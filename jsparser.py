@@ -31,21 +31,32 @@ import time
 import sys
 
 REG_NAME = '[\w]+'
-REG_OP = '[\/\*\-\+\(\)\{\}\[\]<>\|=]+~' #not space here
+REG_OP = '[\/\*\-\+\(\)\{\}\[\]<>\|=~^]+' #not space here
 DEBUG = True
 MAX_RECURSION = 50
 
-JScodeE= """
-ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ ['_']; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ); (ﾟДﾟ) =(ﾟΘﾟ)= (o^_^o)/ (o^_^o);
-"""
-
-JScode ="""
-eval(function(p,a,c,k,e,r){e=String;if(!''.replace(/^/,String)){while(c--)r[c]=k[c]||c;k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('(0(){4 1="5 6 7 8";0 2(3){9(3)}2(1)})();',10,10,'function|b|something|a|var|some|sample|packed|code|alert'.split('|'),0,{}));
+JScodeE = """
+ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ ['_']; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ); (ﾟДﾟ) =(ﾟΘﾟ)= (o^_^o)/ (o^_^o);(ﾟДﾟ)={ﾟΘﾟ: '_' ,ﾟωﾟﾉ : ((ﾟωﾟﾉ==3) +'_') [ﾟΘﾟ] ,ﾟｰﾟﾉ :(ﾟωﾟﾉ+ '_')[o^_^o -(ﾟΘﾟ)] ,ﾟДﾟﾉ:((ﾟｰﾟ==3) +'_')[ﾟｰﾟ] }; (ﾟДﾟ) [ﾟΘﾟ] =((ﾟωﾟﾉ==3) +'_') [c^_^o];(ﾟДﾟ) ['c'] = ((ﾟДﾟ)+'_') [ (ﾟｰﾟ)+(ﾟｰﾟ)-(ﾟΘﾟ) ];(ﾟДﾟ) ['o'] = ((ﾟДﾟ)+'_') [ﾟΘﾟ];(ﾟoﾟ)=(ﾟДﾟ) ['c']+(ﾟДﾟ) ['o']+(ﾟωﾟﾉ +'_')[ﾟΘﾟ]+ ((ﾟωﾟﾉ==3) +'_') [ﾟｰﾟ] + ((ﾟДﾟ) +'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ ((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [(ﾟｰﾟ) - (ﾟΘﾟ)]+(ﾟДﾟ) ['c']+((ﾟДﾟ)+'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ (ﾟДﾟ) ['o']+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ];(ﾟДﾟ) ['_'] =(o^_^o) [ﾟoﾟ] [ﾟoﾟ];(ﾟεﾟ)=((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟДﾟ) .ﾟДﾟﾉ+((ﾟДﾟ)+'_') [(ﾟｰﾟ) + (ﾟｰﾟ)]+((ﾟｰﾟ==3) +'_') [o^_^o -ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟωﾟﾉ +'_') [ﾟΘﾟ]; (ﾟｰﾟ)+=(ﾟΘﾟ); (ﾟДﾟ)[ﾟεﾟ]='\\'; (ﾟДﾟ).ﾟΘﾟﾉ=(ﾟДﾟ+ ﾟｰﾟ)[o^_^o -(ﾟΘﾟ)];(oﾟｰﾟo)=(ﾟωﾟﾉ +'_')[c^_^o];(ﾟДﾟ) [ﾟoﾟ]='\"';(ﾟДﾟ) ['_'] ( (ﾟДﾟ) ['_'] (ﾟεﾟ+(ﾟДﾟ)[ﾟoﾟ]+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟΘﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟΘﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟoﾟ]) (ﾟΘﾟ)) ('_');
 """
 
 JScodeZ ="""
-e = 1;
-e--;
+eval(function(p,a,c,k,e,r){e=String;if(!''.replace(/^/,String)){while(c--)r[c]=k[c]||c;k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('(0(){4 1="5 6 7 8";0 2(3){9(3)}2(1)})();',10,10,'function|b|something|a|var|some|sample|packed|code|alert'.split('|'),0,{}));
+"""
+
+JScode ="""
+a="abcd"[2];
+debug();
+"""
+
+JScode2 ="""
+g = 3;
+f = "";
+a = {
+  "b" : "_",
+  "c" : ((g == 3) + "_")[1],
+  "d" : (f + "_")[2],
+  "e" : ((g == 3) + "_")[3]
+};
 debug();
 """
 
@@ -172,6 +183,12 @@ def IsUnicode(s):
 def out(string):
     if DEBUG:
         print str(string.encode('ascii','replace'))
+        
+def Ustr(string):
+    if isinstance(string, unicode):
+        return str(string.encode('ascii','replace'))
+    return str(string)
+ 
     
 def GetFirstChar(string):
     j = 0
@@ -206,7 +223,7 @@ def GetBeetweenChar(str,char1,char2):
         e = e - 1
         return e,str[s:e]
 
-#Fonction to return string from other string with correct closed [] () "" and ''      
+#Fonction to return only one parameter from a string with correct closed [] () "" and ''      
 def GetItemAlone(string,separator = ' '):
     l = len(string) - 1
     ret = ''
@@ -217,6 +234,8 @@ def GetItemAlone(string,separator = ' '):
     b = 0 #bracket
     c1 = 0
     c2 = 0
+    n = False
+    last_char = ''
 
     s = False
     
@@ -224,6 +243,7 @@ def GetItemAlone(string,separator = ' '):
         i = i + 1
         ch = string[i]
         ret = ret + ch
+        n = False
         
         #Skip empty space
         if (ch.isspace()):
@@ -245,9 +265,13 @@ def GetItemAlone(string,separator = ' '):
             c1 = 1 - c1
         if ch == "'":
             c2 = 1 - c2
+        if ch == '.' and not ((last_char in '0123456789') or (string[i+1] in '0123456789')):
+            n = True
             
-        if (ch in separator) and (p==0) and (a==0) and (b==0) and (c1==0) and (c2==0):
+        if (ch in separator) and (p==0) and (a==0) and (b==0) and (c1==0) and (c2==0) and not(n):
             return ret
+            
+        last_char = ch   
 
     return ret
     
@@ -279,68 +303,57 @@ def MySplit(string,char):
     return r
 
 class JSBuffer(object):
-    PRIO= {'+':3 , '-':3 , '*':4 , '/':4 , '>':1 , '<':1 , '&':2 , '|':2}
+    PRIORITY = {'+':3 , '-':3 , '*':4 , '/':4 , '>':1 , '<':1 , '&':2 , '|':2}
     #print prio.get('*',0)
     def __init__(self):
         self.type = None
-        self.op = ''
         self.buffer = None
-        self.bufferN = ''
+        self.__op = ''
+        self.__value = None
+        self.TotValues = 0
         
-        #self.buf1 = None
-        #self.buf2 = None
-        #self.buf3 = None
-        #self.op12 = ''
-        #self.op23 = ''
+        #need 3 buffer op / buf / op / buf / op / buff
+        self.buf=['','']
+        self.opBuf = ['','']
         
     def SetOp(self,op):
 
-        if (op == '&') and  (self.op == '&'):
+        if (op == '&') and  (self.__op == '&'):
             return
-        if (op == '|') and  (self.op == '|'):
+        if (op == '|') and  (self.__op == '|'):
             return
         else:
-            self.op = self.op + op
+            self.__op = self.__op + op
+            print self.__op
             
         
     #Need 3 values for priority   
     def AddValue(self,value):
-        #print 'ADD ' + str(value) + ' a ' +  str(self.buffer) + ' et ' + str(self.op)
+        #print 'ADD ' + str(value)
         if not self.type:
             self.type = self.CheckType(value)
-            self.buffer = value
-            self.bufferN = str(value)
+            self.Push(value,self.__op)
             return
-        elif not (self.type == self.CheckType(value)) and not(self.op =='&') and not (self.op == '|') :
-            if self.type == 'String':
-                value = str(value)
-            elif self.CheckType(value) == 'String':
-                self.buffer = str(self.bufferN)
+        #Type different mais JS peut convertir en string
+        elif not (self.type == self.CheckType(value)) and not(self.__op =='&') and not (self.__op == '|') :
+            if self.type == 'String' or self.CheckType(value) == 'String':
                 self.type = 'String'
+                self.buf[0]=str(self.buf[0])
+                self.buf[1]=str(self.buf[1])
+                value=str(value)
             else:
-                print '>' + str(self.buffer) + ' ' + str(type(self.buffer))
+                print '> Need ' + str(self.type)
                 print '>' + str(value) + ' '+ str(type(value))
                 raise Exception("Values or not same type")           
                         
-        if not self.op:
-            print '>' + self.buffer
+        if not self.__op:
+            print '>' + self.value
             print '>' + value
             raise Exception("Missing operator")
             
-        if self.type == 'String':
-            if '!' in self.op:
-                value = not value
-            if '+' in self.op:
-                self.buffer = self.buffer + value
-            if '|' in self.op:
-                if not self.buffer:
-                    self.buffer = value
-        if self.type == 'Numeric':    
-            r = re.search('^[0-9+-.\(\)<>&=%!]+$',str(self.buffer))
-            if r:
-                self.bufferN = self.bufferN + self.op + str(value)
+        self.Push(value,self.__op)
 
-        self.op = ''
+        self.__op = ''
         
     def CheckType(self,value):
         if (isinstance(value, types.StringTypes)):
@@ -351,28 +364,72 @@ class JSBuffer(object):
             return 'Numeric'
         if type(value) in [list,tuple]:
             return 'Array'
+        if type(value) in [ NoneType]:
+            return 'Undefined'
         return 'Unknow'
+    
+    def GetPrevious(self):
+        self.TotValues-=1
+        ret = self.buf[self.TotValues]
+        self.buf[self.TotValues] = ''
+        return ret
+    
+    #on decale tout
+    def Push(self,value,op):
+        if self.type == 'Numeric':
+            value = str(value)
+
+        if self.TotValues < 2:
+            self.buf[self.TotValues] = value
+            self.opBuf[self.TotValues] = op
+            self.TotValues+=1
+            return
+                   
+        #on commence le calcul
+        else:
+            if self.type == 'String':
+                if '!' in self.opBuf[0]:
+                    self.buf[0] = not self.buf[0]
+                if '+' in self.opBuf[1]:
+                    self.buf[0] = self.buf[0] + self.buf[1]
+                if '|' in self.opBuf[1]:
+                    if not self.buf[0]:
+                        self.buf[0] = self.buf[1]
+                    
+            if self.type == 'Numeric':
+                if not value == '':
+                    print '+' + value
+                    r = re.search('^[0-9+-.\(\)<>&=%!]+$',value)
+                else:
+                    r = True
+                if r:
+                    self.buf[0] = self.opBuf[0] + self.buf[0] + self.opBuf[1] + self.buf[1]
+                    
+        #on decale tout
+        self.buf[1] = value
+        self.opBuf[1] = op 
     
     #ok all finished, force compute
     def GetBuffer(self):
+        #Force compute
+        self.Push('','')
+        self.Push('','')
+    
         if self.type == 'Numeric':
-            return self.SafeEval(self.bufferN)
-            
-        if '!' in self.op:
-            self.buffer = not self.buffer
+            return self.SafeEval(self.buf[0])
            
-        return self.buffer
+        return self.buf[0]
         
     #WARNING : Take care if you edit this function, eval is realy unsafe.
     #better to use ast.literal_eval() but not implemented before python 3
     def SafeEval(self,str):
-        f = re.search('[^0-9+-.\(\)<>=&%!]',str)
+        f = re.search('[^0-9+-.\(\)<>=&%!*\^\/]',str)
         if f:
             raise Exception ('Wrong parameter to Eval : ' + str)
             return 0
         str = str.replace('!','not ')
         #str = str.replace('=','==')
-
+        #print '>>' + str
         return eval(str)
     
 class JsParser(object):
@@ -542,13 +599,12 @@ class JsParser(object):
         allow_recursion = allow_recursion - 1
 
         #plus que la chaine a evaluer
-        #JScode = JScode.replace(' ','')
         JScode = JScode.strip()
         
         debug = JScode
         
         out( '-------------')
-        out( str(allow_recursion) + ' : A evaluer >'+ JScode)
+        out( str(allow_recursion) + ' : A evaluer >'+ JScode + '<')
             
         #********************************************************
         
@@ -591,6 +647,12 @@ class JsParser(object):
                 InterpretedCode.AddValue(int(JScode[0:r.end()]))
                 JScode = JScode[(r.end()):]
                 continue
+            #Regex
+            r = re.search('(^\/.*\/.*$)',JScode)
+            if r:
+                InterpretedCode.AddValue(r.group(0))
+                JScode = JScode[(len(r.group(0))):]
+                continue            
             #parentheses
             if c == "(":
                 pos2,c2 = GetBeetweenChar(JScode,'(',')')
@@ -798,9 +860,9 @@ class JsParser(object):
                     InterpretedCode.type = ''#to reset it
                     continue
 
-                
+
             #variables
-            m = re.search('^(' + REG_NAME + '(?:\[[^\]]+\])* *)(' + REG_OP + '|$)',JScode)
+            m = re.search('^(' + REG_NAME + '(?:\[[^\]]+\])* *)(' + REG_OP + '|$)',JScode, re.UNICODE)
             if m:
                 v = m.group(1).strip()
                 pos7 = len(m.group(1))
@@ -825,7 +887,7 @@ class JsParser(object):
                             self.SetVar(vars,func,v,r-1)
                             pos7+=2
                         #a == 1
-                        elif (op == '==') or (op == '||') or (op == '&&'):
+                        elif (op == '||') or (op == '&&'):
                             #InterpretedCode.AddValue(r)
                             #InterpretedCode.SetOp(op[0])
                             pos7+=1
@@ -833,9 +895,9 @@ class JsParser(object):
                         elif op[1] == '=':
                             n = GetItemAlone(JScode[m.end():],' ' + REG_OP)
                             if op[0] == '+':
-                                r = r + int(n)
+                                r = self.evalJS(v+'+'+n ,vars,func,allow_recursion)
                             elif op[0] == '-':
-                                r = r - int(n) 
+                                r = self.evalJS(v+'-'+n ,vars,func,allow_recursion)
                             self.SetVar(vars,func,v,r)
                             l = len(n) + 2
                             pos7 = pos7 + l
@@ -886,7 +948,7 @@ class JsParser(object):
 
         InterpretedCode2 = InterpretedCode.GetBuffer()
         
-        out( str(allow_recursion) + ' : Evalue > '+ str(InterpretedCode2) + " type " + str(type(InterpretedCode2)) )
+        out( str(allow_recursion) + ' : Evalue > '+ Ustr(InterpretedCode2) + " type " + Ustr(type(InterpretedCode2)) )
         out( '-------------')
 
         self.LastEval = InterpretedCode2
@@ -929,6 +991,10 @@ class JsParser(object):
     def SetVar(self,var,func,variable,value,i = 0):
 
         variable = variable.strip()
+        
+        #cleaning
+        if variable[0] == '(':
+            variable = variable[1:-1]
 
         #Existing var ?
         for j in var:
@@ -1000,7 +1066,7 @@ class JsParser(object):
             index = self.evalJS(index,vars,func,allow_recursion)
   
         if value:
-            #Values is an array
+            #Values is an array []
             if value.startswith('[') and value.endswith(']'):
                 value = value[1:-1]
                 
@@ -1013,14 +1079,29 @@ class JsParser(object):
                 if index == None:
                     index = 0
                     init = True
+            #Values is an array {}
+            if value.startswith('{') and value.endswith('}'):
+                value = value[1:-1]
+                valueT = MySplit(value,',')
+                v = {}
+                for k in valueT:
+                    l = k.split(':')
+                    v2g = self.evalJS(l[0],vars,func,allow_recursion)
+                    v2d = self.evalJS(l[1],vars,func,allow_recursion)
+                    v[v2g] = v2d
+                value = v
+                if index == None:
+                    index = 0
+                    init = True
+                         
             else:
                 value = self.evalJS(value,vars,func,allow_recursion)
 
         #Output for debug
         if not (index == None):
-            out( '> Variable in parser => ' + name + '[' + str(index) + ']' + ' = ' + str(value))
+            out( '> Variable in parser => ' + Ustr(name) + '[' + str(index) + ']' + ' = ' + Ustr(value))
         else:
-            out( '> Variable in parser => ' + name + ' = ' + str(value))
+            out( '> Variable in parser => ' + Ustr(name) + ' = ' + Ustr(value))
                            
         #chain
         if (isinstance(value, types.StringTypes)):
@@ -1263,23 +1344,32 @@ class JsParser(object):
                     elif (e):
                         self.Parse(e,vars,func,allow_recursion)
                     continue  
- 
+
             #Variable operation/creation/modification ?
-            m = re.search(r'^([\w]+)(?:\[([^\]]+)\])*\s*=',chain,re.DOTALL | re.UNICODE)
+            m = re.search(r'^\({0,1}([\w]+)(?:\[([^\]]+)\])*\){0,1}\s*=',chain,re.DOTALL | re.UNICODE)
             if m or chain.startswith('var '):
                 if chain.startswith('var '):
                     chain = chain[4:]
-
+                
                 #Now need to extract all vars from chain
                 while (chain):
+                    
                     v1 = GetItemAlone(chain,',').strip()
+
                     chain=chain[(len(v1)):]
                     if v1.endswith(',') or v1.endswith(';'):
                         v1 = v1[:-1]
                         
                     #A=B=C=8,A=1
                     if '=' in v1:
-                        t1 = v1.split('=')
+                        t1 = []
+                        while v1:
+                            t3 = GetItemAlone(v1,'=')
+                            v1 = v1[(len(t3)):]
+                            if t3.endswith('='):
+                                t3 = t3[:-1]
+                            t1.append(t3.strip())
+
                         l = len(t1) - 2
                         while ( l >= 0 ):
                             self.VarManage(allow_recursion,vars,func,t1[l],t1[l+1])
@@ -1311,7 +1401,7 @@ class JsParser(object):
 
             #Pas trouve, une fonction ?
             if chain.endswith(';'):
-                return self.evalJS(chain[:-1],vars,func,allow_recursion)
+                self.evalJS(chain[:-1],vars,func,allow_recursion)
             
             #Non gere encore
             #print '> ' + JScode
@@ -1325,7 +1415,7 @@ class JsParser(object):
         
         #unicode ?
         #if isinstance(JScode, unicode):
-        if (False):
+        if (True):
             out('Unicode convertion')
             JScode = unicode(JScode, "utf-8")
             self.Unicode = True
