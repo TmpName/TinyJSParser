@@ -50,13 +50,13 @@ b = a + "t";
 debug();
 """
 
-JScode ="""
+JScode8545 ="""
 a = (3)['constructor']['constructor'];
-b = a( return 4;)("_");
+a(a(return"\2")(gg))("_");
 debug();
 """
 
-JScode545 ="""
+JScode ="""
 dd = /\uff40\uff4d\u00b4\uff09\uff89 ~\u253b\u2501\u253b   /["_"];
 
 o = ff = _ = 3;
@@ -84,8 +84,11 @@ ee.aa = (ee + ff)[o ^ _ ^ o - gg];
 offo = (dd + "_")[c ^ _ ^ o];
 
 ee[ii] = '"';
+
+ee["_"]("test=0")("");
 debug();
-ee["_"](ee["_"](hh + ee[ii] + ee[hh] + gg + ff + gg + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + ff + (ff + gg) + ee[hh] + 
+
+ret = ee["_"](ee["_"](hh + ee[ii] + ee[hh] + gg + ff + gg + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + ff + (ff + gg) + ee[hh] + 
 gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) - gg) + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ff + ee[hh] + (ff + gg) + (c ^ _ ^ o) + ee[hh] + ff + ((o ^ _ ^ o) - gg) + ee[hh] + gg + gg + (c ^ _ ^ o) + ee[hh] + 
 gg + ff + (ff + gg) + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + (ff + gg) + (ff + (o ^ _ ^ o)) + ee[hh] + 
 (ff + gg) + ff + ee[hh] + ff + (c ^ _ ^ o) + ee[hh] + gg + gg + ((o ^ _ ^ o) - gg) + ee[hh] + gg + ff + gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ee[hh] + 
@@ -94,7 +97,7 @@ gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + (c ^ _ ^ o) + ee[hh] + gg + ((o
 
 debug();
 """
-
+#return"\141\154\145\162\164\50\42\110\145\154\154\157\54\40\112\141\166\141\123\143\162\151\160\164\42\51"
 JScode542452 ="""
 var g;
 o = _ = 3;
@@ -269,6 +272,11 @@ def GetNextchar(string, pos):
         return ''
     return string[pos+1]
     
+def GetPrevchar(string, pos):
+    if (pos - 1) < 0:
+        return ''
+    return string[pos-1]
+    
 def GetBeetweenChar(str,char1,char2):
         s = str.find(char1)
         if s == -1:
@@ -305,6 +313,7 @@ def CheckType(value):
 
 #Fonction to return only one parameter from a string with correct closed [] () "" and ''      
 def GetItemAlone(string,separator = ' '):
+
     l = len(string) - 1
     ret = ''
     
@@ -329,25 +338,28 @@ def GetItemAlone(string,separator = ' '):
         if (ch.isspace()):
             continue
 
-        if ch == '(':
-            p = p + 1
-        if ch == ')':
-            p = p - 1
-        if ch == '{':
-            a = a + 1
-        if ch == '}':
-            a = a - 1
-        if ch == '[':
-            b = b + 1
-        if ch == ']':
-            b = b - 1
-        if ch == '"':
+        if ch == '"' and not GetPrevchar(string,i) == '\\' and not c2:
             c1 = 1 - c1
-        if ch == "'":
+        if ch == "'" and not GetPrevchar(string,i) == '\\' and not c1:
             c2 = 1 - c2
-        if ch == '.' and not ((last_char in '0123456789') or (string[i+1] in '0123456789')):
-            n = True
-            
+
+        if not c1 and not c2:
+            if ch == '(':
+                p = p + 1
+            if ch == ')':
+                p = p - 1
+            if ch == '{':
+                a = a + 1
+            if ch == '}':
+                a = a - 1
+            if ch == '[':
+                b = b + 1
+            if ch == ']':
+                b = b - 1
+
+            if ch == '.' and not ((last_char in '0123456789') or (string[i+1] in '0123456789')):
+                n = True
+        
         if (ch in separator) and (p==0) and (a==0) and (b==0) and (c1==0) and (c2==0) and not(n):
             return ret
             
@@ -759,9 +771,8 @@ class JsParser(object):
 
             #Alpha chain
             if c == '"':
-                e = JScode[1:].find('"') + 1
-                if e == 0:
-                    raise Exception("Can't eval chain " + JScode)
+                ee = GetItemAlone(JScode[0:],'"')
+                e = len(ee) - 1
                 #if it's not the form "abc".err
                 if not GetNextchar(JScode,e) == '.':
                     InterpretedCode.AddValue(JScode[1:e])
@@ -771,9 +782,8 @@ class JsParser(object):
                     self.SetVar(vars,func,'TEMPORARY_VARS',JScode[1:e])
                     JScode = 'TEMPORARY_VARS' + JScode[(e+1):]
             if c == "'":
-                e = JScode[1:].find("'") + 1
-                if e == 0:
-                    raise Exception("Can't eval chain " + JScode)
+                ee = GetItemAlone(JScode[0:],"'")
+                e = len(ee) - 1
                 #if it's not the form "abc".err
                 if not GetNextchar(JScode,e ) == '.':
                     InterpretedCode.AddValue(JScode[1:e])
@@ -840,8 +850,8 @@ class JsParser(object):
                 
             name = ''            
             #Extraction info
-            m = re.search(r'^(?:([\w]+)\.)*([\w]+) *\(', JScode,re.DOTALL)
-            #Syntax > aaaaaa.bbbbbb(cccccc) ou bbbb(cccc) ou "aaaa".bb(ccc)
+            m = re.search(r'^(?:([\w]+)\.)*([\w]+(?:\[[^\]]+\])*) *\(', JScode,re.DOTALL)
+            #Syntax > aaaaaa.bbbbbb(cccccc) ou bbbb(cccc) ou "aaaa".bb(ccc) ou aa[bb](cc)
             if m:
                 name == ''
                 if m.group(1):
@@ -856,18 +866,21 @@ class JsParser(object):
                     out( "> function : " + function + ' arg=' + arg)
                     
                     #Definite function ?
-                    fe = self.IsFunc(vars,func,function)
+                    fe = self.IsFunc(vars,function,function)
 
                     if fe:
                         out('> defenite fonction : ' + function)
                         n,p,c,ct = fe.name,fe.param,fe.code,fe.const
                         a = MySplit(arg,',',True)
                         a2 = []
+                        out('****' + c)
                         
                         if ct:
                             #hack
                             c = c.replace('[native code]',a[0])
                             a = []
+                            pos3 = pos3 + 5
+                            out('****' + c)
 
                         for i in a:
                             vv = self.evalJS(i,vars,func,allow_recursion)
@@ -999,6 +1012,13 @@ class JsParser(object):
                         InterpretedCode.AddValue('/' + self.RemoveGuil(t1) + '/' + self.RemoveGuil(t2))
                         JScode = JScode[(len(m.group(0)) + pos3 ):]
                         continue             
+                    #alert
+                    if function=='alert':
+                        print '------------ALERT-------------------'
+                        print arg
+                        print '------------------------------------'
+                        JScode = JScode[(len(m.group(0)) + pos3 ):]
+                        continue
                     #debug
                     if function=='debug':
                         print '------------------------------------'
@@ -1007,6 +1027,16 @@ class JsParser(object):
                         print func
                         print '------------------------------------'
                         raise Exception("DEBUG")
+                    #constructor
+                    if function=='Function':
+                        #pos9 = len(JScode[(len(m.group(0)) + pos3 + 0):])
+                        NewCode = self.evalJS(arg,vars,func,allow_recursion)
+
+                        v = self.MemFonction(vars,func,'','',False,'{'+ NewCode + '}')[2]
+                        #pos3 = pos3 + pos9
+                        #InterpretedCode.AddValue(v)
+                        JScode = v + JScode[(len(m.group(0)) + pos3 ):]
+                        continue                    
                         
                     raise Exception("Unknow fonction : " + function)
                     
@@ -1067,6 +1097,11 @@ class JsParser(object):
                 
             #Space to remove
             if c == ' ' or c == '\n':
+                JScode = JScode[1:]
+                continue
+                
+            #Escape char
+            if c == '\\':
                 JScode = JScode[1:]
                 continue
                 
@@ -1209,14 +1244,17 @@ class JsParser(object):
         
     #Need to use metaclass here
     def IsFunc(self,vars,Func,name):
-        for k in vars:
-            if k[0] == name:
-                f = k[1]
-                if isinstance(f, fonction):
-                    return f
-                else:
-                    return self.IsFunc(vars,Func,f)
-        return False
+        bExist = False
+        print '++++' + str(name)
+        bExist = self.IsVar(vars,name)
+        if not bExist:
+            return False
+            
+        f = self.GetVar(vars,Func,name)
+        if isinstance(f, fonction):
+            return f
+        else:
+            return self.IsFunc(vars,Func,f)
         
     def VarManage(self,allow_recursion,vars,func,name,value=None):
 
@@ -1322,7 +1360,7 @@ class JsParser(object):
         param = MySplit(parametres,',',True)
         
         out('Extract function :' + name + ' Selfinvok :' + str(selfinvoked) + ' ' + str(param))
-        #out('data ' + str(data))
+        out('data ' + str(data))
         
         pos = 0
         replac = ''
