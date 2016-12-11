@@ -32,12 +32,36 @@ import time
 import sys
 
 REG_NAME = '[\w]+'
-REG_OP = '[\/\*\-\+\(\)\{\}\[\]<>\|=~^]+' #not space here
+REG_OP = '[\/\*\-\+\{\}\[\]<>\|=~^]+' #not space here
 DEBUG = True
 MAX_RECURSION = 50
 
-JScode8585 = """
-ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ ['_']; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ); (ﾟДﾟ) =(ﾟΘﾟ)= (o^_^o)/ (o^_^o);(ﾟДﾟ)={ﾟΘﾟ: '_' ,ﾟωﾟﾉ : ((ﾟωﾟﾉ==3) +'_') [ﾟΘﾟ] ,ﾟｰﾟﾉ :(ﾟωﾟﾉ+ '_')[o^_^o -(ﾟΘﾟ)] ,ﾟДﾟﾉ:((ﾟｰﾟ==3) +'_')[ﾟｰﾟ] }; (ﾟДﾟ) [ﾟΘﾟ] =((ﾟωﾟﾉ==3) +'_') [c^_^o];(ﾟДﾟ) ['c'] = ((ﾟДﾟ)+'_') [ (ﾟｰﾟ)+(ﾟｰﾟ)-(ﾟΘﾟ) ];(ﾟДﾟ) ['o'] = ((ﾟДﾟ)+'_') [ﾟΘﾟ];(ﾟoﾟ)=(ﾟДﾟ) ['c']+(ﾟДﾟ) ['o']+(ﾟωﾟﾉ +'_')[ﾟΘﾟ]+ ((ﾟωﾟﾉ==3) +'_') [ﾟｰﾟ] + ((ﾟДﾟ) +'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ ((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [(ﾟｰﾟ) - (ﾟΘﾟ)]+(ﾟДﾟ) ['c']+((ﾟДﾟ)+'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ (ﾟДﾟ) ['o']+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ];(ﾟДﾟ) ['_'] =(o^_^o) [ﾟoﾟ] [ﾟoﾟ];(ﾟεﾟ)=((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟДﾟ) .ﾟДﾟﾉ+((ﾟДﾟ)+'_') [(ﾟｰﾟ) + (ﾟｰﾟ)]+((ﾟｰﾟ==3) +'_') [o^_^o -ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟωﾟﾉ +'_') [ﾟΘﾟ]; (ﾟｰﾟ)+=(ﾟΘﾟ); (ﾟДﾟ)[ﾟεﾟ]='\\'; (ﾟДﾟ).ﾟΘﾟﾉ=(ﾟДﾟ+ ﾟｰﾟ)[o^_^o -(ﾟΘﾟ)];(oﾟｰﾟo)=(ﾟωﾟﾉ +'_')[c^_^o];(ﾟДﾟ) [ﾟoﾟ]='\"';(ﾟДﾟ) ['_'] ( (ﾟДﾟ) ['_'] (ﾟεﾟ+(ﾟДﾟ)[ﾟoﾟ]+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟΘﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟΘﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟoﾟ]) (ﾟΘﾟ)) ('_');
+
+JScode = """
+ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ ['_']; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ);
+(ﾟДﾟ) =(ﾟΘﾟ)= (o^_^o)/ (o^_^o);
+
+(ﾟДﾟ)={
+      ﾟΘﾟ: '_' ,
+      ﾟωﾟﾉ : ((ﾟωﾟﾉ==3) +'_') [ﾟΘﾟ] ,
+      ﾟｰﾟﾉ :(ﾟωﾟﾉ+ '_')[o^_^o -(ﾟΘﾟ)] ,
+      ﾟДﾟﾉ:((ﾟｰﾟ==3) +'_')[ﾟｰﾟ] 
+      };
+
+(ﾟДﾟ) [ﾟΘﾟ] =((ﾟωﾟﾉ==3) +'_') [c^_^o];
+(ﾟДﾟ) ['c'] = ((ﾟДﾟ)+'_') [ (ﾟｰﾟ)+(ﾟｰﾟ)-(ﾟΘﾟ) ];
+(ﾟДﾟ) ['o'] = ((ﾟДﾟ)+'_') [ﾟΘﾟ];
+
+(ﾟoﾟ)=(ﾟДﾟ) ['c']+(ﾟДﾟ) ['o']+(ﾟωﾟﾉ +'_')[ﾟΘﾟ]+ ((ﾟωﾟﾉ==3) +'_') [ﾟｰﾟ] + ((ﾟДﾟ) +'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ ((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [(ﾟｰﾟ) - (ﾟΘﾟ)]+(ﾟДﾟ) ['c']+((ﾟДﾟ)+'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ (ﾟДﾟ) ['o']+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ];(ﾟДﾟ) ['_'] =(o^_^o) [ﾟoﾟ] [ﾟoﾟ];(ﾟεﾟ)=((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟДﾟ) .ﾟДﾟﾉ+((ﾟДﾟ)+'_') [(ﾟｰﾟ) + (ﾟｰﾟ)]+((ﾟｰﾟ==3) +'_') [o^_^o -ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟωﾟﾉ +'_') [ﾟΘﾟ];
+
+
+(ﾟｰﾟ)+=(ﾟΘﾟ);
+(ﾟДﾟ)[ﾟεﾟ]='\\';
+(ﾟДﾟ).ﾟΘﾟﾉ=(ﾟДﾟ+ ﾟｰﾟ)[o^_^o -(ﾟΘﾟ)];
+(oﾟｰﾟo)=(ﾟωﾟﾉ +'_')[c^_^o];
+(ﾟДﾟ) [ﾟoﾟ]='\"';
+
+(ﾟДﾟ) ['_'] ( (ﾟДﾟ) ['_'] (ﾟεﾟ+(ﾟДﾟ)[ﾟoﾟ]+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟΘﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟΘﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟoﾟ]) (ﾟΘﾟ)) ('_');
 """
 
 JScodeQ ="""
@@ -56,7 +80,7 @@ a(a(return"\2")(gg))("_");
 debug();
 """
 
-JScode ="""
+JScode753 ="""
 dd = /\uff40\uff4d\u00b4\uff09\uff89 ~\u253b\u2501\u253b   /["_"];
 
 o = ff = _ = 3;
@@ -64,15 +88,20 @@ o = ff = _ = 3;
 c = gg = ff - ff;
 
 ee = gg = (o ^ _ ^ o) / (o ^ _ ^ o);
+
 ee = {
   "gg" : "_",
   "dd" : ((dd == 3) + "_")[gg],
   "cc" : (dd + "_")[o ^ _ ^ o - gg],
   "bb" : ((ff == 3) + "_")[ff]
 };
+
+
 ee[gg] = ((dd == 3) + "_")[c ^ _ ^ o];
 ee["c"] = (ee + "_")[ff + ff - gg];
 ee["o"] = (ee + "_")[gg];
+
+
 ii = ee["c"] + ee["o"] + (dd + "_")[gg] + ((dd == 3) + "_")[ff] + (ee + "_")[ff + ff] + ((ff == 3) + "_")[gg] + ((ff == 3) + "_")[ff - gg] + ee["c"] + (ee + "_")[ff + ff] + ee["o"] + 
 ((ff == 3) + "_")[gg];
 ee["_"] = (o ^ _ ^ o)[ii][ii];
@@ -85,19 +114,15 @@ offo = (dd + "_")[c ^ _ ^ o];
 
 ee[ii] = '"';
 
-ee["_"]("test=0")("");
-debug();
-
 ret = ee["_"](ee["_"](hh + ee[ii] + ee[hh] + gg + ff + gg + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + ff + (ff + gg) + ee[hh] + 
 gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) - gg) + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ff + ee[hh] + (ff + gg) + (c ^ _ ^ o) + ee[hh] + ff + ((o ^ _ ^ o) - gg) + ee[hh] + gg + gg + (c ^ _ ^ o) + ee[hh] + 
 gg + ff + (ff + gg) + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + (ff + gg) + (ff + (o ^ _ ^ o)) + ee[hh] + 
 (ff + gg) + ff + ee[hh] + ff + (c ^ _ ^ o) + ee[hh] + gg + gg + ((o ^ _ ^ o) - gg) + ee[hh] + gg + ff + gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ee[hh] + 
 gg + ff + gg + ee[hh] + gg + ((o ^ _ ^ o) - gg) + (o ^ _ ^ o) + ee[hh] + gg + ff + (o ^ _ ^ o) + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) - gg) + ee[hh] + gg + (ff + gg) + 
 gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + (c ^ _ ^ o) + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ff + ee[hh] + ff + ((o ^ _ ^ o) - gg) + ee[hh] + (ff + gg) + gg + ee[ii])(gg))("_");
-
 debug();
 """
-#return"\141\154\145\162\164\50\42\110\145\154\154\157\54\40\112\141\166\141\123\143\162\151\160\164\42\51"
+
 JScode542452 ="""
 var g;
 o = _ = 3;
@@ -247,7 +272,7 @@ def IsUnicode(s):
     if isinstance(s, unicode):
         return True
     return False
-    
+   
 def out(string):
     if DEBUG:
         print str(string.encode('ascii','replace'))
@@ -433,10 +458,14 @@ class JSBuffer(object):
         else:
             self.__op = self.__op + op
             
+    def CheckString(self):
+        if len(self.buf) >= len(self.opBuf):
+            return True
+        return False
         
     #Need 3 values for priority   
     def AddValue(self,value):
-        #print 'ADD ' + str(value) + ' ' + str(type(value)) + ' a ' + str(self.buf)
+        print 'ADD ' + Ustr(value) + ' ' + Ustr(type(value)) + ' a ' + Ustr(self.buf)
         if not self.type:
             self.type = CheckType(value)
             self.Push(value,self.__op)
@@ -459,6 +488,25 @@ class JSBuffer(object):
         return ret
         
     def Compute(self):
+    
+        #check type
+        if len(self.buf) > 1:
+            if not (self.type == CheckType(self.buf[len(self.buf) -1])):
+                #Type different mais juste operation logique
+                if self.opBuf[1] == '==':
+                    self.type = 'Logic'
+                #Type different mais JS convertis en string
+                else:
+                    out('string convertion')
+                    #print self.type + ' ' + str(self.buf[0])
+                    #print CheckType(self.buf[len(self.buf) -1]) + ' ' + str(self.buf[1])
+                    
+                    if not CheckType(self.buf[0]) == 'String':
+                        self.buf[0]=self.SpecialStr(self.buf[0])
+                    if len(self.buf) > 1:
+                        if not CheckType(self.buf[1]) == 'String':
+                            self.buf[1]=self.SpecialStr(self.buf[1])
+                    self.type = 'String'
 
         #Work for operateur + | !
         if self.type == 'String':
@@ -512,25 +560,13 @@ class JSBuffer(object):
         if len(self.buf) > 1:
             self.Compute()
 
-        if not (self.type == CheckType(value)):
-            #Type different mais juste operation logique
-            if op == '==':
-                self.type = 'Logic'
-            #Type different mais JS convertis en string
-            else:
-                if not CheckType(self.buf[0]) == 'String':
-                    self.buf[0]=self.SpecialStr(self.buf[0])
-                if len(self.buf) > 1:
-                    if not CheckType(self.buf[1]) == 'String':
-                        self.buf[1]=self.SpecialStr(self.buf[1])
-                value=str(value)
-                self.type = 'String'
-
         self.buf.append(value)
         self.opBuf.append(op)
         return
 
     def SpecialStr(self,value):
+        if CheckType(value) == 'Numeric':
+            return str(value)
         if value == None:
             return 'Undefined'
         if value == True:
@@ -633,6 +669,8 @@ class JsParser(object):
         com1 = False
         com2 = False
         prev = '' #previous char
+        c1 = 0 #string with "
+        c2 = 0 #string with '
         
         stringR = ''
         
@@ -657,8 +695,7 @@ class JsParser(object):
                     continue
 
             ch = string[i]
-            stringR = stringR + ch
-            
+         
             if ch == '(':
                 p = p + 1
             if ch == ')':
@@ -675,10 +712,20 @@ class JsParser(object):
                 r = False
             if ch == '/' and prev == '=':
                 r = True
+            if ch == '"' and not GetPrevchar(string,i) == '\\' and not c2:
+                c1 = 1 - c1
+            if ch == "'" and not GetPrevchar(string,i) == '\\' and not c1:
+                c2 = 1 - c2
+                
+            #vire espace inutile
+            if ch.isspace() and not c1 and not c2:
+                continue
+                
+            stringR = stringR + ch
                 
             #memorise last char
             if not ch.isspace():
-                prev = ch                    
+                prev = ch               
                                
             #Dans tout les cas les parenthses doivent etre fermees, ainsi que les crochet
             if (p == 0) and (b == 0):
@@ -767,23 +814,31 @@ class JsParser(object):
             c = JScode[0]
 
             #print 'InterpretedCode > ' + InterpretedCode
-            #print 'JScode > ' + JScode
+            print 'JScode > ' + JScode.encode('ascii','replace')
 
             #Alpha chain
             if c == '"':
                 ee = GetItemAlone(JScode[0:],'"')
                 e = len(ee) - 1
+                vv = JScode[1:e]
+                if vv[-1] == '\\' and  not GetPrevchar(vv, len(vv) - 2) == '\\':
+                    vv = vv + '\\'
+                vv = vv.decode('string-escape')
                 #if it's not the form "abc".err
                 if not GetNextchar(JScode,e) == '.':
-                    InterpretedCode.AddValue(JScode[1:e])
+                    InterpretedCode.AddValue(vv)
                     JScode = JScode[(e+1):]
                     continue
                 else:
-                    self.SetVar(vars,func,'TEMPORARY_VARS',JScode[1:e])
+                    self.SetVar(vars,func,'TEMPORARY_VARS',vv)
                     JScode = 'TEMPORARY_VARS' + JScode[(e+1):]
             if c == "'":
                 ee = GetItemAlone(JScode[0:],"'")
                 e = len(ee) - 1
+                vv = JScode[1:e]
+                if vv[-1] == '\\' and  not GetPrevchar(vv, len(vv) - 2) == '\\':
+                    vv = vv + '\\'
+                vv = vv.decode('string-escape')                
                 #if it's not the form "abc".err
                 if not GetNextchar(JScode,e ) == '.':
                     InterpretedCode.AddValue(JScode[1:e])
@@ -815,6 +870,10 @@ class JsParser(object):
             #parentheses
             if c == "(":
                 pos2,c2 = GetBeetweenChar(JScode,'(',')')
+                #useless parenthese ?
+                if re.match(r'^[\w]+$',c2,re.UNICODE):
+                    JScode = c2 + JScode[(pos2 + 1):]
+                    continue              
                 v = self.evalJS(c2,vars,func,allow_recursion)
                 InterpretedCode.AddValue(v)
                 JScode = JScode[(pos2 + 1):]
@@ -830,6 +889,16 @@ class JsParser(object):
                 elif CheckType(v) == 'Numeric':
                     v2 = InterpretedCode.GetPrevious()
                     InterpretedCode.AddValue(v2[int(v)])
+                elif InterpretedCode.CheckString():
+                    v2 = InterpretedCode.GetPrevious()
+                    print v
+                    print v2
+                    print type (v2)
+                    try:
+                        InterpretedCode.AddValue(v2[v])
+                    except:
+                        print v2['c']
+                        bb(mm)
                 else:
                     InterpretedCode.AddValue([])
                 JScode = JScode[(pos2 + 1):]
@@ -850,7 +919,7 @@ class JsParser(object):
                 
             name = ''            
             #Extraction info
-            m = re.search(r'^(?:([\w]+)\.)*([\w]+(?:\[[^\]]+\])*) *\(', JScode,re.DOTALL)
+            m = re.search(r'^(?:([\w]+)\.)*([\w]+(?:\[[^\]]+\])*) *\(', JScode,re.DOTALL | re.UNICODE)
             #Syntax > aaaaaa.bbbbbb(cccccc) ou bbbb(cccc) ou "aaaa".bb(ccc) ou aa[bb](cc)
             if m:
                 name == ''
@@ -859,7 +928,7 @@ class JsParser(object):
                 function = m.group(2)
                 pos3,arg = GetBeetweenChar(JScode[(m.end()-1):],'(',')')
 
-                print 'DEBUG EVAL > Name: ' + name + ' arg: ' + arg + ' function: ' + function
+                print 'DEBUG EVAL > Name: ' + Ustr(name) + ' arg: ' + Ustr(arg) + ' function: ' + Ustr(function)
              
                 if function:
                     
@@ -877,10 +946,9 @@ class JsParser(object):
                         
                         if ct:
                             #hack
-                            c = c.replace('[native code]',a[0])
-                            a = []
-                            pos3 = pos3 + 5
-                            out('****' + c)
+                            #Make replacement
+                            JScode = n + '(' +arg + ')' + JScode[(len(m.group(0)) + pos3 + 0):]
+                            continue
 
                         for i in a:
                             vv = self.evalJS(i,vars,func,allow_recursion)
@@ -1043,12 +1111,13 @@ class JsParser(object):
             #TODO hack inside
             if InterpretedCode.type == 'String':
                 if c == '.':
-                    JScode = InterpretedCode.GetPrevious() + JScode
+                    self.SetVar(vars,func,'TEMPORARY_VARS',InterpretedCode.GetPrevious())
+                    JScode = 'TEMPORARY_VARS' + JScode
                     continue
 
 
             #variables
-            m = re.search('^([\w\.]+(?:\[[^\]]+\])* *)(' + REG_OP + '|$)',JScode, re.UNICODE)
+            m = re.search('^(\({0,1}[\w\.]+\){0,1} *(?:\[[^\]]+\])* *)(' + REG_OP + '|$)',JScode, re.UNICODE)
             if m:
                 v = m.group(1).strip()
                 pos7 = len(m.group(1))
@@ -1058,8 +1127,8 @@ class JsParser(object):
                 if len(m.groups()) > 1:
                     op = m.group(2).strip()
 
-                #out("> var " + v + "=" + str(r))
-
+                out("> var " + v + "=" + str(r))
+                
                 if self.IsVar(vars,v):
                     #just var
                     if len(op) < 2:
@@ -1078,6 +1147,7 @@ class JsParser(object):
                         pos7+=1
                     #a+=1 form
                     elif op[1] == '=' and not op[0] == '=':
+                        print 'ok'
                         n = GetItemAlone(JScode[m.end():],' ' + REG_OP)
                         if op[0] == '+':
                             r = self.evalJS(v+'+'+n ,vars,func,allow_recursion)
@@ -1187,6 +1257,8 @@ class JsParser(object):
                             r = r[index]
                     if type(r) in [dict]:
                         index = self.RemoveGuil(index)
+                        print r
+                        print Ustr(index)
                         r = r[index]                   
                 return r
                 
@@ -1245,7 +1317,6 @@ class JsParser(object):
     #Need to use metaclass here
     def IsFunc(self,vars,Func,name):
         bExist = False
-        print '++++' + str(name)
         bExist = self.IsVar(vars,name)
         if not bExist:
             return False
@@ -1263,21 +1334,23 @@ class JsParser(object):
         
         try:
             value = value.strip()
-            name = name.strip()
         except:
             pass
-
-
+        name = name.strip()
+        
         #variable is an object
         if '.' in name:
             index = name.split('.')[1]
             name = name.split('.')[0]
         #Variable is an array ?
-        m = re.search(r'^([\w]+)\[(.+?)\]$', name,re.DOTALL)
+        m = re.search(r'^\({0,1}([\w]+)\){0,1}\[(.+?)\]$', name,re.DOTALL | re.UNICODE)
         if m:
             name = m.group(1)
             index = m.group(2)
             index = self.evalJS(index,vars,func,allow_recursion)
+            
+        if name.startswith('('):
+            name = name[1:-1].strip()
   
         if value:
             #Values is an array []
@@ -1312,10 +1385,14 @@ class JsParser(object):
                          
             else:
                 value = self.evalJS(value,vars,func,allow_recursion)
+                
+
+        name = name.strip()
+
 
         #Output for debug
         if not (index == None):
-            out( '> Variable in parser => ' + Ustr(name) + '[' + str(index) + ']' + ' = ' + Ustr(value))
+            out( '> Variable in parser => ' + Ustr(name) + '[' + Ustr(index) + ']' + ' = ' + Ustr(value))
         else:
             out( '> Variable in parser => ' + Ustr(name) + ' = ' + Ustr(value))
                            
@@ -1361,6 +1438,7 @@ class JsParser(object):
         
         out('Extract function :' + name + ' Selfinvok :' + str(selfinvoked) + ' ' + str(param))
         out('data ' + str(data))
+        out( 'test' + data[1])
         
         pos = 0
         replac = ''
@@ -1571,8 +1649,9 @@ class JsParser(object):
                     continue  
 
             #Variable operation/creation/modification ?
-            m = re.search(r'^\({0,1}([\w\.]+)(?:\[([^\]]+)\])*\){0,1}\s*=',chain,re.DOTALL | re.UNICODE)
-            if m or chain.startswith('var '):
+            m = re.search(r'^\({0,1}([\w\.]+)\){0,1}(?:\[([^\]]+)\])*\){0,1}\s*=',chain,re.DOTALL | re.UNICODE)
+            m2 = re.search(r'^\({0,1}([\w\.]+)\){0,1}(?:\.([\w]+))*\){0,1}\s*=',chain,re.DOTALL | re.UNICODE)
+            if m or chain.startswith('var ') or m2:
                 out('var')
 
                 if chain.startswith('var '):
@@ -1642,7 +1721,7 @@ class JsParser(object):
         
         #unicode ?
         #if isinstance(JScode, unicode):
-        if (False):
+        if (True):
             out('Unicode convertion')
             JScode = unicode(JScode, "utf-8")
             self.Unicode = True
