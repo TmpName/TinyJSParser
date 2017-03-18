@@ -37,6 +37,48 @@ DEBUG = True
 MAX_RECURSION = 50
 ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 
+#---------------------------------------------------------------------------------
+
+
+JScodexxx = """
+function TLn(_0x3d6934,_0x504bc2) { return _0x3d6934/_0x504bc2; }
+function Mrs(_0x95adcb,_0x1db922) { return _0x95adcb+_0x1db922; }
+function dDI(_0x1cefda,_0x5b4a16) { return _0x1cefda+_0x5b4a16; }
+function fTD(_0x4e6ad7,_0x12999e) { return _0x4e6ad7-_0x12999e; }
+function Qyb(_0x42bca4,_0x4676fa) { return _0x42bca4-_0x4676fa; }
+function JXH(_0x1c5b70,_0x1378b2) { return _0x1c5b70-_0x1378b2; }
+function Hol(_0x33d927,_0x4627a8) { return _0x33d927(_0x4627a8); }
+function Huj(_0x16aa89,_0x3890d0,_0x1316f7) { return _0x16aa89(_0x3890d0,_0x1316f7); }
+function qTV(_0x3e7db2,_0x1d5511) { return _0x3e7db2-_0x1d5511; }
+function YYt(_0x4417fe,_0x2daaf0) { return _0x4417fe!=_0x2daaf0; }
+function mtm(_0x258b48,_0x142a30) { return _0x258b48==_0x142a30; }
+function YVW(_0x3eb7b2,_0x5ba7f5) { return _0x3eb7b2%_0x5ba7f5; }
+function FCr(_0x597f69,_0x4e2a31) { return _0x597f69==_0x4e2a31; }
+function XWo(_0x46a93d,_0x44286c,_0x2c596a) { return _0x46a93d(_0x44286c,_0x2c596a); }
+function mmk(_0x4ce281,_0x3b943b) { return _0x4ce281+_0x3b943b; }
+function ehJ(_0x3d6921,_0x3db0f5) { return _0x3d6921+_0x3db0f5; }
+function FSk(_0x322270,_0x15e984) { return _0x322270<_0x15e984; }
+var _0x243cf8='2|3|4|6|8|5|0|1|7'.split('|'),_0x16a278=0;while(true){switch(_0x243cf8[_0x16a278++]){case'0':_0x20fe06=0;continue;case'1':for(var _0x2b5057=0;FSk(_0x20fe06,_0x45262d.length);){var _0xaa6ce7=_0x45262d.substring(_0x20fe06,ehJ(_0x20fe06,2)),_0x2e272c=_0x45262d.substring(_0x20fe06,mmk(_0x20fe06,3)),_0x4fcf9c=XWo(parseInt,_0xaa6ce7,16);_0x20fe06+=2,FCr(YVW(_0x2b5057,3),0)?(_0x4fcf9c=XWo(parseInt,_0x2e272c,8),_0x20fe06+=1):mtm(YVW(_0x2b5057,2),0)&&YYt(0,_0x2b5057)&&FSk(_0x45262d[qTV(_0x2b5057,1)].charCodeAt(0),60)&&(_0x4fcf9c=Huj(parseInt,_0x2e272c,10),_0x20fe06+=1);var _0x68a9c3=_0x3d56ff[YVW(_0x2b5057,12)];_0x4fcf9c^=213,_0x4fcf9c^=_0x68a9c3,_0xb71712.push(String.fromCharCode(_0x4fcf9c)),_0x2b5057+=1;}continue;case'2':var _0x529fb5='abcdefghijkl',_0x135c0f=_0x529fb5.charCodeAt(0),_0x26c260=JXH(_0x135c0f,55),_0x2188bd=Math.max(2,_0x26c260);continue;case'3':_0x26c260=Math.min(_0x2188bd,Qyb(fTD(_0x529fb5.length,36),2));continue;case'4':for(var _0x488068=_0x529fb5.substring(_0x26c260,dDI(_0x26c260,36)),_0x3d56ff=new Array(12),_0x20fe06=0;FSk(_0x20fe06,_0x488068.length);){var _0x4139b3=_0x488068.substring(_0x20fe06,Mrs(_0x20fe06,3));_0x3d56ff[TLn(_0x20fe06,3)]=Huj(parseInt,_0x4139b3,8),_0x20fe06+=3;}continue;case'5':var _0x45262d=_0x3702d7.join(''),_0xb71712=[];continue;case'6':var _0x3702d7=_0x529fb5.split('');continue;case'7':_0x3990aa.spc($,'#streamurl').text(_0xb71712.join(''));continue;case'8':_0x3702d7.splice(_0x26c260,36);continue;}break;}
+"""
+
+JScode = """
+a = Array(10);
+a(3) = 7;
+b = a(3);
+debug();
+"""
+
+JScodecontinu = """
+var i = 4;
+var j = "A";
+while (i > 0 ){
+i = i - 1;
+if ( i == 2) { continue; }
+j = j + i;
+
+}
+debug();
+"""
 
 JScode885 = """
 ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ ['_']; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ);
@@ -155,8 +197,20 @@ JScode753 ="""
 eval('2+2');
 """
 
-JScode = """
+JScode7788 = """
 (function(){var b="some sample packed code";function something(a){alert(a)}something(b)})();
+"""
+
+JScodeswitch = """
+switch(0) {
+    case 0:
+        a = 1;
+        break;
+    case 1:
+        a = 2;
+        break;
+}
+debug();
 """
 
 JScode7744 ="""
@@ -622,6 +676,7 @@ class JsParser(object):
         
         self.Return = False
         self.Break = False
+        self.continu = False
         self.ForceReturn = False
                         
     def SetReturn(self,r,v):
@@ -791,7 +846,7 @@ class JsParser(object):
         debug = JScode
         
         out( '-------------')
-        out( str(allow_recursion) + ' : A evaluer >'+ JScode + '<')
+        out( str(allow_recursion) + ' : A evaluer >'+ JScode + '<\n')
             
         #********************************************************
         
@@ -801,7 +856,7 @@ class JsParser(object):
             c = JScode[0]
 
             #print 'InterpretedCode > ' + InterpretedCode
-            print 'JScode > ' + JScode.encode('ascii','replace')
+            print 'JScode > ' + JScode.encode('ascii','replace') + '\n'
 
             #Alpha chain
             if c == '"':
@@ -919,7 +974,7 @@ class JsParser(object):
              
                 if function:
                     
-                    out( "> function : " + function + ' arg=' + arg)
+                    out( "> function: " + function + ' arg=' + arg)
                     
                     #Definite function ?
                     fe = self.IsFunc(vars,function)
@@ -954,6 +1009,12 @@ class JsParser(object):
                             
                         JScode = JScode[(len(m.group(0)) + pos3 + 0):]
                         continue
+                    
+                    #array
+                    if function=='Array':
+                        InterpretedCode.AddValue('[]')
+                        JScode = JScode[(len(m.group(0)) + pos3):]
+                        continue
    
                     #Native
                     #charCodeAt
@@ -972,7 +1033,7 @@ class JsParser(object):
                     #Substring
                     if function=='substring':
                         s = self.GetVar(vars,name)
-                        arg = arg.split(',')
+                        arg = MySplit(arg,',')
                         p1 = self.evalJS(arg[0],vars,allow_recursion)
                         if len(arg)> 1:
                             p2 = self.evalJS(arg[1],vars,allow_recursion)
@@ -1051,6 +1112,23 @@ class JsParser(object):
                         InterpretedCode.AddValue(s.split(arg))
                         JScode = JScode[(len(m.group(0)) + pos3 ):]
                         continue
+                    #math function
+                    #max
+                    if function=='max':
+                        arg = MySplit(arg,',')
+                        t1 = self.evalJS(arg[0],vars,allow_recursion)
+                        t2 = self.evalJS(arg[1],vars,allow_recursion)
+                        InterpretedCode.AddValue(max(t1,t2))
+                        JScode = JScode[(len(m.group(0)) + pos3 ):]
+                        continue
+                    #min
+                    if function=='min':
+                        arg = MySplit(arg,',')
+                        t1 = self.evalJS(arg[0],vars,allow_recursion)
+                        t2 = self.evalJS(arg[1],vars,allow_recursion)
+                        InterpretedCode.AddValue(min(t1,t2))
+                        JScode = JScode[(len(m.group(0)) + pos3 ):]
+                        continue                        
                     #function
                     if function=='function':
                         pos9 = len(JScode[(len(m.group(0)) + pos3 + 0):])
@@ -1197,8 +1275,8 @@ class JsParser(object):
             print vars
             out("Can't eval string :" + JScode)
             out("Last eval : " + str(self.LastEval))
-            print c.encode('ascii','replace')
-            print debug.encode('ascii','replace')
+
+            #print debug.encode('ascii','replace')
             raise Exception(str(allow_recursion) + " : Can't Eval chain : " + JScode)
 
         InterpretedCode2 = InterpretedCode.GetBuffer()
@@ -1235,6 +1313,11 @@ class JsParser(object):
         if '[' in variable:
             index = variable.split('[')[1][:-1]
             variable = variable.split('[')[0]
+            index = self.evalJS(index,var,50)
+            
+        if '(' in variable:
+            index = variable.split('(')[1][:-1]
+            variable = variable.split('(')[0]
             index = self.evalJS(index,var,50)
             
         if '.' in variable:
@@ -1303,12 +1386,15 @@ class JsParser(object):
         var.append((variable,value))
     
     def IsVar(self,var,variable):
-        variable = variable.split('[')[0]
-        variable = variable.split('.')[0]
-        for j in var:
-            if j[0] == variable:
-                return True
-        return False
+        try:
+            variable = variable.split('[')[0]
+            variable = variable.split('.')[0]
+            for j in var:
+                if j[0] == variable:
+                    return True
+            return False
+        except:
+            return False
         
     #Need to use metaclass here
     def IsFunc(self,vars,name):
@@ -1350,7 +1436,20 @@ class JsParser(object):
   
         if value:
             #Values is an array []
-            if value.startswith('[') and value.endswith(']'):
+            if value.startswith('(') and value.endswith(')'):
+                value = value[1:-1]
+                
+                valueT = MySplit(value,',')
+                v = []
+                for k in valueT:
+                    v2 = self.evalJS(k,vars,allow_recursion)
+                    v.append(v2)
+                value = v
+                if index == None:
+                    index = 0
+                    init = True
+            #Values is an object []
+            elif value.startswith('[') and value.endswith(']'):
                 value = value[1:-1]
                 
                 valueT = MySplit(value,',')
@@ -1501,7 +1600,6 @@ class JsParser(object):
             #fonction
             m = re.search(r'^(\()* *function(?: ([\w]+))* *\(([^\)]*)\) *{', chain,re.DOTALL)
             if m:
-                print str(m.groups())
                 name = ''
                 selfinvoked = False
                 if m.group(2):
@@ -1519,6 +1617,9 @@ class JsParser(object):
         #**********************
 
         while (True):
+        
+            if self.continu:
+                break;
         
             chain,pos = self.ExtractFirstchain(JScode)
             if not (chain):
@@ -1607,7 +1708,29 @@ class JsParser(object):
                         if self.Break:
                             self.Break = False
                             break
+                            
+                        if self.continu:
+                            self.continu = False
 
+                    continue
+                    
+                #boucle switch
+                if name == 'switch':
+                    v = self.evalJS(arg,vars,allow_recursion)
+                    f = code
+                    f = f[:-1]
+                    p = f.find("case'" + v + "':")
+                    
+                    out('> Boucle switch : Var=' + v + ' code=' + f + ' position=' + str(p))
+                    
+                    if p == -1:
+                        raise Exception("Can't find switch value " + str(v))
+                    f = f[(p + len(v) + 7):]
+                    
+                    out('> New block : ' + f)
+                    
+                    self.Parse(f,vars,allow_recursion)
+                    
                     continue
                     
                 #Boucle if
@@ -1677,6 +1800,11 @@ class JsParser(object):
             if chain.startswith('break'):
                 self.Break = True
                 return
+                
+            #continue
+            if chain.startswith('continue'):
+                self.continu = True
+                return
             
             #Return ?                
             if chain.startswith('return'):
@@ -1743,4 +1871,4 @@ JP = JsParser()
 JP.AddHackVar('aQydkd1Gbfx',"u'@D||&FBgHO`cfggghaddOb`]bg]_]_OE59ys33I")
 JP.AddHackVar('aQydkd1Gbf',"u'@D||&FBgHO`cfggghaddOb`]bg]_]_OE59ys33)")
 print 'Return : ' + str(JP.ProcessJS(JScode))
-print 'Result :'  + JP.GetVarHack('streamurl')
+#print 'Result :'  + JP.GetVarHack('streamurl')
