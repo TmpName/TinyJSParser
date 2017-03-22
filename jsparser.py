@@ -13,6 +13,7 @@
 # Object
 # Globla/Local variables/function/object
 #utiliser un tableau special pr variable passe en parametrzs > clash
+# (True)?(a = 2):(a = 3); don't work because of () at first
 
 #help
 #https://sarfraznawaz.wordpress.com/2012/01/26/javascript-self-invoking-functions/
@@ -23,7 +24,10 @@
 
 #UNICODE ERROR
 #print a.decode('utf-8').encode('ascii','replace')
-#
+#true = 1 instead of true
+
+# x == 2 && dosomething();
+# dosomething() will only be called if x == 2. This is called Short-circuiting.
 
 import re
 import types
@@ -40,7 +44,6 @@ ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 
 #---------------------------------------------------------------------------------
 
-#0x450a25 = 37 au lieu de 168
 
 JScode = """
 function XcK(_0xfc1900,_0x9e1420) { return _0xfc1900(_0x9e1420); }
@@ -67,17 +70,16 @@ var _0x46bf10=_0x5e82dd.substring(_0x1e74c2,WNS(_0x1e74c2,3));
 var _0x450a25=pLB(parseInt,_0x221589,16);
 _0x1e74c2+=2;
 gJK(oET(_0x1041b1,3),0)?(_0x450a25=iJA(parseInt,_0x46bf10,8),_0x1e74c2+=1):kOL(oET(_0x1041b1,2),0)&&hlO(0,_0x1041b1)&&eAE(_0x5e82dd[wyf(_0x1041b1,1)].charCodeAt(0),60)&&(_0x450a25=iJA(parseInt,_0x46bf10,10),_0x1e74c2+=1);
-debug();
 var _0x31b23d=_0x347706[oET(_0x1041b1,7)];
 _0x450a25^=213;
 _0x450a25^=_0x31b23d;
 _0x5e5aae.push(String.fromCharCode(_0x450a25));
 _0x1041b1+=1;
 }
+debug();
 continue;
 case'2':
 for(var _0x2d246a=_0x30d464.substring(_0x84a7b0,WNS(_0x84a7b0,36)),_0x347706=new Array(12),_0x1e74c2=0;eAE(_0x1e74c2,_0x2d246a.length);){
-
 var _0x24ac16=_0x2d246a.substring(_0x1e74c2,WNS(_0x1e74c2,3));
 _0x347706[TYf(_0x1e74c2,3)]=iJA(parseInt,_0x24ac16,8),_0x1e74c2+=3;
 }
@@ -95,10 +97,8 @@ break;
 
 """
 
-JScodedfdf = """
-c=9;
-d=e=f=4;
-a=1,b=2,c-=1;
+JScodeTTT = """
+a = true&true;
 debug();
 """
 
@@ -607,6 +607,18 @@ class JSBuffer(object):
                 self.buf[0] = self.opBuf[0] + str(self.buf[0])
                 self.opBuf[0] = ''
 
+        #work for bool     
+        elif self.type == 'Bool':
+            if len(self.buf) > 1:
+                self.buf[0] = self.opBuf[0] + str(self.buf[0]) + self.opBuf[1] + str(self.buf[1])
+                self.opBuf[0] = ''
+                #decale
+                del self.opBuf[-1]
+                del self.buf[-1]
+            else:
+                self.buf[0] = self.opBuf[0] + str(self.buf[0])
+                self.opBuf[0] = ''
+                
         # work for
         elif self.type == 'Logic':
             if not self.buf[0] == self.buf[1]:
@@ -665,6 +677,12 @@ class JSBuffer(object):
     
         if self.type == 'Numeric':
             return self.SafeEval(self.buf[0])
+            
+        if self.type == 'Bool':
+            if self.SafeEval(self.buf[0].replace('True','1').replace('False','0')):
+                return True
+            else:
+                return False
         
         if self.type == None:
             return ''
@@ -927,7 +945,8 @@ class JsParser(object):
                     continue
                 else:
                     self.SetVar(vars,'TEMPORARY_VARS',JScode[1:e])     
-                    JScode = 'TEMPORARY_VARS' + JScode[(e+1):]                   
+                    JScode = 'TEMPORARY_VARS' + JScode[(e+1):]
+                    
             #numeric chain
             r = re.search('(^[0-9]+)',JScode)
             if r:
@@ -995,8 +1014,18 @@ class JsParser(object):
             #remove useless code
             if JScode.startswith('new '):
                 JScode = JScode[4:]
-                continue           
-            
+                continue
+                
+            #Special value
+            m = re.search('^(true|false)',JScode, re.UNICODE)
+            if m:
+                v = m.group(1)
+                if v == 'true':  
+                    InterpretedCode.AddValue(True)
+                if v == 'false':
+                    InterpretedCode.AddValue(False)
+                JScode = JScode[len(v):]
+                continue
                 
             name = ''            
             #Extraction info
@@ -1323,6 +1352,13 @@ class JsParser(object):
                                 
                         InterpretedCode.AddValue(r)       
                         JScode = JScode[pos7:]
+                        
+                        # A new variable ?
+                        print 'pppppppppppppppp' + JScode
+                        if len(JScode) > 0:
+                            if JScode[1] == ',':
+                                rr(pp)
+                        
                         continue
                         
                     raise Exception("Can't find var " + r.group(1))
@@ -1356,18 +1392,27 @@ class JsParser(object):
 
             #Special if (A)?(B):(C)
             if c == '?':
+                print " ****** Special if ********* "
                 #need to find all part
-                A = self.LastEval
+                A = InterpretedCode.GetPrevious()
                 B = GetItemAlone(JScode,':')
-                C = JScode[len(B):]
+                C = GetItemAlone(JScode[len(B):])
+                
+                print '///' + str(A)
+                
+                Totlen = len(B) + len(C)
                 B = B[1:-1]
+                if B.startswith('('):
+                    B = B[1:-1]
+                if C.startswith('('):
+                    C = C[1:-1]               
                 if A:
                     r = self.Parse(B,vars,allow_recursion)
                 else:
                     r = self.Parse(C,vars,allow_recursion)
-                    
-                InterpretedCode.GetPrevious()
+
                 InterpretedCode.AddValue(r)
+                JScode = JScode[Totlen :]
                 continue            
             
                     
@@ -1750,6 +1795,13 @@ class JsParser(object):
                 out( '> hack ' + m.group(0) + ' , variable est ' + m.group(1))
                 self.SetVar(self.HackVars,m.group(1),self.GetVar(vars,m.group(2)))
                 continue
+                
+            #useless ( or [
+            if chain.startswith('(') or chain.startswith('['):
+                print "Useless () or []"
+                if chain.endswith(');') or chain.endswith('];'):
+                    chain = chain[1:-2] + ';'
+                
   
             name = ''            
             #Extraction info
