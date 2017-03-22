@@ -1511,7 +1511,10 @@ class JsParser(object):
                     if type(r) in [list,tuple]:
                         print '2'
                         if CheckType(index) == 'Numeric':
-                            r = r[int(index)]
+                            if int(index) < len(r):
+                                r = r[int(index)]
+                            else:
+                                r = 'undefined'
                         elif CheckType(index) == 'String':
                             index = self.RemoveGuil(index)
                             r = r[index]
@@ -1902,6 +1905,10 @@ class JsParser(object):
                 #boucle switch
                 if name == 'switch':
                     v = self.evalJS(arg,vars,allow_recursion)
+                    
+                    if v == 'undefined':
+                        continue
+                    
                     f = code
                     f = f[:-1]
                     p = f.find("case'" + v + "':")
