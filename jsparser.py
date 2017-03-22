@@ -62,7 +62,9 @@ function xRD(_0x14f459,_0x569260) { return _0x14f459<_0x569260; }
 var _0x254069='3|6|2|7|4|0|5|1|8'.split('|'),_0x38b61f=0;while(true){
 switch(_0x254069[_0x38b61f++]){
 
-case'0':var _0x5e82dd=_0x563f72.join(''),_0x5e5aae=[];continue;
+case'0':var _0x5e82dd=_0x563f72.join(''),_0x5e5aae=[];
+
+continue;
 case'1':
 for(var _0x1041b1=0;xRD(_0x1e74c2,_0x5e82dd.length);){
 var _0x221589=_0x5e82dd.substring(_0x1e74c2,ZeT(_0x1e74c2,2));
@@ -75,8 +77,10 @@ _0x450a25^=213;
 _0x450a25^=_0x31b23d;
 _0x5e5aae.push(String.fromCharCode(_0x450a25));
 _0x1041b1+=1;
+
+
 }
-debug();
+
 continue;
 case'2':
 for(var _0x2d246a=_0x30d464.substring(_0x84a7b0,WNS(_0x84a7b0,36)),_0x347706=new Array(12),_0x1e74c2=0;eAE(_0x1e74c2,_0x2d246a.length);){
@@ -85,12 +89,14 @@ _0x347706[TYf(_0x1e74c2,3)]=iJA(parseInt,_0x24ac16,8),_0x1e74c2+=3;
 }
 continue;
 case'3':var _0x30d464='250730212410323372070311542152273760550920272740711f2319b18111418474143f821536444fc0776b2503371864737624097364192f4132ff116067134be2552d190102006',_0x526965=_0x30d464.charCodeAt(0),_0x84a7b0=wyf(_0x526965,55),_0x4d54a4=Math.max(2,_0x84a7b0);continue;
-case'4':_0x563f72.splice(_0x84a7b0,36);continue;
+case'4':_0x563f72.splice(_0x84a7b0,36);
+continue;
 case'5':_0x1e74c2=0;continue;
 case'6':_0x84a7b0=Math.min(_0x4d54a4,wyf(wyf(_0x30d464.length,36),2));continue;
-case'7':var _0x563f72=_0x30d464.split('');continue;
+case'7':var _0x563f72=_0x30d464.split('');
+continue;
 case'8':Result=_0x5e5aae.join('');
-debug();continue;
+continue;
 }
 break;
 }
@@ -1201,12 +1207,15 @@ class JsParser(object):
                     if function=='splice':
                         s = self.GetVar(vars,name)
                         arg = MySplit(arg,',')
-                        t1 = self.evalJS(arg[0],vars,allow_recursion)
-                        t2 = self.evalJS(arg[1],vars,allow_recursion)
+                        t1 = self.evalJS(arg[0],vars,allow_recursion) + 1
+                        t2 = self.evalJS(arg[1],vars,allow_recursion) 
                         if len(arg) > 2:
                             raise Exception("Not implemented - splice")
-                        tab = s[t1:(t1+t2)]
-                        InterpretedCode.AddValue(tab)
+                        tab = s[:t1] + s[(t1 + t2):]
+                        tabsup = s[t1:(t1 + t2)]
+                        InterpretedCode.AddValue(tabsup)
+                        self.SetVar(vars,name,tab)
+
                         JScode = JScode[(len(m.group(0)) + pos3 ):]
                         continue
                     #push
@@ -1220,6 +1229,7 @@ class JsParser(object):
                             raise Exception("Not implemented - push")
                         s.append(t1)
                         self.SetVar(vars,name,s)
+                        #self.VarManage(allow_recursion,vars,name,str(s))
                         v = len(s)
                         InterpretedCode.AddValue(v)
                         JScode = JScode[(len(m.group(0)) + pos3 ):]
@@ -1354,7 +1364,6 @@ class JsParser(object):
                         JScode = JScode[pos7:]
                         
                         # A new variable ?
-                        print 'pppppppppppppppp' + JScode
                         if len(JScode) > 0:
                             if JScode[1] == ',':
                                 rr(pp)
@@ -1374,6 +1383,47 @@ class JsParser(object):
                 JScode = JScode[1:]
                 continue
                 
+            #Special if (A)?(B):(C)
+            if c == '?':
+                print " ****** Special if 1 ********* "
+                #need to find all part
+                A = InterpretedCode.GetPrevious()
+                B = GetItemAlone(JScode,':')
+                C = GetItemAlone(JScode[len(B):])
+                
+                Totlen = len(B) + len(C)
+                B = B[1:-1]
+                if B.startswith('('):
+                    B = B[1:-1]
+                if C.startswith('('):
+                    C = C[1:-1]               
+                if A:
+                    r = self.Parse(B,vars,allow_recursion)
+                else:
+                    r = self.Parse(C,vars,allow_recursion)
+
+                InterpretedCode.AddValue(r)
+                JScode = JScode[Totlen :]
+                continue
+
+            #another special if
+            if JScode[0:2] == '&&':
+                print " ****** Special if 2 ********* "
+                A = InterpretedCode.GetPrevious()
+                B = GetItemAlone(JScode[2:])
+                print ' > ' + B
+                
+                Totlen = len(B) + 2
+                if B.startswith('('):
+                    B = B[1:-1]
+                if A:
+                    r = self.Parse(B,vars,allow_recursion)
+                    
+                #InterpretedCode.AddValue(r)
+                JScode = JScode[Totlen :]
+                print '* ' + JScode
+                continue                    
+                
             #Simple operation
             if c in '+<>-*/=&%|!^.':
                 InterpretedCode.SetOp(c)
@@ -1389,33 +1439,7 @@ class JsParser(object):
                 InterpretedCode.AddValue([])
                 JScode = JScode[2:]
                 continue
-
-            #Special if (A)?(B):(C)
-            if c == '?':
-                print " ****** Special if ********* "
-                #need to find all part
-                A = InterpretedCode.GetPrevious()
-                B = GetItemAlone(JScode,':')
-                C = GetItemAlone(JScode[len(B):])
-                
-                print '///' + str(A)
-                
-                Totlen = len(B) + len(C)
-                B = B[1:-1]
-                if B.startswith('('):
-                    B = B[1:-1]
-                if C.startswith('('):
-                    C = C[1:-1]               
-                if A:
-                    r = self.Parse(B,vars,allow_recursion)
-                else:
-                    r = self.Parse(C,vars,allow_recursion)
-
-                InterpretedCode.AddValue(r)
-                JScode = JScode[Totlen :]
-                continue            
-            
-                    
+        
             #???
             if JScode == ';':
                 JScode = JScode[1:]
@@ -1526,7 +1550,10 @@ class JsParser(object):
                         Listvalue.append('undefined')
                         l = l - 1
                     #Now modify it
-                    Listvalue[int(i)] = value
+                    if type(value) in [list,tuple]:
+                        Listvalue = value
+                    else:
+                        Listvalue[int(i)] = value
                     var[var.index(j)] = (variable,Listvalue)
                 #dictionnary
                 elif type(var[var.index(j)][1]) in [dict]:
