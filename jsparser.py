@@ -38,7 +38,7 @@ import sys
 
 REG_NAME = '[\w]+'
 REG_OP = '[\/\*\-\+\{\}\[\]<>\|=~^%!]+' #not space here
-DEBUG = True
+DEBUG = True # Never enable it in kodi, too big size log
 MAX_RECURSION = 50
 ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 
@@ -540,14 +540,14 @@ class JSBuffer(object):
         
     #Need 3 values for priority   
     def AddValue(self,value):
-        print 'ADD ' + Ustr(value) + ' ' + Ustr(type(value)) + ' a ' + Ustr(self.buf)
+        out('ADD ' + Ustr(value) + ' ' + Ustr(type(value)) + ' a ' + Ustr(self.buf))
         if not self.type:
             self.type = CheckType(value)
             self.Push(value,self.__op)
             return       
          
         if not self.__op:
-            print 'op ' + str(self.opBuf) + ' - buff ' +str(self.buf)
+            out( 'op ' + str(self.opBuf) + ' - buff ' +str(self.buf))
             raise Exception("Missing operator")
             
         self.Push(value,self.__op)
@@ -573,8 +573,6 @@ class JSBuffer(object):
                 #Type different mais JS convertis en string
                 else:
                     out('string convertion')
-                    print self.type + ' ' + str(self.buf[0])
-                    print CheckType(self.buf[len(self.buf) -1]) + ' ' + str(self.buf[1])
                     
                     if not CheckType(self.buf[0]) == 'String':
                         self.buf[0]=self.SpecialStr(self.buf[0])
@@ -737,6 +735,7 @@ class JsParser(object):
         self.Break = False
         self.continu = False
         self.ForceReturn = False
+        
                         
     def SetReturn(self,r,v):
         self.Return = True
@@ -919,7 +918,7 @@ class JsParser(object):
             c = JScode[0]
 
             #print 'InterpretedCode > ' + InterpretedCode
-            print 'JScode > ' + JScode.encode('ascii','replace') + '\n'
+            out( 'JScode > ' + JScode.encode('ascii','replace') + '\n')
 
             #Alpha chain
             if c == '"':
@@ -997,13 +996,9 @@ class JsParser(object):
                     InterpretedCode.AddValue(v2[int(v)])
                 elif InterpretedCode.CheckString():
                     v2 = InterpretedCode.GetPrevious()
-                    print v
-                    print v2
-                    print type (v2)
                     try:
                         InterpretedCode.AddValue(v2[v])
                     except:
-                        print v2['c']
                         bb(mm)
                 else:
                     InterpretedCode.AddValue([])
@@ -1044,7 +1039,7 @@ class JsParser(object):
                 function = m.group(2)
                 pos3,arg = GetBeetweenChar(JScode[(m.end()-1):],'(',')')
 
-                print 'DEBUG EVAL > Name: ' + Ustr(name) + ' arg: ' + Ustr(arg) + ' function: ' + Ustr(function)
+                out( 'DEBUG EVAL > Name: ' + Ustr(name) + ' arg: ' + Ustr(arg) + ' function: ' + Ustr(function) )
              
                 if function:
                     
@@ -1114,7 +1109,6 @@ class JsParser(object):
                         t1 = self.evalJS(arg[0],vars,allow_recursion)
                         t2 = self.evalJS(arg[1],vars,allow_recursion)
                         r = int(t1,int(t2))
-                        print "parseInt (" + t1 + ',' + str(t2) +')=' + str(r)
                         InterpretedCode.AddValue(r)
                         JScode = JScode[(len(m.group(0)) + pos3 ):]
                         continue                   
@@ -1220,7 +1214,6 @@ class JsParser(object):
                         continue
                     #push
                     if function=='push':
-                        self.PrintVar(vars)
                         s = self.GetVar(vars,name)
                         arg = MySplit(arg,',')
                         t1 = self.evalJS(arg[0],vars,allow_recursion)
@@ -1346,7 +1339,6 @@ class JsParser(object):
                             pos7+=1
                         #a+=1 form
                         elif op[1] == '=' and not op[0] == '=':
-                            print 'ok' + op[0]
                             n = GetItemAlone(JScode[m.end():],' ' + REG_OP)
                             if op[0] == '+':
                                 r = self.evalJS(v+'+'+n ,vars,allow_recursion)
@@ -1385,7 +1377,7 @@ class JsParser(object):
                 
             #Special if (A)?(B):(C)
             if c == '?':
-                print " ****** Special if 1 ********* "
+                out( " ****** Special if 1 ********* ")
                 #need to find all part
                 A = InterpretedCode.GetPrevious()
                 B = GetItemAlone(JScode,':')
@@ -1408,10 +1400,9 @@ class JsParser(object):
 
             #another special if
             if JScode[0:2] == '&&':
-                print " ****** Special if 2 ********* "
+                out( " ****** Special if 2 ********* ")
                 A = InterpretedCode.GetPrevious()
                 B = GetItemAlone(JScode[2:])
-                print ' > ' + B
                 
                 Totlen = len(B) + 2
                 if B.startswith('('):
@@ -1421,7 +1412,6 @@ class JsParser(object):
                     
                 #InterpretedCode.AddValue(r)
                 JScode = JScode[Totlen :]
-                print '* ' + JScode
                 continue                    
                 
             #Simple operation
@@ -1509,7 +1499,6 @@ class JsParser(object):
                 r = j[1]
                 if not(index == None):
                     if type(r) in [list,tuple]:
-                        print '2'
                         if CheckType(index) == 'Numeric':
                             if int(index) < len(r):
                                 r = r[int(index)]
@@ -1815,9 +1804,9 @@ class JsParser(object):
             if chain == ';':
                 continue
               
-            print 'D++++++++++++++++++'
-            print chain.encode('ascii','replace')
-            print 'F++++++++++++++++++'
+            out( 'D++++++++++++++++++' )
+            out(chain.encode('ascii','replace') )
+            out( 'F++++++++++++++++++')
             
             #hackVars ?
             m = re.search(r'^\$\("#([^"]+)"\)\.text\(([^\)]+)\);', chain)
@@ -1828,7 +1817,7 @@ class JsParser(object):
                 
             #useless ( or [
             if chain.startswith('(') or chain.startswith('['):
-                print "Useless () or []"
+                out( "Useless () or []" )
                 if chain.endswith(');') or chain.endswith('];'):
                     chain = chain[1:-2] + ';'
                 
@@ -1842,7 +1831,7 @@ class JsParser(object):
                 name = m.group(1)
                 pos3,arg = GetBeetweenChar(chain[(m.end()-1):],'(',')')
                 code = chain[(m.end() + pos3):]
-                print 'DEBUG > Name: ' + name + ' arg: ' + arg + ' code: ' + code
+                out( 'DEBUG > Name: ' + name + ' arg: ' + arg + ' code: ' + code )
                 
                 #Jquery
                 if name == 'DOCUMENT_READY':
@@ -1989,11 +1978,8 @@ class JsParser(object):
                         else:
                             ope = v1[(len(t3)) - 2]
                             t2 = t3[:-2]
-                            print t2
-                            print ope
                             v1 = v1[(len(t3)):]
                             t3 = GetItemAlone(v1,'=')
-                            print t3
                             r = self.evalJS(t2+ope+t3 ,vars,allow_recursion)
                             self.VarManage(allow_recursion,vars,t2,str(r))
                     #A,B,C
@@ -2059,7 +2045,12 @@ class JsParser(object):
         JScode = JScode.replace('.length','.length()')
         
         #Start the parsing
-        return self.Parse(JScode,vars)
+        ret = self.Parse(JScode,vars)
+        
+        #Memorise vars
+        
+        
+        return ret
 
         
 #---------------------------------------------------------------------------------------------------------------------------------------- 
@@ -2074,7 +2065,12 @@ class JsParser(object):
 #print ord(my_unicode_string[3])
 
 JP = JsParser()
-JP.AddHackVar('aQydkd1Gbfx',"u'@D||&FBgHO`cfggghaddOb`]bg]_]_OE59ys33I")
-JP.AddHackVar('aQydkd1Gbf',"u'@D||&FBgHO`cfggghaddOb`]bg]_]_OE59ys33)")
-print 'Return : ' + str(JP.ProcessJS(JScode))
-#print 'Result :'  + JP.GetVarHack('streamurl')
+Liste_var = []
+
+#JP.AddHackVar('aQydkd1Gbfx',"u'@D||&FBgHO`cfggghaddOb`]bg]_]_OE59ys33I")
+#print 'Return : ' + str(JP.ProcessJS(JScode))
+JP.ProcessJS(JScode,Liste_var)
+print 'Decoded url : ' + JP.GetVar(Liste_var,'Result')
+
+
+
