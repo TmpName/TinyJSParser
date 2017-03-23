@@ -26,8 +26,23 @@
 #print a.decode('utf-8').encode('ascii','replace')
 #true = 1 instead of true
 
-# x == 2 && dosomething();
-# dosomething() will only be called if x == 2. This is called Short-circuiting.
+# x = (y = 5, z = 6); > x= 6
+#function maFonction () {
+#  var x = 0;
+#  return (x += 1, x); // ce qui revient à renvoyer ++x
+#}
+
+#var x, y, z
+#x = (y=1, z=4);
+#x; //4
+#y; //1
+#z; //4
+
+#https://javascriptweblog.wordpress.com/2011/04/04/the-javascript-comma-operator/
+
+#if(x){foo();return bar()}else{return 1}
+#return x?(foo(),bar()):1
+
 
 import re
 import types
@@ -44,59 +59,50 @@ ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 
 #---------------------------------------------------------------------------------
 
+#_0x306459
 
 JScode = """
-function XcK(_0xfc1900,_0x9e1420) { return _0xfc1900(_0x9e1420); }
-function TYf(_0x3969f8,_0x48db24) { return _0x3969f8/_0x48db24; }
-function wyf(_0x234038,_0x42c6db) { return _0x234038-_0x42c6db; }
-function eAE(_0x425ad1,_0xc0cae2) { return _0x425ad1<_0xc0cae2; }
-function hlO(_0x5319f7,_0x1e7980) { return _0x5319f7!=_0x1e7980; }
-function kOL(_0x419965,_0x1ed3ea) { return _0x419965==_0x1ed3ea; }
-function iJA(_0x3953f0,_0x2d9f37,_0x4f842b) { return _0x3953f0(_0x2d9f37,_0x4f842b); }
-function oET(_0xbb4971,_0x3fdb77) { return _0xbb4971%_0x3fdb77; }
-function gJK(_0xe13ab1,_0x363e1d) { return _0xe13ab1==_0x363e1d; }
-function pLB(_0x3ab1d7,_0x5b73ee,_0x12dbc2) { return _0x3ab1d7(_0x5b73ee,_0x12dbc2); }
-function WNS(_0x5324b2,_0x9c4759) { return _0x5324b2+_0x9c4759; }
-function ZeT(_0x11547f,_0x2c0d13) { return _0x11547f+_0x2c0d13; }
-function xRD(_0x14f459,_0x569260) { return _0x14f459<_0x569260; }
-var _0x254069='3|6|2|7|4|0|5|1|8'.split('|'),_0x38b61f=0;while(true){
-switch(_0x254069[_0x38b61f++]){
+function oIa(_0x41645b,_0x10c153) { return _0x41645b-_0x10c153; }
+function EKC(_0x2250c2,_0x1160e6) { return _0x2250c2-_0x1160e6; }
+function XzN(_0x283e6a,_0x49206b) { return _0x283e6a(_0x49206b); }
+function dFN(_0x422306,_0x51e2dc,_0x230729) { return _0x422306(_0x51e2dc,_0x230729); }
+function XcK(_0x2ec800,_0x3087df) { return _0x2ec800/_0x3087df; }
+function TYf(_0x42c4ab,_0x3a8e71) { return _0x42c4ab<_0x3a8e71; }
+function MEA(_0x1f7e16,_0xe5b384) { return _0x1f7e16%_0xe5b384; }
+function FxE(_0x3738d3,_0x36a500,_0x2f551f) { return _0x3738d3(_0x36a500,_0x2f551f); }
+function yfs(_0x563f72,_0x3d8b3f) { return _0x563f72-_0x3d8b3f; }
+function bqe(_0x526965,_0x84a7b0) { return _0x526965!=_0x84a7b0; }
+function rZh(_0x1e74c2,_0x24ac16) { return _0x1e74c2%_0x24ac16; }
+function OLB(_0x31b23d,_0x2d246a) { return _0x31b23d==_0x2d246a; }
+function tVi(_0x221589,_0x46bf10) { return _0x221589%_0x46bf10; }
+function wqo(_0x5e82dd,_0x5e5aae) { return _0x5e82dd==_0x5e5aae; }
+function BOg(_0x174a99,_0x52dfc2,_0x254069) { return _0x174a99(_0x52dfc2,_0x254069); }
+function WNS(_0xfc1900,_0x9e1420) { return _0xfc1900+_0x9e1420; }
+function ZeT(_0x3969f8,_0x48db24) { return _0x3969f8+_0x48db24; }
+function xRD(_0x234038,_0x42c6db) { return _0x234038<_0x42c6db; }
+var _0x22b8e5='3|6|2|7|4|0|5|1|8'.split('|'),_0x3aae80=0;while(true){
+switch(_0x22b8e5[_0x3aae80++]){
 
-case'0':var _0x5e82dd=_0x563f72.join(''),_0x5e5aae=[];
-
-continue;
+case'0':var _0x4ff92f=_0x49dbe3.join(''),_0x3303a2=[];continue;
 case'1':
-for(var _0x1041b1=0;xRD(_0x1e74c2,_0x5e82dd.length);){
-var _0x221589=_0x5e82dd.substring(_0x1e74c2,ZeT(_0x1e74c2,2));
-var _0x46bf10=_0x5e82dd.substring(_0x1e74c2,WNS(_0x1e74c2,3));
-var _0x450a25=pLB(parseInt,_0x221589,16);
-_0x1e74c2+=2;
-gJK(oET(_0x1041b1,3),0)?(_0x450a25=iJA(parseInt,_0x46bf10,8),_0x1e74c2+=1):kOL(oET(_0x1041b1,2),0)&&hlO(0,_0x1041b1)&&eAE(_0x5e82dd[wyf(_0x1041b1,1)].charCodeAt(0),60)&&(_0x450a25=iJA(parseInt,_0x46bf10,10),_0x1e74c2+=1);
-var _0x31b23d=_0x347706[oET(_0x1041b1,7)];
-_0x450a25^=213;
-_0x450a25^=_0x31b23d;
-_0x5e5aae.push(String.fromCharCode(_0x450a25));
-_0x1041b1+=1;
-
-
-}
-
-continue;
-case'2':
-for(var _0x2d246a=_0x30d464.substring(_0x84a7b0,WNS(_0x84a7b0,36)),_0x347706=new Array(12),_0x1e74c2=0;eAE(_0x1e74c2,_0x2d246a.length);){
-var _0x24ac16=_0x2d246a.substring(_0x1e74c2,WNS(_0x1e74c2,3));
-_0x347706[TYf(_0x1e74c2,3)]=iJA(parseInt,_0x24ac16,8),_0x1e74c2+=3;
+for(var _0x2142d2=0;xRD(_0x4c3948,_0x4ff92f.length);){
+var _0x208bb1=_0x4ff92f.substring(_0x4c3948,ZeT(_0x4c3948,2));
+var _0x28906b=_0x4ff92f.substring(_0x4c3948,WNS(_0x4c3948,3));
+var _0xb1703c=_0x4ff92f.substring(_0x4c3948,WNS(_0x4c3948,4)),_0x306459=BOg(parseInt,_0x208bb1,16);
+_0x4c3948+=2,wqo(tVi(_0x2142d2,3),0)?(_0x306459=BOg(parseInt,_0x28906b,8),_0x4c3948+=1):OLB(rZh(_0x2142d2,2),0)&&bqe(0,_0x2142d2)&&xRD(_0x4ff92f[yfs(_0x2142d2,1)].charCodeAt(0),60)&&(_0x306459=FxE(parseInt,_0xb1703c,10),_0x4c3948+=2);
+var _0x3a9a19=_0x1701aa[MEA(_0x2142d2,9)];_0x306459^=213,_0x306459^=_0x3a9a19,_0x3303a2.push(String.fromCharCode(_0x306459)),_0x2142d2+=1;
 }
 continue;
-case'3':var _0x30d464='250730212410323372070311542152273760550920272740711f2319b18111418474143f821536444fc0776b2503371864737624097364192f4132ff116067134be2552d190102006',_0x526965=_0x30d464.charCodeAt(0),_0x84a7b0=wyf(_0x526965,55),_0x4d54a4=Math.max(2,_0x84a7b0);continue;
-case'4':_0x563f72.splice(_0x84a7b0,36);
+case'2':for(var _0x6594be=_0x22b5f6.substring(_0x21dc81,WNS(_0x21dc81,30)),_0x1701aa=new Array(10),_0x4c3948=0;TYf(_0x4c3948,_0x6594be.length);){
+var _0x46b158=_0x6594be.substring(_0x4c3948,WNS(_0x4c3948,3));_0x1701aa[XcK(_0x4c3948,3)]=dFN(parseInt,_0x46b158,8),_0x4c3948+=3;
+}
 continue;
-case'5':_0x1e74c2=0;continue;
-case'6':_0x84a7b0=Math.min(_0x4d54a4,wyf(wyf(_0x30d464.length,36),2));continue;
-case'7':var _0x563f72=_0x30d464.split('');
-continue;
-case'8':Result=_0x5e5aae.join('');
-continue;
+case'3':var _0x22b5f6='1125737736416423734301622231515467e007035500471b26074004102101035f2207e00153530116201131e00252300052053526900431020004112177a00722340012560704101013550001',_0x53f09a=_0x22b5f6.charCodeAt(0),_0x21dc81=EKC(_0x53f09a,52),_0x3f9f56=Math.max(2,_0x21dc81);continue;
+case'4':_0x49dbe3.splice(_0x21dc81,30);continue;
+case'5':_0x4c3948=0;continue;
+case'6':_0x21dc81=Math.min(_0x3f9f56,oIa(oIa(_0x22b5f6.length,30),2));continue;
+case'7':var _0x49dbe3=_0x22b5f6.split('');continue;
+case'8':Result=_0x3303a2.join('');continue;
 }
 break;
 }
@@ -1201,7 +1207,7 @@ class JsParser(object):
                     if function=='splice':
                         s = self.GetVar(vars,name)
                         arg = MySplit(arg,',')
-                        t1 = self.evalJS(arg[0],vars,allow_recursion) + 1
+                        t1 = self.evalJS(arg[0],vars,allow_recursion)
                         t2 = self.evalJS(arg[1],vars,allow_recursion) 
                         if len(arg) > 2:
                             raise Exception("Not implemented - splice")
@@ -1560,6 +1566,17 @@ class JsParser(object):
                 
         #New var
         var.append((variable,value))
+        
+    def GetTypeVar(self,var,variable):
+        try:
+            variable = variable.split('[')[0]
+            variable = variable.split('.')[0]
+            for j in var:
+                if j[0] == variable:
+                    return type(j[1])
+            return 'Undefined'
+        except:
+            return 'Undefined'   
     
     def IsVar(self,var,variable):
         try:
@@ -1598,8 +1615,9 @@ class JsParser(object):
         
         #variable is an object
         if '.' in name:
-            index = name.split('.')[1]
-            name = name.split('.')[0]
+            if self.GetTypeVar(vars,name) == 'tuple':
+                index = name.split('.')[1]
+                name = name.split('.')[0]
         #Variable is an array ?
         m = re.search(r'^\({0,1}([\w]+)\){0,1}\[(.+?)\]$', name,re.DOTALL | re.UNICODE)
         if m:
@@ -1945,21 +1963,36 @@ class JsParser(object):
             if m or chain.startswith('var ') or m2:
                 out('var')
 
+                InitVar = False
                 if chain.startswith('var '):
+                    InitVar = True
                     chain = chain[4:]
                 
                 #Now need to extract all vars from chain
                 while (chain):
                     
+                    print '**1 ' + chain
+                    
                     v1 = GetItemAlone(chain,',').strip()
+                    
+                    
 
                     chain=chain[(len(v1)):]
+                    
+                    print '**2 ' + chain
+                    
                     if v1.endswith(',') or v1.endswith(';'):
                         v1 = v1[:-1]
                         
+                    t3 = GetItemAlone(v1,'=')
+                        
+                    if t3 == v1:
+                        print '*** hack ***'
+                        self.evalJS(v1 ,vars,allow_recursion)
+                        continue
+                        
                     #A=B=C=8,A=1
                     if '=' in v1:
-                        t3 = GetItemAlone(v1,'=')
                         #just '='
                         if v1[(len(t3)) - 2] not in '+-*/^':
                             t1 = []
@@ -1982,9 +2015,11 @@ class JsParser(object):
                             t3 = GetItemAlone(v1,'=')
                             r = self.evalJS(t2+ope+t3 ,vars,allow_recursion)
                             self.VarManage(allow_recursion,vars,t2,str(r))
+                            print '**0 ' + chain
                     #A,B,C
                     else:
                         self.VarManage(allow_recursion,vars,v1,None)
+                    print '** ' + chain
                                     
                 continue
   
