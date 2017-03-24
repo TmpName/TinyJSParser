@@ -48,17 +48,8 @@ ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 
 #---------------------------------------------------------------------------------
 
-JScode = """
-function bar() { return "bar"; }
-function foo() { t = 4; }
-function a(){
-if(true){foo();return bar()}else{return "zut";}
-}
-s=a();
-debug();
-"""
 
-JScodeXX = """
+JScode = """
 function oIa(_0x41645b,_0x10c153) { return _0x41645b-_0x10c153; }
 function EKC(_0x2250c2,_0x1160e6) { return _0x2250c2-_0x1160e6; }
 function XzN(_0x283e6a,_0x49206b) { return _0x283e6a(_0x49206b); }
@@ -741,6 +732,8 @@ class JsParser(object):
         self.SpecialOption = ''
         
         self.Return = False
+        self.ReturnValue = None
+        
         self.Break = False
         self.continu = False
         self.ForceReturn = False
@@ -1083,11 +1076,12 @@ class JsParser(object):
                                 for z,w in nv:
                                     self.SetVar(vars,z,w)
 
-                            v = self.Parse(c,vars,allow_recursion)
+                            self.Parse(c,vars,allow_recursion)
                             
                             if self.Return:
                                 self.Return = False
-                                InterpretedCode.AddValue(v)
+                                InterpretedCode.AddValue(self.ReturnValue)
+                                self.Return = None
                                 
                             JScode = JScode[(len(m.group(0)) + pos3 + 0):]
                             continue
@@ -2042,13 +2036,15 @@ class JsParser(object):
                 m = re.match(r'return *;', chain)
                 if m:
                     self.Return = True
-                    return None
+                    self.ReturnValue = None
+                    return
                 m = re.match(r'^return *([^;]+)', chain)
                 if m:
                     chain = m.group(1)
                     r = self.evalJS(chain,vars,allow_recursion)
                     self.Return = True
-                    return r              
+                    self.ReturnValue = r
+                    return           
                     
 
             #Pas trouve, une fonction ?
@@ -2056,9 +2052,6 @@ class JsParser(object):
                 rrr = self.evalJS(chain[:-1],vars,allow_recursion)
                 if self.ForceReturn:
                     self.ForceReturn = False
-                    return rrr
-                print rrr
-                if 'bar' in str(rrr):
                     return rrr
 
             
