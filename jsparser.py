@@ -32,6 +32,8 @@
 #if(x){foo();return bar()}else{return 1}
 #return x?(foo(),bar()):1
 
+#false || null return null
+#null && false return null
 
 import re
 import types
@@ -49,7 +51,7 @@ ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 #---------------------------------------------------------------------------------
 
 
-JScode = """
+JScodeZZ = """
 function oIa(_0x41645b,_0x10c153) { return _0x41645b-_0x10c153; }
 function EKC(_0x2250c2,_0x1160e6) { return _0x2250c2-_0x1160e6; }
 function XzN(_0x283e6a,_0x49206b) { return _0x283e6a(_0x49206b); }
@@ -97,23 +99,6 @@ break;
 
 """
 
-JScodeTTT = """
-a = true&true;
-debug();
-"""
-
-JScodecontinu = """
-var i = 4;
-var j = "A";
-while (i > 0 ){
-i = i - 1;
-if ( i == 2) { continue; }
-j = j + i;
-
-}
-debug();
-"""
-
 JScode885 = """
 ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ ['_']; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ);
 (ﾟДﾟ) =(ﾟΘﾟ)= (o^_^o)/ (o^_^o);
@@ -141,12 +126,13 @@ JScode885 = """
 (ﾟДﾟ) ['_'] ( (ﾟДﾟ) ['_'] (ﾟεﾟ+(ﾟДﾟ)[ﾟoﾟ]+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟΘﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟΘﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟoﾟ]) (ﾟΘﾟ)) ('_');
 """
 
-JScodeQ ="""
-eval(function(p,a,c,k,e,r){e=String;if(!''.replace(/^/,String)){while(c--)r[c]=k[c]||c;k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('(0(){4 1="5 6 7 8";0 2(3){9(3)}2(1)})();',10,10,'function|b|something|a|var|some|sample|packed|code|alert'.split('|'),0,{}));
+JScode7521 ="""
+function(p,a,c,k,e,r){e=String;if(!''.replace(/^/,String)){while(c--)r[c]=k[c]||c;k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('(0(){4 1="5 6 7 8";0 2(3){9(3)}2(1)})();',10,10,'function|b|something|a|var|some|sample|packed|code|alert'.split('|'),0,{});
+debug();
 """
 
 
-JScode753 ="""
+JScode ="""
 dd = /\uff40\uff4d\u00b4\uff09\uff89 ~\u253b\u2501\u253b   /["_"];
 
 o = ff = _ = 3;
@@ -189,7 +175,12 @@ gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + (c ^ _ ^ o) + ee[hh] + gg + ((o
 debug();
 """
 
-JScode4554 ="""
+JScode789 ="""
+window.alert(false&&(a=1));
+debug();
+"""
+
+JScode3521 ="""
 (function(s, opt_attributes, key, pairs, i, params) {
   /** @type {function (new:String, *=): string} */
   i = String;
@@ -197,7 +188,6 @@ JScode4554 ="""
     for (;key--;) {
       /** @type {(number|string)} */
       params[key] = pairs[key] || key;
-
     }
     /** @type {Array} */
     pairs = [function(urlParam) {
@@ -219,7 +209,6 @@ JScode4554 ="""
     if (pairs[key]) {
       /** @type {string} */
       s = s.replace(new RegExp("\\b" + i(key) + "\\b", "g"), pairs[key]);
-
     }
   }
 
@@ -572,7 +561,6 @@ class JSBuffer(object):
                 #Type different mais JS convertis en string
                 else:
                     out('string convertion')
-                    hh(mm)
                     
                     if not CheckType(self.buf[0]) == 'String':
                         self.buf[0]=self.SpecialStr(self.buf[0])
@@ -929,7 +917,10 @@ class JsParser(object):
                 vv = JScode[1:e]
                 if vv[-1:] == '\\' and  not vv[-2:-1] == '\\':
                     vv = vv + '\\'
-                vv = vv.decode('string-escape')
+                    
+                #warning with this function
+                #vv = vv.decode('string-escape')
+                
                 #if it's not the form "abc".err
                 if not GetNextchar(JScode,e) == '.':
                     InterpretedCode.AddValue(vv)
@@ -944,7 +935,10 @@ class JsParser(object):
                 vv = JScode[1:e]
                 if vv[-1:] == '\\' and  not vv[-2:-1] == '\\':
                     vv = vv + '\\'
-                vv = vv.decode('string-escape')                
+                    
+                #warning with this function
+                #vv = vv.decode('string-escape')
+                
                 #if it's not the form "abc".err
                 if not GetNextchar(JScode,e ) == '.':
                     InterpretedCode.AddValue(JScode[1:e])
@@ -1148,20 +1142,21 @@ class JsParser(object):
                         if not t1.startswith('/'):
                             t1 = self.evalJS(t1,vars,allow_recursion)
                             
-                        #regex mode ?
+                        #regex mode ? HACK
                         if t1.startswith('/'):
-
+                            print '+++++++ ' + str(t1.split('/')[1])+ ' ' + t2
                             jr = re.findall(t1.split('/')[1], s)
 
                             for k in jr:
-                                out('replace ' + str(t2))
                                 if not self.IsFunc(vars,t2):
                                     #print str(k) + ' > ' + str(t2)
                                     s = s.replace(k,t2)
+                                    out('Replace ' + str(k) + " by " + str(t2))
                                 else:
                                     v = self.evalJS(t2+'('+ k + ')',vars,allow_recursion)
                                     v = str(v)
                                     s = s.replace(k,v)
+                                    out('Replace ' + str(k) + " by " + str(v))
                             InterpretedCode.AddValue( s )
                         #String mode
                         else:
@@ -1293,7 +1288,8 @@ class JsParser(object):
                         out('To eval >' + arg)
                         self.ForceReturn = True
                         r = self.Parse(arg,vars,allow_recursion)
-                        JScode = r + JScode[(len(m.group(0)) + pos3 ):]
+                        InterpretedCode.AddValue(r)
+                        JScode = JScode[(len(m.group(0)) + pos3 ):]
                         continue
 
                     print vars
@@ -1320,15 +1316,21 @@ class JsParser(object):
                 #Recup variable
                 v = m.group(1).strip()
                 JScode = JScode[(len(m.group(1))):]
-
-                out('Variable=' + str(v))
-                
+ 
                 New_Var = False
                 
                 #recup operator
                 op = ''
                 if len(m.groups()) > 1:
                     op = m.group(2).strip()
+                if op == '[':
+                    op = ''
+                #prb because the only possible case  is ==
+                if len(op) > 1 and op[0] == '=' and op[1] != '=':
+                    op = op[0]
+                    
+                    
+                out('Variable=' + str(v) + '  operator : ' + op )                   
                 
                 if not self.IsVar(vars,v):
                     out('*** VARIABLE NOT INITIALISEE ***')
@@ -1354,7 +1356,6 @@ class JsParser(object):
                 if  New_Var:
                     raise Exception("Can't find var " + str(v))
                 
-
                 r = self.GetVar(vars,v)
                 
                 #just put var
@@ -1378,6 +1379,7 @@ class JsParser(object):
                         self.SetVar(vars,v,r-1)
                         JScode = JScode[2:]
                         InterpretedCode.AddValue(r)
+                        continue
                     #a+=1 form
                     elif op[1] == '=' and not op[0] == '=':
                         n = GetItemAlone(JScode[2:],' ,' + REG_OP)
@@ -1388,10 +1390,10 @@ class JsParser(object):
                         InterpretedCode.AddValue(r)
                         JScode = JScode[(len(n) + 2):]
                         continue
+                        
                 #just var
-                else:
-                    InterpretedCode.AddValue(r)
-                    continue
+                InterpretedCode.AddValue(r)
+                continue
                 
             #Space to remove
             if c == ' ' or c == '\n':
@@ -1426,23 +1428,35 @@ class JsParser(object):
                 JScode = JScode[Totlen :]
                 continue
 
-            #another special if
-            if JScode[0:2] == '&&':
-                out( " ****** Special if 2 ********* ")
+            #Short-circuiting evaluations
+            if JScode[0:2] == '&&' or JScode[0:2] == '||':
+                out( " ****** Short-circuiting  ********* ")
                 A = InterpretedCode.GetPrevious()
                 B = GetItemAlone(JScode[2:])
                 
                 Totlen = len(B) + 2
                 if B.startswith('('):
                     B = B[1:-1]
-                if A:
-                    r = self.evalJS(B,vars,allow_recursion)
                     
-                #InterpretedCode.AddValue(r)
+                #for && if the first operand evaluates to false, the second operand is never evaluated
+                if JScode[0:2] == '&&':
+                    if A:
+                        r = self.evalJS(B,vars,allow_recursion)
+                        InterpretedCode.AddValue(r)
+                    else:
+                        InterpretedCode.AddValue(A)
+                #for || if the result of the first operand is true, the second operand is never operated
+                if JScode[0:2] == '||':
+                    if not A:
+                        r = self.evalJS(B,vars,allow_recursion)
+                        InterpretedCode.AddValue(r)
+                    else:
+                        InterpretedCode.AddValue(A)
+                        
                 JScode = JScode[Totlen :]
                 continue                    
                 
-            #Simple operation
+            #Operation
             if c in '+<>-*/=&%|!^.':
                 InterpretedCode.SetOp(c)
                 JScode = JScode[1:]
@@ -1534,7 +1548,8 @@ class JsParser(object):
                             r = r[index]
                     if type(r) in [dict]:
                         index = self.RemoveGuil(index)
-                        r = r[index]                   
+                        self.PrintVar(var)
+                        r = r.get(index)              
                 return r
                 
         raise Exception('Variable not defined: ' + variable)
