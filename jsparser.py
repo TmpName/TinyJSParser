@@ -32,8 +32,6 @@
 #if(x){foo();return bar()}else{return 1}
 #return x?(foo(),bar()):1
 
-#false || null return null
-#null && false return null
 
 import re
 import types
@@ -51,7 +49,7 @@ ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 #---------------------------------------------------------------------------------
 
 
-JScodeZZ = """
+JScode = """
 function oIa(_0x41645b,_0x10c153) { return _0x41645b-_0x10c153; }
 function EKC(_0x2250c2,_0x1160e6) { return _0x2250c2-_0x1160e6; }
 function XzN(_0x283e6a,_0x49206b) { return _0x283e6a(_0x49206b); }
@@ -132,7 +130,7 @@ debug();
 """
 
 
-JScode ="""
+JScodesss ="""
 dd = /\uff40\uff4d\u00b4\uff09\uff89 ~\u253b\u2501\u253b   /["_"];
 
 o = ff = _ = 3;
@@ -172,7 +170,7 @@ gg + ff + (ff + gg) + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + (ff + gg) + f
 (ff + gg) + ff + ee[hh] + ff + (c ^ _ ^ o) + ee[hh] + gg + gg + ((o ^ _ ^ o) - gg) + ee[hh] + gg + ff + gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ee[hh] + 
 gg + ff + gg + ee[hh] + gg + ((o ^ _ ^ o) - gg) + (o ^ _ ^ o) + ee[hh] + gg + ff + (o ^ _ ^ o) + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) - gg) + ee[hh] + gg + (ff + gg) + 
 gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + (c ^ _ ^ o) + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ff + ee[hh] + ff + ((o ^ _ ^ o) - gg) + ee[hh] + (ff + gg) + gg + ee[ii])(gg))("_");
-debug();
+
 """
 
 JScode789 ="""
@@ -404,8 +402,8 @@ def GetItemAlone(string,separator = ' '):
     p = 0 #parenthese
     a = 0 #accolade
     b = 0 #bracket
-    c1 = 0
-    c2 = 0
+    c1 = 0 #chain with "
+    c2 = 0 #chain with '
     n = False
     last_char = ''
 
@@ -524,8 +522,7 @@ class JSBuffer(object):
     #Need 3 values for priority   
     def AddValue(self,value):
         out('ADD ' + Ustr(value) + ' ' + Ustr(type(value)) + ' a ' + Ustr(self.buf))
-        #if str(value) == 'None':
-        #    ee(mm)
+        
         if not self.type:
             self.type = CheckType(value)
             self.Push(value,self.__op)
@@ -915,11 +912,14 @@ class JsParser(object):
                 ee = GetItemAlone(JScode[0:],'"')
                 e = len(ee)
                 vv = JScode[1:e]
-                if vv[-1:] == '\\' and  not vv[-2:-1] == '\\':
-                    vv = vv + '\\'
+                
+                # raw string cannot end in a single backslash
+                #if vv[-1:] == '\\' and  not vv[-2:-1] == '\\':
+                #    vv = vv + '\\'
                     
                 #warning with this function
-                #vv = vv.decode('string-escape')
+                if not vv.endswith('\\'):
+                    vv = vv.decode('string-escape')
                 
                 #if it's not the form "abc".err
                 if not GetNextchar(JScode,e) == '.':
@@ -933,11 +933,14 @@ class JsParser(object):
                 ee = GetItemAlone(JScode[0:],"'")
                 e = len(ee)
                 vv = JScode[1:e]
-                if vv[-1:] == '\\' and  not vv[-2:-1] == '\\':
-                    vv = vv + '\\'
+                
+                # raw string cannot end in a single backslash
+                #if vv[-1:] == '\\' and  not vv[-2:-1] == '\\':
+                #    vv = vv + '\\'
                     
                 #warning with this function
-                #vv = vv.decode('string-escape')
+                if not vv.endswith('\\'):
+                    vv = vv.decode('string-escape')
                 
                 #if it's not the form "abc".err
                 if not GetNextchar(JScode,e ) == '.':
@@ -1008,19 +1011,21 @@ class JsParser(object):
                 JScode = JScode[(r.end()):]
                 continue
                 
-            #remove useless code
+            #remove "useless" code
             if JScode.startswith('new '):
                 JScode = JScode[4:]
                 continue
                 
             #Special value
-            m = re.search('^(true|false)',JScode, re.UNICODE)
+            m = re.search('^(true|false|null)',JScode, re.UNICODE)
             if m:
                 v = m.group(1)
                 if v == 'true':  
                     InterpretedCode.AddValue(True)
                 if v == 'false':
                     InterpretedCode.AddValue(False)
+                if v == 'null':
+                    InterpretedCode.AddValue(None)
                 JScode = JScode[len(v):]
                 continue
                 
@@ -1144,12 +1149,10 @@ class JsParser(object):
                             
                         #regex mode ? HACK
                         if t1.startswith('/'):
-                            print '+++++++ ' + str(t1.split('/')[1])+ ' ' + t2
                             jr = re.findall(t1.split('/')[1], s)
 
                             for k in jr:
                                 if not self.IsFunc(vars,t2):
-                                    #print str(k) + ' > ' + str(t2)
                                     s = s.replace(k,t2)
                                     out('Replace ' + str(k) + " by " + str(t2))
                                 else:
@@ -1661,10 +1664,6 @@ class JsParser(object):
             
         if name.startswith('('):
             name = name[1:-1].strip()
-            
-        #Error check
-        if '+' in name:
-            raise Exception('Variable problem')
   
         if value:
             if isinstance(value, ( int, long , float) ):
@@ -2088,8 +2087,8 @@ class JsParser(object):
         
         #Special
         vars.append(('String',''))
-        vars.append(('true',True))
-        vars.append(('false',False))
+        #vars.append(('true',True))
+        #vars.append(('false',False))
         
         #Hack
         JScode = JScode.replace('$(document).ready','DOCUMENT_READY')
