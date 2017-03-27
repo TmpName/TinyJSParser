@@ -46,8 +46,12 @@ ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 
 #---------------------------------------------------------------------------------
 
-
 JScode = """
+a = eval('1+1') + eval('2+2');
+debug();
+"""
+
+JScodefdgdg = """
 function oIa(_0x41645b,_0x10c153) { return _0x41645b-_0x10c153; }
 function EKC(_0x2250c2,_0x1160e6) { return _0x2250c2-_0x1160e6; }
 function XzN(_0x283e6a,_0x49206b) { return _0x283e6a(_0x49206b); }
@@ -171,7 +175,7 @@ gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + (c ^ _ ^ o) + ee[hh] + gg + ((o
 
 """
 
-JScode3521 ="""
+JScoderfvg ="""
 (function(s, opt_attributes, key, pairs, i, params) {
   /** @type {function (new:String, *=): string} */
   i = String;
@@ -881,6 +885,7 @@ class JsParser(object):
             if not (string == []):
                 return True
         return False
+    
         
     def evalJS(self,JScode,vars,allow_recursion):
     
@@ -906,71 +911,7 @@ class JsParser(object):
 
             #print 'InterpretedCode > ' + InterpretedCode
             out( 'JScode > ' + JScode.encode('ascii','replace') + '\n')
-
-            #Alpha chain
-            if c == '"':
-                ee = GetItemAlone(JScode[0:],'"')
-                e = len(ee)
-                vv = JScode[1:e]
-                
-                # raw string cannot end in a single backslash
-                #if vv[-1:] == '\\' and  not vv[-2:-1] == '\\':
-                #    vv = vv + '\\'
-                    
-                #warning with this function
-                if not vv.endswith('\\'):
-                    vv = vv.decode('string-escape')
-                
-                #if it's not the form "abc".err
-                if not GetNextchar(JScode,e) == '.':
-                    InterpretedCode.AddValue(vv)
-                    JScode = JScode[(e+1):]
-                    continue
-                else:
-                    self.SetVar(vars,'TEMPORARY_VARS',vv)
-                    JScode = 'TEMPORARY_VARS' + JScode[(e+1):]
-            if c == "'":
-                ee = GetItemAlone(JScode[0:],"'")
-                e = len(ee)
-                vv = JScode[1:e]
-                
-                # raw string cannot end in a single backslash
-                #if vv[-1:] == '\\' and  not vv[-2:-1] == '\\':
-                #    vv = vv + '\\'
-                    
-                #warning with this function
-                if not vv.endswith('\\'):
-                    vv = vv.decode('string-escape')
-                
-                #if it's not the form "abc".err
-                if not GetNextchar(JScode,e ) == '.':
-                    InterpretedCode.AddValue(JScode[1:e])
-                    JScode = JScode[(e+1):]
-                    continue
-                else:
-                    self.SetVar(vars,'TEMPORARY_VARS',JScode[1:e])     
-                    JScode = 'TEMPORARY_VARS' + JScode[(e+1):]
-                    
-            #numeric chain
-            r = re.search('(^[0-9]+)',JScode)
-            if r:
-                InterpretedCode.AddValue(int(JScode[0:r.end()]))
-                JScode = JScode[(r.end()):]
-                continue
-            #Regex
-            r = re.search('^\/.*\/(.*$)',JScode)
-            if r:
-                reg = r.group(0)
-                flag = r.group(1)
-                #test if the regex is valid
-                if flag:
-                    for i in flag:
-                        if i not in 'gimuy':
-                            reg = None
-                            break
-                InterpretedCode.AddValue(reg)
-                JScode = JScode[(len(r.group(0))):]
-                continue            
+            
             #parentheses
             if c == "(":
                 pos2,c2 = GetBeetweenChar(JScode,'(',')')
@@ -1002,7 +943,53 @@ class JsParser(object):
                 else:
                     InterpretedCode.AddValue([])
                 JScode = JScode[(pos2 + 1):]
-                continue           
+                continue 
+
+            #Alpha chain
+            if c == '"' or c == "'":
+                ee = GetItemAlone(JScode[0:],c)
+                e = len(ee)
+                vv = JScode[1:e]
+                
+                # raw string cannot end in a single backslash
+                #if vv[-1:] == '\\' and  not vv[-2:-1] == '\\':
+                #    vv = vv + '\\'
+                    
+                #warning with this function
+                #if not vv.endswith('\\'):
+                #    vv = vv.decode('string-escape')
+                
+                InterpretedCode.AddValue(vv)
+                JScode = JScode[(e+1):]
+                continue
+                    
+            #TODO hack inside
+            if c == '.' and InterpretedCode.type == 'String':         
+                self.SetVar(vars,'TEMPORARY_VARS',InterpretedCode.GetPrevious())
+                JScode = 'TEMPORARY_VARS' + JScode
+                continue
+                    
+            #numeric chain
+            r = re.search('(^[0-9]+)',JScode)
+            if r:
+                InterpretedCode.AddValue(int(JScode[0:r.end()]))
+                JScode = JScode[(r.end()):]
+                continue
+
+            #Regex
+            r = re.search('^\/.*\/(.*$)',JScode)
+            if r:
+                reg = r.group(0)
+                flag = r.group(1)
+                #test if the regex is valid
+                if flag:
+                    for i in flag:
+                        if i not in 'gimuy':
+                            reg = None
+                            break
+                InterpretedCode.AddValue(reg)
+                JScode = JScode[(len(r.group(0))):]
+                continue          
                 
             #hackVars
             r = re.search('^\$\("#([\w]+)"\)\.text\(\)',JScode)
@@ -1017,7 +1004,7 @@ class JsParser(object):
                 continue
                 
             #Special value
-            m = re.search('^(true|false|null)',JScode, re.UNICODE)
+            m = re.search('^(true|false|null|String)',JScode, re.UNICODE)
             if m:
                 v = m.group(1)
                 if v == 'true':  
@@ -1026,6 +1013,10 @@ class JsParser(object):
                     InterpretedCode.AddValue(False)
                 if v == 'null':
                     InterpretedCode.AddValue(None)
+                if v == 'String':
+                    InterpretedCode.AddValue('')
+                #if v == 'Array':
+                #    InterpretedCode.AddValue([])
                 JScode = JScode[len(v):]
                 continue
                    
@@ -1094,70 +1085,36 @@ class JsParser(object):
                     #Native fonction
                     # http://stackoverflow.com/questions/1091259/how-to-test-if-a-class-attribute-is-an-instance-method
                     
-                    #Basic one
-                    if hasattr(Basic, function):
-                        arg = MySplit(arg,',')
-                        for i in range(len(arg)):
-                            arg[i] = self.evalJS(arg[i],vars,allow_recursion)
-                        r = getattr(Basic(), function)(arg)
-                        InterpretedCode.AddValue(r)
-                        JScode = JScode[(len(m.group(0)) + pos3 ):]
-                        continue
-                    #Array one
-                    if hasattr(Array, function):
-                        arg = MySplit(arg,',')
-                        for i in range(len(arg)):
-                            arg[i] = self.evalJS(arg[i],vars,allow_recursion)
-                        
-                        #Get value and pass it
-                        s = self.GetVar(vars,name)
-                        cls =  Array(s)
-                        
-                        r = getattr(cls, function)(arg)
-                        
-                        #set new value if chnaged
-                        NV = getattr(cls, 'Get')
-                        if not NV == s:
-                            self.SetVar(vars,name,getattr(cls, 'Get'))
-                        
-                        InterpretedCode.AddValue(r)
-                        JScode = JScode[(len(m.group(0)) + pos3 ):]
+                    Find_lib = False
+                    for lib in List_Lib:
+                        if hasattr(lib, function):
+                            arg = MySplit(arg,',')
+                            for i in range(len(arg)):
+                                arg[i] = self.evalJS(arg[i],vars,allow_recursion)
+                            
+                            #Lib need init
+                            if hasattr(lib, 'Get'):
+                                s = self.GetVar(vars,name)
+                                cls =  lib(s)
+                                r = getattr(cls, function)(arg)
+                                #set new value if chnaged, never reached ??
+                                NV = getattr(cls, 'Get')()
+                                if not NV == s:
+                                    self.SetVar(vars,name,NV)
+                                    
+                            #Classic lib
+                            else:
+                                r = getattr(lib(), function)(arg)
+                                
+                            InterpretedCode.AddValue(r)
+                            JScode = JScode[(len(m.group(0)) + pos3 ):]
+                            
+                            Find_lib = True
+                            
+                            break
+                            
+                    if Find_lib:
                         continue     
-                        
-                    
-                    #array
-                    if function=='Array':
-                        InterpretedCode.AddValue([])
-                        JScode = JScode[(len(m.group(0)) + pos3):]
-                        continue
-   
-                    #Native
-                    #charCodeAt
-                    if function=='charCodeAt':
-                        s = self.GetVar(vars,name)
-                        v = self.evalJS(arg,vars,allow_recursion)
-                        InterpretedCode.AddValue(ord(s[int(v)]))
-                        JScode = JScode[(len(m.group(0)) + pos3 ):]
-                        continue
-                    #length
-                    if function=='length':
-                        s = self.GetVar(vars,name)
-                        InterpretedCode.AddValue(len(s))
-                        JScode = JScode[(len(m.group(0)) + pos3):]
-                        continue                  
-                    #Substring
-                    if function=='substring':
-                        s = self.GetVar(vars,name)
-                        arg = MySplit(arg,',')
-                        p1 = self.evalJS(arg[0],vars,allow_recursion)
-                        if len(arg)> 1:
-                            p2 = self.evalJS(arg[1],vars,allow_recursion)
-                            InterpretedCode.AddValue(s[ int(p1) : int(p2) ])
-                        else:
-                            InterpretedCode.AddValue(s[ int(p1) :])
-                        #out('Substring : var = ' + s + ' index=' + str(p1) )
-                        JScode = JScode[(len(m.group(0)) + pos3 ):]
-                        continue
 
                     #replace
                     #print re.sub('1',lambda m: f(m.group()),s)
@@ -1191,85 +1148,13 @@ class JsParser(object):
                             InterpretedCode.AddValue( s.replace(t1,t2))
                         JScode = JScode[(len(m.group(0)) + pos3 ):]
                         continue
-                    #slice
-                    if function=='slice':
-                        s = self.GetVar(vars,name)
-                        arg = arg.split(',')
-                        p1 = self.evalJS(arg[0],vars,allow_recursion)
-                        if len(arg)> 1:
-                            p2 = self.evalJS(arg[1],vars,allow_recursion)
-                            sr = s[int(p1):int(p2)]
-                        else:
-                            sr = s[int(p1):]
-                        sr = '"' + sr + '"'
-                        InterpretedCode.AddValue(sr)
-                        JScode = JScode[(len(m.group(0)) + pos3 ):]
-                        continue
-                    #string.fromCharCode
-                    if (function=='fromCharCode') and (name=='String'):
-                        v = self.evalJS(arg,vars,allow_recursion)
-                        #out('StringFromCharcode ' +  r.group(1) + '=' + str(v))
-                        InterpretedCode.AddValue(chr(int(v)))
-                        JScode = JScode[(len(m.group(0)) + pos3 ):]
-                        continue
-                    #split
-                    if function=='split':
-                        arg = arg.replace('"','').replace("'","")
-                        s = self.GetVar(vars,name)
-                        if arg == '':
-                            InterpretedCode.AddValue(list(s))
-                        else:
-                            InterpretedCode.AddValue(s.split(arg))
-                        JScode = JScode[(len(m.group(0)) + pos3 ):]
-                        continue
-                    #splice
-                    if function=='splice':
-                        s = self.GetVar(vars,name)
-                        arg = MySplit(arg,',')
-                        t1 = self.evalJS(arg[0],vars,allow_recursion)
-                        t2 = self.evalJS(arg[1],vars,allow_recursion) 
-                        if len(arg) > 2:
-                            raise Exception("Not implemented - splice")
-                        tab = s[:t1] + s[(t1 + t2):]
-                        tabsup = s[t1:(t1 + t2)]
-                        InterpretedCode.AddValue(tabsup)
-                        self.SetVar(vars,name,tab)
-
-                        JScode = JScode[(len(m.group(0)) + pos3 ):]
-                        continue
-                    #push
-                    if function=='push':
-                        s = self.GetVar(vars,name)
-                        arg = MySplit(arg,',')
-                        t1 = self.evalJS(arg[0],vars,allow_recursion)
-                        if len(arg) > 1:
-                            #use s.extend-[array]);
-                            raise Exception("Not implemented - push")
-                        s.append(t1)
-                        self.SetVar(vars,name,s)
-                        #self.VarManage(allow_recursion,vars,name,str(s))
-                        v = len(s)
-                        InterpretedCode.AddValue(v)
-                        JScode = JScode[(len(m.group(0)) + pos3 ):]
-                        continue
                         
-                    #math function
-                    #max
-                    if function=='max':
-                        arg = MySplit(arg,',')
-                        t1 = self.evalJS(arg[0],vars,allow_recursion)
-                        t2 = self.evalJS(arg[1],vars,allow_recursion)
-                        InterpretedCode.AddValue(max(t1,t2))
-                        JScode = JScode[(len(m.group(0)) + pos3 ):]
+                    #array
+                    if function=='Array':
+                        InterpretedCode.AddValue([])
+                        JScode = JScode[(len(m.group(0)) + pos3):]
                         continue
-                    #min
-                    if function=='min':
-                        arg = MySplit(arg,',')
-                        t1 = self.evalJS(arg[0],vars,allow_recursion)
-                        t2 = self.evalJS(arg[1],vars,allow_recursion)
-                        InterpretedCode.AddValue(min(t1,t2))
-                        JScode = JScode[(len(m.group(0)) + pos3 ):]
-                        continue                        
+                
                     #function
                     if function=='function':
                         pos9 = len(JScode[(len(m.group(0)) + pos3 + 0):])
@@ -1297,6 +1182,7 @@ class JsParser(object):
                     #eval ?
                     if function=='eval':
                         out('Eval')
+                        arg = RemoveGuil(arg)
                         out('To eval >' + arg)
                         self.ForceReturn = True
                         r = self.Parse(arg,vars,allow_recursion)
@@ -1306,13 +1192,6 @@ class JsParser(object):
 
                     print vars
                     raise Exception("Unknow fonction : " + function)
-                    
-            #TODO hack inside
-            if InterpretedCode.type == 'String':
-                if c == '.':
-                    self.SetVar(vars,'TEMPORARY_VARS',InterpretedCode.GetPrevious())
-                    JScode = 'TEMPORARY_VARS' + JScode
-                    continue
                     
             # pointeur vers fonction ?
             if hasattr(Basic, JScode):
@@ -1339,8 +1218,7 @@ class JsParser(object):
                 #prb because the only possible case  is ==
                 if len(op) > 1 and op[0] == '=' and op[1] != '=':
                     op = op[0]
-                    
-                    
+              
                 out('Variable=' + str(v) + '  operator : ' + op )                   
                 
                 if not self.IsVar(vars,v):
@@ -2108,6 +1986,81 @@ class JsParser(object):
 # fonctions
 #
 
+class Math(object):
+    def __init__(self):
+        pass
+
+    def max(self,arg):
+        t1 = arg[0]
+        t2 = arg[1]
+        return max(t1,t2)
+        
+    def min(self,arg):
+        t1 = arg[0]
+        t2 = arg[1]
+        return min(t1,t2)
+        
+    def abs(self,arg):
+        return abs(arg[0])    
+
+class String(object):
+    def __init__(self,__string=''):
+        self._string = __string
+
+    def Get(self):
+        return self._string
+
+    def charCodeAt(self,arg):
+        v = arg[0]
+        return ord(self._string[int(v)])
+
+    def length(self,arg):
+        return len(self._string)
+
+    def substring(self,arg):
+            p1 = arg[0]
+            if len(arg)> 1:
+                p2 = arg[1]
+                return self._string[ int(p1) : int(p2) ]
+            else:
+               return self._string[ int(p1) :]
+
+    def replace_not_working(self,arg):
+        t1 = arg[0]
+        t2 = arg[1]
+        
+        #if not t1.startswith('/'):
+        #    t1 = self.evalJS(t1,vars,allow_recursion)
+            
+        #regex mode ? HACK
+        if t1.startswith('/'):
+            jr = re.findall(t1.split('/')[1], self._string)
+
+            for k in jr:
+                if not self.IsFunc(vars,t2):
+                    r = self._string.replace(k,t2)
+                    out('Replace ' + str(k) + " by " + str(t2))
+                else:
+                    v = self.evalJS(t2+'('+ k + ')',vars,allow_recursion)
+                    v = str(v)
+                    r = self._string.replace(k,v)
+                    out('Replace ' + str(k) + " by " + str(v))
+        #String mode
+        else:
+            #t1 = self.evalJS(t1,vars,func,allow_recursion)
+            r = s.replace(t1,t2)
+        return r
+            
+    def fromCharCode(self,arg):
+        return chr(int(arg[0]))
+
+    def split(self,arg):
+        arg = arg[0].replace('"','').replace("'","")
+        if arg == '':
+            return list(self._string)
+        else:
+            return self._string.split(arg)
+
 class Array(object):
     def __init__(self,__array=[]):
         self._array = __array
@@ -2119,7 +2072,7 @@ class Array(object):
         t = arg[0].replace('"','').replace("'","")
         return t.join(self._array)
 
-    def pushv(self,arg):
+    def push(self,arg):
         t1 = arg[0]
         if len(arg) > 1:
             #use s.extend-[array]);
@@ -2128,6 +2081,27 @@ class Array(object):
 
         v = len(self._array)
         return v
+        
+    def slice(self,arg):
+        p1 = arg[0]
+        if len(arg)> 1:
+            p2 = arg[1]
+            sr = s[int(p1):int(p2)]
+        else:
+            sr = s[int(p1):]
+        sr = '"' + sr + '"'
+        return sr
+        
+    def splice(self,arg):
+        t1 = arg[0]
+        t2 = arg[1]
+        if len(arg) > 2:
+            raise Exception("Not implemented - splice")
+        tab = self._array[:t1] + self._array[(t1 + t2):]
+        tabsup = self._array[t1:(t1 + t2)]
+
+        self._array = tab
+        return tabsup
 
                         
 class Basic(object):
@@ -2148,10 +2122,11 @@ class Basic(object):
             return ''
 
     def RegExp(self,arg):
-        t1 = RemoveGuil(t1)
-        t2 = RemoveGuil(t2)
+        t1 = RemoveGuil(arg[0])
+        t2 = RemoveGuil(arg[1])
         return '/' + t1 + '/' + t2
-        
+
+List_Lib = [Basic,Array,String,Math]
 #----------------------------------------------------------------------------------------------------------------------------------------
 
 #main
