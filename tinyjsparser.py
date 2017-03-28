@@ -47,55 +47,152 @@ ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 #---------------------------------------------------------------------------------
 
 JScode = """
-a = eval('1+1') + eval('2+2');
+var _0xa4b7=['push','sKA','ready'];
+(function(_0x389e2e,_0x1ccc06){
+var _0x3edeb0=function(_0x12e01f){
+while(--_0x12e01f){
+_0x389e2e.push(_0x389e2e.shift());
+}
+
+}
+;_0x3edeb0(++_0x1ccc06);
+}
+(_0xa4b7,444));
 debug();
 """
 
-JScodefdgdg = """
-function oIa(_0x41645b,_0x10c153) { return _0x41645b-_0x10c153; }
-function EKC(_0x2250c2,_0x1160e6) { return _0x2250c2-_0x1160e6; }
-function XzN(_0x283e6a,_0x49206b) { return _0x283e6a(_0x49206b); }
-function dFN(_0x422306,_0x51e2dc,_0x230729) { return _0x422306(_0x51e2dc,_0x230729); }
-function XcK(_0x2ec800,_0x3087df) { return _0x2ec800/_0x3087df; }
-function TYf(_0x42c4ab,_0x3a8e71) { return _0x42c4ab<_0x3a8e71; }
-function MEA(_0x1f7e16,_0xe5b384) { return _0x1f7e16%_0xe5b384; }
-function FxE(_0x3738d3,_0x36a500,_0x2f551f) { return _0x3738d3(_0x36a500,_0x2f551f); }
-function yfs(_0x563f72,_0x3d8b3f) { return _0x563f72-_0x3d8b3f; }
-function bqe(_0x526965,_0x84a7b0) { return _0x526965!=_0x84a7b0; }
-function rZh(_0x1e74c2,_0x24ac16) { return _0x1e74c2%_0x24ac16; }
-function OLB(_0x31b23d,_0x2d246a) { return _0x31b23d==_0x2d246a; }
-function tVi(_0x221589,_0x46bf10) { return _0x221589%_0x46bf10; }
-function wqo(_0x5e82dd,_0x5e5aae) { return _0x5e82dd==_0x5e5aae; }
-function BOg(_0x174a99,_0x52dfc2,_0x254069) { return _0x174a99(_0x52dfc2,_0x254069); }
-function WNS(_0xfc1900,_0x9e1420) { return _0xfc1900+_0x9e1420; }
-function ZeT(_0x3969f8,_0x48db24) { return _0x3969f8+_0x48db24; }
-function xRD(_0x234038,_0x42c6db) { return _0x234038<_0x42c6db; }
-var _0x22b8e5='3|6|2|7|4|0|5|1|8'.split('|'),_0x3aae80=0;while(true){
-switch(_0x22b8e5[_0x3aae80++]){
+JScodegggg = """
+function sKA(_0x4cc6f4,_0x16fd7d) { return _0x4cc6f4*_0x16fd7d; }
+function bLD(_0x25e56b,_0x560d72,_0x43c36c) { return _0x25e56b(_0x560d72,_0x43c36c); }
+function gif(_0x1bd05a,_0x536a03) { return _0x1bd05a+_0x536a03; }
+function IQO(_0x3b09a0,_0x49e441) { return _0x3b09a0*_0x49e441; }
+function waX(_0x134ea6,_0x31c280) { return _0x134ea6<_0x31c280; }
+function kKG(_0x4aa626,_0x20ccc3) { return _0x4aa626+_0x20ccc3; }
+function ysG(_0x27c45e,_0xf2d4e4) { return _0x27c45e*_0xf2d4e4; }
+function ZjA(_0xa0f786,_0x2e0c16) { return _0xa0f786>>_0x2e0c16; }
+function bWh(_0x53b452,_0x645d0b) { return _0x53b452<<_0x645d0b; }
+function rZj(_0x31a5bc,_0x275383) { return _0x31a5bc!=_0x275383; }
+function OWe(_0x42c840,_0x319b9a) { return _0x42c840/_0x319b9a; }
+function dew(_0x3d2820,_0x306388) { return _0x3d2820*_0x306388; }
+function fGi(_0x50d04c,_0x3279a7) { return _0x50d04c&_0x3279a7; }
+function KzL(_0x29276d,_0x544c3d) { return _0x29276d>=_0x544c3d; }
+function rPe(_0x402588,_0x2ef2a1) { return _0x402588*_0x2ef2a1; }
+function Zqu(_0x373be7,_0x2d8041) { return _0x373be7<<_0x2d8041; }
+function FBD(_0x5705ec,_0x1d01c4) { return _0x5705ec&_0x1d01c4; }
+function ZGr(_0x35cc4f,_0x233886) { return _0x35cc4f<_0x233886; }
+function RbZ(_0x114615,_0x65b84) { return _0x114615+_0x65b84; }
+function MYg(_0xe27ddb,_0xf067ff) { return _0xe27ddb>=_0xf067ff; }
+function Jia(_0x1230ba,_0x289191,_0x11ee82) { return _0x1230ba(_0x289191,_0x11ee82); }
+function uSu(_0x45e58b,_0xd1f058) { return _0x45e58b%_0xd1f058; }
+function hRs(_0x173c13,_0x98d9ef) { return _0x173c13^_0x98d9ef; }
+function epX(_0x5e2bff,_0x547293) { return _0x5e2bff<_0x547293; }
+function jYD(_0x292aa0,_0x387698) { return _0x292aa0(_0x387698); }
+window.p='AmWncdZqOr';
 
-case'0':var _0x4ff92f=_0x49dbe3.join(''),_0x3303a2=[];continue;
-case'1':
-for(var _0x2142d2=0;xRD(_0x4c3948,_0x4ff92f.length);){
-var _0x208bb1=_0x4ff92f.substring(_0x4c3948,ZeT(_0x4c3948,2));
-var _0x28906b=_0x4ff92f.substring(_0x4c3948,WNS(_0x4c3948,3));
-var _0xb1703c=_0x4ff92f.substring(_0x4c3948,WNS(_0x4c3948,4)),_0x306459=BOg(parseInt,_0x208bb1,16);
-_0x4c3948+=2,wqo(tVi(_0x2142d2,3),0)?(_0x306459=BOg(parseInt,_0x28906b,8),_0x4c3948+=1):OLB(rZh(_0x2142d2,2),0)&&bqe(0,_0x2142d2)&&xRD(_0x4ff92f[yfs(_0x2142d2,1)].charCodeAt(0),60)&&(_0x306459=FxE(parseInt,_0xb1703c,10),_0x4c3948+=2);
-var _0x3a9a19=_0x1701aa[MEA(_0x2142d2,9)];_0x306459^=213,_0x306459^=_0x3a9a19,_0x3303a2.push(String.fromCharCode(_0x306459)),_0x2142d2+=1;
+var _0xa4b7=['push','sKA','ready','9|8|6|2|4|1|7|11|12|5|10|13|3|0','#streamurl','text','substring','epX','length','8|9|7|6|3|1|0|5|2|4','split','hRs','uSu','1|3|4|5|0|6|2','RbZ','ZGr','Zqu','FBD','rPe','pow','KzL','0|2|5|1|3|4','fGi','fromCharCode','dew','rZj','bWh','ZjA','ysG','charCodeAt','jYD','kKG','IQO','gif'];
+(function(_0x389e2e,_0x1ccc06){
+var _0x3edeb0=function(_0x12e01f){
+while(--_0x12e01f){
+_0x389e2e.push(_0x389e2e.shift());
+}
+
+}
+;_0x3edeb0(++_0x1ccc06);
+}
+(_0xa4b7,444));
+
+
+var _0x7a4b=function(_0x389e2e,_0x1ccc06){
+_0x389e2e=_0x389e2e-0;
+var _0x3edeb0=_0xa4b7[_0x389e2e];return _0x3edeb0;
+}
+;
+
+var _0x4a3f26=_0x7a4b('1').split('|'),_0x14602e=0;
+debug();
+while(true){
+switch(_0x4a3f26[_0x14602e++]){
+
+case'0':jYD($,_0x7a4b('2'))[_0x7a4b('3')](_0x5bf24a);continue;
+case'1':var _0xf0d52b=_0x11894f[_0x7a4b('4')](0,_0x58e425);continue;
+case'2':var _0x5bf24a='';continue;
+case'3':while(_0x4869aa[_0x7a4b('5')](_0xf0d52b,_0x11894f[_0x7a4b('6')])){
+var _0x126680=_0x7a4b('7')[_0x7a4b('8')]('|'),_0x3cc582=0;while(true){
+switch(_0x126680[_0x3cc582++]){
+
+case'0':var _0x279fee=_0x4869aa[_0x7a4b('9')](_0x4fd569,_0x58c4a2[_0x4869aa[_0x7a4b('10')](_0x4b5dad,3)]);continue;
+case'1':do{
+var _0x58ef54=_0x7a4b('11')[_0x7a4b('8')]('|'),_0xa7be18=0;while(true){
+switch(_0x58ef54[_0xa7be18++]){
+
+case'0':_0x21a6bf=Jia(parseInt,_0x1853c9,16);continue;
+case'1':if(MYg(RbZ(_0xf0d52b,1),_0x11894f.length)){
+_0x2e6efb=143;
 }
 continue;
-case'2':for(var _0x6594be=_0x22b5f6.substring(_0x21dc81,WNS(_0x21dc81,30)),_0x1701aa=new Array(10),_0x4c3948=0;TYf(_0x4c3948,_0x6594be.length);){
-var _0x46b158=_0x6594be.substring(_0x4c3948,WNS(_0x4c3948,3));_0x1701aa[XcK(_0x4c3948,3)]=dFN(parseInt,_0x46b158,8),_0x4c3948+=3;
+case'2':_0x425958+=7;continue;
+case'3':var _0x1853c9=_0x11894f[_0x7a4b('4')](_0xf0d52b,_0x4869aa[_0x7a4b('12')](_0xf0d52b,2));continue;
+case'4':_0xf0d52b++;continue;
+case'5':_0xf0d52b++;continue;
+case'6':if(_0x4869aa[_0x7a4b('13')](_0x425958,28)){
+var _0x5157c4=FBD(_0x21a6bf,_0x1333c0);_0x4fd569+=_0x4869aa[_0x7a4b('14')](_0x5157c4,_0x425958);
+}
+else{
+var _0x5157c4=_0x4869aa[_0x7a4b('15')](_0x21a6bf,_0x1333c0);_0x4fd569+=_0x4869aa[_0x7a4b('16')](_0x5157c4,Math[_0x7a4b('17')](2,_0x425958));
 }
 continue;
-case'3':var _0x22b5f6='1125737736416423734301622231515467e007035500471b26074004102101035f2207e00153530116201131e00252300052053526900431020004112177a00722340012560704101013550001',_0x53f09a=_0x22b5f6.charCodeAt(0),_0x21dc81=EKC(_0x53f09a,52),_0x3f9f56=Math.max(2,_0x21dc81);continue;
-case'4':_0x49dbe3.splice(_0x21dc81,30);continue;
-case'5':_0x4c3948=0;continue;
-case'6':_0x21dc81=Math.min(_0x3f9f56,oIa(oIa(_0x22b5f6.length,30),2));continue;
-case'7':var _0x49dbe3=_0x22b5f6.split('');continue;
-case'8':Result=_0x3303a2.join('');continue;
 }
 break;
 }
+
+}
+while(_0x4869aa[_0x7a4b('18')](_0x21a6bf,_0x2e6efb));continue;
+case'2':for(i=0;_0x4869aa[_0x7a4b('13')](i,4);i++){
+var _0x5901b5=_0x7a4b('19')[_0x7a4b('8')]('|'),_0x4a573e=0;while(true){
+switch(_0x5901b5[_0x4a573e++]){
+
+case'0':var _0x5e73dd=_0x4869aa[_0x7a4b('20')](_0x279fee,_0xc093ea);continue;
+case'1':var _0x3852b3=String[_0x7a4b('21')](_0x5e73dd);continue;
+case'2':var _0x2d6869=_0x4869aa[_0x7a4b('22')](OWe(_0x58e425,3),i);continue;
+case'3':if(_0x4869aa[_0x7a4b('23')](_0x3852b3,'#'))_0x5bf24a+=_0x3852b3;continue;
+case'4':_0xc093ea=_0x4869aa[_0x7a4b('24')](_0xc093ea,OWe(_0x58e425,3));continue;
+case'5':_0x5e73dd=_0x4869aa[_0x7a4b('25')](_0x5e73dd,_0x2d6869);continue;
+}
+break;
+}
+
+}
+continue;
+case'3':var _0x21a6bf=0;continue;
+case'4':_0x4b5dad+=1;continue;
+case'5':var _0xc093ea=_0x4869aa[_0x7a4b('12')](_0x2e6efb,_0x1333c0);continue;
+case'6':var _0x425958=0;continue;
+case'7':var _0x4fd569=0;continue;
+case'8':var _0x2e6efb=128;continue;
+case'9':var _0x1333c0=127;continue;
+}
+break;
+}
+
+}
+continue;
+case'4':var _0x58e425=_0x4869aa[_0x7a4b('26')](3,8);continue;
+case'5':_0x11894f=_0x11894f[_0x7a4b('4')](_0x58e425);continue;
+case'6':_0x11894f=_0xd97fd7;continue;
+case'7':var _0x58c4a2=[];continue;
+case'8':var _0x11894f=_0xd97fd7[_0x7a4b('27')](0);continue;
+case'9':var _0xd97fd7=_0x4869aa[_0x7a4b('28')]($,_0x4869aa[_0x7a4b('29')]('#',p)).text();continue;
+case'10':var _0xf0d52b=0;continue;
+case'11':for(i=0;waX(i,_0xf0d52b[_0x7a4b('6')]);i+=8){
+_0x58e425=_0x4869aa[_0x7a4b('30')](i,8);var _0x2f5a6c=_0xf0d52b.substring(i,_0x4869aa[_0x7a4b('31')](i,8));var _0x357bed=bLD(parseInt,_0x2f5a6c,16);_0x58c4a2[_0x7a4b('32')](_0x357bed);
+}
+continue;
+case'12':_0x58e425=_0x4869aa[_0x7a4b('33')](3,8);continue;
+case'13':var _0x4b5dad=0;continue;
+}
+break;
+}
+
 
 """
 
@@ -175,7 +272,7 @@ gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + (c ^ _ ^ o) + ee[hh] + gg + ((o
 
 """
 
-JScoderfvg ="""
+JScodefgdf ="""
 (function(s, opt_attributes, key, pairs, i, params) {
   /** @type {function (new:String, *=): string} */
   i = String;
@@ -266,12 +363,12 @@ debug();
 
 """
 
-JScode741 ="""
+JScodedfdf ="""
 var t = 78;
 
 $(document).ready(function() {
+
     var y = $("#aQydkd1Gbfx").text();
-    var x = $("#aQydkd1Gbf").text();
     var s = [];
     for (var i = 0; i < y.length; i++) {
         var j = y.charCodeAt(i);
@@ -285,7 +382,7 @@ $(document).ready(function() {
     var str = tmp.substring(0, tmp.length - _CoRPE1bSt9()) + String.fromCharCode(tmp.slice(0 - _CoRPE1bSt9()).charCodeAt(0) + _0oN0h2PZmC()) + tmp.substring(tmp.length - _CoRPE1bSt9() + 1);
     $("#streamurl").text(str);
 });
-t = 10;
+debug();
 
 function nWuEkcMO4z() {
     return 2 + 1;
@@ -1069,6 +1166,7 @@ class JsParser(object):
                                 nv = tuple(zip(p, a2))
                                 for z,w in nv:
                                     self.SetVar(vars,z,w)
+                                    print str(z) + " --- " + str(w)
 
                             self.Parse(c,vars,allow_recursion)
                             
@@ -1199,6 +1297,15 @@ class JsParser(object):
                 InterpretedCode.AddValue(fm)
                 JScode = ''
                 continue
+                
+            # --var method, HACK
+            if JScode[0:2] == '--' or JScode[0:2] == '++':
+                m = re.search('^(\({0,1}\w[\w\.]*\){0,1} *(?:\[[^\]]+\])* *)(' + REG_OP + '|\[|$)',JScode[2:], re.UNICODE)
+                if m:
+                    l = len(m.group(1))
+                    JScode = m.group(1) +JScode[0:2] + JScode[(l+2):]
+                else:
+                    bb(mm)
 
             #variables
             m = re.search('^(\({0,1}\w[\w\.]*\){0,1} *(?:\[[^\]]+\])* *)(' + REG_OP + '|\[|$)',JScode, re.UNICODE)
@@ -1216,7 +1323,7 @@ class JsParser(object):
                 if op == '[':
                     op = ''
                 #prb because the only possible case  is ==
-                if len(op) > 1 and op[0] == '=' and op[1] != '=':
+                if len(op) > 1 and op[0] == '=' and not op[1] == '=':
                     op = op[0]
               
                 out('Variable=' + str(v) + '  operator : ' + op )                   
@@ -1270,7 +1377,7 @@ class JsParser(object):
                         InterpretedCode.AddValue(r)
                         continue
                     #a+=1 form
-                    elif op[1] == '=' and not op[0] == '=':
+                    elif op[1] == '=' and op[0] in '+-*/%^':
                         n = GetItemAlone(JScode[2:],' ,' + REG_OP)
                         r = self.evalJS(v + op[0] + n ,vars,allow_recursion)
                         #self.SetVar(vars,v,r)
@@ -1343,7 +1450,7 @@ class JsParser(object):
                         InterpretedCode.AddValue(A)
                         
                 JScode = JScode[Totlen :]
-                continue                    
+                continue
                 
             #Operation
             if c in '+<>-*/=&%|!^.':
@@ -1428,13 +1535,18 @@ class JsParser(object):
                             r = r[index]
                     if type(r) in [dict]:
                         index = RemoveGuil(index)
-                        self.PrintVar(var)
                         r = r.get(index)              
                 return r
                 
+        #search it in hackvar ?
+        for j in self.HackVars:
+            print j[0]
+            if j[0] == variable:
+                return j[1]
+                
         raise Exception('Variable not defined: ' + variable)
             
-    def SetVar(self,var,variable,value,i = 0):
+    def SetVar(self,var,variable,value,i = None):
     
         #print 'Setvar Variable =' + variable + ' value=' + str(value) + ' index=' + str(i)
 
@@ -1448,33 +1560,36 @@ class JsParser(object):
         for j in var:
             if j[0] == variable:
 
-                #vars ?
-                if (isinstance(var[var.index(j)][1], types.StringTypes)):
-                    var[var.index(j)] = (variable,value)
-                #Array 
-                elif type(var[var.index(j)][1]) in [list,tuple]:
-
-                    Listvalue = var[var.index(j)][1]
-
-                    #ok this place doesn't esist yet
-                    l = int(i) - len(Listvalue) + 1
-                    while l > 0:
-                        Listvalue.append('undefined')
-                        l = l - 1
-                    #Now modify it
-                    if type(value) in [list,tuple]:
-                        Listvalue = value
+                if i == None:
+                    #vars ?
+                    if (isinstance(value, types.StringTypes)):
+                        var[var.index(j)] = (variable,value)
+                    #Numeric
                     else:
-                        Listvalue[int(i)] = value
-                    var[var.index(j)] = (variable,Listvalue)
-                #dictionnary
-                elif type(var[var.index(j)][1]) in [dict]:
-                    Listvalue = var[var.index(j)][1]
-                    Listvalue[i] = value
-                    var[var.index(j)] = (variable,Listvalue)                
-                #Numeric
-                else:
-                    var[var.index(j)] = (variable,value)
+                        var[var.index(j)] = (variable,value)
+                else:   
+                #Array 
+                    if type(var[var.index(j)][1]) in [list,tuple]:
+
+                        Listvalue = var[var.index(j)][1]
+
+                        #ok this place doesn't esist yet
+                        l = int(i) - len(Listvalue) + 1
+                        while l > 0:
+                            Listvalue.append('undefined')
+                            l = l - 1
+                        #Now modify it
+                        if type(value) in [list,tuple]:
+                            Listvalue = value
+                        else:
+                            Listvalue[int(i)] = value
+                        var[var.index(j)] = (variable,Listvalue)
+                    #dictionnary
+                    elif type(var[var.index(j)][1]) in [dict]:
+                        Listvalue = var[var.index(j)][1]
+                        Listvalue[i] = value
+                        var[var.index(j)] = (variable,Listvalue)                
+
 
                 return
                 
@@ -1637,30 +1752,33 @@ class JsParser(object):
         pos = 0
         replac = ''
         
+        while not data[0] == '{':
+            data = data[1:]
+            
         pos2,content = GetBeetweenChar(data,'{','}')
         #out('content ' + str(content))
-        pos = pos2 + 1
-
+        
         fm = fonction(name,param,content.lstrip())
         self.SetVar(vars,name,fm)
         
+        data = data[(len(content) + 2):]
+
+        selfinvoked = False
+        if len(data) > 0:
+            if data[0] == '(':
+                selfinvoked = True
+
         #self invoked ? Not working yet
         if selfinvoked:
-            pos = data.find(')',pos) + 1
-            data = data[pos:]
-        else:
-            data = data[pos:] 
+            paraminvoked = GetItemAlone(data,')') + ')'
+            print "Self invoked " + str(paraminvoked)
+            data = data[(len(paraminvoked)):]
+            
+            replac = name + paraminvoked
 
-        #param in function ?
-        if len(data)> 0:
-            r = name + data
-            if not data.endswith(';'):
-                r = r + ';'
-            replac = r
-
-            pos = pos + len(data)
+        replac = replac + data
           
-        return replac, pos , name
+        return replac, 0 , name
         
     def Parse(self,JScode,vars,allow_recursion=MAX_RECURSION):
     
@@ -1697,6 +1815,8 @@ class JsParser(object):
             #out('> ' + chain)
             #out('/////////////////')
             
+            #selfinvoke = (function a(){})() or (function a(){}() )
+            
             #fonction
             m = re.search(r'^(\()* *function(?: ([\w]+))* *\(([^\)]*)\) *{', chain,re.DOTALL)
             if m:
@@ -1708,13 +1828,16 @@ class JsParser(object):
                     selfinvoked = True
             
                 replac,pos3,xyz = self.MemFonction(vars,name,m.group(3),selfinvoked,chain)
+                
                 JScode = JScode[:Startoff]+ replac + JScode[Endoff:]
-
+                
                 posG = Startoff + len(replac)
 
         #***********************
         # The real Parser
         #**********************
+        
+        print '+++' + JScode
 
         while (True):
         
@@ -1966,8 +2089,8 @@ class JsParser(object):
         
         #Special
         vars.append(('String',''))
-        #vars.append(('true',True))
-        #vars.append(('false',False))
+        #vars.append(('True',True))
+        #vars.append(('False',False))
         
         #Hack
         JScode = JScode.replace('$(document).ready','DOCUMENT_READY')
@@ -2086,9 +2209,9 @@ class Array(object):
         p1 = arg[0]
         if len(arg)> 1:
             p2 = arg[1]
-            sr = s[int(p1):int(p2)]
+            sr = self._array[int(p1):int(p2)]
         else:
-            sr = s[int(p1):]
+            sr = self._array[int(p1):]
         sr = '"' + sr + '"'
         return sr
         
@@ -2103,6 +2226,10 @@ class Array(object):
         self._array = tab
         return tabsup
 
+    def shift(self,arg):
+        if len(self._array) == 0:
+            return None
+        return self._array.pop(0)
                         
 class Basic(object):
     def __init__(self):
@@ -2141,7 +2268,9 @@ List_Lib = [Basic,Array,String,Math]
 JP = JsParser()
 Liste_var = []
 
-#JP.AddHackVar('aQydkd1Gbfx',"u'@D||&FBgHO`cfggghaddOb`]bg]_]_OE59ys33I")
+JP.AddHackVar('aQydkd1Gbfx',"u'@D||&FBgHO`cfggghaddOb`]bg]_]_OE59ys33I")
 #print 'Return : ' + str(JP.ProcessJS(JScode))
+JP.AddHackVar('window',{})
+
 JP.ProcessJS(JScode,Liste_var)
 print 'Decoded url : ' + JP.GetVar(Liste_var,'Result')
