@@ -46,47 +46,96 @@ ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 
 #---------------------------------------------------------------------------------
 
-JScode = """
-var _0xa4b7=['push','sKA','ready'];
-(function(_0x389e2e,_0x1ccc06){
-var _0x3edeb0=function(_0x12e01f){
-while(--_0x12e01f){
-_0x389e2e.push(_0x389e2e.shift());
-}
-
-}
-;_0x3edeb0(++_0x1ccc06);
-}
-(_0xa4b7,444));
+JScodesdfd = """
+    
 debug();
 """
 
-JScodegggg = """
-function sKA(_0x4cc6f4,_0x16fd7d) { return _0x4cc6f4*_0x16fd7d; }
-function bLD(_0x25e56b,_0x560d72,_0x43c36c) { return _0x25e56b(_0x560d72,_0x43c36c); }
-function gif(_0x1bd05a,_0x536a03) { return _0x1bd05a+_0x536a03; }
-function IQO(_0x3b09a0,_0x49e441) { return _0x3b09a0*_0x49e441; }
-function waX(_0x134ea6,_0x31c280) { return _0x134ea6<_0x31c280; }
-function kKG(_0x4aa626,_0x20ccc3) { return _0x4aa626+_0x20ccc3; }
-function ysG(_0x27c45e,_0xf2d4e4) { return _0x27c45e*_0xf2d4e4; }
-function ZjA(_0xa0f786,_0x2e0c16) { return _0xa0f786>>_0x2e0c16; }
-function bWh(_0x53b452,_0x645d0b) { return _0x53b452<<_0x645d0b; }
-function rZj(_0x31a5bc,_0x275383) { return _0x31a5bc!=_0x275383; }
-function OWe(_0x42c840,_0x319b9a) { return _0x42c840/_0x319b9a; }
-function dew(_0x3d2820,_0x306388) { return _0x3d2820*_0x306388; }
-function fGi(_0x50d04c,_0x3279a7) { return _0x50d04c&_0x3279a7; }
-function KzL(_0x29276d,_0x544c3d) { return _0x29276d>=_0x544c3d; }
-function rPe(_0x402588,_0x2ef2a1) { return _0x402588*_0x2ef2a1; }
-function Zqu(_0x373be7,_0x2d8041) { return _0x373be7<<_0x2d8041; }
-function FBD(_0x5705ec,_0x1d01c4) { return _0x5705ec&_0x1d01c4; }
-function ZGr(_0x35cc4f,_0x233886) { return _0x35cc4f<_0x233886; }
-function RbZ(_0x114615,_0x65b84) { return _0x114615+_0x65b84; }
-function MYg(_0xe27ddb,_0xf067ff) { return _0xe27ddb>=_0xf067ff; }
-function Jia(_0x1230ba,_0x289191,_0x11ee82) { return _0x1230ba(_0x289191,_0x11ee82); }
-function uSu(_0x45e58b,_0xd1f058) { return _0x45e58b%_0xd1f058; }
-function hRs(_0x173c13,_0x98d9ef) { return _0x173c13^_0x98d9ef; }
-function epX(_0x5e2bff,_0x547293) { return _0x5e2bff<_0x547293; }
-function jYD(_0x292aa0,_0x387698) { return _0x292aa0(_0x387698); }
+#var _0xd97fd7=_0x4869aa[_0x7a4b('28')]($,_0x4869aa[_0x7a4b('29')]('#','p')).text();
+#    _0xd97fd7=       $(#p).text();
+# bug = #p
+
+JScode = """
+    var _0x4869aa = {
+        'jYD': function _0x5a23c5(_0x292aa0, _0x387698) {
+            return _0x292aa0(_0x387698);
+        },
+        'epX': function _0x5f50fe(_0x5e2bff, _0x547293) {
+            return _0x5e2bff < _0x547293;
+        },
+        'hRs': function _0x152fe0(_0x173c13, _0x98d9ef) {
+            return _0x173c13 ^ _0x98d9ef;
+        },
+        'uSu': function _0x91eab9(_0x45e58b, _0xd1f058) {
+            return _0x45e58b % _0xd1f058;
+        },
+        'Jia': function _0x30706c(_0x1230ba, _0x289191, _0x11ee82) {
+            return _0x1230ba(_0x289191, _0x11ee82);
+        },
+        'MYg': function _0x4e205f(_0xe27ddb, _0xf067ff) {
+            return _0xe27ddb >= _0xf067ff;
+        },
+        'RbZ': function _0x31b1a8(_0x114615, _0x65b84) {
+            return _0x114615 + _0x65b84;
+        },
+        'ZGr': function _0x2e4204(_0x35cc4f, _0x233886) {
+            return _0x35cc4f < _0x233886;
+        },
+        'FBD': function _0x5e86fd(_0x5705ec, _0x1d01c4) {
+            return _0x5705ec & _0x1d01c4;
+        },
+        'Zqu': function _0x5d4a7b(_0x373be7, _0x2d8041) {
+            return _0x373be7 << _0x2d8041;
+        },
+        'rPe': function _0x57303b(_0x402588, _0x2ef2a1) {
+            return _0x402588 * _0x2ef2a1;
+        },
+        'KzL': function _0x3d9b90(_0x29276d, _0x544c3d) {
+            return _0x29276d >= _0x544c3d;
+        },
+        'fGi': function _0x3b75d9(_0x50d04c, _0x3279a7) {
+            return _0x50d04c & _0x3279a7;
+        },
+        'dew': function _0x22a6c6(_0x3d2820, _0x306388) {
+            return _0x3d2820 * _0x306388;
+        },
+        'OWe': function _0x93a61c(_0x42c840, _0x319b9a) {
+            return _0x42c840 / _0x319b9a;
+        },
+        'rZj': function _0x4b6d60(_0x31a5bc, _0x275383) {
+            return _0x31a5bc != _0x275383;
+        },
+        'bWh': function _0x5ae633(_0x53b452, _0x645d0b) {
+            return _0x53b452 << _0x645d0b;
+        },
+        'ZjA': function _0x2779d4(_0xa0f786, _0x2e0c16) {
+            return _0xa0f786 >> _0x2e0c16;
+        },
+        'ysG': function _0x3af8fd(_0x27c45e, _0xf2d4e4) {
+            return _0x27c45e * _0xf2d4e4;
+        },
+        'kKG': function _0x48e415(_0x4aa626, _0x20ccc3) {
+            return _0x4aa626 + _0x20ccc3;
+        },
+        'waX': function _0x53a972(_0x134ea6, _0x31c280) {
+            return _0x134ea6 < _0x31c280;
+        },
+        'IQO': function _0x558c8b(_0x3b09a0, _0x49e441) {
+            return _0x3b09a0 * _0x49e441;
+        },
+        'gif': function _0x458653(_0x1bd05a, _0x536a03) {
+            return _0x1bd05a + _0x536a03;
+        },
+        'bLD': function _0x309754(_0x25e56b, _0x560d72, _0x43c36c) {
+            return _0x25e56b(_0x560d72, _0x43c36c);
+        },
+        'sKA': function _0x551899(_0x4cc6f4, _0x16fd7d) {
+            return _0x4cc6f4 * _0x16fd7d;
+        }
+    };
+
+function hack(a,b){ bug = a;}
+
 window.p='AmWncdZqOr';
 
 var _0xa4b7=['push','sKA','ready','9|8|6|2|4|1|7|11|12|5|10|13|3|0','#streamurl','text','substring','epX','length','8|9|7|6|3|1|0|5|2|4','split','hRs','uSu','1|3|4|5|0|6|2','RbZ','ZGr','Zqu','FBD','rPe','pow','KzL','0|2|5|1|3|4','fGi','fromCharCode','dew','rZj','bWh','ZjA','ysG','charCodeAt','jYD','kKG','IQO','gif'];
@@ -104,12 +153,13 @@ _0x389e2e.push(_0x389e2e.shift());
 
 var _0x7a4b=function(_0x389e2e,_0x1ccc06){
 _0x389e2e=_0x389e2e-0;
-var _0x3edeb0=_0xa4b7[_0x389e2e];return _0x3edeb0;
+var _0x3edeb0=_0xa4b7[_0x389e2e];
+return _0x3edeb0;
 }
 ;
 
 var _0x4a3f26=_0x7a4b('1').split('|'),_0x14602e=0;
-debug();
+
 while(true){
 switch(_0x4a3f26[_0x14602e++]){
 
@@ -181,9 +231,13 @@ case'5':_0x11894f=_0x11894f[_0x7a4b('4')](_0x58e425);continue;
 case'6':_0x11894f=_0xd97fd7;continue;
 case'7':var _0x58c4a2=[];continue;
 case'8':var _0x11894f=_0xd97fd7[_0x7a4b('27')](0);continue;
-case'9':var _0xd97fd7=_0x4869aa[_0x7a4b('28')]($,_0x4869aa[_0x7a4b('29')]('#',p)).text();continue;
+case'9':
+var _0xd97fd7=_0x4869aa[_0x7a4b('28')]($,_0x4869aa[_0x7a4b('29')]('#','p')).text();
+debug();
+continue;
 case'10':var _0xf0d52b=0;continue;
-case'11':for(i=0;waX(i,_0xf0d52b[_0x7a4b('6')]);i+=8){
+case'11':
+for(i=0;waX(i,_0xf0d52b[_0x7a4b('6')]);i+=8){
 _0x58e425=_0x4869aa[_0x7a4b('30')](i,8);var _0x2f5a6c=_0xf0d52b.substring(i,_0x4869aa[_0x7a4b('31')](i,8));var _0x357bed=bLD(parseInt,_0x2f5a6c,16);_0x58c4a2[_0x7a4b('32')](_0x357bed);
 }
 continue;
@@ -272,7 +326,7 @@ gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + (c ^ _ ^ o) + ee[hh] + gg + ((o
 
 """
 
-JScodefgdf ="""
+JScodedfgdg ="""
 (function(s, opt_attributes, key, pairs, i, params) {
   /** @type {function (new:String, *=): string} */
   i = String;
@@ -457,6 +511,14 @@ def GetNextchar(string, pos):
     if len(string) <= (pos + 1):
         return ''
     return string[pos+1]
+    
+def GetNextUsefullchar(string):
+    j = 0
+    for i in string:
+        if not i == ' ':
+            return i,j
+        j = j + 1
+    return '',0
     
 def GetPrevchar(string, pos):
     if (pos - 1) < 0:
@@ -1094,6 +1156,11 @@ class JsParser(object):
                 InterpretedCode.AddValue(self.GetVar(self.HackVars,r.group(1)))
                 JScode = JScode[(r.end()):]
                 continue
+            if JScode == '$':
+                v = self.IsFunc(vars,'hack')
+                InterpretedCode.AddValue(v)
+                JScode = JScode[1:]
+                continue
                 
             #remove "useless" code
             if JScode.startswith('new '):
@@ -1116,6 +1183,23 @@ class JsParser(object):
                 #    InterpretedCode.AddValue([])
                 JScode = JScode[len(v):]
                 continue
+                
+            #new function delcaration ?
+            if JScode.startswith("function "):
+                m = re.search(r'^(\()* *function(?: ([\w]+))* *\(([^\)]*)\) *{', JScode,re.DOTALL)
+                if m:
+                    name = ''
+                    openparenthesis = False
+                    if m.group(2):
+                        name = m.group(2)
+                    if m.group(1):
+                        openparenthesis = True
+                
+                    replac,pos3,xyz = self.MemFonction(vars,name,m.group(3),openparenthesis,JScode)
+                    JScode = replac
+                    v = self.IsFunc(vars,name)
+                    InterpretedCode.AddValue(v)
+                    continue             
                    
             name = ''            
             #Extraction info
@@ -1139,8 +1223,8 @@ class JsParser(object):
 
                     if fe:
                         if isinstance(fe, types.MethodType):
-                            print fe.im_func.__name__ #parseint
-                            print fe.im_class.__name__ #Basic
+                            #print fe.im_func.__name__ #parseint
+                            #print fe.im_class.__name__ #Basic
                             function = fe.im_func.__name__
                             out( "> function (native): " + function + ' arg=' + arg)
                             #and continu with native fonction
@@ -1166,7 +1250,6 @@ class JsParser(object):
                                 nv = tuple(zip(p, a2))
                                 for z,w in nv:
                                     self.SetVar(vars,z,w)
-                                    print str(z) + " --- " + str(w)
 
                             self.Parse(c,vars,allow_recursion)
                             
@@ -1247,6 +1330,13 @@ class JsParser(object):
                         JScode = JScode[(len(m.group(0)) + pos3 ):]
                         continue
                         
+                    #hack var
+                    if function=='text':
+                        s = self.GetVar(vars,name)
+                        InterpretedCode.AddValue( str(s) + ' : hack texr')
+                        JScode = JScode[(len(m.group(0)) + pos3):]
+                        continue                   
+                        
                     #array
                     if function=='Array':
                         InterpretedCode.AddValue([])
@@ -1288,7 +1378,7 @@ class JsParser(object):
                         JScode = JScode[(len(m.group(0)) + pos3 ):]
                         continue
 
-                    print vars
+                    self.PrintVar(vars)
                     raise Exception("Unknow fonction : " + function)
                     
             # pointeur vers fonction ?
@@ -1532,7 +1622,10 @@ class JsParser(object):
                                 r = 'undefined'
                         elif CheckType(index) == 'String':
                             index = RemoveGuil(index)
-                            r = r[index]
+                            try:
+                                r = r[index]
+                            except:
+                                r = r[int(index)]
                     if type(r) in [dict]:
                         index = RemoveGuil(index)
                         r = r.get(index)              
@@ -1731,7 +1824,7 @@ class JsParser(object):
 
     #(Function(arg){code})(arg2) Self invoked
     # Function(arg){code}(arg2)  Not self invoked 
-    def MemFonction(self,vars,name,parametres,selfinvoked,data):
+    def MemFonction(self,vars,name,parametres,openparenthesis,data):
     
         if not name:
             n0 = 0
@@ -1746,7 +1839,7 @@ class JsParser(object):
              
         param = MySplit(parametres,',',True)
         
-        out('Extract function :' + name + ' Selfinvok :' + str(selfinvoked) + ' ' + str(param))
+        out('Extract function :' + name + ' ' + str(param))
         #out('data ' + str(data))
         
         pos = 0
@@ -1761,7 +1854,13 @@ class JsParser(object):
         fm = fonction(name,param,content.lstrip())
         self.SetVar(vars,name,fm)
         
-        data = data[(len(content) + 2):]
+        data = data[(pos2+1):]
+        
+        if openparenthesis:
+            c,p = GetNextUsefullchar(data)
+            if c == ')':
+                data = data[(p+1):]
+                openparenthesis = False
 
         selfinvoked = False
         if len(data) > 0:
@@ -1772,9 +1871,15 @@ class JsParser(object):
         if selfinvoked:
             paraminvoked = GetItemAlone(data,')') + ')'
             print "Self invoked " + str(paraminvoked)
+            replac = name + paraminvoked
+            
             data = data[(len(paraminvoked)):]
             
-            replac = name + paraminvoked
+            if openparenthesis:
+                c,p = GetNextUsefullchar(data)
+                if c == ')':
+                    data = data[(p+1):]
+                    openparenthesis = False
 
         replac = replac + data
           
@@ -1821,13 +1926,13 @@ class JsParser(object):
             m = re.search(r'^(\()* *function(?: ([\w]+))* *\(([^\)]*)\) *{', chain,re.DOTALL)
             if m:
                 name = ''
-                selfinvoked = False
+                openparenthesis = False
                 if m.group(2):
                     name = m.group(2)
                 if m.group(1):
-                    selfinvoked = True
+                    openparenthesis = True
             
-                replac,pos3,xyz = self.MemFonction(vars,name,m.group(3),selfinvoked,chain)
+                replac,pos3,xyz = self.MemFonction(vars,name,m.group(3),openparenthesis,chain)
                 
                 JScode = JScode[:Startoff]+ replac + JScode[Endoff:]
                 
@@ -1940,21 +2045,29 @@ class JsParser(object):
                 #boucle switch
                 if name == 'switch':
                     v = self.evalJS(arg,vars,allow_recursion)
+                    f = code
                     
                     if v == 'undefined':
                         continue
+                        
+                    v = str(v)
+                        
+                    out('> Boucle switch : Var= ' + v + ' code= ' + f + 'position= ' + v)
                     
-                    f = code
-                    f = f[:-1]
-                    p = f.find("case'" + v + "':")
+                    #Search the good case code
+                    f = f[1:]
+                    StrToSearch = "case'" + v + "':"
                     
-                    out('> Boucle switch : Var=' + v + ' code=' + f + ' position=' + str(p))
-                    
-                    if p == -1:
+                    while ((not f.startswith(StrToSearch)) and (len(f) > 0)):
+                        tmp_str = GetItemAlone(f,';}')
+                        f = f[(len(tmp_str)+1):]
+
+                    if len(f) < 1:
                         raise Exception("Can't find switch value " + str(v))
-                    f = f[(p + len(v) + 7):]
-                    
-                    out('> New block : ' + f)
+                        
+                    f = f[(len(StrToSearch)+0):]
+                        
+                    out('\n> New block : ' + f)
                     
                     self.Parse(f,vars,allow_recursion)
                     
