@@ -49,10 +49,9 @@ ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 
 #---------------------------------------------------------------------------------
 
-JScoderetet = """
-a='A';
-b='B';
-c = a + b;
+JScodesdfdfds = """
+a = '#';
+b = ( a != '#');
 debug();
 """
 
@@ -263,7 +262,6 @@ while (true) {
                                             var _0x2d6869 = _0x4869aa[_0x7a4b('22')](_0x4869aa['OWe'](_0x58e425, 3), i);
                                             continue;
                                         case '3':
-
                                             if (_0x4869aa[_0x7a4b('23')](_0x3852b3, '#')) _0x5bf24a += _0x3852b3;
                                             continue;
 
@@ -351,7 +349,7 @@ while (true) {
     break;
 }
 
-debug();
+
 """
 
 JScode885 = """
@@ -739,7 +737,7 @@ def GetConstructor(value):
 
 class JSBuffer(object):
     PRIORITY = {'+':3 , '-':3 , '*':4 , '/':4 , '>':1 , '<':1 , '&':2 , '|':2}
-    #print prio.get('*',0)
+
     def __init__(self):
         self.type = None
         self.buffer = ''
@@ -751,7 +749,6 @@ class JSBuffer(object):
         self.opBuf = []
         
     def SetOp(self,op):
-        #print 'Set op  ' + str(op)
         if (op == '&') and  (self.__op == '&'):
             return
         if (op == '|') and  (self.__op == '|'):
@@ -817,14 +814,21 @@ class JSBuffer(object):
                 self.buf[0] = not self.buf[0]
                 self.opBuf[0] = self.opBuf[0].replace('!','')
             if len(self.buf) > 1:
-                if '!' in self.opBuf[1]:
+                if self.opBuf[1] == '!':
                     self.buf[1] = not self.buf[1]
                     self.opBuf[1] = self.opBuf[1].replace('!','')
-                if '+' in self.opBuf[1]:
+                if self.opBuf[1] == '+':
                     self.buf[0] = self.buf[0] + self.buf[1]
-                if '|' in self.opBuf[1]:
+                if self.opBuf[1] == '|':
                     if not self.buf[0]:
                         self.buf[0] = self.buf[1]
+                if '==' in self.opBuf[1]:
+                    self.buf[0] = (self.buf[1] == self.buf[0])
+                    self.type == 'Logic'
+                if '!=' in self.opBuf[1]:
+                    self.buf[0] = (self.buf[1] != self.buf[0])
+                    self.type == 'Logic'
+                    
                 #decale
                 del self.opBuf[-1]
                 del self.buf[-1]
@@ -900,7 +904,7 @@ class JSBuffer(object):
     
     #ok all finished, force compute
     def GetBuffer(self):
-    
+
         #Force compute
         self.Compute()
         while len(self.buf) > 1:
@@ -947,6 +951,12 @@ class fonction(object):
         
     def ToStr(self):
         return 'function ' + self.name + '(' + str(self.param)[1:-1] + ') {'+ self.code + '}'
+        
+class Hack(object):
+    def __init__(self,var):
+        self.var = var
+    def text(self):
+        return self.var
 
 class JsParserHelper1(object):
     def __init__(self):
@@ -1214,23 +1224,40 @@ class JsParser(object):
 
         out( 'fonction > Name: ' + Ustr(name) + ' arg: ' + Ustr(arg) + ' function: ' + Ustr(function) )     
         
+        #hack ?
+        if isinstance(name, Hack):
+            a = MySplit(arg,',',True)
+            
+            #function = text
+            if a:
+            #ecriture
+                vv = self.evalJS(a[0],vars,allow_recursion)
+                self.AddHackVar(name.var,vv)
+                JScode = JScode[( pos3 + 0):]
+                return vv,JScode
+            else:
+            #lecture
+                vv = self.GetVarHack(name.var)
+                out('Hack vars (set): ' + vv)
+                JScode = JScode[( pos3 + 0):]
+                return vv,JScode
+        
         #Definite function ?
         fe = self.IsFunc(vars,function)
         if not fe:
             try:
                 fe = self.IsFunc(vars,name+'["' + function + '"]')
-                print name+'["' + function + '"]'
             except:
                 pass        
 
         if fe:
             if fe == '$':
+                JScode = JScode[( pos3 + 0):]
                 a = MySplit(arg,',',True)
                 vv = self.evalJS(a[0],vars,allow_recursion)
-                vv = self.GetVarHack(vv)
-                out('Hack vars (set): ' + vv) 
-                JScode = JScode[( pos3 + 0):]
-                return vv,JScode
+                fff = Hack(vv)
+                
+                return fff,JScode
                 
             elif isinstance(fe, types.MethodType):
                 #print fe.im_func.__name__ #parseint
@@ -1367,7 +1394,6 @@ class JsParser(object):
         #function
         if function=='function':
             pos9 = len(JScode[( pos3 + 0):])
-            print 
             v = self.MemFonction(vars,'',arg,False,JScode[( pos3 + 0):])[2]
             pos3 = pos3 + pos9
             JScode = JScode[( pos3 ):]
@@ -1735,7 +1761,9 @@ class JsParser(object):
                         if P1.eval:   
                             fonction = self.evalJS(fonction,vars,allow_recursion)
 
-                        #name = self.evalJS(name,vars,allow_recursion)
+                        #hack devrait etre acive tout le temps
+                        if 'TEMPORARY_VARS' in name:
+                            name = self.evalJS(name,vars,allow_recursion)
                             
                         r,JScode = self.FonctionParser(vars,allow_recursion,name,fonction,JScode)
 
@@ -2171,7 +2199,7 @@ class JsParser(object):
         #self invoked ?
         if selfinvoked:
             paraminvoked = GetItemAlone(data,')')
-            print "Self invoked " + str(paraminvoked)
+            out( "Self invoked " + str(paraminvoked) )
             replac = name + paraminvoked
             
             data = data[(len(paraminvoked)):]
@@ -2287,8 +2315,6 @@ class JsParser(object):
                     arg = ''
                     code = chain[(m.end()-1):]
                 else:
-                    print '\n' + chain + '\n'
-                    print sp
                     raise Exception('> Er 74')
                 
                 out( 'DEBUG > Name: ' + name + ' arg: ' + arg + ' code: ' + code + '\n' )
@@ -2406,9 +2432,7 @@ class JsParser(object):
                         
                     v = str(v)
                         
-                    out('> Boucle switch : Case=' + v + ' code= ' + f[0:50] + '\n')
-                    
-                    #logwrite(v)
+                    #out('> Boucle switch : Case=' + v + ' code= ' + f[0:50] + '\n')
                     
                     #Search the good case code
                     f = f[1:]
@@ -2424,7 +2448,7 @@ class JsParser(object):
                         
                     f = f[(len(StrToSearch)+0):]
                         
-                    out('\n> New block : ' + f[0:50])
+                    #out('\n> New block : ' + f[0:50])
                     
                     self.Parse(f,vars,allow_recursion)
                     
@@ -2748,9 +2772,7 @@ JP = JsParser()
 Liste_var = []
 
 JP.AddHackVar('#AmWncdZqOr',"332f98cc836ecb269255d1cc9dd38b5af2fe96d10da0cd97e30efdd9da189ef6f3da0bfcc5af890afdedf25888f6839a0bb2b98ef30dfd97abfa05ebd0b7820a")
-JP.AddHackVar('#streamurl',"test")
 #print 'Return : ' + str(JP.ProcessJS(JScode))
-JP.AddHackVar('window',{})
 
 JP.ProcessJS(JScode,Liste_var)
-print 'Decoded url : ' + JP.GetVar(Liste_var,'Result')
+print 'Decoded url : ' + JP.GetVarHack("#streamurl")
