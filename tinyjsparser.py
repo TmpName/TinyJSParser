@@ -49,305 +49,206 @@ ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 
 #---------------------------------------------------------------------------------
 
-JScodesdfdfds = """
-a = '#';
-b = ( a != '#');
+JScodegfg = """
+if ('c' in 'document') { a = 2;}
 debug();
 """
-
-
-
-JScodefffff = """
-a = 'A';
-a += '~';
-debug();
-"""
-
-
-#var _0xd97fd7=_0x4869aa[_0x7a4b('28')]($,_0x4869aa[_0x7a4b('29')]('#','p')).text();
-#    _0xd97fd7=       $(#p).text();
-# _0x1853c9 = 9d au lieu de 0d
-
 
 JScode = """
 
-
-window.p = 'AmWncdZqOr';
-var _0xa4b7 = ['push', 'sKA', 'ready', '9|8|6|2|4|1|7|11|12|5|10|13|3|0', '#streamurl', 'text', 'substring', 'epX', 'length', '8|9|7|6|3|1|0|5|2|4', 'split', 'hRs', 'uSu', '1|3|4|5|0|6|2', 'RbZ', 'ZGr', 'Zqu', 'FBD', 'rPe', 'pow', 'KzL', '0|2|5|1|3|4', 'fGi', 'fromCharCode', 'dew', 'rZj', 'bWh', 'ZjA', 'ysG', 'charCodeAt', 'jYD', 'kKG', 'IQO', 'gif'];
-
-
-(function(_0x389e2e, _0x1ccc06) {
-        var _0x3edeb0 = function(_0x12e01f) {
-            while (--_0x12e01f) {
-                _0x389e2e['push'](_0x389e2e['shift']());
-            }
-
-        };
-        _0x3edeb0(++_0x1ccc06);
-    }
-    (_0xa4b7, 444));
-
-
-var _0x7a4b = function(_0x389e2e, _0x1ccc06) {
-    _0x389e2e = _0x389e2e - 0;
-
-    var _0x3edeb0 = _0xa4b7[_0x389e2e];
-    return _0x3edeb0;
-};
-
-var _0x4869aa = {
-    'jYD': function _0x5a23c5(_0x292aa0, _0x387698) {
-        return _0x292aa0(_0x387698);
-    },
-    'epX': function _0x5f50fe(_0x5e2bff, _0x547293) {
-        return _0x5e2bff < _0x547293;
-    },
-    'hRs': function _0x152fe0(_0x173c13, _0x98d9ef) {
-        return _0x173c13 ^ _0x98d9ef;
-    },
-    'uSu': function _0x91eab9(_0x45e58b, _0xd1f058) {
-        return _0x45e58b % _0xd1f058;
-    },
-    'Jia': function _0x30706c(_0x1230ba, _0x289191, _0x11ee82) {
-        return _0x1230ba(_0x289191, _0x11ee82);
-    },
-    'MYg': function _0x4e205f(_0xe27ddb, _0xf067ff) {
-        return _0xe27ddb >= _0xf067ff;
-    },
-    'RbZ': function _0x31b1a8(_0x114615, _0x65b84) {
-        return _0x114615 + _0x65b84;
-    },
-    'ZGr': function _0x2e4204(_0x35cc4f, _0x233886) {
-        return _0x35cc4f < _0x233886;
-    },
-    'FBD': function _0x5e86fd(_0x5705ec, _0x1d01c4) {
-        return _0x5705ec & _0x1d01c4;
-    },
-    'Zqu': function _0x5d4a7b(_0x373be7, _0x2d8041) {
-        return _0x373be7 << _0x2d8041;
-    },
-    'rPe': function _0x57303b(_0x402588, _0x2ef2a1) {
-        return _0x402588 * _0x2ef2a1;
-    },
-    'KzL': function _0x3d9b90(_0x29276d, _0x544c3d) {
-        return _0x29276d >= _0x544c3d;
-    },
-    'fGi': function _0x3b75d9(_0x50d04c, _0x3279a7) {
-        return _0x50d04c & _0x3279a7;
-    },
-    'dew': function _0x22a6c6(_0x3d2820, _0x306388) {
-        return _0x3d2820 * _0x306388;
-    },
-    'OWe': function _0x93a61c(_0x42c840, _0x319b9a) {
-        return _0x42c840 / _0x319b9a;
-    },
-    'rZj': function _0x4b6d60(_0x31a5bc, _0x275383) {
-        return _0x31a5bc != _0x275383;
-    },
-    'bWh': function _0x5ae633(_0x53b452, _0x645d0b) {
-        return _0x53b452 << _0x645d0b;
-    },
-    'ZjA': function _0x2779d4(_0xa0f786, _0x2e0c16) {
-        return _0xa0f786 >> _0x2e0c16;
-    },
-    'ysG': function _0x3af8fd(_0x27c45e, _0xf2d4e4) {
-        return _0x27c45e * _0xf2d4e4;
-    },
-    'kKG': function _0x48e415(_0x4aa626, _0x20ccc3) {
-        return _0x4aa626 + _0x20ccc3;
-    },
-    'waX': function _0x53a972(_0x134ea6, _0x31c280) {
-        return _0x134ea6 < _0x31c280;
-    },
-    'IQO': function _0x558c8b(_0x3b09a0, _0x49e441) {
-        return _0x3b09a0 * _0x49e441;
-    },
-    'gif': function _0x458653(_0x1bd05a, _0x536a03) {
-        return _0x1bd05a + _0x536a03;
-    },
-    'bLD': function _0x309754(_0x25e56b, _0x560d72, _0x43c36c) {
-        return _0x25e56b(_0x560d72, _0x43c36c);
-    },
-    'sKA': function _0x551899(_0x4cc6f4, _0x16fd7d) {
-        return _0x4cc6f4 * _0x16fd7d;
-    }
-
-};
-var _0x4a3f26 = _0x7a4b('1')['split']('|'),
-    _0x14602e = 0;
-while (true) {
-    switch (_0x4a3f26[_0x14602e++]) {
-
-        case '0':
-            _0x4869aa['jYD']($, _0x7a4b('2'))[_0x7a4b('3')](_0x5bf24a);
-            continue;
-        case '1':
-            var _0xf0d52b = _0x11894f[_0x7a4b('4')](0, _0x58e425);
-            continue;
-        case '2':
-            var _0x5bf24a = '';
-            continue;
-        case '3':
-            while (_0x4869aa[_0x7a4b('5')](_0xf0d52b, _0x11894f[_0x7a4b('6')])) {
-                var _0x126680 = _0x7a4b('7')[_0x7a4b('8')]('|'),
-                    _0x3cc582 = 0;
-
-                while (true) {
-                    switch (_0x126680[_0x3cc582++]) {
-
-                        case '0':
-                            var _0x279fee = _0x4869aa[_0x7a4b('9')](_0x4fd569, _0x58c4a2[_0x4869aa[_0x7a4b('10')](_0x4b5dad, 3)]);
-
-                            continue;
-                        case '1':     
-                            do {
-                            
-                                var _0x58ef54 = _0x7a4b('11')[_0x7a4b('8')]('|'),
-                                    _0xa7be18 = 0;
-                                while (true) {
-                                    switch (_0x58ef54[_0xa7be18++]) {
-
-                                        case '0':
-                                            _0x21a6bf = _0x4869aa['Jia'](parseInt, _0x1853c9, 16);
-                                            continue;
-                                        case '1':
-                                            if (_0x4869aa['MYg'](_0x4869aa['RbZ'](_0xf0d52b, 1), _0x11894f['length'])) {
-                                                _0x2e6efb = 143;
-                                            }
-                                            continue;
-                                        case '2':
-                                            _0x425958 += 7;
-                                            continue;
-                                        case '3':
-                                            var _0x1853c9 = _0x11894f[_0x7a4b('4')](_0xf0d52b, _0x4869aa[_0x7a4b('12')](_0xf0d52b, 2));
-                                            continue;
-                                        case '4':
-                                            _0xf0d52b++;
-                                            continue;
-                                        case '5':
-                                            _0xf0d52b++;
-                                            continue;
-                                        case '6':
-                                            
-                                            if (_0x4869aa[_0x7a4b('13')](_0x425958, 28)) {
-                                                var _0x5157c4 = _0x4869aa['FBD'](_0x21a6bf, _0x1333c0);
-                                                _0x4fd569 += _0x4869aa[_0x7a4b('14')](_0x5157c4, _0x425958);
-
-                                            } else {
-                                                var _0x5157c4 = _0x4869aa[_0x7a4b('15')](_0x21a6bf, _0x1333c0);
-                                                _0x4fd569 += _0x4869aa[_0x7a4b('16')](_0x5157c4, Math[_0x7a4b('17')](2, _0x425958));
-                                            }
-                                            continue;
-                                    }
-                                    break;
-                                }
-
-                            }
-                            while (_0x4869aa[_0x7a4b('18')](_0x21a6bf, _0x2e6efb));
-                            continue;
-                        case '2':
-                            for (i = 0; _0x4869aa[_0x7a4b('13')](i, 4); i++) {
-                                var _0x5901b5 = _0x7a4b('19')[_0x7a4b('8')]('|'),
-                                    _0x4a573e = 0;
-                                while (true) {
-                                    switch (_0x5901b5[_0x4a573e++]) {
-
-                                        case '0':
-                                            var _0x5e73dd = _0x4869aa[_0x7a4b('20')](_0x279fee, _0xc093ea);
-                                            continue;
-                                        case '1':
-                                            var _0x3852b3 = String[_0x7a4b('21')](_0x5e73dd);
-                                            continue;
-                                        case '2':
-                                            var _0x2d6869 = _0x4869aa[_0x7a4b('22')](_0x4869aa['OWe'](_0x58e425, 3), i);
-                                            continue;
-                                        case '3':
-                                            if (_0x4869aa[_0x7a4b('23')](_0x3852b3, '#')) _0x5bf24a += _0x3852b3;
-                                            continue;
-
-
-                                        case '4':
-                                            _0xc093ea = _0x4869aa[_0x7a4b('24')](_0xc093ea, _0x4869aa['OWe'](_0x58e425, 3));
-                                            continue;
-                                        case '5':
-                                            _0x5e73dd = _0x4869aa[_0x7a4b('25')](_0x5e73dd, _0x2d6869);
-                                            continue;
-                                    }
-                                    break;
-                                }
-
-                            }
-                            continue;
-                        case '3':
-                            var _0x21a6bf = 0;
-                            continue;
-                        case '4':
-                            _0x4b5dad += 1;
-                            continue;
-                        case '5':
-                            var _0xc093ea = _0x4869aa[_0x7a4b('12')](_0x2e6efb, _0x1333c0);
-                            continue;
-                        case '6':
-                            var _0x425958 = 0;
-                            continue;
-                        case '7':
-                            var _0x4fd569 = 0;
-                            continue;
-                        case '8':
-                            var _0x2e6efb = 128;
-                            continue;
-                        case '9':
-                            var _0x1333c0 = 127;
-                            continue;
-                    }
-                    break;
-                }
-
-            }
-            continue;
-        case '4':
-            var _0x58e425 = _0x4869aa[_0x7a4b('26')](3, 8);
-            continue;
-        case '5':
-            _0x11894f = _0x11894f[_0x7a4b('4')](_0x58e425);
-            continue;
-        case '6':
-            _0x11894f = _0xd97fd7;
-            continue;
-        case '7':
-            var _0x58c4a2 = [];
-            continue;
-        case '8':
-            var _0x11894f = _0xd97fd7[_0x7a4b('27')](0);
-            continue;
-        case '9':
-            var _0xd97fd7 = _0x4869aa[_0x7a4b('28')]($, _0x4869aa[_0x7a4b('29')]('#', p))['text']();
-            continue;
-        case '10':
-            var _0xf0d52b = 0;
-            continue;
-
-        case '11':
-            for (i = 0; _0x4869aa['waX'](i, _0xf0d52b[_0x7a4b('6')]); i += 8) {
-
-                _0x58e425 = _0x4869aa[_0x7a4b('30')](i, 8);
-                var _0x2f5a6c = _0xf0d52b['substring'](i, _0x4869aa[_0x7a4b('31')](i, 8));
-                var _0x357bed = _0x4869aa['bLD'](parseInt, _0x2f5a6c, 16);
-                _0x58c4a2[_0x7a4b('32')](_0x357bed);
-            }
-
-            continue;
-
-
-        case '12':
-            _0x58e425 = _0x4869aa[_0x7a4b('33')](3, 8);
-            continue;
-        case '13':
-            var _0x4b5dad = 0;
-            continue;
-    }
-    break;
+window.p='nluS6xqhUl';var _0x921f=['text','#streamurl','BAk','lst','length','5|8|1|3|11|10|12|9|2|0|6|4|7','ORC','bPD','aIa','5|2|0|3|1|4','Erm','YNv','bmw','rGv','fromCharCode','SZh','fZT','Jqk','XJA','5|7|3|6|4|2|1|0','Nrb','rcI','JEm','pow','qEq','write','Wyw','sbJ','substring','Wlj','GSh','ewq','push','charCodeAt','ready','2|9|3|0|12|13|10|14|8|5|7|1|11|6|4','split','suY','Har'];(function(_0x2eba5e,_0xdfc150){
+var _0x568c31=function(_0x3755c3){
+while(--_0x3755c3){
+_0x2eba5e['push'](_0x2eba5e['shift']());
 }
+
+}
+;_0x568c31(++_0xdfc150);
+}
+(_0x921f,385));var _0xf921=function(_0x2eba5e,_0xdfc150){
+_0x2eba5e=_0x2eba5e-0;var _0x568c31=_0x921f[_0x2eba5e];return _0x568c31;
+}
+;
+var _0x24225f={
+'suY':function _0x7040d7(_0x17fafa,_0x2e1161){
+return _0x17fafa(_0x2e1161);
+}
+,'Har':function _0x5ee0c9(_0x2a7467,_0x26496a){
+return _0x2a7467+_0x26496a;
+}
+,'BAk':function _0x34f382(_0x45134a,_0x56cc43){
+return _0x45134a*_0x56cc43;
+}
+,'lst':function _0x3c3b7e(_0x3bec0c,_0x5be819){
+return _0x3bec0c<_0x5be819;
+}
+,'ORC':function _0x288b06(_0x1ae361,_0x5b3876){
+return _0x1ae361^_0x5b3876;
+}
+,'bPD':function _0x10dae9(_0x2c4582,_0x1ea265){
+return _0x2c4582%_0x1ea265;
+}
+,'aIa':function _0x484fb7(_0x146198,_0x4f9277){
+return _0x146198<_0x4f9277;
+}
+,'Erm':function _0x2034f5(_0x21d410,_0x21b8d3){
+return _0x21d410>>_0x21b8d3;
+}
+,'YNv':function _0x510f55(_0x367fe3,_0x138493){
+return _0x367fe3!=_0x138493;
+}
+,'bmw':function _0x5dc687(_0x4b5a9b,_0x1c9771){
+return _0x4b5a9b*_0x1c9771;
+}
+,'rGv':function _0x8f93c4(_0x2c6552,_0x41f9db){
+return _0x2c6552/_0x41f9db;
+}
+,'SZh':function _0x211f2b(_0x575d0e,_0x40b45b){
+return _0x575d0e<<_0x40b45b;
+}
+,'fZT':function _0x20c3db(_0x403ac9,_0x1711dd){
+return _0x403ac9/_0x1711dd;
+}
+,'Jqk':function _0x49abc(_0x518724,_0x358a80){
+return _0x518724&_0x358a80;
+}
+,'XJA':function _0x450870(_0x2fc711,_0x3d44bf){
+return _0x2fc711+_0x3d44bf;
+}
+,'Nrb':function _0x12ee26(_0x37c99e,_0x1a6688){
+return _0x37c99e&_0x1a6688;
+}
+,'rcI':function _0x2ae5d4(_0x213919,_0x560871){
+return _0x213919<<_0x560871;
+}
+,'JEm':function _0x469001(_0x508d4d,_0x123bce){
+return _0x508d4d&_0x123bce;
+}
+,'Nvd':function _0x272baa(_0x558040,_0x3f6eee){
+return _0x558040*_0x3f6eee;
+}
+,'qEq':function _0xff0343(_0x10ca70,_0x4aab9e){
+return _0x10ca70 in _0x4aab9e;
+}
+,'Wyw':function _0x2e17f1(_0x29dd98,_0x562ea6,_0x263d50){
+return _0x29dd98(_0x562ea6,_0x263d50);
+}
+,'sbJ':function _0x23702b(_0x276095,_0x49a3ca){
+return _0x276095>=_0x49a3ca;
+}
+,'Wlj':function _0x112fbb(_0x577fdb,_0xf5f24e){
+return _0x577fdb*_0xf5f24e;
+}
+,'GSh':function _0x506a3d(_0x441092,_0x26b40f){
+return _0x441092+_0x26b40f;
+}
+,'ewq':function _0x2789de(_0x1f3721,_0x411606,_0x24e0a1){
+return _0x1f3721(_0x411606,_0x24e0a1);
+}
+
+}
+;var _0x44f0f1=_0xf921('1')[_0xf921('2')]('|'),_0x782b39=0;while(true){
+
+switch(_0x44f0f1[_0x782b39++]){
+
+case'0':var _0x4938b1='';continue;
+case'1':var _0x35da22=0;continue;
+case'2':
+var _0x580851=_0x24225f[_0xf921('3')]($,_0x24225f[_0xf921('4')]('#',p))[_0xf921('5')]();
+continue;
+case'3':_0x1921b6=_0x580851;continue;
+case'4':_0x24225f[_0xf921('3')]($,_0xf921('6'))[_0xf921('5')](_0x4938b1);continue;
+case'5':_0x36f44e=_0x24225f[_0xf921('7')](3,8);continue;
+case'6':
+while(_0x24225f[_0xf921('8')](_0x35da22,_0x1921b6[_0xf921('9')])){
+var _0x4641b6=_0xf921('10')[_0xf921('2')]('|'),_0x2e3ee3=0;while(true){
+switch(_0x4641b6[_0x2e3ee3++]){
+
+case'0':_0x555924=_0x24225f[_0xf921('11')](_0x24225f[_0xf921('11')](_0x555924,_0x166636),_0x3c938b);continue;
+case'1':var _0x1f98ab=0;continue;
+case'2':var _0x555924=_0x24225f[_0xf921('11')](_0x1f98ab,_0x3842ea[_0x24225f[_0xf921('12')](_0x49a4d1,3)]);continue;
+case'3':var _0x5c7995=0;continue;
+case'4':for(i=0;_0x24225f[_0xf921('13')](i,4);i++){
+var _0x27547d=_0xf921('14')[_0xf921('2')]('|'),_0x40d8d6=0;while(true){
+switch(_0x27547d[_0x40d8d6++]){
+
+case'0':_0x7d6e76=_0x24225f[_0xf921('15')](_0x7d6e76,_0x1ae18e);continue;
+case'1':if(_0x24225f[_0xf921('16')](_0x1fd8a8,'#'))_0x4938b1+=_0x1fd8a8;continue;
+case'2':var _0x1ae18e=_0x24225f[_0xf921('17')](_0x24225f[_0xf921('18')](_0x36f44e,3),i);continue;
+case'3':var _0x1fd8a8=String[_0xf921('19')](_0x7d6e76);continue;
+case'4':_0x553ab0=_0x24225f[_0xf921('20')](_0x553ab0,_0x24225f[_0xf921('21')](_0x36f44e,3));continue;
+case'5':var _0x7d6e76=_0x24225f[_0xf921('22')](_0x555924,_0x553ab0);continue;
+}
+break;
+}
+
+}
+continue;
+case'5':var _0x2c77c6=128;continue;
+case'6':var _0x553ab0=_0x24225f[_0xf921('23')](_0x2c77c6,_0x4e034c);continue;
+case'7':_0x49a4d1+=1;continue;
+case'8':var _0x4e034c=127;continue;
+case'9':var _0x3c938b=3433170087;continue;
+case'10':do{
+var _0x493a95=_0xf921('24')[_0xf921('2')]('|'),_0x4a91a3=0;while(true){
+switch(_0x493a95[_0x4a91a3++]){
+
+case'0':_0x5c7995+=7;continue;
+case'1':if(_0x24225f[_0xf921('13')](_0x5c7995,28)){
+var _0x57fc9b=_0x24225f[_0xf921('25')](_0x141afe,_0x4e034c);_0x1f98ab+=_0x24225f[_0xf921('26')](_0x57fc9b,_0x5c7995);
+}
+else{
+var _0x57fc9b=_0x24225f[_0xf921('27')](_0x141afe,_0x4e034c);_0x1f98ab+=_0x24225f['Nvd'](_0x57fc9b,Math[_0xf921('28')](2,_0x5c7995));
+}
+continue;
+case'2':
+if (false) {
+_0x4e034c=17;
+}
+continue;
+case'3':_0x35da22++;continue;
+case'4':_0x141afe=_0x24225f[_0xf921('31')](parseInt,_0x265559,16);continue;
+case'5':if(_0x24225f[_0xf921('32')](_0x24225f[_0xf921('23')](_0x35da22,1),_0x1921b6[_0xf921('9')])){
+_0x2c77c6=143;
+}
+continue;
+case'6':_0x35da22++;continue;
+case'7':var _0x265559=_0x1921b6[_0xf921('33')](_0x35da22,_0x24225f[_0xf921('23')](_0x35da22,2));continue;
+}
+break;
+}
+
+}
+while(_0x24225f[_0xf921('32')](_0x141afe,_0x2c77c6));continue;
+case'11':var _0x141afe=0;continue;
+case'12':var _0x166636=681717228;continue;
+}
+break;
+}
+
+}
+continue;
+case'7':_0x1921b6=_0x1921b6[_0xf921('33')](_0x36f44e);continue;
+case'8':
+for(i=0;_0x24225f[_0xf921('13')](i,_0x35da22[_0xf921('9')]);i+=8){
+_0x36f44e=_0x24225f[_0xf921('34')](i,8);
+var _0x117c21=_0x35da22[_0xf921('33')](i,_0x24225f[_0xf921('35')](i,8));
+var _0x1b9797=_0x24225f[_0xf921('36')](parseInt,_0x117c21,16);
+_0x3842ea[_0xf921('37')](_0x1b9797);
+}
+continue;
+case'9':var _0x1921b6=_0x580851[_0xf921('38')](0);continue;
+case'10':var _0x35da22=_0x1921b6[_0xf921('33')](0,_0x36f44e);continue;
+case'11':var _0x49a4d1=0;continue;
+case'12':var _0x36f44e=_0x24225f[_0xf921('34')](3,8);continue;
+case'13':
+var _0x565dd0=_0x1921b6[_0xf921('9')];
+continue;
+case'14':var _0x3842ea=[];continue;
+}
+break;
+}
+
 
 
 """
@@ -468,17 +369,6 @@ JScode7788 = """
 (function(){var b="some sample packed code";function something(a){alert(a)}something(b)})();
 """
 
-JScodeswitch = """
-switch(0) {
-    case 0:
-        a = 1;
-        break;
-    case 1:
-        a = 2;
-        break;
-}
-debug();
-"""
 
 JScode7744 ="""
 eval(function(p, a, c, k, e, r) {
@@ -502,22 +392,6 @@ eval(function(p, a, c, k, e, r) {
 }('(0(){4 1="5 6 7 8";0 2(3){9(3)}2(1)})();', 10, 10, 'function|b|something|a|var|some|sample|packed|code|alert'.split('|'), 0, {}));
 """
 
-JScode77878 = """
-var cars = ["aa", "bb", "cc", "dd"];
-var i, len, text="to erase";
-for (i = 0, len = cars.length, text = ""; i < len; i++) {
-    text += cars[i] + " " ;
-    if ( i == 0) break;
-}
-
-var j = 2.5;
-j*=2;
-
-text += j;
-
-debug();
-
-"""
 
 def logwrite(stri):
     fh = open('G:\\JSparser\\debug.txt', "a")
@@ -565,16 +439,6 @@ def Ustr(string):
     if isinstance(string, unicode):
         return str(string.encode('ascii','replace'))
     return str(string)
- 
-    
-def GetFirstChar(string):
-    j = 0
-    try:
-        while (string[j].isspace()):
-            j = j + 1
-    except:
-        return ''
-    return string[j]
     
 def GetNextchar(string, pos):
     if len(string) <= (pos + 1):
@@ -959,14 +823,15 @@ class Hack(object):
         return self.var
 
 class JsParserHelper1(object):
-    def __init__(self):
+    def __init__(self,tmp_var):
         self.reset()
         self.used = False
+        self.Tmp_var = tmp_var
         
     def reset(self):
         type = None
-        self.name = ''
-        self.at1 = None
+        self.name = None
+
         self.t = None
         self.arg = None
         self.rest_code = ''
@@ -975,22 +840,31 @@ class JsParserHelper1(object):
       
     def process(self,JScode):
         self.reset()
-        self.memo = JScode
-    
-        r = re.search('^(\w[\w]*)',JScode)
-        if not r:
-            return False
+        
+        print 'process ' + JScode
+        
+        self.at1 = None
+        
+        #If already started
+        if JScode.startswith(self.Tmp_var):
+            self.name = self.Tmp_var
+        else:
+            #si on a rien encore trouve on recherche une variable/fonction
+            r = re.search('^(\w[\w]*)',JScode)
+            if r and not self.used:
+                self.name = r.group(1)
+            else:
+                return False
             
         self.used = True
             
         #By defaut
         self.t = 'var'
-            
-        self.name = r.group(1)
+  
         JScode = JScode[(len(self.name)):]
         
         c,p = GetNextUsefullchar(JScode)
-        while (c in '.[') and c:
+        while (c in '.[') and c and not self.at1:
             JScode = JScode[p:]
             if c == '[':
                 a = GetItemAlone(JScode,']')
@@ -1013,27 +887,30 @@ class JsParserHelper1(object):
         
         #operation ?
         op = None
+
         m = re.search('^(' + REG_OP + '|\[|$)',JScode, re.UNICODE)
         if m and JScode:
             op = m.group(1).strip()
             if op == '[':
-                op = ''
-            #prb because the only possible case  is ==
-            if len(op) > 1 and op[0] == '=' and not op[1] == '=':
-                op = op[0]
-                      
-            self.op = op
-            self.t = 'ope'
+                op = None
+            else:
+                #prb because the only possible case  is ==
+                if len(op) > 1 and op[0] == '=' and not op[1] == '=':
+                    op = op[0]
+                          
+                self.op = op
+                JScode = JScode[(len(op)):]
+                self.t = 'ope'
+        
         
         if self.t == 'fct':
             out('Fonction :' + self.name + ' method: ' + str(self.at1) + ' arg: ' + self.arg)
-            self.rest_code = JScode
         elif self.t == 'var':
             out('Variable :' + self.name + ' []= ' + str(self.at1) )
-            self.rest_code = JScode
-        elif self.t == 'ope':
-            out('operation :' + self.name )
-            self.rest_code = self.memo
+        if self.op:
+            out('operation :' + self.name + ' op=' + str(self.op) )
+            
+        self.rest_code = JScode
             
         return True
         
@@ -1427,23 +1304,11 @@ class JsParser(object):
         self.PrintVar(vars)
         raise Exception("Unknow fonction : " + function)
         
-    def VarParser(self,vars,allow_recursion,variable,JScode):
-    
-        #Special vars
-        if variable.startswith('window.'):
-            variable = variable[7:] 
+    def VarParser(self,vars,allow_recursion,variable,operator,JScode):
         
         #recup operator
-        op = ''
-        m = re.search('^(' + REG_OP + '|\[|$)',JScode, re.UNICODE)
-        if m:
-            op = m.group(1).strip()
-            if op == '[':
-                op = ''
-            #prb because the only possible case  is ==
-            if len(op) > 1 and op[0] == '=' and not op[1] == '=':
-                op = op[0]
-
+        if operator:
+            op = operator
             New_Var = False
       
         out('Variable : ' + str(variable) + '  operator : ' + op )
@@ -1456,9 +1321,7 @@ class JsParser(object):
         if op == '=':
         
             out('creation')
-        
-            JScode = JScode[1:]
-            
+
             v1 = GetItemAlone(JScode,',')
             JScode = JScode[(len(v1)):]
             
@@ -1477,10 +1340,10 @@ class JsParser(object):
         
         r = self.GetVar(vars,variable)
         
-        #just put var
+        #just put var because not managed here
         if len(op) == 2:
             if op[0] in '=!':
-                return r,JScode
+                return r,op + JScode
                         
         #Only modification
         if len(op) == 2:
@@ -1490,17 +1353,15 @@ class JsParser(object):
             #check if it's i++ ou i -- form
             if op == '++':
                 self.SetVar(vars,variable,r + 1)
-                JScode = JScode[2:]
                 return r,JScode
 
             elif op == '--':
                 self.SetVar(vars,variable,r-1)
-                JScode = JScode[2:]
                 return r,JScode
 
             #a+=1 form
             elif op[1] == '=' and op[0] in '+-*/%^':
-                n = GetItemAlone(JScode[2:],';,')
+                n = GetItemAlone(JScode,';,')
                 out('A rajouter ' + n)
                 r = self.evalJS(variable + op[0] + n ,vars,allow_recursion)
                 #self.SetVar(vars,variable,r)
@@ -1512,10 +1373,12 @@ class JsParser(object):
                 else:
                     self.VarManage(allow_recursion,vars,variable,str(r))
                     
-                JScode = JScode[(len(n) + 2):]
+                JScode = JScode[(len(n)):]
                 return r,JScode
                 
-        #just var     
+        #just var
+        #re-ad op if not used
+        JScode = op + JScode
         return r,JScode
         
     def checkoperator(self,strg):
@@ -1545,8 +1408,6 @@ class JsParser(object):
         
         while (len(JScode)>0):
             c = JScode[0]
-            
-            item = None
 
             #print 'InterpretedCode > ' + InterpretedCode
             out( 'JScode > ' + JScode.encode('ascii','replace') + '\n')
@@ -1568,6 +1429,17 @@ class JsParser(object):
                 JScode = JScode[4:]
                 continue
                 
+            #in operator            
+            if JScode[0:2] == 'in':
+                A = InterpretedCode.GetPrevious()
+                B = GetItemAlone(JScode[2:],',;')
+                B2 = self.evalJS(B,vars,allow_recursion)
+                if A in B2:
+                    InterpretedCode.AddValue(True)
+                else:
+                    InterpretedCode.AddValue(False)
+                JScode = JScode[(len (B)+2) :]
+                continue
                 
             #Special value
             m = re.search('^(true|false|null|String)',JScode, re.UNICODE)
@@ -1628,14 +1500,14 @@ class JsParser(object):
             
             #3 - numeric chain
             r = re.search('(^[0-9]+)',JScode)
-            if r and not item:
+            if r:
                 InterpretedCode.AddValue(int(JScode[0:r.end()]))
                 JScode = JScode[(r.end()):]
                 continue #for this one continue directly
 
             #4 - Regex
             r = re.search('^\/.*\/(.*$)',JScode)
-            if r and not item:
+            if r:
                 reg = r.group(0)
                 flag = r.group(1)
                 #test if the regex is valid
@@ -1697,40 +1569,44 @@ class JsParser(object):
                 else:
                     self.SetVar(vars,'TEMPORARY_VARS'+str(allow_recursion),vv)
                     JScode = 'TEMPORARY_VARS'+str(allow_recursion) + JScode
-                
-                #item = vv
-                continue               
+                  
 
             item = ''
             #5 Variable/fonction/object
-            P1 = JsParserHelper1()
+            P1 = JsParserHelper1('TEMPORARY_VARS'+str(allow_recursion))
             while(P1.process(JScode)):
                 JScode = P1.rest_code
-                item = P1.name
+
                 r = None
                 
                 if P1.op:
-                    m = re.search('^(\({0,1}\w[\w\.]*\){0,1} *(?:\[[^\]]+\])* *)(' + REG_OP + '|\[|$)',JScode, re.UNICODE)
+                    #special vars
+                    if P1.name== 'window' and P1.at1 == 'p':
+                        P1.name = 'p'
+                        P1.at1= ''
+                        
+                    vv = P1.name
+                    if P1.at1:
+                        #eee = self.evalJS(P1.at1,vars,allow_recursion)
+                        vv = vv +'[' + str(eee) + ']'
+                        
+                    out('creation/modification ' + vv + ' ' + P1.op )
 
-                    out('creation/modification ' + str(m.groups()) + ' ' + str(len(m.group(2))) )
-                    m = re.search('^(\({0,1}\w[\w\.]*\){0,1} *(?:\[[^\]]+\])* *)(' + REG_OP + '|\[|$)',JScode, re.UNICODE)
-                    vv = m.group(1).strip()
-                    JScode = JScode[(len(m.group(1))):]
-                    r,JScode = self.VarParser(vars,allow_recursion,vv,JScode)
+                    r,JScode = self.VarParser(vars,allow_recursion,vv,P1.op,JScode)
                     
                     InterpretedCode.AddValue(r)
-                    continue
+                    break
                 else:
-                
                     if P1.t == 'var':
                         if not self.IsVar(vars,P1.name):
+                            self.PrintVar(vars)
                             raise Exception('Variable error : ' + P1.name)
                             
                         #C'est fini ?
                         if (P1.name == 'TEMPORARY_VARS'+str(allow_recursion)) and (P1.at1 == None):
                             r = self.GetVar(vars,'TEMPORARY_VARS'+str(allow_recursion))
                             self.InitVar(vars,'TEMPORARY_VARS'+str(allow_recursion))
-                            JScode = JScode[(len('TEMPORARY_VARS'+str(allow_recursion))):]
+                            #JScode = JScode[(len('TEMPORARY_VARS'+str(allow_recursion))):]
                             InterpretedCode.AddValue(r)
                             continue
 
@@ -1738,15 +1614,8 @@ class JsParser(object):
                         
                         #hack
                         if not P1.at1 == None:
-                            eee = self.evalJS(P1.at1,vars,allow_recursion)
-                            if eee == 'length':
-                                t1 = self.evalJS(P1.name,vars,allow_recursion)
-                                r = len(t1)
-                                P1.at1 = None
-                            
-                            else:
-                                r = self.GetVar(vars,Var_string+'[' + str(eee) + ']')
-                        else:       
+                            r = self.GetVar(vars,Var_string+'[' + str(P1.at1) + ']')
+                        else:
                             r = self.GetVar(vars,Var_string)
                             
                     
@@ -1770,7 +1639,7 @@ class JsParser(object):
                         
                     self.SetVar(vars,'TEMPORARY_VARS'+str(allow_recursion),r)
                     JScode = 'TEMPORARY_VARS'+str(allow_recursion) + JScode
-     
+            
             if JScode.startswith('TEMPORARY_VARS'+str(allow_recursion)):
                 r = self.GetVar(vars,'TEMPORARY_VARS'+str(allow_recursion))
                 self.InitVar(vars,'TEMPORARY_VARS'+str(allow_recursion))
@@ -1915,7 +1784,8 @@ class JsParser(object):
         
         index = None
         if '[' in variable:
-            index = variable.split('[')[1][:-1]
+            index = GetItemAlone(variable[(variable.find('[')):],']')
+            index = index[1:-1]
             variable = variable.split('[')[0]
             index = self.evalJS(index,var,50)
             
@@ -2337,7 +2207,7 @@ class JsParser(object):
                     t = arg[1]
                     i = arg[2] + ';'
                     f = code
-                    if GetFirstChar(f) =='{':
+                    if GetNextUsefullchar(f)[0] =='{':
                         f = GetBeetweenChar(f,'{','}')[1]
                     
                     #out('> Boucle for : Var=' + v + ' test=' + t + ' incrementation=' + i + ' code=' + f)
@@ -2359,7 +2229,7 @@ class JsParser(object):
                 #boucle while ?
                 if name == 'while':
                     f = code
-                    if GetFirstChar(f) =='{':
+                    if GetNextUsefullchar(f)[0] =='{':
                         f = GetBeetweenChar(f,'{','}')[1]
                     
                     #out('> Boucle while : Var=' + v + ' test=' + t + ' incrementation=' + i + ' code=' + f)
@@ -2431,9 +2301,10 @@ class JsParser(object):
                         continue
                         
                     v = str(v)
-                        
+                         
                     #out('> Boucle switch : Case=' + v + ' code= ' + f[0:50] + '\n')
-                    
+                    #logwrite(str(v) + '\n')
+
                     #Search the good case code
                     f = f[1:]
                     StrToSearch = "case'" + v + "':"
@@ -2460,7 +2331,7 @@ class JsParser(object):
                     f = code
                     e = ''
                     
-                    if GetFirstChar(f) =='{':
+                    if GetNextUsefullchar(f)[0] =='{':
                         f = GetBeetweenChar(f,'{','}')[1]
 
                     #Need to check if there is else statement ?
@@ -2589,7 +2460,7 @@ class JsParser(object):
         
         #Hack
         JScode = JScode.replace('$(document).ready','DOCUMENT_READY')
-        JScode = JScode.replace('.length','.length()')
+        #JScode = JScode.replace('.length','.length()')
         
         #Start the parsing
         ret = self.Parse(JScode,vars)
@@ -2771,7 +2642,7 @@ List_Lib = [Basic,Array,String,Math]
 JP = JsParser()
 Liste_var = []
 
-JP.AddHackVar('#AmWncdZqOr',"332f98cc836ecb269255d1cc9dd38b5af2fe96d10da0cd97e30efdd9da189ef6f3da0bfcc5af890afdedf25888f6839a0bb2b98ef30dfd97abfa05ebd0b7820a")
+JP.AddHackVar('#nluS6xqhUl',"2df3342324dbba57fd77f21fb1b2f9fe0bc8b0a3d70be2dceab906d9d2a8c60fa8c4ae8f0fe3d2a7d002d9e6808e0fb2c6d6870faac48fb2049d88f5dc0adbe0e29f0e")
 #print 'Return : ' + str(JP.ProcessJS(JScode))
 
 JP.ProcessJS(JScode,Liste_var)
