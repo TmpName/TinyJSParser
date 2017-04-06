@@ -32,7 +32,7 @@
 
 #https://javascriptweblog.wordpress.com/2011/04/04/the-javascript-comma-operator/
 
-
+import cProfile
 
 import re
 import types
@@ -42,10 +42,12 @@ import time
 import sys
 
 REG_NAME = '[\w]+'
-REG_OP = '[\/\*\-\+\{\}<>\|\&=~^%!]+' #not space here, and no bracket
+REG_OP = '[\/\*\-\+<>\|\&=~^%!]+' #not space here, and no bracket
 DEBUG = True # Never enable it in kodi, too big size log
 MAX_RECURSION = 50
 ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
+
+#if(!_0x45ae41[_0x5949('28')](_0x5949('9'),document)||!(!(typeof (document.write) == 'undefined'))){
 
 #---------------------------------------------------------------------------------
 
@@ -53,202 +55,235 @@ JScodegfg = """
 if ('c' in 'document') { a = 2;}
 debug();
 """
-
+#_0x1fa71e = 73 puis 78
 JScode = """
 
-window.p='nluS6xqhUl';var _0x921f=['text','#streamurl','BAk','lst','length','5|8|1|3|11|10|12|9|2|0|6|4|7','ORC','bPD','aIa','5|2|0|3|1|4','Erm','YNv','bmw','rGv','fromCharCode','SZh','fZT','Jqk','XJA','5|7|3|6|4|2|1|0','Nrb','rcI','JEm','pow','qEq','write','Wyw','sbJ','substring','Wlj','GSh','ewq','push','charCodeAt','ready','2|9|3|0|12|13|10|14|8|5|7|1|11|6|4','split','suY','Har'];(function(_0x2eba5e,_0xdfc150){
-var _0x568c31=function(_0x3755c3){
-while(--_0x3755c3){
-_0x2eba5e['push'](_0x2eba5e['shift']());
+window.g='DyDOtIQqb6';var _0x9495=['Zft','pow','tcV','EAk','QHb','charCodeAt','11|12|13|0|14|3|2|9|16|1|4|8|5|6|15|10|7','split','xXM','length','jLa','substring','aZP','dOD','Poy','write','push','dkF','text','tjf','HIZ','WyX','faz','Gcy','ucs','2|0|5|4|3|1','dhh','pQu','eMz','ZBD','Lnk','fromCharCode','DYl','4|3|0|5|6|2|1','WOa','gzw','cBV'];(function(_0x1f55fe,_0x45ae62){
+var _0x3d4039=function(_0x32de24){
+while(--_0x32de24){
+_0x1f55fe['push'](_0x1f55fe['shift']());
 }
 
 }
-;_0x568c31(++_0xdfc150);
+;_0x3d4039(++_0x45ae62);
 }
-(_0x921f,385));var _0xf921=function(_0x2eba5e,_0xdfc150){
-_0x2eba5e=_0x2eba5e-0;var _0x568c31=_0x921f[_0x2eba5e];return _0x568c31;
+(_0x9495,191));var _0x5949=function(_0x1f55fe,_0x45ae62){
+_0x1f55fe=_0x1f55fe-0;var _0x3d4039=_0x9495[_0x1f55fe];return _0x3d4039;
 }
 ;
-var _0x24225f={
-'suY':function _0x7040d7(_0x17fafa,_0x2e1161){
-return _0x17fafa(_0x2e1161);
+var _0x45ae41={
+'xXM':function _0x184df4(_0x3f842b,_0x6062d8){
+return _0x3f842b<_0x6062d8;
 }
-,'Har':function _0x5ee0c9(_0x2a7467,_0x26496a){
-return _0x2a7467+_0x26496a;
+,'jLa':function _0x3457b8(_0x38f439,_0x457b87){
+return _0x38f439*_0x457b87;
 }
-,'BAk':function _0x34f382(_0x45134a,_0x56cc43){
-return _0x45134a*_0x56cc43;
+,'aZP':function _0x961da7(_0x56acea,_0x37f246){
+return _0x56acea+_0x37f246;
 }
-,'lst':function _0x3c3b7e(_0x3bec0c,_0x5be819){
-return _0x3bec0c<_0x5be819;
+,'dOD':function _0x2dfccb(_0x44ea34,_0xe1a069,_0x49022f){
+return _0x44ea34(_0xe1a069,_0x49022f);
 }
-,'ORC':function _0x288b06(_0x1ae361,_0x5b3876){
-return _0x1ae361^_0x5b3876;
+,'Poy':function _0x170b95(_0x49e0ac,_0x204c53){
+return _0x49e0ac in _0x204c53;
 }
-,'bPD':function _0x10dae9(_0x2c4582,_0x1ea265){
-return _0x2c4582%_0x1ea265;
+,'dkF':function _0x275cbe(_0x48d105,_0x930083){
+return _0x48d105(_0x930083);
 }
-,'aIa':function _0x484fb7(_0x146198,_0x4f9277){
-return _0x146198<_0x4f9277;
+,'tjf':function _0x2af2f3(_0x5d6e96,_0x41b58f){
+return _0x5d6e96*_0x41b58f;
 }
-,'Erm':function _0x2034f5(_0x21d410,_0x21b8d3){
-return _0x21d410>>_0x21b8d3;
+,'HIZ':function _0x1ccc24(_0x2f473c,_0xef0da5){
+return _0x2f473c^_0xef0da5;
 }
-,'YNv':function _0x510f55(_0x367fe3,_0x138493){
-return _0x367fe3!=_0x138493;
+,'WyX':function _0x83e7c(_0x4fa9eb,_0x4fc60d){
+return _0x4fa9eb^_0x4fc60d;
 }
-,'bmw':function _0x5dc687(_0x4b5a9b,_0x1c9771){
-return _0x4b5a9b*_0x1c9771;
+,'faz':function _0x7ec967(_0x1d25ce,_0x2d0418){
+return _0x1d25ce^_0x2d0418;
 }
-,'rGv':function _0x8f93c4(_0x2c6552,_0x41f9db){
-return _0x2c6552/_0x41f9db;
+,'Gcy':function _0x3346a1(_0x5cef79,_0x59b5a3){
+return _0x5cef79%_0x59b5a3;
 }
-,'SZh':function _0x211f2b(_0x575d0e,_0x40b45b){
-return _0x575d0e<<_0x40b45b;
+,'ucs':function _0x2f75f3(_0x3e1dda,_0x192d4c){
+return _0x3e1dda<_0x192d4c;
 }
-,'fZT':function _0x20c3db(_0x403ac9,_0x1711dd){
-return _0x403ac9/_0x1711dd;
+,'dhh':function _0x2cc0da(_0x240c12,_0x5b7c4c){
+return _0x240c12*_0x5b7c4c;
 }
-,'Jqk':function _0x49abc(_0x518724,_0x358a80){
-return _0x518724&_0x358a80;
+,'pQu':function _0xe29029(_0x45e457,_0x88979d){
+return _0x45e457/_0x88979d;
 }
-,'XJA':function _0x450870(_0x2fc711,_0x3d44bf){
-return _0x2fc711+_0x3d44bf;
+,'eMz':function _0xe40d05(_0x5a668a,_0x2c7bd1){
+return _0x5a668a<<_0x2c7bd1;
 }
-,'Nrb':function _0x12ee26(_0x37c99e,_0x1a6688){
-return _0x37c99e&_0x1a6688;
+,'ZBD':function _0x46f50e(_0x5ba232,_0x312024){
+return _0x5ba232&_0x312024;
 }
-,'rcI':function _0x2ae5d4(_0x213919,_0x560871){
-return _0x213919<<_0x560871;
+,'Lnk':function _0x56789d(_0x3aa5f8,_0x3172ef){
+return _0x3aa5f8!=_0x3172ef;
 }
-,'JEm':function _0x469001(_0x508d4d,_0x123bce){
-return _0x508d4d&_0x123bce;
+,'DYl':function _0x19031e(_0x144a2e,_0x309a9f){
+return _0x144a2e>>_0x309a9f;
 }
-,'Nvd':function _0x272baa(_0x558040,_0x3f6eee){
-return _0x558040*_0x3f6eee;
+,'WOa':function _0x1689bf(_0x39dbf0,_0x42e9f7){
+return _0x39dbf0 in _0x42e9f7;
 }
-,'qEq':function _0xff0343(_0x10ca70,_0x4aab9e){
-return _0x10ca70 in _0x4aab9e;
+,'gzw':function _0x5cedc0(_0x21a7ef,_0x482441){
+return _0x21a7ef<_0x482441;
 }
-,'Wyw':function _0x2e17f1(_0x29dd98,_0x562ea6,_0x263d50){
-return _0x29dd98(_0x562ea6,_0x263d50);
+,'cBV':function _0x47a063(_0x47d3f1,_0x4bebf9){
+return _0x47d3f1<<_0x4bebf9;
 }
-,'sbJ':function _0x23702b(_0x276095,_0x49a3ca){
-return _0x276095>=_0x49a3ca;
+,'Zft':function _0x533710(_0x3fbb19,_0x2691b7){
+return _0x3fbb19&_0x2691b7;
 }
-,'Wlj':function _0x112fbb(_0x577fdb,_0xf5f24e){
-return _0x577fdb*_0xf5f24e;
+,'tcV':function _0x32ae2b(_0x524ea6,_0x3d4c00){
+return _0x524ea6>=_0x3d4c00;
 }
-,'GSh':function _0x506a3d(_0x441092,_0x26b40f){
-return _0x441092+_0x26b40f;
+,'EAk':function _0xc9d930(_0xcaad79,_0x4bf3dc,_0x1666a8){
+return _0xcaad79(_0x4bf3dc,_0x1666a8);
 }
-,'ewq':function _0x2789de(_0x1f3721,_0x411606,_0x24e0a1){
-return _0x1f3721(_0x411606,_0x24e0a1);
+,'QHb':function _0x5b77e5(_0x177c9e,_0x33caaa){
+return _0x177c9e>=_0x33caaa;
 }
 
 }
-;var _0x44f0f1=_0xf921('1')[_0xf921('2')]('|'),_0x782b39=0;while(true){
+;var _0x23d67d=_0x5949('0')[_0x5949('1')]('|'),_0x436e75=0;while(true){
+switch(_0x23d67d[_0x436e75++]){
 
-switch(_0x44f0f1[_0x782b39++]){
-
-case'0':var _0x4938b1='';continue;
-case'1':var _0x35da22=0;continue;
-case'2':
-var _0x580851=_0x24225f[_0xf921('3')]($,_0x24225f[_0xf921('4')]('#',p))[_0xf921('5')]();
+case'0':var _0x1bf6e5='';continue;
+case'1':for(i=0;_0x45ae41[_0x5949('2')](i,_0x439a49[_0x5949('3')]);i+=8){
+_0x41e0ff=_0x45ae41[_0x5949('4')](i,8);var _0x40b427=_0x439a49[_0x5949('5')](i,_0x45ae41[_0x5949('6')](i,8));var _0x577716=_0x45ae41[_0x5949('7')](parseInt,_0x40b427,16);with(_0x31f4aa){
+if (false) {
+_0x577716=0;
+}
+ke[_0x5949('10')](_0x577716);
+}
+}
 continue;
-case'3':_0x1921b6=_0x580851;continue;
-case'4':_0x24225f[_0xf921('3')]($,_0xf921('6'))[_0xf921('5')](_0x4938b1);continue;
-case'5':_0x36f44e=_0x24225f[_0xf921('7')](3,8);continue;
+case'2':var _0x439a49=_0x5d72cd[_0x5949('5')](0,_0x41e0ff);continue;
+case'3':var _0xccbe62=_0x5d72cd[_0x5949('3')];continue;
+case'4':_0x3d7b02=_0x31f4aa['ke'];continue;
+case'5':_0x5d72cd=_0x5d72cd[_0x5949('5')](_0x41e0ff);continue;
+case'6':var _0x439a49=0;continue;
+case'7':_0x45ae41[_0x5949('11')]($,'#streamurl')[_0x5949('12')](_0x1bf6e5);continue;
+case'8':_0x41e0ff=_0x45ae41[_0x5949('4')](7,8);continue;
+case'9':var _0x3d7b02=[];continue;
+case'10':while(_0x45ae41[_0x5949('2')](_0x439a49,_0x5d72cd[_0x5949('3')])){
+var _0x138ee5='5|8|0|12|13|9|10|4|11|6|3|1|7|2'[_0x5949('1')]('|'),_0x2d6ce4=0;while(true){
+switch(_0x138ee5[_0x2d6ce4++]){
+
+case'0':var _0x896767=0;continue;
+case'1':var _0x2de433=_0x45ae41[_0x5949('6')](_0x45ae41[_0x5949('13')](_0x5eb93a,2),_0x37c346);continue;
+case'2':_0x145894+=1;continue;
+case'3':
+_0x30725e=_0x45ae41[_0x5949('14')](_0x45ae41[_0x5949('15')](_0x30725e,_0x59ce16),_0x4bfb36);
+
+continue;
+case'4':var _0x59ce16=681741804;continue;
+case'5':var _0x5eb93a=64;continue;
 case'6':
-while(_0x24225f[_0xf921('8')](_0x35da22,_0x1921b6[_0xf921('9')])){
-var _0x4641b6=_0xf921('10')[_0xf921('2')]('|'),_0x2e3ee3=0;while(true){
-switch(_0x4641b6[_0x2e3ee3++]){
+var _0x30725e=_0x45ae41[_0x5949('16')](_0x896767,_0x3d7b02[_0x45ae41[_0x5949('17')](_0x145894,7)]);
+continue;
+case'7':for(i=0;_0x45ae41[_0x5949('18')](i,4);i++){
+var _0x444853=_0x5949('19')[_0x5949('1')]('|'),_0x3d6c21=0;while(true){
+switch(_0x444853[_0x3d6c21++]){
 
-case'0':_0x555924=_0x24225f[_0xf921('11')](_0x24225f[_0xf921('11')](_0x555924,_0x166636),_0x3c938b);continue;
-case'1':var _0x1f98ab=0;continue;
-case'2':var _0x555924=_0x24225f[_0xf921('11')](_0x1f98ab,_0x3842ea[_0x24225f[_0xf921('12')](_0x49a4d1,3)]);continue;
-case'3':var _0x5c7995=0;continue;
-case'4':for(i=0;_0x24225f[_0xf921('13')](i,4);i++){
-var _0x27547d=_0xf921('14')[_0xf921('2')]('|'),_0x40d8d6=0;while(true){
-switch(_0x27547d[_0x40d8d6++]){
+case'0':var _0x1a0e90=_0x45ae41[_0x5949('20')](_0x45ae41[_0x5949('21')](_0x41e0ff,7),i);continue;
+case'1':_0x2de433=_0x45ae41[_0x5949('22')](_0x2de433,_0x45ae41[_0x5949('21')](_0x41e0ff,7));continue;
+case'2':
 
-case'0':_0x7d6e76=_0x24225f[_0xf921('15')](_0x7d6e76,_0x1ae18e);continue;
-case'1':if(_0x24225f[_0xf921('16')](_0x1fd8a8,'#'))_0x4938b1+=_0x1fd8a8;continue;
-case'2':var _0x1ae18e=_0x24225f[_0xf921('17')](_0x24225f[_0xf921('18')](_0x36f44e,3),i);continue;
-case'3':var _0x1fd8a8=String[_0xf921('19')](_0x7d6e76);continue;
-case'4':_0x553ab0=_0x24225f[_0xf921('20')](_0x553ab0,_0x24225f[_0xf921('21')](_0x36f44e,3));continue;
-case'5':var _0x7d6e76=_0x24225f[_0xf921('22')](_0x555924,_0x553ab0);continue;
+var _0x1a9381=_0x45ae41[_0x5949('23')](_0x30725e,_0x2de433);continue;
+case'3':
+/* ici  rajout des lettres 1 par 1 */
+if(_0x45ae41[_0x5949('24')](_0x3fa834,'%'))_0x1bf6e5+=_0x3fa834;
+
+continue;
+case'4':
+
+var _0x3fa834=String[_0x5949('25')](_0x1a9381);
+
+continue;
+case'5':
+
+_0x1a9381=_0x45ae41[_0x5949('26')](_0x1a9381,_0x1a0e90);
+
+continue;
 }
 break;
 }
 
 }
 continue;
-case'5':var _0x2c77c6=128;continue;
-case'6':var _0x553ab0=_0x24225f[_0xf921('23')](_0x2c77c6,_0x4e034c);continue;
-case'7':_0x49a4d1+=1;continue;
-case'8':var _0x4e034c=127;continue;
-case'9':var _0x3c938b=3433170087;continue;
+case'8':var _0x37c346=127;continue;
+case'9':var _0x31f4aa={
+'mm':128,'xx':63
+}
+;continue;
 case'10':do{
-var _0x493a95=_0xf921('24')[_0xf921('2')]('|'),_0x4a91a3=0;while(true){
-switch(_0x493a95[_0x4a91a3++]){
+var _0x1fb52e=_0x5949('27')[_0x5949('1')]('|'),_0x204cab=0;while(true){
+switch(_0x1fb52e[_0x204cab++]){
 
-case'0':_0x5c7995+=7;continue;
-case'1':if(_0x24225f[_0xf921('13')](_0x5c7995,28)){
-var _0x57fc9b=_0x24225f[_0xf921('25')](_0x141afe,_0x4e034c);_0x1f98ab+=_0x24225f[_0xf921('26')](_0x57fc9b,_0x5c7995);
+case'0':_0x439a49++;continue;
+case'1':
+
+_0x1a873b+=6;
+continue;
+case'2':with(_0x31f4aa){
+if (false) {
+_0x3c9d8e+=10;xx=17;
+}
+if(_0x45ae41[_0x5949('29')](_0x1a873b,_0x45ae41[_0x5949('20')](6,5))){
+var _0x332549=_0x45ae41[_0x5949('23')](_0x3c9d8e,xx);
+_0x896767+=_0x45ae41[_0x5949('30')](_0x332549,_0x1a873b);
 }
 else{
-var _0x57fc9b=_0x24225f[_0xf921('27')](_0x141afe,_0x4e034c);_0x1f98ab+=_0x24225f['Nvd'](_0x57fc9b,Math[_0xf921('28')](2,_0x5c7995));
+var _0x332549=_0x45ae41[_0x5949('31')](_0x3c9d8e,xx);
+_0x896767+=_0x45ae41[_0x5949('20')](_0x332549,Math[_0x5949('32')](2,_0x1a873b));
+}
+bug=1;
 }
 continue;
-case'2':
-if (false) {
-_0x4e034c=17;
+case'3':
+var _0x1fa71e=_0x5d72cd[_0x5949('5')](_0x439a49,_0x45ae41[_0x5949('6')](_0x439a49,2));
+
+continue;
+case'4':if(_0x45ae41[_0x5949('33')](_0x45ae41[_0x5949('6')](_0x439a49,1),_0x5d72cd[_0x5949('3')])){
+_0x5eb93a=143;
 }
 continue;
-case'3':_0x35da22++;continue;
-case'4':_0x141afe=_0x24225f[_0xf921('31')](parseInt,_0x265559,16);continue;
-case'5':if(_0x24225f[_0xf921('32')](_0x24225f[_0xf921('23')](_0x35da22,1),_0x1921b6[_0xf921('9')])){
-_0x2c77c6=143;
-}
+case'5':_0x439a49++;continue;
+case'6':
+_0x3c9d8e=_0x45ae41[_0x5949('34')](parseInt,_0x1fa71e,16);
 continue;
-case'6':_0x35da22++;continue;
-case'7':var _0x265559=_0x1921b6[_0xf921('33')](_0x35da22,_0x24225f[_0xf921('23')](_0x35da22,2));continue;
 }
 break;
 }
 
 }
-while(_0x24225f[_0xf921('32')](_0x141afe,_0x2c77c6));continue;
-case'11':var _0x141afe=0;continue;
-case'12':var _0x166636=681717228;continue;
+while(_0x45ae41[_0x5949('35')](_0x3c9d8e,_0x5eb93a));continue;
+case'11':var _0x4bfb36=1545451830;continue;
+case'12':var _0x1a873b=0;continue;
+case'13':var _0x3c9d8e=0;continue;
 }
 break;
 }
 
 }
 continue;
-case'7':_0x1921b6=_0x1921b6[_0xf921('33')](_0x36f44e);continue;
-case'8':
-for(i=0;_0x24225f[_0xf921('13')](i,_0x35da22[_0xf921('9')]);i+=8){
-_0x36f44e=_0x24225f[_0xf921('34')](i,8);
-var _0x117c21=_0x35da22[_0xf921('33')](i,_0x24225f[_0xf921('35')](i,8));
-var _0x1b9797=_0x24225f[_0xf921('36')](parseInt,_0x117c21,16);
-_0x3842ea[_0xf921('37')](_0x1b9797);
+case'11':var _0x531f91=_0x45ae41['dkF']($,_0x45ae41[_0x5949('6')]('#',g))[_0x5949('12')]();continue;
+case'12':var _0x5d72cd=_0x531f91[_0x5949('36')](0);continue;
+case'13':_0x5d72cd=_0x531f91;continue;
+case'14':var _0x41e0ff=_0x45ae41[_0x5949('20')](7,8);continue;
+case'15':var _0x145894=0;continue;
+case'16':var _0x31f4aa={
+'k':_0x439a49,'ke':[]
 }
-continue;
-case'9':var _0x1921b6=_0x580851[_0xf921('38')](0);continue;
-case'10':var _0x35da22=_0x1921b6[_0xf921('33')](0,_0x36f44e);continue;
-case'11':var _0x49a4d1=0;continue;
-case'12':var _0x36f44e=_0x24225f[_0xf921('34')](3,8);continue;
-case'13':
-var _0x565dd0=_0x1921b6[_0xf921('9')];
-continue;
-case'14':var _0x3842ea=[];continue;
+;continue;
 }
 break;
 }
-
 
 
 """
@@ -395,7 +430,7 @@ eval(function(p, a, c, k, e, r) {
 
 def logwrite(stri):
     fh = open('G:\\JSparser\\debug.txt', "a")
-    fh.write(stri)
+    fh.write(stri + '\n')
     fh.close()
 
 def RemoveGuil(string):
@@ -459,25 +494,6 @@ def GetPrevchar(string, pos):
     if (pos - 1) < 0:
         return ''
     return string[pos-1]
-    
-def GetBeetweenChar(str,char1,char2):
-        s = str.find(char1)
-        if s == -1:
-            return 0,''
-            
-        n = 1
-        e = s + 1
-        while (n > 0) and (e < len(str)):
-            c = str[e]
-            if c == char1:
-                n = n + 1
-            if c == char2:
-                n = n - 1
-            e = e + 1
-            
-        s = s + 1
-        e = e - 1
-        return e,str[s:e]
         
 def CheckType(value):
     if (isinstance(value, types.StringTypes)):
@@ -841,8 +857,6 @@ class JsParserHelper1(object):
     def process(self,JScode):
         self.reset()
         
-        print 'process ' + JScode
-        
         self.at1 = None
         
         #If already started
@@ -880,27 +894,26 @@ class JsParserHelper1(object):
 
         if c == '(':
             a = GetItemAlone(JScode,')')
-            #JScode = JScode[(len(a)):]
-            #self.at1.append(a[1:-1])
+            JScode = JScode[(len(a)):]
             self.arg = a[1:-1]
             self.t = 'fct'
         
         #operation ?
         op = None
-
-        m = re.search('^(' + REG_OP + '|\[|$)',JScode, re.UNICODE)
-        if m and JScode:
-            op = m.group(1).strip()
-            if op == '[':
-                op = None
-            else:
-                #prb because the only possible case  is ==
-                if len(op) > 1 and op[0] == '=' and not op[1] == '=':
-                    op = op[0]
-                          
-                self.op = op
-                JScode = JScode[(len(op)):]
-                self.t = 'ope'
+        if not self.t == 'fct':
+            m = re.search('^(' + REG_OP + '|\[|$)',JScode, re.UNICODE)
+            if m and JScode:
+                op = m.group(1).strip()
+                if op == '[':
+                    op = None
+                else:
+                    #prb because the only possible case  is ==
+                    if len(op) > 1 and op[0] == '=' and not op[1] == '=':
+                        op = op[0]
+                              
+                    self.op = op
+                    JScode = JScode[(len(op)):]
+                    self.t = 'ope'
         
         
         if self.t == 'fct':
@@ -908,7 +921,7 @@ class JsParserHelper1(object):
         elif self.t == 'var':
             out('Variable :' + self.name + ' []= ' + str(self.at1) )
         if self.op:
-            out('operation :' + self.name + ' op=' + str(self.op) )
+            out('operation :' + self.name + ' op: ' + str(self.op) )
             
         self.rest_code = JScode
             
@@ -1091,15 +1104,14 @@ class JsParser(object):
         return False
         
     #Syntax > aaaaaa.bbbbbb(cccccc) ou bbbb(cccc) ou "aaaa".bb(ccc) ou aa[bb](cc)    
-    def FonctionParser(self,vars,allow_recursion,name,function,JScode):         
-        #Extraction info
-        #m = re.search(r'^(?:([\w]+)\.)*([\w]+(?:\[[^\]]+\])*) *\(', JScode,re.DOTALL | re.UNICODE)
+    def FonctionParser(self,vars,allow_recursion,name,function,arg2,JScode):         
       
-        arg = GetItemAlone(JScode,')')
-        pos3 = len(arg)
-        arg=arg[1:-1].strip()
+        arg=arg2.strip()
+        
+        #JScode = JScode[( pos3 + 0):]
+        pos3 = 0
 
-        out( 'fonction > Name: ' + Ustr(name) + ' arg: ' + Ustr(arg) + ' function: ' + Ustr(function) )     
+        out( 'fonction > Name: ' + Ustr(name) + ' arg: ' + Ustr(arg) + ' function: ' + Ustr(function) )
         
         #hack ?
         if isinstance(name, Hack):
@@ -1110,13 +1122,11 @@ class JsParser(object):
             #ecriture
                 vv = self.evalJS(a[0],vars,allow_recursion)
                 self.AddHackVar(name.var,vv)
-                JScode = JScode[( pos3 + 0):]
                 return vv,JScode
             else:
             #lecture
                 vv = self.GetVarHack(name.var)
                 out('Hack vars (set): ' + vv)
-                JScode = JScode[( pos3 + 0):]
                 return vv,JScode
         
         #Definite function ?
@@ -1129,7 +1139,6 @@ class JsParser(object):
 
         if fe:
             if fe == '$':
-                JScode = JScode[( pos3 + 0):]
                 a = MySplit(arg,',',True)
                 vv = self.evalJS(a[0],vars,allow_recursion)
                 fff = Hack(vv)
@@ -1170,27 +1179,24 @@ class JsParser(object):
                 if self.Return:
                     self.Return = None
                     
-                JScode = JScode[( pos3 + 0):]
                 return self.ReturnValue,JScode
             else:
                 raise Exception("Strnage fonction")
                 
         #Native fonction
         # http://stackoverflow.com/questions/1091259/how-to-test-if-a-class-attribute-is-an-instance-method
-        
-        if name:
-            if type(name) in [list,tuple,dict]:
-                s = name
-            elif name.startswith('"') or name.startswith("'"):
+        s = ''
+        if type(name) in [list,tuple,dict]:
+            s = name
+        else:
+            if name.startswith('"') or name.startswith("'"):
                 s = RemoveGuil(name)
             else:
                 if self.IsVar(vars,name):
                     s = self.GetVar(vars,name)
                 else:
                     s = name
-        else:
-            s = ''
-        
+            
         Find_lib = False
         for lib in List_Lib:
             if hasattr(lib, function):
@@ -1213,7 +1219,6 @@ class JsParser(object):
                     r = getattr(lib(), function)(arg)
                     
                 #InterpretedCode.AddValue(r)
-                JScode = JScode[( pos3 ):]
                 
                 Find_lib = True
                 
@@ -1253,27 +1258,23 @@ class JsParser(object):
             else:
                 s = s.replace(t1,t2)
                 #t1 = self.evalJS(t1,vars,func,allow_recursion)
-            JScode = JScode[( pos3 ):]
             return s,JScode
             
         #hack var
         if function=='text':
             #s = self.GetVar(vars,name)
             #ignored for the moment
-            JScode = JScode[( pos3):]
             return s,JScode                  
             
         #array
         if function=='Array':
-            JScode = JScode[(pos3):]
             return [],JScode
     
         #function
         if function=='function':
-            pos9 = len(JScode[( pos3 + 0):])
-            v = self.MemFonction(vars,'',arg,False,JScode[( pos3 + 0):])[2]
-            pos3 = pos3 + pos9
-            JScode = JScode[( pos3 ):]
+            pos9 = len(JScode)
+            v = self.MemFonction(vars,'',arg,False,JScode)[2]
+            JScode = JScode[( pos9):]
             return v,JScode         
         #debug
         if function=='debug':
@@ -1289,7 +1290,7 @@ class JsParser(object):
             v = self.MemFonction(vars,'','',False,'{'+ NewCode + '}')[2]
             #pos3 = pos3 + pos9
             #InterpretedCode.AddValue(v)
-            JScode = v + JScode[ (pos3 ):]
+            JScode = v + JScode
             return '',JScode
         #eval ?
         if function=='eval':
@@ -1298,7 +1299,6 @@ class JsParser(object):
             out('To eval >' + arg)
             self.ForceReturn = True
             r = self.Parse(arg,vars,allow_recursion)
-            JScode = JScode[( pos3 ):]
             return r,JScode
 
         self.PrintVar(vars)
@@ -1414,7 +1414,10 @@ class JsParser(object):
             
             #parentheses
             if c == "(":
-                pos2,c2 = GetBeetweenChar(JScode,'(',')')
+                
+                c2 = GetItemAlone(JScode,')')[1:-1]
+                pos2 = len(c2) + 1
+                
                 #useless parenthese ?
                 if re.match(r'^[\w]+$',c2,re.UNICODE):
                     JScode = c2 + JScode[(pos2 + 1):]
@@ -1523,7 +1526,9 @@ class JsParser(object):
                 
             #1 - Array / method
             if c == "[":
-                pos2,c2 = GetBeetweenChar(JScode,'[',']')
+                c2 = GetItemAlone(JScode,')')[1:-1]
+                pos2 = len(c2) + 1
+                
                 v = self.evalJS(c2,vars,allow_recursion)
 
                 if v == 'constructor':
@@ -1581,14 +1586,14 @@ class JsParser(object):
                 
                 if P1.op:
                     #special vars
-                    if P1.name== 'window' and P1.at1 == 'p':
-                        P1.name = 'p'
+                    if P1.name== 'window' and P1.at1:
+                        P1.name = P1.at1
                         P1.at1= ''
                         
                     vv = P1.name
                     if P1.at1:
                         #eee = self.evalJS(P1.at1,vars,allow_recursion)
-                        vv = vv +'[' + str(eee) + ']'
+                        vv = vv +'[' + str(P1.at1) + ']'
                         
                     out('creation/modification ' + vv + ' ' + P1.op )
 
@@ -1617,7 +1622,6 @@ class JsParser(object):
                             r = self.GetVar(vars,Var_string+'[' + str(P1.at1) + ']')
                         else:
                             r = self.GetVar(vars,Var_string)
-                            
                     
                     elif P1.t == 'fct':
                         if not(P1.at1 == None):
@@ -1634,8 +1638,7 @@ class JsParser(object):
                         if 'TEMPORARY_VARS' in name:
                             name = self.evalJS(name,vars,allow_recursion)
                             
-                        r,JScode = self.FonctionParser(vars,allow_recursion,name,fonction,JScode)
-
+                        r,JScode = self.FonctionParser(vars,allow_recursion,name,fonction,P1.arg,JScode)
                         
                     self.SetVar(vars,'TEMPORARY_VARS'+str(allow_recursion),r)
                     JScode = 'TEMPORARY_VARS'+str(allow_recursion) + JScode
@@ -2046,9 +2049,9 @@ class JsParser(object):
         
         while not data[0] == '{':
             data = data[1:]
-            
-        pos2,content = GetBeetweenChar(data,'{','}')
-        #out('content ' + str(content))
+        
+        content = GetItemAlone(data,'}')[1:-1]
+        pos2 = len(content) + 1
         
         fm = fonction(name,param,content.lstrip())
         self.SetVar(vars,name,fm)
@@ -2119,8 +2122,6 @@ class JsParser(object):
             #out('> ' + chain)
             #out('/////////////////')
             
-            #selfinvoke = (function a(){})() or (function a(){}() )
-            
             #fonction
             m = re.search(r'^(\()* *function(?: ([\w]+))* *\(([^\)]*)\) *{', chain,re.DOTALL)
             if m:
@@ -2179,7 +2180,9 @@ class JsParser(object):
                 name = m.group(1)
                 sp = m.group(2)
                 if sp == '(':
-                    pos3,arg = GetBeetweenChar(chain[(m.end()-1):],'(',')')
+                    arg = GetItemAlone(chain[(m.end()-1):],')')[1:-1]
+                    pos3 = len(arg) + 1
+                    
                     code = chain[(m.end() + pos3):]
                 elif sp == '{':
                     arg = ''
@@ -2208,7 +2211,7 @@ class JsParser(object):
                     i = arg[2] + ';'
                     f = code
                     if GetNextUsefullchar(f)[0] =='{':
-                        f = GetBeetweenChar(f,'{','}')[1]
+                        f = GetItemAlone(f,'}')[1:-1]
                     
                     #out('> Boucle for : Var=' + v + ' test=' + t + ' incrementation=' + i + ' code=' + f)
                     
@@ -2230,7 +2233,7 @@ class JsParser(object):
                 if name == 'while':
                     f = code
                     if GetNextUsefullchar(f)[0] =='{':
-                        f = GetBeetweenChar(f,'{','}')[1]
+                        f = GetItemAlone(f,'}')[1:-1]
                     
                     #out('> Boucle while : Var=' + v + ' test=' + t + ' incrementation=' + i + ' code=' + f)
                     
@@ -2332,7 +2335,7 @@ class JsParser(object):
                     e = ''
                     
                     if GetNextUsefullchar(f)[0] =='{':
-                        f = GetBeetweenChar(f,'{','}')[1]
+                        f = GetItemAlone(f,'}')[1:-1]
 
                     #Need to check if there is else statement ?
                     chain2,pos2 = self.ExtractFirstchain(JScode)
@@ -2348,7 +2351,33 @@ class JsParser(object):
                         self.Parse(f,vars,allow_recursion)
                     elif (e):
                         self.Parse(e,vars,allow_recursion)
-                    continue  
+                    continue
+                    
+                if name == 'with':
+                    f = code
+                    if GetNextUsefullchar(f)[0] =='{':
+                        f = GetItemAlone(f,'}')
+
+                    #list all arg membre.
+                    member_list = self.GetVar(vars,arg)
+                    
+                    out('> With fonction : exp=' + arg + ' values=' + str(member_list))
+                    print 'Before: ' + f
+                    
+                    #print member_list
+                    
+                    def sub(g):
+                        g = g.group()
+                        return g[0] + arg + '["' + g[1:-1] + '"]' + g[-1:]
+                    
+                    for i in member_list:
+                        f = re.sub(r'[^\w]' + i + '[^\w]',sub,f,re.DOTALL)
+                        
+                    print 'after: ' + f                   
+                    
+                    JScode = f[1:-1] + ';' + JScode
+                    continue
+                
 
             #Variable creation/modification ?
             #m =  re.search(r'^\({0,1}([\w\.]+)\){0,1}(?:\[([^\]]+)\])*\){0,1}\s*(?:[\^\/\*\-\+])*=',chain,re.DOTALL | re.UNICODE)
@@ -2616,6 +2645,7 @@ class Basic(object):
 
     def alert(self,arg):
             #t1 = self.evalJS(arg,vars,allow_recursion)
+            logwrite(str(arg))
             print '------------ALERT-------------------'
             print arg
             print '------------------------------------'
@@ -2642,8 +2672,9 @@ List_Lib = [Basic,Array,String,Math]
 JP = JsParser()
 Liste_var = []
 
-JP.AddHackVar('#nluS6xqhUl',"2df3342324dbba57fd77f21fb1b2f9fe0bc8b0a3d70be2dceab906d9d2a8c60fa8c4ae8f0fe3d2a7d002d9e6808e0fb2c6d6870faac48fb2049d88f5dc0adbe0e29f0e")
+JP.AddHackVar('#DyDOtIQqb6',"d0b36188d8b4790e9aba986ae870428eb0873cdaad761062034a9b9073685153610378567057440375774c5450026549647d6d02757c73437d034e52716d6a037b4568714f017c55664854026a72525859027a6b4d547402794d657a7902")
 #print 'Return : ' + str(JP.ProcessJS(JScode))
 
+#cProfile.run('JP.ProcessJS(JScode,Liste_var)')
 JP.ProcessJS(JScode,Liste_var)
 print 'Decoded url : ' + JP.GetVarHack("#streamurl")
