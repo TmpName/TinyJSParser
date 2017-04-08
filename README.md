@@ -72,7 +72,7 @@ JP.ProcessJS(JScode,Liste_var)
 print 'Decoded url : ' + JP.GetVarHack("#streamurl")
 ```
    
-<br><br>
+<br><br><br><br>
    
 One time the JS is executed you can access at all var, for exemple with
 ```
@@ -84,7 +84,7 @@ Or using "Hackvar" to get Jquery $("#streamurl").text()
 print 'Decoded url : ' + JP.GetVarHack("#streamurl")
 ```
    
-   
+<br><br><br><br>
    
 He is not totally secure, I don't use exec() but I use eval() in restricted mode (No letter).
 
