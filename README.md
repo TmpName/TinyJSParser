@@ -72,7 +72,7 @@ JP.ProcessJS(JScode,Liste_var)
 print 'Decoded url : ' + JP.GetVarHack("#streamurl")
 ```
    
-   
+---
    
 One time the JS is executed you can access at all var, for exemple with
 ```
