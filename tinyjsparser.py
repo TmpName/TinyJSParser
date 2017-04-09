@@ -565,7 +565,6 @@ class JsParser(object):
         
         self.Break = False
         self.continu = False
-        self.ForceReturn = False
         
         self.FastEval_vars = []
         self.FastEval_recur = 0
@@ -735,12 +734,13 @@ class JsParser(object):
         arg=arg2.strip()
 
         out( 'fonction > Name: ' + Ustr(name) + ' arg: ' + Ustr(arg) + ' function: ' + Ustr(function) )
-        
+
         #hack ?
         if isinstance(name, Hack):
             a = MySplit(arg,',',True)
             
-            #function = text
+            #In this case function = text but useless ATM
+
             if a:
             #ecriture
                 vv = self.evalJS(a[0],vars,allow_recursion)
@@ -751,16 +751,17 @@ class JsParser(object):
                 vv = self.GetVarHack(name.var)
                 out('Hack vars (set): ' + vv)
                 return vv,JScode
-        
+
         #Definite function ?
         fe = self.IsFunc(vars,function)
         if not fe:
             try:
                 fe = self.IsFunc(vars, '%s["%s"]'%(name,function) )
             except:
-                pass        
+                pass
 
         if fe:
+        
             if fe == '$':
                 a = MySplit(arg,',',True)
                 vv = self.evalJS(a[0],vars,allow_recursion)
@@ -825,13 +826,14 @@ class JsParser(object):
                     s = self.GetVar(vars,name)
                 else:
                     s = name
-            
+
         Find_lib = False
         for lib in List_Lib:
             if hasattr(lib, function):
-                arg = MySplit(arg,',')
-                for i in range(len(arg)):
-                    arg[i] = self.evalJS(arg[i],vars,allow_recursion)
+                if not function == "eval":
+                    arg = MySplit(arg,',')
+                    for i in range(len(arg)):
+                        arg[i] = self.evalJS(arg[i],vars,allow_recursion)
 
                 #for fastcall
                 self.FastEval_vars = vars
@@ -854,18 +856,15 @@ class JsParser(object):
         if Find_lib:
             return r,JScode
             
-        #hack var
-        if function=='text':
-            #s = self.GetVar(vars,name)
-            #ignored for the moment
-            return s,JScode                  
-    
-        #function
-        if function=='function':
-            pos9 = len(JScode)
-            v = self.MemFonction(vars,'',arg,False,JScode)[2]
-            JScode = JScode[( pos9):]
-            return v,JScode         
+        #test, if all is ok, never reached
+        if (False):
+            #function
+            if function=='function':
+                pos9 = len(JScode)
+                v = self.MemFonction(vars,'',arg,False,JScode)[2]
+                JScode = JScode[( pos9):]
+                return v,JScode
+                
         #constructor
         if function=='Function':
             #pos9 = len(JScode[(len(m.group(0)) + pos3 + 0):])
@@ -876,14 +875,6 @@ class JsParser(object):
             #InterpretedCode.AddValue(v)
             JScode = v + JScode
             return '',JScode
-        #eval ?
-        if function=='eval':
-            out('Eval')
-            arg = RemoveGuil(arg)
-            out('To eval >' + arg)
-            self.ForceReturn = True
-            r = self.Parse(arg,vars,allow_recursion)
-            return r,JScode
 
         self.PrintVar(vars)
         raise Exception("Unknow fonction : " + function)
@@ -1050,20 +1041,20 @@ class JsParser(object):
                 JScode = JScode[1:]
                 continue 
                 
-            #new function delcaration ?
-            if JScode.startswith("function "):
-                m = re.search(r'^(\()* *function(?: ([\w]+))* *\(([^\)]*)\) *{', JScode,re.DOTALL)
+            #new function delcaration ? Need to be before the fonction/variable parser.
+            # var x = function (a, b) {return a * b};
+            # function myFunction(a, b) {return a * b};
+            if JScode.startswith("function"):
+                #m = re.search(r'^(\()* *function(?: ([\w]+))* *\(([^\)]*)\) *{', JScode,re.DOTALL)
+                m = re.search(r'^function(?: ([\w]+))* *\(([^\)]*)\) *{', JScode,re.DOTALL)
                 if m:
                     name = ''
                     openparenthesis = False
-                    if m.group(2):
-                        name = m.group(2)
                     if m.group(1):
-                        openparenthesis = True
+                        name = m.group(1)
                 
-                    replac,pos3,xyz = self.MemFonction(vars,name,m.group(3),openparenthesis,JScode)
+                    replac,pos3,v = self.MemFonction(vars,name,m.group(2),openparenthesis,JScode)
                     JScode = replac
-                    v = self.IsFunc(vars,name)
                     InterpretedCode.AddValue(v)
                     continue             
                     
@@ -1159,7 +1150,6 @@ class JsParser(object):
             P1 = JsParserHelper1('TEMPORARY_VARS'+str(allow_recursion))
             while(P1.process(JScode)):
                 JScode = P1.rest_code
-
                 r = None
                 
                 if P1.op:
@@ -1208,14 +1198,14 @@ class JsParser(object):
                         else:
                             fonction = P1.name
                             name = ''
-                            
+
                         if P1.eval:   
                             fonction = self.evalJS(fonction,vars,allow_recursion)
 
                         #hack devrait etre acive tout le temps
                         if 'TEMPORARY_VARS' in name:
                             name = self.evalJS(name,vars,allow_recursion)
-                            
+
                         r,JScode = self.FonctionParser(vars,allow_recursion,name,fonction,P1.arg,JScode)
                         
                     self.SetVar(vars,'TEMPORARY_VARS'+str(allow_recursion),r)
@@ -1600,7 +1590,8 @@ class JsParser(object):
         
 
     #(Function(arg){code})(arg2) Self invoked
-    # Function(arg){code}(arg2)  Not self invoked 
+    #(Function(arg){code}(arg2)) Self invoked
+    # Function(arg){code}(arg2)  Self invoked 
     def MemFonction(self,vars,name,parametres,openparenthesis,data):
     
         if not name:
@@ -1664,6 +1655,8 @@ class JsParser(object):
         
     def Parse(self,JScode,vars,allow_recursion=MAX_RECURSION):
     
+        print 'ok'
+    
         if allow_recursion < 0:
             raise Exception('Recursion limit reached')
             
@@ -1719,6 +1712,8 @@ class JsParser(object):
         # The real Parser
         #**********************
 
+        Parser_return = None
+        
         while (True):
         
             if self.continu:
@@ -1996,10 +1991,7 @@ class JsParser(object):
                     
             #Pas trouve, une fonction ?
             if chain.endswith(';'):
-                rrr = self.evalJS(chain[:-1],vars,allow_recursion)
-                if self.ForceReturn:
-                    self.ForceReturn = False
-                    return rrr
+                Parser_return = self.evalJS(chain[:-1],vars,allow_recursion)
 
             #hack, need to be reenabled
             #Non gere encore
@@ -2007,7 +1999,7 @@ class JsParser(object):
                 print '> ' + JScode
                 raise Exception('> ERROR : can t parse >' + chain)
             
-        return
+        return Parser_return
 
     def ProcessJS(self,JScode,vars = []):
         vars_return = []
@@ -2193,6 +2185,11 @@ class Basic(object):
         print '------------------------------------'
         raise Exception("DEBUG")        
         return
+        
+    def eval(self,arg):
+        out('To eval >' + arg)
+        r = self._JSParser.Parse(RemoveGuil(arg),self._JSParser.FastEval_vars,self._JSParser.FastEval_recur)
+        return r
        
     def Array(self,arg):
         if arg[0]:
