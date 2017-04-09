@@ -1,5 +1,5 @@
 # TinyJSParser
-Simple JavaScript parser/interpreter in python
+Simple JavaScript parser/interpreter in python in only one file.
 
 This program can parse and interpret Javascript code. For the moment it can work for AAdecode script (if you enable Unicode) and JSunpacker for exemple.
 
