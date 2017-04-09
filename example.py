@@ -210,7 +210,7 @@ case'16':var _0x31f4aa={
 }
 break;
 }
-debug();
+
 """
 
 JScode885 = """
@@ -371,7 +371,7 @@ Liste_var = []
 JP.AddHackVar('#07Hw0Iq0Y6',"b601f6becd1a6884f9a075582cb7751256e9091eea84a7f88aa02e2874526a7546034546727d7b026565745b44026f55644d1e6461535a6201454e69505a035551704a71025c4b7c654502766e617462026d6c725140027950654a0a")
 
 
-if (True):
+if (False):
     import cProfile
     cProfile.run('JP.ProcessJS(JScode,Liste_var)')
 else:
