@@ -4,15 +4,11 @@
 from tinyjsparser import JsParser
 
 
-JScodezddaz = """
-a=b=c=7;
-
-debug();
-"""
 
 JScode = """
 
-window.g='07Hw0Iq0Y6';var _0x9495=['Zft','pow','tcV','EAk','QHb','charCodeAt','11|12|13|0|14|3|2|9|16|1|4|8|5|6|15|10|7','split','xXM','length','jLa','substring','aZP','dOD','Poy','write','push','dkF','text','tjf','HIZ','WyX','faz','Gcy','ucs','2|0|5|4|3|1','dhh','pQu','eMz','ZBD','Lnk','fromCharCode','DYl','4|3|0|5|6|2|1','WOa','gzw','cBV'];(function(_0x1f55fe,_0x45ae62){
+window.g='i53KaHmJha';var _0x9495=['Zft','pow','tcV','EAk','QHb','charCodeAt','11|12|13|0|14|3|2|9|16|1|4|8|5|6|15|10|7','split','xXM','length','jLa','substring','aZP','dOD','Poy','write','push','dkF','text','tjf','HIZ','WyX','faz','Gcy','ucs','2|0|5|4|3|1','dhh','pQu','eMz','ZBD','Lnk','fromCharCode','DYl','4|3|0|5|6|2|1','WOa','gzw','cBV'];
+(function(_0x1f55fe,_0x45ae62){
 var _0x3d4039=function(_0x32de24){
 while(--_0x32de24){
 _0x1f55fe['push'](_0x1f55fe['shift']());
@@ -104,22 +100,30 @@ return _0x177c9e>=_0x33caaa;
 }
 
 }
-;var _0x23d67d=_0x5949('0')[_0x5949('1')]('|'),_0x436e75=0;while(true){
+;
+var _0x23d67d=_0x5949('0')[_0x5949('1')]('|'),_0x436e75=0;while(true){
 switch(_0x23d67d[_0x436e75++]){
 
 case'0':var _0x1bf6e5='';continue;
 case'1':for(i=0;_0x45ae41[_0x5949('2')](i,_0x439a49[_0x5949('3')]);i+=8){
 _0x41e0ff=_0x45ae41[_0x5949('4')](i,8);var _0x40b427=_0x439a49[_0x5949('5')](i,_0x45ae41[_0x5949('6')](i,8));var _0x577716=_0x45ae41[_0x5949('7')](parseInt,_0x40b427,16);with(_0x31f4aa){
-if(false){
+if (false) {
 _0x577716=0;
 }
 ke[_0x5949('10')](_0x577716);
 }
+
 }
 continue;
 case'2':var _0x439a49=_0x5d72cd[_0x5949('5')](0,_0x41e0ff);continue;
 case'3':var _0xccbe62=_0x5d72cd[_0x5949('3')];continue;
-case'4':_0x3d7b02=_0x31f4aa['ke'];continue;
+case'4':_0x3d7b02=_0x31f4aa['ke'];with(Math){
+if('toString' in sin&&sin.toString().indexOf('[native code')!=-1&&document.getElementById.toString().indexOf('[native code')==-1){
+_0x3d7b02=[];
+}
+
+}
+;continue;
 case'5':_0x5d72cd=_0x5d72cd[_0x5949('5')](_0x41e0ff);continue;
 case'6':var _0x439a49=0;continue;
 case'7':_0x45ae41[_0x5949('11')]($,'#streamurl')[_0x5949('12')](_0x1bf6e5);continue;
@@ -189,7 +193,7 @@ break;
 
 }
 while(_0x45ae41[_0x5949('35')](_0x3c9d8e,_0x5eb93a));continue;
-case'11':var _0x4bfb36=723159456;continue;
+case'11':var _0x4bfb36=1545451830;continue;
 case'12':var _0x1a873b=0;continue;
 case'13':var _0x3c9d8e=0;continue;
 }
@@ -326,32 +330,6 @@ JScodehhbdrt ="""
 })('(0(){4 1="5 6 7 8";0 2(3){9(3)}2(1)})();', 10, 10, "function|b|something|a|var|some|sample|packed|code|alert".split("|"), 0, {});
 """
 
-JScode7788 = """
-(function(){var b="some sample packed code";function something(a){alert(a)}something(b)})();
-"""
-
-
-JScode7744 ="""
-eval(function(p, a, c, k, e, r) {
-    e = String;
-    if (!''.replace(/^/, String)) {
-        while (c--) r[c] = k[c] || c;
-        k = [function(e) {
-            return r[e]
-        }];
-        e = function() {
-            return '\\w+'
-        };
-        c = 1
-    };
-
-    while (c--)
-
-        if (k[c]) p = p.replace(new RegExp('\\b' + e(c) + '\\b', 'g'), k[c]);
-
-    return p
-}('(0(){4 1="5 6 7 8";0 2(3){9(3)}2(1)})();', 10, 10, 'function|b|something|a|var|some|sample|packed|code|alert'.split('|'), 0, {}));
-"""
 
 #******************************************************************************************************************************************************
 
@@ -368,7 +346,7 @@ eval(function(p, a, c, k, e, r) {
 JP = JsParser()
 Liste_var = []
 
-JP.AddHackVar('#07Hw0Iq0Y6',"b601f6becd1a6884f9a075582cb7751256e9091eea84a7f88aa02e2874526a7546034546727d7b026565745b44026f55644d1e6461535a6201454e69505a035551704a71025c4b7c654502766e617462026d6c725140027950654a0a")
+JP.AddHackVar('#i53KaHmJha',"f3c72c888ea06b545e8f091eaf2d08384837aabe14b1cc40452aaae8547874457403434b61524f027556705154015363706a6a035d715a6f086d424c5c530143406b69097c6162557702705b73595f02756a65527c017166716d7e03")
 
 
 if (False):
@@ -379,5 +357,3 @@ else:
     
 #print 'Return : ' + str(JP.ProcessJS(JScode))
 print 'Decoded url : ' + JP.GetVarHack("#streamurl")
-
-
