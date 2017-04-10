@@ -38,6 +38,7 @@ import re
 import types
 from types import NoneType
 import time
+import math
 
 import sys
 
@@ -466,6 +467,7 @@ class JsParserHelper1(object):
         self.reset()
         self.used = False
         self.Tmp_var = tmp_var
+        self.op = None
         
     def reset(self):
         type = None
@@ -474,11 +476,15 @@ class JsParserHelper1(object):
         self.t = None
         self.arg = None
         self.rest_code = ''
-        self.op = None
+        #self.op = None
         self.eval = False
         self.property = False
       
     def process(self,JScode):
+    
+        #IDK why ?
+        if self.op:
+            return False
         self.reset()
         
         self.at1 = None
@@ -543,6 +549,9 @@ class JsParserHelper1(object):
             if self.property:
                 self.at1 = '"' + self.at1 + '"'
             out('Variable :' + self.name + ' []= ' + str(self.at1) )
+            #Exit if nothing to process
+            if (self.name == self.Tmp_var) and not self.at1 and not self.op:
+                return False
         if self.op:
             out('operation :' + self.name + ' []= ' + str(self.at1) + ' op: ' + str(self.op) )
             
@@ -631,7 +640,17 @@ class JsParser(object):
                     continue
 
             ch = string[i]
-         
+            
+            if ch == '"' and not GetPrevchar(string,i) == '\\' and not c2:
+                c1 = 1 - c1
+            if ch == "'" and not GetPrevchar(string,i) == '\\' and not c1:
+                c2 = 1 - c2
+            
+            #if we are in a chain no more thing to do than waiting for end
+            if c1 or c2:
+                stringR = stringR + ch
+                continue
+                
             if ch == '(':
                 p += 1
             if ch == ')':
@@ -648,10 +667,7 @@ class JsParser(object):
                 r = False
             if ch == '/' and prev == '=':
                 r = True
-            if ch == '"' and not GetPrevchar(string,i) == '\\' and not c2:
-                c1 = 1 - c1
-            if ch == "'" and not GetPrevchar(string,i) == '\\' and not c1:
-                c2 = 1 - c2
+
                 
             #vire espace inutile
             if ch.isspace() and not c1 and not c2:
@@ -708,6 +724,12 @@ class JsParser(object):
             #out('ERROR Extract chain without ";" > ' + string )
             return string.rstrip() + ';', i
             
+        print p
+        print a
+        print b
+        print c1
+        print c2
+        
         raise Exception("Can't extract chain " + string)
 
     #Everything Without a "Real" is False   
@@ -1152,65 +1174,49 @@ class JsParser(object):
                 JScode = P1.rest_code
                 r = None
                 
-                if P1.op:
+                if P1.t == 'var':
+                
                     #special vars
                     if P1.name== 'window' and P1.at1:
                         P1.name = RemoveGuil(P1.at1)
                         P1.at1= ''
                         
-                    vv = P1.name
+                    Var_string = P1.name
                     if P1.at1:
-                        #eee = self.evalJS(P1.at1,vars,allow_recursion)
-                        vv = "%s[%s]" % (vv, str(P1.at1) )
+                        Var_string = "%s[%s]" % (P1.name, str(P1.at1) )
                         
-                    out('creation/modification ' + vv + ' ' + P1.op )
-
-                    r,JScode = self.VarParser(vars,allow_recursion,vv,P1.op,JScode)
-                    
-                    InterpretedCode.AddValue(r)
-                    break
-                else:
-                    if P1.t == 'var':
+                    #operation / creation ?
+                    if P1.op:    
+                        out('creation/modification ' + Var_string + ' ' + P1.op )
+                        r,JScode = self.VarParser(vars,allow_recursion,Var_string,P1.op,JScode)
+                        
+                    else:
                         if not self.IsVar(vars,P1.name):
                             self.PrintVar(vars)
                             raise Exception('Variable error : ' + P1.name)
-                            
-                        #C'est fini ?
-                        if (P1.name == 'TEMPORARY_VARS'+str(allow_recursion)) and (P1.at1 == None):
-                            r = self.GetVar(vars,'TEMPORARY_VARS'+str(allow_recursion))
-                            self.InitVar(vars,'TEMPORARY_VARS'+str(allow_recursion))
-                            #JScode = JScode[(len('TEMPORARY_VARS'+str(allow_recursion))):]
-                            InterpretedCode.AddValue(r)
-                            continue
 
-                        Var_string = P1.name
-                        
-                        #hack
-                        if not P1.at1 == None:
-                            r = self.GetVar(vars,"%s[%s]" % (Var_string,str(P1.at1)) )
-                        else:
-                            r = self.GetVar(vars,Var_string)
+                        r = self.GetVar(vars,Var_string)
+                
+                elif P1.t == 'fct':
+                    if P1.at1:
+                        fonction = P1.at1
+                        name = P1.name
+                    else:
+                        fonction = P1.name
+                        name = ''
+
+                    if P1.eval:   
+                        fonction = self.evalJS(fonction,vars,allow_recursion)
+
+                    #hack, devrait etre acive tout le temps
+                    if 'TEMPORARY_VARS' in name:
+                        name = self.evalJS(name,vars,allow_recursion)
+
+                    r,JScode = self.FonctionParser(vars,allow_recursion,name,fonction,P1.arg,JScode)
                     
-                    elif P1.t == 'fct':
-                        if not(P1.at1 == None):
-                            fonction = P1.at1
-                            name = P1.name
-                        else:
-                            fonction = P1.name
-                            name = ''
-
-                        if P1.eval:   
-                            fonction = self.evalJS(fonction,vars,allow_recursion)
-
-                        #hack devrait etre acive tout le temps
-                        if 'TEMPORARY_VARS' in name:
-                            name = self.evalJS(name,vars,allow_recursion)
-
-                        r,JScode = self.FonctionParser(vars,allow_recursion,name,fonction,P1.arg,JScode)
-                        
-                    self.SetVar(vars,'TEMPORARY_VARS'+str(allow_recursion),r)
-                    JScode = 'TEMPORARY_VARS'+str(allow_recursion) + JScode
-            
+                self.SetVar(vars,'TEMPORARY_VARS'+str(allow_recursion),r)
+                JScode = 'TEMPORARY_VARS'+str(allow_recursion) + JScode
+                
             if JScode.startswith('TEMPORARY_VARS'+str(allow_recursion)):
                 r = self.GetVar(vars,'TEMPORARY_VARS'+str(allow_recursion))
                 self.InitVar(vars,'TEMPORARY_VARS'+str(allow_recursion))
@@ -1219,8 +1225,6 @@ class JsParser(object):
                 continue     
             if P1.used:
                 continue
-   
-
                 
             # --var method, HACK
             if JScode[0:2] == '--' or JScode[0:2] == '++':
@@ -1392,6 +1396,11 @@ class JsParser(object):
         for j in self.HackVars:
             if j[0] == variable:
                 return j[1]
+                
+        #search in fonction in lib, Hack again
+        for lib in List_Lib:
+            if variable == str(lib.__name__):
+                return lib
                 
         raise Exception('Variable not defined: ' + str(variable))
             
@@ -1655,8 +1664,6 @@ class JsParser(object):
         
     def Parse(self,JScode,vars,allow_recursion=MAX_RECURSION):
     
-        print 'ok'
-    
         if allow_recursion < 0:
             raise Exception('Recursion limit reached')
             
@@ -1711,6 +1718,8 @@ class JsParser(object):
         #***********************
         # The real Parser
         #**********************
+        
+        logwrite(JScode)
 
         Parser_return = None
         
@@ -1957,6 +1966,12 @@ class JsParser(object):
                             e = m2.group(1)
                     
                     #out('> Boucle if : test=' + arg + ' code=' + f + ' else=' + e)
+                    
+                    #Enormous hack
+                    if 'indexOf' in t:
+                        t = 'false'
+                        
+                        
                     if (self.CheckTrueFalse(self.evalJS(t,vars,allow_recursion))):
                         self.Parse(f,vars,allow_recursion)
                     elif (e):
@@ -1980,8 +1995,13 @@ class JsParser(object):
                         g = g.group()
                         return g[0] + arg + '["' + g[1:-1] + '"]' + g[-1:]
                     
-                    for i in member_list:
-                        f = re.sub(r'[^\w]' + i + '[^\w]',sub,f,re.DOTALL)
+                    #Hack again
+                    if type(member_list) in [type]:
+                        for i in member_list.__dict__:
+                             f = re.sub(r'[^\w]' + str(i) + '[^\w]',sub,f,re.DOTALL)
+                    else:
+                        for i in member_list:
+                            f = re.sub(r'[^\w]' + i + '[^\w]',sub,f,re.DOTALL)
                         
                     #print 'after: ' + f        
                     
@@ -2053,6 +2073,9 @@ class Math(object):
         t1 = arg[0]
         t2 = arg[1]
         return pow(t1,t2)
+        
+    def sin(self,arg):
+         return math.sin(arg[0])
 
 class String(object):
     def __init__(self,initV1,initV2=''):
