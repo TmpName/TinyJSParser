@@ -578,11 +578,17 @@ class JsParser(object):
         self.FastEval_vars = []
         self.FastEval_recur = 0
         
+        self.option_ForceTest = False
+        
                         
     def SetReturn(self,r,v):
         self.Return = True
         self.RecursionReturn = r
         self.ReturnValue = v
+        
+    def SetOption(self,option):
+        if option == 'ForceTest':
+            self.option_ForceTest = True
     
     def AddHackVar(self,name, value):
         self.HackVars.append((name,value))
@@ -723,12 +729,6 @@ class JsParser(object):
         if ';' not in string:
             #out('ERROR Extract chain without ";" > ' + string )
             return string.rstrip() + ';', i
-            
-        print p
-        print a
-        print b
-        print c1
-        print c2
         
         raise Exception("Can't extract chain " + string)
 
@@ -838,7 +838,7 @@ class JsParser(object):
         #Native fonction
         # http://stackoverflow.com/questions/1091259/how-to-test-if-a-class-attribute-is-an-instance-method
         s = ''
-        if type(name) in [list,tuple,dict]:
+        if type(name) in [list,tuple,dict,types.MethodType,NoneType]:
             s = name
         else:
             if name.startswith('"') or name.startswith("'"):
@@ -1020,9 +1020,12 @@ class JsParser(object):
             #in operator            
             if JScode[0:2] == 'in':
                 A = InterpretedCode.GetPrevious()
-                B = GetItemAlone(JScode[2:],',;')
+                B = GetItemAlone(JScode[2:],',;&|')
                 B2 = self.evalJS(B,vars,allow_recursion)
                 
+                if type(B2) in [types.MethodType,types.InstanceType]:
+                    B2 = str(B2)
+
                 if A in B2:
                     InterpretedCode.AddValue(True)
                 else:
@@ -1370,26 +1373,29 @@ class JsParser(object):
         
         for j in var:
             if j[0] == variable:
-                r = j[1]
+                k = j[1]
+                r = k
                 if not(index == None):
-                    if type(r) in [list,tuple,str]:
+                    if type(k) in [list,tuple,str]:
                         if CheckType(index) == 'Numeric':
-                            if int(index) < len(r):
-                                r = r[int(index)]
+                            if int(index) < len(k):
+                                r = k[int(index)]
                             else:
                                 r = 'undefined'
                         elif CheckType(index) == 'String':
                             index = RemoveGuil(index)
                             if index == 'length':
-                                r = len(r)
+                                r = len(k)
                             else:
                                 try:
-                                    r = r[index]
+                                    r = k[index]
                                 except:
-                                    r = r[int(index)]
-                    if type(r) in [dict]:
+                                    r = k[int(index)]
+                    elif type(k) in [dict]:
                         index = RemoveGuil(index)
-                        r = r.get(index)              
+                        r = k.get(index) 
+                    elif type(k) in [type]:
+                        r = getattr(k(self,None), index)
                 return r
                 
         #search it in hackvar ?
@@ -1398,9 +1404,9 @@ class JsParser(object):
                 return j[1]
                 
         #search in fonction in lib, Hack again
-        for lib in List_Lib:
-            if variable == str(lib.__name__):
-                return lib
+        #for lib in List_Lib:
+        #    if variable == str(lib.__name__):
+        #        return lib
                 
         raise Exception('Variable not defined: ' + str(variable))
             
@@ -1967,16 +1973,27 @@ class JsParser(object):
                     
                     #out('> Boucle if : test=' + arg + ' code=' + f + ' else=' + e)
                     
-                    #Enormous hack
-                    if 'indexOf' in t:
-                        t = 'false'
-                        
-                        
-                    if (self.CheckTrueFalse(self.evalJS(t,vars,allow_recursion))):
-                        self.Parse(f,vars,allow_recursion)
-                    elif (e):
-                        self.Parse(e,vars,allow_recursion)
-                    continue
+                    #hack, need to memorise working test in future
+                    if self.option_ForceTest:
+                        try:
+                            ttt = self.CheckTrueFalse(self.evalJS(t,vars,allow_recursion))
+                        except:
+                            from random import choice
+                            ttt = choice([True,False])
+                            #thx to come every day, to help me to find bug on this code
+                            
+                        if (ttt):
+                            self.Parse(f,vars,allow_recursion)
+                        elif (e):
+                            self.Parse(e,vars,allow_recursion)
+                        continue
+                    #normal way
+                    else:
+                        if (self.CheckTrueFalse(self.evalJS(t,vars,allow_recursion))):
+                            self.Parse(f,vars,allow_recursion)
+                        elif (e):
+                            self.Parse(e,vars,allow_recursion)
+                        continue
                     
                 if name == 'with':
                     f = code
@@ -2032,6 +2049,9 @@ class JsParser(object):
             self.Unicode = True
         
         #Special
+        vars.append(('Math',Math))
+
+        
         vars.append(('String',''))
         vars.append(('document',{'write':'ok'}))
         
@@ -2051,6 +2071,17 @@ class JsParser(object):
 #----------------------------------------------------------------------------------------------------------------------------------------
 # fonctions
 #
+
+def toStr(str):
+    def decorator(f):
+        class _temp:
+            def __call__(self, *args, **kwargs):
+                return f(self.real_self, *args, **kwargs)
+            def __str__(self):
+                return str%f.__name__
+        return _temp()
+    return decorator
+
 
 class Math(object):
     def __init__(self,initV1,initV2):
@@ -2074,8 +2105,14 @@ class Math(object):
         t2 = arg[1]
         return pow(t1,t2)
         
+    @toStr("function %s() {\n    [native code]\n}")
     def sin(self,arg):
-         return math.sin(arg[0])
+        return math.sin(arg[0])
+         
+    def __contains__(self,arg):
+        if arg in ['max','min','abs','pow','sin']:
+            return True
+        return False
 
 class String(object):
     def __init__(self,initV1,initV2=''):
@@ -2135,6 +2172,12 @@ class String(object):
             return list(self._string)
         else:
             return self._string.split(arg)
+            
+    def indexOf(self,arg):
+        start = 0
+        if len(arg) > 1:
+            start = int(arg[1])
+        return self._string.find(arg[0], start)
 
 class Array(object):
     def __init__(self,initV1,initV2=[]):
@@ -2186,6 +2229,7 @@ class Array(object):
 class Basic(object):
     def __init__(self,initV1,initV2):
         self._JSParser = initV1
+        self._name = initV2
         pass
         
     def Setting(self,vars):
@@ -2233,6 +2277,17 @@ class Basic(object):
         t1 = RemoveGuil(arg[0])
         t2 = RemoveGuil(arg[1])
         return '/' + t1 + '/' + t2
+        
+    #this fonction if for object normaly
+    def toString(self,arg):
+        t1 = arg[0]
+        try:
+            f = self._name.im_func.__name__
+        except:
+            f = "HACK'"
+        t = "function %s() {\n    [native code]\n}"%(f)
+        return t
+    
   
 
 List_Lib = [Basic,Array,String,Math]
