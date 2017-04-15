@@ -249,8 +249,15 @@ function(p,a,c,k,e,r){e=String;if(!''.replace(/^/,String)){while(c--)r[c]=k[c]||
 debug();
 """
 
+JScodexxx ="""
 
-JScodefdff ="""
+t = 'm'['constructor']['constructor'];
+k = t('return 5;')('mm');
+debug();
+
+"""
+
+JScodefgdfg ="""
 dd = /\uff40\uff4d\u00b4\uff09\uff89 ~\u253b\u2501\u253b   /["_"];
 
 o = ff = _ = 3;
@@ -275,6 +282,7 @@ ee["o"] = (ee + "_")[gg];
 ii = ee["c"] + ee["o"] + (dd + "_")[gg] + ((dd == 3) + "_")[ff] + (ee + "_")[ff + ff] + ((ff == 3) + "_")[gg] + ((ff == 3) + "_")[ff - gg] + ee["c"] + (ee + "_")[ff + ff] + ee["o"] + 
 ((ff == 3) + "_")[gg];
 ee["_"] = (o ^ _ ^ o)[ii][ii];
+
 hh = ((ff == 3) + "_")[gg] + ee.bb + (ee + "_")[ff + ff] + ((ff == 3) + "_")[o ^ _ ^ o - gg] + ((ff == 3) + "_")[gg] + (dd + "_")[gg];
 ff += gg;
 
@@ -284,12 +292,17 @@ offo = (dd + "_")[c ^ _ ^ o];
 
 ee[ii] = '"';
 
-ret = ee["_"](ee["_"](hh + ee[ii] + ee[hh] + gg + ff + gg + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + ff + (ff + gg) + ee[hh] + 
+ee["_"](ee["_"](hh + ee[ii] + ee[hh] + gg + ff + gg + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + ff + (ff + gg) + ee[hh] + 
 gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) - gg) + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ff + ee[hh] + (ff + gg) + (c ^ _ ^ o) + ee[hh] + ff + ((o ^ _ ^ o) - gg) + ee[hh] + gg + gg + (c ^ _ ^ o) + ee[hh] + 
 gg + ff + (ff + gg) + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + (ff + gg) + (ff + (o ^ _ ^ o)) + ee[hh] + 
 (ff + gg) + ff + ee[hh] + ff + (c ^ _ ^ o) + ee[hh] + gg + gg + ((o ^ _ ^ o) - gg) + ee[hh] + gg + ff + gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ee[hh] + 
 gg + ff + gg + ee[hh] + gg + ((o ^ _ ^ o) - gg) + (o ^ _ ^ o) + ee[hh] + gg + ff + (o ^ _ ^ o) + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) - gg) + ee[hh] + gg + (ff + gg) + 
 gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + (c ^ _ ^ o) + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ff + ee[hh] + ff + ((o ^ _ ^ o) - gg) + ee[hh] + (ff + gg) + gg + ee[ii])(gg))("_");
+
+
+
+
+debug();
 
 """
 
@@ -348,6 +361,8 @@ Liste_var = []
 
 JP.AddHackVar('#i53KaHmJha',"f3c72c888ea06b545e8f091eaf2d08384837aabe14b1cc40452aaae8547874457403434b61524f027556705154015363706a6a035d715a6f086d424c5c530143406b69097c6162557702705b73595f02756a65527c017166716d7e03")
 
+#JP.SetOption('ForceTest')
+
 
 if (False):
     import cProfile
@@ -355,5 +370,5 @@ if (False):
 else:
     JP.ProcessJS(JScode,Liste_var)
     
-#print 'Return : ' + str(JP.ProcessJS(JScode))
-print 'Decoded url : ' + JP.GetVarHack("#streamurl")
+print 'Return : ' + str(JP.ProcessJS(JScode))
+#print 'Decoded url : ' + JP.GetVarHack("#streamurl")
