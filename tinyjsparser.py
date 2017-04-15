@@ -264,11 +264,11 @@ class JSBuffer(object):
         if len(self.buf) >= len(self.opBuf):
             return True
         return False
-        
+    
     #Need 3 values for priority   
     def AddValue(self,value):
         out('ADD ' + Ustr(value) + ' ' + Ustr(type(value)) + ' a ' + Ustr(self.buf))
-        
+
         if not self.type:
             self.type = CheckType(value)
             self.Push(value,self.__op)
@@ -807,10 +807,13 @@ class JsParser(object):
                 #out('code de la fonction : ' + c)
                 
                 if ct:
+                    out('constructor mode')
                     #hack
                     #Make replacement
-                    JScode = "%s(%s)%s"%(n,arg,JScode)
-                    return '',JScode
+                    JScode = "%s(%s)%s"%(n,arg,JScode) + ';'
+                    
+                    NewEval = self.Parse(JScode,vars,allow_recursion)
+                    return NewEval,''
 
                 for i in a:
                     vv = self.evalJS(i,vars,allow_recursion)
@@ -823,7 +826,7 @@ class JsParser(object):
                         self.SetVar(vars,z,w)
                         List_tmpvar.append(z)
 
-                self.Parse(c,vars,allow_recursion)
+                jjj = self.Parse(c,vars,allow_recursion)
                 
                 #And delete tmp var
                 for i in List_tmpvar:
@@ -832,7 +835,9 @@ class JsParser(object):
                 if self.Return:
                     self.Return = None
                     
+                #return jjj,JScode
                 return self.ReturnValue,JScode
+                
             else:
                 raise Exception("Strnage fonction")
                 
@@ -886,14 +891,13 @@ class JsParser(object):
                 
         #constructor
         if function=='Function':
-            #pos9 = len(JScode[(len(m.group(0)) + pos3 + 0):])
-            NewCode = self.evalJS(arg,vars,allow_recursion)
+            NewCode = RemoveGuil(arg) + ';'
 
             v = self.MemFonction(vars,'','',False,'{'+ NewCode + '}')[2]
-            #pos3 = pos3 + pos9
-            #InterpretedCode.AddValue(v)
-            JScode = v + JScode
-            return '',JScode
+            JScode = v + JScode    
+            
+            NewEval = self.Parse(JScode,vars,allow_recursion)
+            return NewEval,''
 
         self.PrintVar(vars)
         raise Exception("Unknow fonction : " + function)
@@ -1120,9 +1124,8 @@ class JsParser(object):
                 #all this part is managed away but not for some rare case.
                 A = InterpretedCode.GetPrevious()
                 if not A:
-                    valueT = MySplit(c2,',')
+                    valueT = MySplit(c2,',',True)
                     JScode = JScode[(pos2):]
-                    valueT = [] #To be continued later
                     InterpretedCode.AddValue(valueT)         
                     continue
                     
@@ -1202,10 +1205,12 @@ class JsParser(object):
                     if 'TEMPORARY_VARS' in name:
                         name = self.evalJS(name,vars,allow_recursion)
 
+                    gg = fonction + '***' + P1.arg + '**' + JScode
                     r,JScode = self.FonctionParser(vars,allow_recursion,name,fonction,P1.arg,JScode)
-                
+
                 #to speed up
                 if not JScode:
+                    #It speed up but cause some TEMPORARY_VARS stay in code.
                     InterpretedCode.AddValue(r)
                     continue                    
                 #normal way
@@ -1370,6 +1375,13 @@ class JsParser(object):
                 k = j[1]
                 r = k
                 if not(index == None):
+                    #Special method
+                    if index == 'length':
+                        r = len(k)
+                        return r
+                    if index == 'constructor':
+                        return GetConstructor(k)
+                                
                     if type(k) in [list,tuple,str]:
                         if CheckType(index) == 'Numeric':
                             if int(index) < len(k):
@@ -1378,18 +1390,16 @@ class JsParser(object):
                                 r = 'undefined'
                         elif CheckType(index) == 'String':
                             index = RemoveGuil(index)
-                            if index == 'length':
-                                r = len(k)
-                            else:
-                                try:
-                                    r = k[index]
-                                except:
-                                    r = k[int(index)]
+                            try:
+                                r = k[index]
+                            except:
+                                r = k[int(index)]
                     elif type(k) in [dict]:
                         index = RemoveGuil(index)
                         r = k.get(index) 
                     elif type(k) in [type]:
                         r = getattr(k(self,None), index)
+                        
                 return r
                 
         #search it in hackvar ?
@@ -1765,14 +1775,14 @@ class JsParser(object):
                 if m:
                     self.Return = True
                     self.ReturnValue = None
-                    return
+                    return None
                 m = re.match(r'^return *([^;]+)', chain)
                 if m:
                     chain = m.group(1)
                     r = self.evalJS(chain,vars,allow_recursion)
                     self.Return = True
                     self.ReturnValue = r
-                    return
+                    return self.ReturnValue
                     
             #Variable creation/modification ?
             #m =  re.search(r'^\({0,1}([\w\.]+)\){0,1}(?:\[([^\]]+)\])*\){0,1}\s*(?:[\^\/\*\-\+])*=',chain,re.DOTALL | re.UNICODE)
@@ -2021,6 +2031,10 @@ class JsParser(object):
             #Pas trouve, une fonction ?
             if chain.endswith(';'):
                 Parser_return = self.evalJS(chain[:-1],vars,allow_recursion)
+                #hack
+                #if 'return "ok"' in str(Parser_return):
+                #    JScode = str(Parser_return)
+                #    continue
 
             #hack, need to be reenabled
             #Non gere encore
