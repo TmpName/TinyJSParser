@@ -370,5 +370,5 @@ if (False):
 else:
     JP.ProcessJS(JScode,Liste_var)
     
-print 'Return : ' + str(JP.ProcessJS(JScode))
-#print 'Decoded url : ' + JP.GetVarHack("#streamurl")
+#print 'Return : ' + str(JP.ProcessJS(JScode))
+print 'Decoded url : ' + JP.GetVarHack("#streamurl")
