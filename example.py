@@ -3,11 +3,22 @@
 
 from tinyjsparser import JsParser
 
+tmp = """
+eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('I(A(p,a,c,k,e,d){e=A(c){B c.L(F)};D(!\'\'.C(/^/,H)){E(c--){d[e(c)]=k[c]||e(c)}k=[A(e){B d[e]}];e=A(){B\'\\\\w+\'};c=1};E(c--){D(k[c]){p=p.C(J G(\'\\\\b\'+e(c)+\'\\\\b\',\'g\'),k[c])}}B p}(\'l(9(p,a,c,k,e,d){e=9(c){f c};j(!\\\'\\\'.i(/^/,m)){h(c--){d[c]=k[c]||c}k=[9(e){f d[e]}];e=9(){f\\\'\\\\\\\\w+\\\'};c=1};h(c--){j(k[c]){p=p.i(n o(\\\'\\\\\\\\b\\\'+e(c)+\\\'\\\\\\\\b\\\',\\\'g\\\'),k[c])}}f p}(\\\'2.1.0="3-4-6-5.7"\\\',8,8,\\\'q|z|x|y|v|u|r|s\\\'.t(\\\'|\\\'),0,{}))\',F,F,\'|||||||||A||||||B||E|C|D||I|H|J|G||M|N|O|K|Q|R||S|T|P\'.K(\'|\'),0,{}))',56,56,'||||||||||||||||||||||||||||||||||||function|return|replace|if|while|36|RegExp|String|eval|new|split|toString|href|75|html|location|64|acsd8d0qc8ar|window|sp|IFRAME'.split('|'),0,{}))
+"""
+
+JScodehgf ="""
+b="ee\"bb";
+
+debug();
+
+"""
 
 
-JScode = """
+JScodeppp = """
 
 window.g='i53KaHmJha';var _0x9495=['Zft','pow','tcV','EAk','QHb','charCodeAt','11|12|13|0|14|3|2|9|16|1|4|8|5|6|15|10|7','split','xXM','length','jLa','substring','aZP','dOD','Poy','write','push','dkF','text','tjf','HIZ','WyX','faz','Gcy','ucs','2|0|5|4|3|1','dhh','pQu','eMz','ZBD','Lnk','fromCharCode','DYl','4|3|0|5|6|2|1','WOa','gzw','cBV'];
+
 (function(_0x1f55fe,_0x45ae62){
 var _0x3d4039=function(_0x32de24){
 while(--_0x32de24){
@@ -249,14 +260,6 @@ function(p,a,c,k,e,r){e=String;if(!''.replace(/^/,String)){while(c--)r[c]=k[c]||
 debug();
 """
 
-JScodexxx ="""
-
-t = 'm'['constructor']['constructor'];
-k = t('return 5;')('mm');
-debug();
-
-"""
-
 JScodefgdfg ="""
 dd = /\uff40\uff4d\u00b4\uff09\uff89 ~\u253b\u2501\u253b   /["_"];
 
@@ -307,7 +310,7 @@ debug();
 """
 
 
-JScodehhbdrt ="""
+JScodedfdf ="""
 (function(s, opt_attributes, key, pairs, i, params) {
   /** @type {function (new:String, *=): string} */
   i = String;
@@ -316,6 +319,7 @@ JScodehhbdrt ="""
       /** @type {(number|string)} */
       params[key] = pairs[key] || key;
     }
+
     /** @type {Array} */
     pairs = [function(urlParam) {
       return params[urlParam];
@@ -343,6 +347,57 @@ JScodehhbdrt ="""
 })('(0(){4 1="5 6 7 8";0 2(3){9(3)}2(1)})();', 10, 10, "function|b|something|a|var|some|sample|packed|code|alert".split("|"), 0, {});
 """
 
+JScodegfg = """
+ func = function(iii) {
+    hh = (iii < 10 ? "" : func(parseInt(iii / 10))) + ((iii = iii % 10) > 35 ? String.fromCharCode(iii + 29) : iii.toString(36));
+    return hh;
+  };
+  
+ aa= func(4);
+  
+debug();
+"""
+
+
+JScode ="""
+a = (function(s, opt_attributes, key, pairs, func, params) {
+  /**
+   * @param {number} i
+   * @return {?}
+   */
+  func = function(iii) {
+    hh = (iii < opt_attributes ? "" : func(parseInt(iii / opt_attributes))) + ((iii = iii % opt_attributes) > 35 ? String.fromCharCode(iii + 29) : iii.toString(36));
+    return parseInt(hh);
+  };
+  if (!"".replace(/^/, String)) {
+    for (;key--;) {
+      params[func(key)] = pairs[key] || func(key);
+    }
+
+    /** @type {Array} */
+    pairs = [function(urlParam) {
+      return params[urlParam];
+    }];
+    /**
+     * @return {?}
+     */
+    func = function() {
+      return "\\w+";
+    };
+    /** @type {number} */
+    key = 1;
+  }
+  for (;key--;) {
+    if (pairs[key]) {
+      /** @type {string} */
+      s = s.replace(new RegExp("\\b" + func(key) + "\\b", "g"), pairs[key]);
+    }
+  }
+  return s;
+})('(0(){4 1="5 6 7 8";0 2(3){9(3)}2(1)})();', 10, 10, "function|b|something|a|var|some|sample|packed|code|alert".split("|"), 0, {});
+debug();
+"""
+
 
 #******************************************************************************************************************************************************
 
@@ -355,6 +410,16 @@ JScodehhbdrt ="""
 #my_unicode_string = unicode(s, "utf-8")
 #print my_unicode_string[3].encode('utf-8')
 #print ord(my_unicode_string[3])
+
+#Fonction en cas de probleme de raw string
+def loadRawstring(file):
+    fh = open(file, "r")
+    tmp = fh.read()
+    fh.close()
+    return tmp
+
+
+#JScode = loadRawstring('G:\\JSparser\\raw.txt')
 
 JP = JsParser()
 Liste_var = []
