@@ -14,6 +14,7 @@
 # Object
 # Globla/Local variables/function/object
 # utiliser un tableau special pr variable passe en parametrzs > clash
+# List doesn't exist in JS it s all dictionnary.
 
 
 #help
@@ -1442,10 +1443,10 @@ class JsParser(object):
         #print 'Setvar Variable =' + variable + ' value=' + str(value) + ' index=' + str(i)
 
         variable = variable.strip()
-
+        
         #If not xisting var, create it first ?
         if not self.IsVar(var,variable):
-            if (False):
+            if (True):
                 #Chain or numeric
                 if i == None:
                     var.append((variable,value))
@@ -1471,7 +1472,13 @@ class JsParser(object):
                     else:
                         var[var.index(j)] = (variable,value)
                 else:   
-                #Array 
+                #Array
+                    #hack
+                    if (isinstance(i, types.StringTypes)) and type(var[var.index(j)][1]) in [list,tuple]:
+                        ind = var.index(j)
+                        var[ind] = (variable,{})
+                        j = (variable,{})
+                    
                     if type(var[var.index(j)][1]) in [list,tuple]:
 
                         Listvalue = var[var.index(j)][1]
@@ -1489,9 +1496,10 @@ class JsParser(object):
                         var[var.index(j)] = (variable,Listvalue)
                     #dictionnary
                     elif type(var[var.index(j)][1]) in [dict]:
-                        Listvalue = var[var.index(j)][1]
-                        Listvalue[i] = value
-                        var[var.index(j)] = (variable,Listvalue)
+                        ind = var.index(j)
+                        Listvalue = var[ind][1]
+                        Listvalue[str(i)] = value
+                        var[ind] = (variable,Listvalue)
 
                 return
 
@@ -1512,7 +1520,7 @@ class JsParser(object):
         try:
             variable = variable.split('[')[0]
             variable = variable.split('.')[0]
-            print variable
+
             #Normal vars
             for j in var:
                 if j[0] == variable:
@@ -1579,18 +1587,22 @@ class JsParser(object):
                 value = self.evalJS(value,vars,allow_recursion)
             else:
                 value = self.evalJS(value,vars,allow_recursion)
-                if type(value) in [list,tuple,dict]:
+                #to optimise
+                if type(value) in [list,tuple]:
                     if index == None:
                         index = 0
                         init = True
+                elif type(value) in [dict]:
+                    if index == None:
+                        init = True                        
 
         name = name.strip()
 
         #Output for debug
         if index == None:
-            out( '> Variable in parser => ' + Ustr(name) + ' = ' + Ustr(value))
+            out( '*** Variable in parser => ' + Ustr(name) + ' = ' + Ustr(value))
         else:
-            out( '> Variable in parser => ' + Ustr(name) + '[' + Ustr(index) + ']' + ' = ' + Ustr(value))
+            out( '*** Variable in parser => ' + Ustr(name) + '[' + Ustr(index) + ']' + ' = ' + Ustr(value))
                            
         #chain
         if (isinstance(value, types.StringTypes)):
