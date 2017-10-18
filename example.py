@@ -7,15 +7,15 @@ tmp = """
 eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('I(A(p,a,c,k,e,d){e=A(c){B c.L(F)};D(!\'\'.C(/^/,H)){E(c--){d[e(c)]=k[c]||e(c)}k=[A(e){B d[e]}];e=A(){B\'\\\\w+\'};c=1};E(c--){D(k[c]){p=p.C(J G(\'\\\\b\'+e(c)+\'\\\\b\',\'g\'),k[c])}}B p}(\'l(9(p,a,c,k,e,d){e=9(c){f c};j(!\\\'\\\'.i(/^/,m)){h(c--){d[c]=k[c]||c}k=[9(e){f d[e]}];e=9(){f\\\'\\\\\\\\w+\\\'};c=1};h(c--){j(k[c]){p=p.i(n o(\\\'\\\\\\\\b\\\'+e(c)+\\\'\\\\\\\\b\\\',\\\'g\\\'),k[c])}}f p}(\\\'2.1.0="3-4-6-5.7"\\\',8,8,\\\'q|z|x|y|v|u|r|s\\\'.t(\\\'|\\\'),0,{}))\',F,F,\'|||||||||A||||||B||E|C|D||I|H|J|G||M|N|O|K|Q|R||S|T|P\'.K(\'|\'),0,{}))',56,56,'||||||||||||||||||||||||||||||||||||function|return|replace|if|while|36|RegExp|String|eval|new|split|toString|href|75|html|location|64|acsd8d0qc8ar|window|sp|IFRAME'.split('|'),0,{}))
 """
 
-JScodehgf ="""
-b="ee\"bb";
+JScodejjj ="""
+return 4;
 
 debug();
 
 """
 
 
-JScodeppp = """
+JScode1 = """
 
 window.g='i53KaHmJha';var _0x9495=['Zft','pow','tcV','EAk','QHb','charCodeAt','11|12|13|0|14|3|2|9|16|1|4|8|5|6|15|10|7','split','xXM','length','jLa','substring','aZP','dOD','Poy','write','push','dkF','text','tjf','HIZ','WyX','faz','Gcy','ucs','2|0|5|4|3|1','dhh','pQu','eMz','ZBD','Lnk','fromCharCode','DYl','4|3|0|5|6|2|1','WOa','gzw','cBV'];
 
@@ -228,7 +228,7 @@ break;
 
 """
 
-JScode885 = """
+JScode2 = """
 ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ ['_']; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ);
 (ﾟДﾟ) =(ﾟΘﾟ)= (o^_^o)/ (o^_^o);
 
@@ -243,8 +243,10 @@ JScode885 = """
 (ﾟДﾟ) ['c'] = ((ﾟДﾟ)+'_') [ (ﾟｰﾟ)+(ﾟｰﾟ)-(ﾟΘﾟ) ];
 (ﾟДﾟ) ['o'] = ((ﾟДﾟ)+'_') [ﾟΘﾟ];
 
-(ﾟoﾟ)=(ﾟДﾟ) ['c']+(ﾟДﾟ) ['o']+(ﾟωﾟﾉ +'_')[ﾟΘﾟ]+ ((ﾟωﾟﾉ==3) +'_') [ﾟｰﾟ] + ((ﾟДﾟ) +'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ ((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [(ﾟｰﾟ) - (ﾟΘﾟ)]+(ﾟДﾟ) ['c']+((ﾟДﾟ)+'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ (ﾟДﾟ) ['o']+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ];(ﾟДﾟ) ['_'] =(o^_^o) [ﾟoﾟ] [ﾟoﾟ];(ﾟεﾟ)=((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟДﾟ) .ﾟДﾟﾉ+((ﾟДﾟ)+'_') [(ﾟｰﾟ) + (ﾟｰﾟ)]+((ﾟｰﾟ==3) +'_') [o^_^o -ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟωﾟﾉ +'_') [ﾟΘﾟ];
+(ﾟoﾟ)=(ﾟДﾟ) ['c']+(ﾟДﾟ) ['o']+(ﾟωﾟﾉ +'_')[ﾟΘﾟ]+ ((ﾟωﾟﾉ==3) +'_') [ﾟｰﾟ] + ((ﾟДﾟ) +'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ ((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [(ﾟｰﾟ) - (ﾟΘﾟ)]+(ﾟДﾟ) ['c']+((ﾟДﾟ)+'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ (ﾟДﾟ) ['o']+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ];
+(ﾟДﾟ) ['_'] =(o^_^o) [ﾟoﾟ] [ﾟoﾟ];
 
+(ﾟεﾟ)=((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟДﾟ) .ﾟДﾟﾉ+((ﾟДﾟ)+'_') [(ﾟｰﾟ) + (ﾟｰﾟ)]+((ﾟｰﾟ==3) +'_') [o^_^o -ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟωﾟﾉ +'_') [ﾟΘﾟ];
 
 (ﾟｰﾟ)+=(ﾟΘﾟ);
 (ﾟДﾟ)[ﾟεﾟ]='\\';
@@ -253,6 +255,7 @@ JScode885 = """
 (ﾟДﾟ) [ﾟoﾟ]='\"';
 
 (ﾟДﾟ) ['_'] ( (ﾟДﾟ) ['_'] (ﾟεﾟ+(ﾟДﾟ)[ﾟoﾟ]+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟΘﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ ((ﾟｰﾟ) + (o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟΘﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) +(o^_^o))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ (ﾟｰﾟ)+ (o^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (c^_^o)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟΘﾟ)+ ((o^_^o) +(o^_^o))+ (ﾟｰﾟ)+ (ﾟДﾟ)[ﾟεﾟ]+(ﾟｰﾟ)+ ((o^_^o) - (ﾟΘﾟ))+ (ﾟДﾟ)[ﾟεﾟ]+((ﾟｰﾟ) + (ﾟΘﾟ))+ (ﾟΘﾟ)+ (ﾟДﾟ)[ﾟoﾟ]) (ﾟΘﾟ)) ('_');
+
 """
 
 JScode7521 ="""
@@ -260,7 +263,9 @@ function(p,a,c,k,e,r){e=String;if(!''.replace(/^/,String)){while(c--)r[c]=k[c]||
 debug();
 """
 
-JScodefgdfg ="""
+
+
+JScode ="""
 dd = /\uff40\uff4d\u00b4\uff09\uff89 ~\u253b\u2501\u253b   /["_"];
 
 o = ff = _ = 3;
@@ -275,7 +280,6 @@ ee = {
   "cc" : (dd + "_")[o ^ _ ^ o - gg],
   "bb" : ((ff == 3) + "_")[ff]
 };
-
 
 ee[gg] = ((dd == 3) + "_")[c ^ _ ^ o];
 ee["c"] = (ee + "_")[ff + ff - gg];
@@ -302,15 +306,12 @@ gg + ff + (ff + gg) + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + (ff + gg) + f
 gg + ff + gg + ee[hh] + gg + ((o ^ _ ^ o) - gg) + (o ^ _ ^ o) + ee[hh] + gg + ff + (o ^ _ ^ o) + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) - gg) + ee[hh] + gg + (ff + gg) + 
 gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + (c ^ _ ^ o) + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ff + ee[hh] + ff + ((o ^ _ ^ o) - gg) + ee[hh] + (ff + gg) + gg + ee[ii])(gg))("_");
 
-
-
-
 debug();
 
 """
 
 
-JScodedfdf ="""
+JScodedgdf ="""
 (function(s, opt_attributes, key, pairs, i, params) {
   /** @type {function (new:String, *=): string} */
   i = String;
@@ -347,19 +348,8 @@ JScodedfdf ="""
 })('(0(){4 1="5 6 7 8";0 2(3){9(3)}2(1)})();', 10, 10, "function|b|something|a|var|some|sample|packed|code|alert".split("|"), 0, {});
 """
 
-JScodegfg = """
- func = function(iii) {
-    hh = (iii < 10 ? "" : func(parseInt(iii / 10))) + ((iii = iii % 10) > 35 ? String.fromCharCode(iii + 29) : iii.toString(36));
-    return hh;
-  };
-  
- aa= func(4);
-  
-debug();
-"""
 
-
-JScode ="""
+JScode3 ="""
 a = (function(s, opt_attributes, key, pairs, func, params) {
   /**
    * @param {number} i
@@ -403,6 +393,7 @@ debug();
 
 
 #main
+#https://stackoverflow.com/questions/30923819/why-python-2-7-on-windows-need-a-space-before-unicode-character-when-print
 
 
 # -*- coding: utf-8 -*- 
@@ -410,6 +401,16 @@ debug();
 #my_unicode_string = unicode(s, "utf-8")
 #print my_unicode_string[3].encode('utf-8')
 #print ord(my_unicode_string[3])
+#print s
+#hh(mm)
+
+# 0 - debug
+# 1 - openload
+# 2 - AAdecode
+# 3 - Unpaccker
+# 4 - AAdecode in file
+
+TEST = 2
 
 #Fonction en cas de probleme de raw string
 def loadRawstring(file):
@@ -418,16 +419,32 @@ def loadRawstring(file):
     fh.close()
     return tmp
 
+if TEST == 1:
+    JScode = JScode1
+if TEST == 2:
+    JScode = JScode2
+    JScode = unicode(JScode, "utf-8")
+if TEST == 3:
+    JScode = JScode3
+if TEST == 4:
+    import codecs
+    with codecs.open('G:\\JSparser\\raw.txt','rb',encoding='utf16') as f:
+        JScode = f.read()
+    #not working yet
+    #JScode = loadRawstring('G:\\JSparser\\raw.txt')
+    #JScode = JScode.strip().encode('utf-8')
+    
+    
+    
 
-#JScode = loadRawstring('G:\\JSparser\\raw.txt')
 
 JP = JsParser()
 Liste_var = []
 
-JP.AddHackVar('#i53KaHmJha',"f3c72c888ea06b545e8f091eaf2d08384837aabe14b1cc40452aaae8547874457403434b61524f027556705154015363706a6a035d715a6f086d424c5c530143406b69097c6162557702705b73595f02756a65527c017166716d7e03")
+if TEST == 1:
+    JP.AddHackVar('#i53KaHmJha',"f3c72c888ea06b545e8f091eaf2d08384837aabe14b1cc40452aaae8547874457403434b61524f027556705154015363706a6a035d715a6f086d424c5c530143406b69097c6162557702705b73595f02756a65527c017166716d7e03")
 
 #JP.SetOption('ForceTest')
-
 
 if (False):
     import cProfile
@@ -436,4 +453,10 @@ else:
     JP.ProcessJS(JScode,Liste_var)
     
 #print 'Return : ' + str(JP.ProcessJS(JScode))
-print 'Decoded url : ' + JP.GetVarHack("#streamurl")
+
+if TEST == 1:
+    print 'Decoded url : ' + JP.GetVarHack("#streamurl")
+if TEST == 2:
+    print 'return : ' + JP.LastEval.decode('string-escape')
+if TEST == 4:
+    print 'return : ' + JP.LastEval.decode('string-escape')
