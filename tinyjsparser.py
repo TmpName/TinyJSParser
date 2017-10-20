@@ -275,7 +275,7 @@ class JSBuffer(object):
     #Need 3 values for priority   
     def AddValue(self,value):
         if DEBUG:
-            out('ADD ' + Ustr(value) + ' (' + Ustr(type(value)) + ') a ' + Ustr(self.buf))
+            out('ADD (operator=' + self.__op + ')  ' + Ustr(value) + ' (' + Ustr(type(value)) + ') a ' + Ustr(self.buf))
 
         if not self.type:
             self.type = CheckType(value)
@@ -285,9 +285,8 @@ class JSBuffer(object):
         if not self.__op:
             out( 'op ' + str(self.opBuf) + ' - buff ' +str(self.buf))
             raise Exception("Missing operator")
-            
+
         self.Push(value,self.__op)
-        self.__op = ''
     
     def GetPrevious(self):
         ret = None
@@ -394,6 +393,8 @@ class JSBuffer(object):
 
         self.buf.append(value)
         self.opBuf.append(op)
+        self.__op = ''
+        
         return
 
     def SpecialStr(self,value):
@@ -809,7 +810,7 @@ class JsParser(object):
                 fe = self.IsFunc(vars, '%s["%s"]'%(name,function) )
             except:
                 pass
-
+                
         if fe:
         
             if fe == '$':
@@ -1029,15 +1030,16 @@ class JsParser(object):
                 JScode = JScode[(pos2):]
                 
                 if re.search(REG_OP,c2, re.UNICODE):
+                #if not re.search('^=[^=]',JScode, re.UNICODE):
                     #usefull parenthses
                     v = self.evalJS(c2,vars,allow_recursion)
                     self.SetVar(vars,'TEMPORARY_VARS'+str(allow_recursion),v)
                     JScode = 'TEMPORARY_VARS'+str(allow_recursion) + JScode
                 else:
-                    print 'useles'
-                    out( c2 )
+                    #print 'useless'
                     #useless parenthses
                     JScode = c2 + JScode
+                    continue
                 
             #remove "useless" code
             if JScode.startswith('new '):
@@ -1458,8 +1460,6 @@ class JsParser(object):
                                 except:
                                     return False # To check
                     elif type(k) in [dict]:
-                        print 'ok3'
-
                         index = RemoveGuil(index)
                         if CheckType(index) == 'Numeric':
                             index  = str(index)
@@ -1468,8 +1468,7 @@ class JsParser(object):
                         #    index = unicode(index, "utf-8")
                         
                         r = k.get(index)
-                        print r# bug here r = none
-                        print j[1]
+
                     elif type(k) in [type]:
                         r = getattr(k(self,None), index)
                         
@@ -1634,7 +1633,6 @@ class JsParser(object):
                 value = self.evalJS(value,vars,allow_recursion)
             else:
                 value = self.evalJS(value,vars,allow_recursion)
-                print '///////' + str(value)
                 #to optimise
                 if type(value) in [list,tuple]:
                     if index == None:
