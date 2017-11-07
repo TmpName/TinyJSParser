@@ -279,14 +279,14 @@ class JSBuffer(object):
 
         if not self.type:
             self.type = CheckType(value)
-            self.Push(value,self.__op)
+            self.Push(value)
             return       
          
         if not self.__op:
             out( 'op ' + str(self.opBuf) + ' - buff ' +str(self.buf))
             raise Exception("Missing operator")
 
-        self.Push(value,self.__op)
+        self.Push(value)
     
     def GetPrevious(self):
         ret = None
@@ -386,13 +386,13 @@ class JSBuffer(object):
             raise Exception("Can't compute")
     
     #on decale tout
-    def Push(self,value,op):
+    def Push(self,value):
         
         if len(self.buf) > 1:
             self.Compute()
 
         self.buf.append(value)
-        self.opBuf.append(op)
+        self.opBuf.append(self.__op)
         self.__op = ''
         
         return
@@ -1444,6 +1444,7 @@ class JsParser(object):
                                 return GetConstructor(k)
                         else:
                             return GetConstructor(k)
+                    # normal one
                     if type(k) in [list,tuple,str,unicode]:
                         if CheckType(index) == 'Numeric':
                             if int(index) < len(k):
@@ -2201,6 +2202,9 @@ class String(object):
 
     def length(self,arg):
         return len(self._string)
+        
+    def reverse(self,arg):
+        return self._string[::-1]
 
     def substring(self,arg):
             p1 = arg[0]
