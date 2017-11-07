@@ -3,12 +3,10 @@
 
 from tinyjsparser import JsParser
 
-tmp = """
-eval(function(p,a,c,k,e,r){e=function(c){return(c<a?'':e(parseInt(c/a)))+((c=c%a)>35?String.fromCharCode(c+29):c.toString(36))};if(!''.replace(/^/,String)){while(c--)r[e(c)]=k[c]||e(c);k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('I(A(p,a,c,k,e,d){e=A(c){B c.L(F)};D(!\'\'.C(/^/,H)){E(c--){d[e(c)]=k[c]||e(c)}k=[A(e){B d[e]}];e=A(){B\'\\\\w+\'};c=1};E(c--){D(k[c]){p=p.C(J G(\'\\\\b\'+e(c)+\'\\\\b\',\'g\'),k[c])}}B p}(\'l(9(p,a,c,k,e,d){e=9(c){f c};j(!\\\'\\\'.i(/^/,m)){h(c--){d[c]=k[c]||c}k=[9(e){f d[e]}];e=9(){f\\\'\\\\\\\\w+\\\'};c=1};h(c--){j(k[c]){p=p.i(n o(\\\'\\\\\\\\b\\\'+e(c)+\\\'\\\\\\\\b\\\',\\\'g\\\'),k[c])}}f p}(\\\'2.1.0="3-4-6-5.7"\\\',8,8,\\\'q|z|x|y|v|u|r|s\\\'.t(\\\'|\\\'),0,{}))\',F,F,\'|||||||||A||||||B||E|C|D||I|H|J|G||M|N|O|K|Q|R||S|T|P\'.K(\'|\'),0,{}))',56,56,'||||||||||||||||||||||||||||||||||||function|return|replace|if|while|36|RegExp|String|eval|new|split|toString|href|75|html|location|64|acsd8d0qc8ar|window|sp|IFRAME'.split('|'),0,{}))
-"""
 
-JScodejjj ="""
-return 4;
+JScode ="""
+a = "abcd";
+a = a.split("c").reverse().join('+');
 
 debug();
 
@@ -258,178 +256,6 @@ JScode2 = """
 
 """
 
-JScode7521 ="""
-function(p,a,c,k,e,r){e=String;if(!''.replace(/^/,String)){while(c--)r[c]=k[c]||c;k=[function(e){return r[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('(0(){4 1="5 6 7 8";0 2(3){9(3)}2(1)})();',10,10,'function|b|something|a|var|some|sample|packed|code|alert'.split('|'),0,{});
-debug();
-"""
-
-JScodedf = """
-a=(b)=c=7;
-debug();
-"""
-
-JScode="""
-aa = /\uff40\uff4d\u00b4\uff09\uff89 ~\u253b\u2501\u253b  /["_"];
-/** @type {number} */
-o = bb = _ = 3;
-/** @type {number} */
-c = cc = bb - bb;
-/** @type {number} */
-ff = cc = (o ^ _ ^ o) / (o ^ _ ^ o);
-ff = {
-  "cc" : "_",
-  "aa" : ((aa == 3) + "_")[cc],
-  "dd" : (aa + "_")[o ^ _ ^ o - cc],
-  "ee" : ((bb == 3) + "_")[bb]
-};
-ff[cc] = ((aa == 3) + "_")[c ^ _ ^ o];
-ff["c"] = (ff + "_")[bb + bb - cc];
-ff["o"] = (ff + "_")[cc];
-gg = ff["c"] + ff["o"] + (aa + "_")[cc] + ((aa == 3) + "_")[bb] + (ff + "_")[bb + bb] + ((bb == 3) + "_")[cc] + ((bb == 3) + "_")[bb - cc] + ff["c"] + (ff + "_")[bb + bb] + ff["o"] + 
-((bb == 3) + "_")[cc];
-ff["_"] = (o ^ _ ^ o)[gg][gg];
-hh = ((bb == 3) + "_")[cc] + ff.ee + (ff + "_")[bb + bb] + ((bb == 3) + "_")[o ^ _ ^ o - cc] + ((bb == 3) + "_")[cc] + (aa + "_")[cc];
-bb += cc;
-/** @type {string} */
-ff[hh] = "\\";
-
-/** @type {string} */
-ff[gg] = '"';
-
-res =  ff[gg] + ff[hh] + (-cc - cc + (o ^ _ ^ o) - (-bb + bb)) + (-(o ^ _ ^ o) + cc + bb + cc + (cc + bb - (o ^ _ ^ o) + cc)) + (cc - (o ^ _ ^ o) + bb + cc + (cc - 
-(c ^ _ ^ o)) + (bb + cc - (o ^ _ ^ o) + cc)) + ff[hh] + (-(-(o ^ _ ^ o) + cc + cc + bb) + (bb + (c ^ _ ^ o))) + (bb - (c ^ _ ^ o) + (-(c ^ _ ^ o) + cc)) + (-(-cc + cc) + (bb - (o ^ _ ^ o))) + ff[hh] + (-(-cc - cc + 
-(o ^ _ ^ o)) - (-(o ^ _ ^ o) + bb) + (-(o ^ _ ^ o) + cc + cc + bb)) + (bb + (c ^ _ ^ o) + (-(o ^ _ ^ o) + bb)) + (cc + cc + bb - (o ^ _ ^ o) + (-(o ^ _ ^ o) + bb + cc + cc)) + ff[hh] + (-(c ^ _ ^ o) + cc - (bb - bb)) + (-(c ^ _ ^ 
-o) + bb - (-(o ^ _ ^ o) + (o ^ _ ^ o))) + (-(c ^ _ ^ o) + bb - (-cc + cc)) + ff[hh] + (-(c ^ _ ^ o) + (o ^ _ ^ o) - (bb - (o ^ _ ^ o)) - (-(c ^ _ ^ o) + cc)) + (-(o ^ _ ^ o) + bb + (cc - (o ^ _ ^ o) + bb + cc) + (-(c ^ _ ^ o) + cc)) + ((c ^ _ ^ o) + bb + (bb - 
-(c ^ _ ^ o)) - ((o ^ _ ^ o) - cc - cc)) + ff[hh] + (-((o ^ _ ^ o) - (o ^ _ ^ o)) + (-(o ^ _ ^ o) + bb)) + (bb - (c ^ _ ^ o) + ((o ^ _ ^ o) - (c ^ _ ^ o)) - (-(c ^ _ ^ o) + cc)) + ((o ^ _ ^ o) + cc + (cc + bb - (o ^ _ ^ o) + cc)) + ff[hh] + (-cc + (o ^ _ ^ o) - cc + 
-(cc + bb + cc - (o ^ _ ^ o)) + (bb - (o ^ _ ^ o))) + ((o ^ _ ^ o) + cc - ((o ^ _ ^ o) - cc - cc) + (-(o ^ _ ^ o) + bb + cc + cc)) + ff[hh] + ((o ^ _ ^ o) - cc - cc - ((o ^ _ ^ o) - (o ^ _ ^ o))) + (-cc - cc + (o ^ _ ^ o) + (bb - 
-(o ^ _ ^ o)) + (-(c ^ _ ^ o) + (o ^ _ ^ o))) + (-(cc - cc) + (-(c ^ _ ^ o) + bb)) + ff[hh] + ((o ^ _ ^ o) - cc - cc - ((c ^ _ ^ o) - (c ^ _ ^ o))) + (-(c ^ _ ^ o) + cc + ((o ^ _ ^ o) - cc - cc) + (-(o ^ _ ^ o) + cc + bb + cc)) + (bb - (c ^ _ ^ o) + (bb + (c ^ _ ^ 
-o)) - (cc - (c ^ _ ^ o))) + ff[hh] + (-((o ^ _ ^ o) - (o ^ _ ^ o)) + (-(c ^ _ ^ o) + cc)) + (-(c ^ _ ^ o) + bb - (-bb + bb)) + ((o ^ _ ^ o) - (c ^ _ ^ o) - (-bb + bb)) + ff[hh] + (-(-(c ^ _ ^ o) + (c ^ _ ^ o)) + (-cc - cc + (o ^ _ ^ o))) + (bb + cc - (o ^ _ ^ o) + 
-cc + (cc - (c ^ _ ^ o))) + (bb + (c ^ _ ^ o) - ((o ^ _ ^ o) - (c ^ _ ^ o))) + ff[hh] + (-(-(c ^ _ ^ o) + (o ^ _ ^ o)) + (bb - (c ^ _ ^ o))) + (bb - (c ^ _ ^ o) - (-(c ^ _ ^ o) + cc) + ((o ^ _ ^ o) - (c ^ _ ^ o))) + (bb - bb + (bb - (c ^ _ ^ o))) + ff[hh] + (-(cc - (c ^ _ ^ o)) - 
-(-(o ^ _ ^ o) + bb) + ((o ^ _ ^ o) - (c ^ _ ^ o))) + ((o ^ _ ^ o) - (c ^ _ ^ o) - (-(c ^ _ ^ o) + cc) + (-(c ^ _ ^ o) + (o ^ _ ^ o))) + (-(-cc - cc + (o ^ _ ^ o)) - (-(c ^ _ ^ o) + cc) + (cc - (o ^ _ ^ o) + cc + bb)) + ff[hh] + (-(-cc - cc + (o ^ _ ^ o)) - (-(o ^ _ ^ o) + bb) + ((o ^ _ ^ o) - 
-(c ^ _ ^ o))) + (bb - (o ^ _ ^ o) + (cc + (o ^ _ ^ o))) + (cc + (o ^ _ ^ o) + ((o ^ _ ^ o) + cc) - (-cc - cc + (o ^ _ ^ o))) + ff[hh] + (-(cc - cc) + (-(o ^ _ ^ o) + bb)) + (bb - (o ^ _ ^ o) + (-(c ^ _ ^ o) + bb)) + (cc - (o ^ _ ^ o) + bb + cc + 
-(-(o ^ _ ^ o) + cc + cc + bb)) + ff[hh] + (-(o ^ _ ^ o) + bb + (-(c ^ _ ^ o) + cc) + ((o ^ _ ^ o) - (c ^ _ ^ o))) + (-(o ^ _ ^ o) + cc + bb + cc + (-(o ^ _ ^ o) + cc + bb + cc)) + ff[hh] + (-(-(c ^ _ ^ o) + (o ^ _ ^ o)) + (cc + (o ^ _ ^ o))) + (-(o ^ 
-_ ^ o) + bb + cc + cc + (-cc - cc + (o ^ _ ^ o)) + (bb - (o ^ _ ^ o))) + (bb + cc - (o ^ _ ^ o) + cc - (cc + bb - (o ^ _ ^ o) + cc)) + ff[hh] + (bb + (c ^ _ ^ o) - (cc + cc + bb - (o ^ _ ^ o))) + (-(o ^ _ ^ o) + bb + 
-(-cc - cc + (o ^ _ ^ o)) + ((o ^ _ ^ o) + cc)) + ((c ^ _ ^ o) + bb + (bb - (o ^ _ ^ o)) - ((o ^ _ ^ o) - (c ^ _ ^ o))) + ff[hh] + (-(-cc + (o ^ _ ^ o) - cc) - (-(o ^ _ ^ o) + bb) + (-(c ^ _ ^ o) + (o ^ _ ^ o))) + ((c ^ _ ^ o) + bb + (cc - cc)) + (-(c ^ _ ^ o) + (o ^ _ ^ o) + (-(o ^ _ ^ o) + bb) + 
-((o ^ _ ^ o) - cc - cc)) + ff[hh] + (-(-(c ^ _ ^ o) + (c ^ _ ^ o)) + (cc - (c ^ _ ^ o))) + (-(c ^ _ ^ o) + (c ^ _ ^ o) + (bb + (c ^ _ ^ o))) + (-(c ^ _ ^ o) + cc + (-cc + (o ^ _ ^ o) - cc) + (bb - (c ^ _ ^ o))) + ff[hh] + (bb - (c ^ _ ^ o) + (-cc + cc)) + (-(c ^ 
-_ ^ o) + (c ^ _ ^ o) - (-(c ^ _ ^ o) + (c ^ _ ^ o))) + ff[hh] + ((o ^ _ ^ o) - (c ^ _ ^ o) + (-cc + (o ^ _ ^ o) - cc) + (cc - (o ^ _ ^ o) + cc + bb)) + (cc + bb - (o ^ _ ^ o) + cc + (cc + cc - (o ^ _ ^ o) + bb) - (bb - (o ^ _ ^ o))) + ff[hh] + (bb - 
-(c ^ _ ^ o) - ((c ^ _ ^ o) - (c ^ _ ^ o))) + (-(c ^ _ ^ o) + bb - ((o ^ _ ^ o) + cc)) + ff[hh] + (cc - cc + (-(c ^ _ ^ o) + bb)) + (cc + (o ^ _ ^ o) + (-cc + (o ^ _ ^ o) - cc) - (cc + cc + bb - (o ^ _ ^ o))) + ff[hh] + (-cc - cc + 
-(o ^ _ ^ o) + ((o ^ _ ^ o) - (c ^ _ ^ o)) + (-cc - cc + (o ^ _ ^ o))) + (bb + (c ^ _ ^ o) + (bb - (c ^ _ ^ o)) - (-(o ^ _ ^ o) + bb)) + ff[hh] + ((o ^ _ ^ o) + cc + (-cc + (o ^ _ ^ o) - cc)) + (-((o ^ _ ^ o) - cc - cc) + (-(c ^ _ ^ o) + bb) + ((o ^ _ ^ o) + cc)) + ff[hh] + 
-(cc - (c ^ _ ^ o) - (-(o ^ _ ^ o) + (o ^ _ ^ o))) + (cc + cc + bb - (o ^ _ ^ o) + (bb + (c ^ _ ^ o)) - (-(c ^ _ ^ o) + cc)) + ((c ^ _ ^ o) + bb + (bb + (c ^ _ ^ o)) - ((o ^ _ ^ o) - cc - cc)) + ff[hh] + (-(c ^ _ ^ o) + cc - (-bb + bb)) + (bb + (c ^ 
-_ ^ o) - (-(o ^ _ ^ o) + bb) + (-(c ^ _ ^ o) + (o ^ _ ^ o))) + ((o ^ _ ^ o) - (c ^ _ ^ o) + (cc - (c ^ _ ^ o)) + ((o ^ _ ^ o) - (c ^ _ ^ o))) + ff[hh] + (bb + cc + cc - (o ^ _ ^ o) - (-(c ^ _ ^ o) + cc) - (-cc + (o ^ _ ^ o) - cc)) + (cc + bb - (o ^ _ ^ o) + cc - (bb - (o ^ _ ^ 
-o)) + (cc + (o ^ _ ^ o))) + (-(o ^ _ ^ o) + bb + (cc - (o ^ _ ^ o) + bb + cc) + (bb + cc - (o ^ _ ^ o) + cc)) + ff[hh] + (bb - (c ^ _ ^ o) + ((o ^ _ ^ o) - cc - cc)) + (bb - (o ^ _ ^ o) + (cc + (o ^ _ ^ o)) + (-(o ^ _ ^ o) + bb)) + ff[hh] + 
-(-(-(o ^ _ ^ o) + bb + cc + cc) + (cc + (o ^ _ ^ o))) + ((o ^ _ ^ o) - cc - cc + (bb - (o ^ _ ^ o)) + ((o ^ _ ^ o) + cc)) + (-(o ^ _ ^ o) + bb + (bb - (c ^ _ ^ o)) - (cc + cc + bb - (o ^ _ ^ o)) + (cc - (c ^ _ ^ o))) + ff[hh] + ((o ^ _ ^ o) - (c ^ 
-_ ^ o) - (cc - (c ^ _ ^ o)) - (cc - (c ^ _ ^ o))) + (-cc - cc + (o ^ _ ^ o) + (bb - (c ^ _ ^ o)) + (-(o ^ _ ^ o) + bb)) + (-(-(o ^ _ ^ o) + cc + bb + cc) + (-(c ^ _ ^ o) + (o ^ _ ^ o))) + ff[hh] + (-((o ^ _ ^ o) - (o ^ _ ^ o)) + (-cc + (o ^ _ ^ o) - cc)) + (cc - (c ^ _ ^ o) + 
-((o ^ _ ^ o) - (c ^ _ ^ o))) + (-cc - cc + (o ^ _ ^ o) + (-(c ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) - cc - cc)) + ff[hh] + (-(-bb + bb) + ((o ^ _ ^ o) - cc - cc)) + (-(-(c ^ _ ^ o) + (c ^ _ ^ o)) + (-(c ^ _ ^ o) + bb)) + (-(c ^ _ ^ o) + bb + (-cc + (o ^ _ ^ o) - cc)) + ff[hh] + 
-(-(c ^ _ ^ o) + (o ^ _ ^ o) - (cc - (c ^ _ ^ o)) - (-cc - cc + (o ^ _ ^ o))) + (-(-cc + cc) + (-(c ^ _ ^ o) + bb)) + (cc - (c ^ _ ^ o) + (cc + bb - (o ^ _ ^ o) + cc)) + ff[hh] + (bb + (c ^ _ ^ o) - ((o ^ _ ^ o) - (c ^ _ ^ o))) + (-(c ^ _ ^ o) + (o ^ _ ^ o) + (bb + cc + 
-cc - (o ^ _ ^ o))) + (-(c ^ _ ^ o) + (o ^ _ ^ o) + (bb + cc - (o ^ _ ^ o) + cc)) + ff[hh] + (-(bb - bb) + (-(c ^ _ ^ o) + cc)) + (bb + (c ^ _ ^ o) + (-(o ^ _ ^ o) + bb)) + (-(-(c ^ _ ^ o) + cc) - (bb - (o ^ _ ^ o)) + ((o ^ _ ^ o) - (c ^ _ ^ o))) + ff[hh] + (-(-(c ^ 
-_ ^ o) + (o ^ _ ^ o)) + (-(c ^ _ ^ o) + bb)) + (cc + cc - (o ^ _ ^ o) + bb + (-(c ^ _ ^ o) + cc)) + (-(c ^ _ ^ o) + (o ^ _ ^ o) + (-(c ^ _ ^ o) + cc)) + ff[hh] + (-(c ^ _ ^ o) + cc + ((c ^ _ ^ o) + bb)) + (bb - (o ^ _ ^ o) + (cc + (o ^ _ ^ o)) + (cc - (c ^ _ ^ o))) + ff[hh] + 
-(-(-(o ^ _ ^ o) + (o ^ _ ^ o)) + (cc - (c ^ _ ^ o))) + (-(c ^ _ ^ o) + (o ^ _ ^ o) + ((o ^ _ ^ o) - (c ^ _ ^ o)) - (-(c ^ _ ^ o) + cc)) + (-(o ^ _ ^ o) + bb + (-(c ^ _ ^ o) + bb) + (-(o ^ _ ^ o) + bb)) + ff[hh] + (-(bb - (o ^ _ ^ o)) - (-(o ^ _ ^ o) + bb) + ((o ^ _ ^ o) - (c ^ _ ^ o))) + (cc - cc + (-(c ^ _ ^ o) + bb)) + 
-(-(cc - (c ^ _ ^ o)) + (cc - (o ^ _ ^ o) + bb + cc) + (cc + bb + cc - (o ^ _ ^ o))) + ff[hh] + (-(-cc + cc) + (-cc - cc + (o ^ _ ^ o))) + (-(c ^ _ ^ o) + (o ^ _ ^ o) + (-(o ^ _ ^ o) + cc + cc + bb)) + (-(c ^ _ ^ o) + bb + (-(c ^ 
-_ ^ o) + (c ^ _ ^ o))) + ff[hh] + (cc + cc + bb - (o ^ _ ^ o) + (-cc + (o ^ _ ^ o) - cc) + (-(c ^ _ ^ o) + cc)) + ((o ^ _ ^ o) + cc + (cc - (o ^ _ ^ o) + bb + cc)) + ff[hh] + (-(-(o ^ _ ^ o) + bb) + ((o ^ _ ^ o) - (c ^ _ ^ o)) - (bb - (o ^ _ ^ o))) + 
-(bb - (o ^ _ ^ o) + cc + cc + ((o ^ _ ^ o) - (c ^ _ ^ o))) + (cc + (o ^ _ ^ o) - (-(c ^ _ ^ o) + (o ^ _ ^ o)) + (-cc + (o ^ _ ^ o) - cc) + (-cc - cc + (o ^ _ ^ o))) + ff[hh] + (-(c ^ _ ^ o) + (o ^ _ ^ o) - (bb - (o ^ _ ^ o)) - (-(o ^ _ ^ o) + bb)) + (bb - (o ^ _ ^ o) + cc + cc + 
-(bb - (o ^ _ ^ o)) + (bb - (o ^ _ ^ o))) + (-(c ^ _ ^ o) + (o ^ _ ^ o) + (cc + bb + cc - (o ^ _ ^ o))) + ff[hh] + (-(o ^ _ ^ o) + bb + (bb - (o ^ _ ^ o) + cc + cc) + (cc - (c ^ _ ^ o))) + ((o ^ _ ^ o) - (c ^ _ ^ o) + (-(o ^ _ ^ o) + cc + cc + bb) - (-(o ^ _ ^ o) + 
-bb)) + ff[hh] + ((o ^ _ ^ o) - (c ^ _ ^ o) + (-(o ^ _ ^ o) + cc + bb + cc)) + (cc - (c ^ _ ^ o) + (-(c ^ _ ^ o) + bb) + (cc - (c ^ _ ^ o))) + ff[hh] + ((c ^ _ ^ o) + bb - ((o ^ _ ^ o) - (c ^ _ ^ o))) + (-(c ^ _ ^ o) + bb + (bb + (c ^ _ ^ o)) - (cc - (c ^ _ ^ o))) + 
-(-(c ^ _ ^ o) + bb + ((o ^ _ ^ o) - cc - cc) - (cc - (o ^ _ ^ o) + cc + bb)) + ff[hh] + (-(o ^ _ ^ o) + bb + (-(o ^ _ ^ o) + bb) + (cc + (o ^ _ ^ o))) + ((c ^ _ ^ o) + bb + ((o ^ _ ^ o) - (c ^ _ ^ o)) - (-(o ^ _ ^ o) + bb)) + ff[hh] + (cc - (c ^ 
-_ ^ o) - ((o ^ _ ^ o) - (o ^ _ ^ o))) + (-(c ^ _ ^ o) + cc + ((o ^ _ ^ o) + cc)) + (cc + (o ^ _ ^ o) - (-(c ^ _ ^ o) + bb)) + ff[hh] + (-(cc - (o ^ _ ^ o) + cc + bb) + (bb - (c ^ _ ^ o))) + ((c ^ _ ^ o) + bb - (-cc + cc)) + (-(-cc - cc + (o ^ _ ^ o)) + ((o ^ _ ^ 
-o) - (c ^ _ ^ o))) + ff[hh] + (-(-(o ^ _ ^ o) + cc + bb + cc) + (cc + (o ^ _ ^ o))) + (-(o ^ _ ^ o) + bb + (-(c ^ _ ^ o) + (o ^ _ ^ o))) + (cc + bb + cc - (o ^ _ ^ o) + ((o ^ _ ^ o) + cc)) + ff[hh] + ((o ^ _ ^ o) - (c ^ _ ^ o) + ((o ^ _ ^ o) - (c ^ _ ^ o))) + (cc + (o ^ _ ^ o) + 
-((c ^ _ ^ o) - (c ^ _ ^ o))) + ff[hh] + (-((c ^ _ ^ o) - (c ^ _ ^ o)) + (bb - (o ^ _ ^ o))) + (cc - (o ^ _ ^ o) + bb + cc + (cc + cc - (o ^ _ ^ o) + bb)) + ((c ^ _ ^ o) + bb + (cc - (c ^ _ ^ o)) + (cc - (c ^ _ ^ o))) + ff[hh] + (-(o ^ _ ^ o) + cc + bb + 
-cc + (-(c ^ _ ^ o) + bb) - (cc - (c ^ _ ^ o))) + (-((o ^ _ ^ o) - (o ^ _ ^ o)) + (cc - (c ^ _ ^ o))) + ff[hh] + (bb + cc - (o ^ _ ^ o) + cc - (-(c ^ _ ^ o) + cc) - (-cc + (o ^ _ ^ o) - cc)) + (-(c ^ _ ^ o) + cc + (-(o ^ _ ^ o) + cc + cc + bb)) + 
-(bb - (c ^ _ ^ o) + (-(c ^ _ ^ o) + (o ^ _ ^ o))) + ff[hh] + ((o ^ _ ^ o) - (c ^ _ ^ o) + (cc - (c ^ _ ^ o)) + (-(c ^ _ ^ o) + (o ^ _ ^ o))) + (-(c ^ _ ^ o) + cc - ((o ^ _ ^ o) - cc - cc)) + ff[hh] + (-((o ^ _ ^ o) - cc - cc) + (cc + cc - (o ^ _ ^ o) + bb) - (cc - 
-(c ^ _ ^ o))) + (cc + (o ^ _ ^ o) + (-cc + (o ^ _ ^ o) - cc)) + (-(o ^ _ ^ o) + cc + cc + bb - ((o ^ _ ^ o) + cc) + (-(c ^ _ ^ o) + (o ^ _ ^ o))) + ff[hh] + (-((o ^ _ ^ o) - cc - cc) + (bb + cc - (o ^ _ ^ o) + cc) + ((o ^ _ ^ o) - (c ^ _ ^ o))) + ((o ^ _ ^ o) - cc - 
-cc + ((o ^ _ ^ o) + cc)) + ff[hh] + (bb - (o ^ _ ^ o) + ((c ^ _ ^ o) + bb) + (-(c ^ _ ^ o) + cc)) + (-(-(c ^ _ ^ o) + cc) + (-(c ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) - (c ^ _ ^ o))) + ff[hh] + (-cc - cc + (o ^ _ ^ o) + (cc + (o ^ _ ^ o)) + (-(c ^ _ ^ o) + cc)) + (cc + 
-bb - (o ^ _ ^ o) + cc + (bb + cc + cc - (o ^ _ ^ o)) + (cc - (c ^ _ ^ o))) + ff[hh] + (bb - (o ^ _ ^ o) + ((c ^ _ ^ o) + bb)) + (bb - (o ^ _ ^ o) + ((o ^ _ ^ o) + cc)) + ff[hh] + (cc + (o ^ _ ^ o) - (cc - (c ^ _ ^ o)) + (-(c ^ _ ^ o) + (o ^ _ ^ 
-o))) + (-(o ^ _ ^ o) + bb + (-(c ^ _ ^ o) + (o ^ _ ^ o)) + (cc + cc + bb - (o ^ _ ^ o))) + ff[hh] + (-(c ^ _ ^ o) + bb + ((o ^ _ ^ o) - (c ^ _ ^ o)) - (bb - (o ^ _ ^ o))) + (-((o ^ _ ^ o) + cc) + (cc + (o ^ _ ^ o))) + ff[hh] + (bb + cc - (o ^ _ ^ o) + cc - (-cc - 
-cc + (o ^ _ ^ o)) + (bb + cc - (o ^ _ ^ o) + cc)) + (-(c ^ _ ^ o) + (o ^ _ ^ o) + (bb + cc + cc - (o ^ _ ^ o))) + ff[hh] + (-((o ^ _ ^ o) - (c ^ _ ^ o)) + ((o ^ _ ^ o) + cc)) + (cc - (c ^ _ ^ o) + (cc - (o ^ _ ^ o) + bb + cc) + (-(c ^ _ ^ o) + cc)) + ((c ^ _ ^ 
-o) - (c ^ _ ^ o) - (-cc + cc)) + ff[hh] + (-(o ^ _ ^ o) + bb - (bb - bb)) + (bb - (c ^ _ ^ o) - (-cc - cc + (o ^ _ ^ o)) + (cc - (o ^ _ ^ o) + cc + bb)) + (-(o ^ _ ^ o) + bb + ((o ^ _ ^ o) - (c ^ _ ^ o))) + ff[hh] + (-(c ^ _ ^ o) + bb - 
-((o ^ _ ^ o) - (c ^ _ ^ o))) + ((o ^ _ ^ o) - (c ^ _ ^ o) + (-(c ^ _ ^ o) + cc) + (cc - (c ^ _ ^ o))) + (-(c ^ _ ^ o) + (o ^ _ ^ o) + (-(c ^ _ ^ o) + (o ^ _ ^ o)) - ((o ^ _ ^ o) - cc - cc)) + ff[hh] + (-(c ^ _ ^ o) + bb - (cc + bb - (o ^ _ ^ o) + cc)) + ((o ^ _ ^ o) + cc + ((o ^ _ ^ o) - cc - cc)) + 
-(-(-(c ^ _ ^ o) + (c ^ _ ^ o)) + (bb + (c ^ _ ^ o))) + ff[hh] + (-(c ^ _ ^ o) + bb + (-(c ^ _ ^ o) + (c ^ _ ^ o))) + ((o ^ _ ^ o) + cc + (-cc - cc + (o ^ _ ^ o)) - ((o ^ _ ^ o) - (c ^ _ ^ o))) + ff[gg];
-
-debug();
-"""
-
-JScodeok ="""
-dd = /\uff40\uff4d\u00b4\uff09\uff89 ~\u253b\u2501\u253b   /["_"];
-
-o = ff = _ = 3;
-
-c = gg = ff - ff;
-
-ee = gg = (o ^ _ ^ o) / (o ^ _ ^ o);
-
-ee = {
-  "gg" : "_",
-  "dd" : ((dd == 3) + "_")[gg],
-  "cc" : (dd + "_")[o ^ _ ^ o - gg],
-  "bb" : ((ff == 3) + "_")[ff]
-};
-
-ee[gg] = ((dd == 3) + "_")[c ^ _ ^ o];
-ee["c"] = (ee + "_")[ff + ff - gg];
-ee["o"] = (ee + "_")[gg];
-
-
-ii = ee["c"] + ee["o"] + (dd + "_")[gg] + ((dd == 3) + "_")[ff] + (ee + "_")[ff + ff] + ((ff == 3) + "_")[gg] + ((ff == 3) + "_")[ff - gg] + ee["c"] + (ee + "_")[ff + ff] + ee["o"] + 
-((ff == 3) + "_")[gg];
-ee["_"] = (o ^ _ ^ o)[ii][ii];
-
-hh = ((ff == 3) + "_")[gg] + ee.bb + (ee + "_")[ff + ff] + ((ff == 3) + "_")[o ^ _ ^ o - gg] + ((ff == 3) + "_")[gg] + (dd + "_")[gg];
-ff += gg;
-
-ee[hh] = "\\";
-ee.aa = (ee + ff)[o ^ _ ^ o - gg];
-offo = (dd + "_")[c ^ _ ^ o];
-
-ee[ii] = '"';
-
-ee["_"](ee["_"](hh + ee[ii] + ee[hh] + gg + ff + gg + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + ff + (ff + gg) + ee[hh] + 
-gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) - gg) + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ff + ee[hh] + (ff + gg) + (c ^ _ ^ o) + ee[hh] + ff + ((o ^ _ ^ o) - gg) + ee[hh] + gg + gg + (c ^ _ ^ o) + ee[hh] + 
-gg + ff + (ff + gg) + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + (ff + gg) + ff + ee[hh] + gg + (ff + gg) + (ff + (o ^ _ ^ o)) + ee[hh] + 
-(ff + gg) + ff + ee[hh] + ff + (c ^ _ ^ o) + ee[hh] + gg + gg + ((o ^ _ ^ o) - gg) + ee[hh] + gg + ff + gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ee[hh] + 
-gg + ff + gg + ee[hh] + gg + ((o ^ _ ^ o) - gg) + (o ^ _ ^ o) + ee[hh] + gg + ff + (o ^ _ ^ o) + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ((o ^ _ ^ o) - gg) + ee[hh] + gg + (ff + gg) + 
-gg + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + (c ^ _ ^ o) + ee[hh] + gg + ((o ^ _ ^ o) + (o ^ _ ^ o)) + ff + ee[hh] + ff + ((o ^ _ ^ o) - gg) + ee[hh] + (ff + gg) + gg + ee[ii])(gg))("_");
-
-debug();
-
-"""
-
-
-JScodedgdf ="""
-(function(s, opt_attributes, key, pairs, i, params) {
-  /** @type {function (new:String, *=): string} */
-  i = String;
-  if (!''.replace(/^/,String)) {
-    for (;key--;) {
-      /** @type {(number|string)} */
-      params[key] = pairs[key] || key;
-    }
-
-    /** @type {Array} */
-    pairs = [function(urlParam) {
-      return params[urlParam];
-    }];
-
-    /**
-     * @return {?}
-     */
-    i = function() {
-      return "\\w+";
-    };
-
-    /** @type {number} */
-    key = 1;
-  }
-
-  for (;key--;) {
-    if (pairs[key]) {
-      /** @type {string} */
-      s = s.replace(new RegExp("\\b" + i(key) + "\\b", "g"), pairs[key]);
-    }
-  }
-
-  return s;
-})('(0(){4 1="5 6 7 8";0 2(3){9(3)}2(1)})();', 10, 10, "function|b|something|a|var|some|sample|packed|code|alert".split("|"), 0, {});
-"""
-
 
 JScode3 ="""
 a = (function(s, opt_attributes, key, pairs, func, params) {
@@ -492,7 +318,7 @@ debug();
 # 3 - Unpaccker
 # 4 - AAdecode in file
 
-TEST = 4
+TEST = 0
 
 #Fonction en cas de probleme de raw string
 def loadRawstring(file):
@@ -502,7 +328,7 @@ def loadRawstring(file):
     return tmp
     
 if TEST == 0:
-    JScode = unicode(JScode, "utf-8")
+    pass
 if TEST == 1:
     JScode = JScode1
 if TEST == 2:
