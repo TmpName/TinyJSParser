@@ -60,7 +60,7 @@ def logwrite(stri):
 def RemoveGuil(string):
     if not (isinstance(string, types.StringTypes)):
         return string
-    string = string.strip()
+    #string = string.strip()
     if string.startswith('"') and string.endswith('"'):
         return string[1:-1]
     if string.startswith("'") and string.endswith("'"):
@@ -92,7 +92,10 @@ def IsUnicode(s):
    
 def out(string):
     if DEBUG:
-        string = str(string.encode('ascii','replace'))
+        try:
+            string = str(string.encode('ascii','replace'))
+        except:
+            pass
         print str(string.decode('latin-1').encode('ascii','replace'))
         #logwrite(string)
         
@@ -446,7 +449,7 @@ class JSBuffer(object):
     def SafeEval(self,str):
         if not str:
             raise Exception ('Nothing to eval')
-        f = re.search('[^0-9+-.\(\)<>=&%!*\^\/]',str)
+        f = re.search('[^0-9+-.\(\)<>=|&%!*\^\/]',str)
         if f:
             raise Exception ('Wrong parameter to Eval : ' + str)
             return 0
@@ -831,10 +834,12 @@ class JsParser(object):
             elif isinstance(fe, fonction):
                 if DEBUG:
                     out('> fonction definie par code : ' + function)
+
                 n,p,c,ct = fe.name,fe.param,fe.code,fe.const
                 a = MySplit(arg,',',True)
                 a2 = []
                 #out('code de la fonction : ' + c)
+
                 
                 if ct:
                     out('constructor mode')
@@ -849,19 +854,22 @@ class JsParser(object):
                 for i in a:
                     vv = self.evalJS(i,vars,allow_recursion)
                     a2.append(RemoveGuil(vv))
+
+                #We copy previous variables and function
+                #TODO list copy is rly bad for optimisation, need to make variable list by scope
+                List_tmpvar = list(vars)
                 
-                List_tmpvar = []
                 if (len(p) > 0) and (len(a2)>0):
                     nv = tuple(zip(p, a2))
                     for z,w in nv:
-                        self.SetVar(vars,z,w)
-                        List_tmpvar.append(z)
+                        self.SetVar(List_tmpvar,z,w)
+                        #List_tmpvar.append(z)
 
-                jjj = self.Parse(c,vars,allow_recursion)
+                jjj = self.Parse(c,List_tmpvar,allow_recursion)
                 
                 #And delete tmp var
-                for i in List_tmpvar:
-                    self.InitVar(vars,i)
+                #for i in List_tmpvar:
+                #    self.InitVar(vars,i)
                 
                 if self.Return:
                     self.Return = None
@@ -943,10 +951,10 @@ class JsParser(object):
             
             v1 = v1.strip()
 
-            self.VarManage(allow_recursion,vars,variable,v1)
+            r = self.VarManage(allow_recursion,vars,variable,v1)
             
             #and return it
-            r = self.GetVar(vars,variable)
+            #r = self.GetVar(vars,variable)
             return r,JScode
 
             
@@ -1243,7 +1251,7 @@ class JsParser(object):
                         if DEBUG:
                             out('creation/modification/test ' + Var_string + ' ' + P1.op )
                         r,JScode = self.VarParser(vars,allow_recursion,Var_string,P1.op,JScode)
-                        
+
                     else:
                         if not self.IsVar(vars,P1.name):
                             self.PrintVar(vars)
@@ -1266,7 +1274,6 @@ class JsParser(object):
                     if 'TEMPORARY_VARS' in name:
                         name = self.evalJS(name,vars,allow_recursion)
 
-                    gg = fonction + '***' + P1.arg + '**' + JScode
                     r,JScode = self.FonctionParser(vars,allow_recursion,name,fonction,P1.arg,JScode)
 
                 #to speed up
@@ -1337,7 +1344,9 @@ class JsParser(object):
             #Short-circuiting evaluations
             if JScode[0:2] == '&&' or JScode[0:2] == '||':
                 out( " ****** Short-circuiting  ********* ")
-                A = InterpretedCode.GetPrevious()
+                #A = InterpretedCode.GetPrevious()
+                A = InterpretedCode.GetBuffer()
+                InterpretedCode.Reset()
                 B = GetItemAlone(JScode[2:])
                 
                 Totlen = len(B) + 2
@@ -1351,7 +1360,7 @@ class JsParser(object):
                         InterpretedCode.AddValue(r)
                     else:
                         InterpretedCode.AddValue(A)
-                #for || if the result of the first operand is true, the second operand is never operated
+                #for || if the result of the first operand is true, the second operand is never evaluated
                 if JScode[0:2] == '||':
                     if not A:
                         r = self.evalJS(B,vars,allow_recursion)
@@ -1672,7 +1681,10 @@ class JsParser(object):
         else:
             print type(value)
             raise Exception('> ERROR : Var problem >' + str(value))
-        return
+            
+        
+        #and return value, to avoid double eval
+        return value
         
 
     #(Function(arg){code})(arg2) Self invoked
@@ -1857,7 +1869,7 @@ class JsParser(object):
             #m =  re.search(r'^\({0,1}([\w\.]+)\){0,1}(?:\[([^\]]+)\])*\){0,1}\s*(?:[\^\/\*\-\+])*=',chain,re.DOTALL | re.UNICODE)
             #m2 = re.search(r'^\({0,1}([\w\.]+)\){0,1}(?:\.([\w]+))*\){0,1}\s*(?:[\^\/\*\-\+])*=',chain,re.DOTALL | re.UNICODE)
             if chain.startswith('var '):
-                #out('var')
+                out('var')
 
                 chain = chain[4:]
                 
@@ -1867,6 +1879,9 @@ class JsParser(object):
                     chain=chain[(len(v1) + 1):]
                     if v1.endswith(',') or v1.endswith(';'):
                         v1 = v1[:-1]
+                    #HACK in case of creation
+                    if '=' not in v1:
+                        v1 = v1 + '=0'
                     self.evalJS(v1,vars,allow_recursion)                      
                 continue
           
@@ -2029,7 +2044,7 @@ class JsParser(object):
                     t = arg
                     f = code
                     e = ''
-                    
+
                     if GetNextUsefullchar(f)[0] =='{':
                         f = GetItemAlone(f,'}')[1:-1]
 
@@ -2126,6 +2141,7 @@ class JsParser(object):
         self.SystemVars.append(('Math',Math))
         #hack
         self.SystemVars.append(('String',''))
+        self.SystemVars.append(('undefined',None))
         #DOM
         self.SystemVars.append(('document',{'write':'ok'}))
         
@@ -2174,6 +2190,9 @@ class Math(object):
         t1 = arg[0]
         t2 = arg[1]
         return pow(t1,t2)
+        
+    def floor(self,arg):
+        return int(math.floor(arg[0]))
         
     @toStr("function %s() {\n    [native code]\n}")
     def sin(self,arg):
@@ -2243,7 +2262,21 @@ class String(object):
         return self._string
             
     def fromCharCode(self,arg):
-        return chr(int(arg[0]))
+        #HACK
+        #a =  chr(int(arg[0]))
+        b = ''.join(map(unichr, arg))
+        try:
+            return str(b)
+        except:
+            return b
+        
+    def substr(self,arg):
+        #self._string = unicode(self._string)
+        if len(arg) > 1:
+            length = int(arg[1])
+            if (arg[0]+length) > 0:
+                return self._string[arg[0]:arg[0]+length]
+        return self._string[arg[0]:]
 
     def split(self,arg):
         arg = arg[0].replace('"','').replace("'","")
@@ -2257,6 +2290,10 @@ class String(object):
         if len(arg) > 1:
             start = int(arg[1])
         return self._string.find(arg[0], start)
+        
+    def charAt(self,arg):
+        p = int(arg[0])
+        return self._string[p]
 
 class Array(object):
     def __init__(self,initV1,initV2=[]):
