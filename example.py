@@ -3,12 +3,108 @@
 
 from tinyjsparser import JsParser
 
+JScode77 ="""
 
-JScode ="""
-a = "abcd";
-a = a.split("c").reverse().join('+');
+function ord(r) {
+  e = r + 1;
+  return e;
+}
+
+var r = 8;
+var e = 10;
+gg = ord(5);
 
 debug();
+
+"""
+
+JScode5 ="""
+function base64_decode(r) {
+  var e;
+  var n;
+  var i;
+  var t;
+  var a;
+  var d;
+  var o = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";
+  var f = 0;
+  var h = 0;
+  var c = [];
+  if (!r) {
+    return r;
+  }
+  r += "";
+  do {
+    e = (d = o.indexOf(r.charAt(f++)) << 18 | o.indexOf(r.charAt(f++)) << 12 | (t = o.indexOf(r.charAt(f++))) << 6 | (a = o.indexOf(r.charAt(f++)))) >> 16 & 255;
+    n = d >> 8 & 255;
+    i = 255 & d;
+    c[h++] = 64 == t ? String.fromCharCode(e) : 64 == a ? String.fromCharCode(e, n) : String.fromCharCode(e, n, i);
+  } while (f < r.length);
+  return c.join("").replace(/\0+$/, "");
+}
+function ord(r) {
+  var t = r + "";
+  var e = t.charCodeAt(0);
+
+  if (e >= 55296 && 56319 >= e) {
+    debug();
+    var o = e;
+    return 1 === t.length ? e : 1024 * (o - 55296) + (t.charCodeAt(1) - 56320) + 65536;
+  }
+
+  return e;
+}
+function hta(r) {
+  var t = r.toString();
+  var e = "";
+  var o = 0;
+  for (;o < t.length;o += 2) {
+    e += String.fromCharCode(parseInt(t.substr(o, 2), 16));
+  }
+  return e;
+}
+function strrev(r) {
+  return r.split("").reverse().join("");
+}
+function strswpcs(r) {
+  var t = "";
+  var e = 0;
+  for (;e < r.length;e++) {
+    t += r[e].match(/^[A-Za-z]$/) ? r[e] === r[e].toLowerCase() ? r[e].toUpperCase() : r[e].toLowerCase() : r[e];
+  }
+  return t;
+}
+function decrypt(r, t) {
+  var e = "";
+  var o = r.substring(0, 3);
+  r = r.substring(3);
+  if ("36f" == o) {
+    r = strrev(base64_decode(r));
+  } else {
+    if ("fc0" == o) {
+      r = hta(strrev(r));
+    } else {
+      if ("663" == o) {
+        r = base64_decode(strrev(r));
+      } else {
+        if ("53a" == o) {
+          r = base64_decode(strswpcs(r));
+        }
+      }
+    }
+  }
+  
+  var s = 0;
+  s = 0;
+  for (;s < r.length;s++) {
+    var n = r.substr(s, 1);
+    var a = t.substr(s % t.length - 1, 1);
+    n = Math.floor(ord(n) - ord(a));
+    e += n = String.fromCharCode(n);
+  }
+  return e;
+}
+tt = decrypt("663=ompjS2nseJZ69JrOSmpfiIi4Rme7lHiFyHeLmIZ+lHh7hIfkp2ZmhGZV6ZmkuJq8V5lCW2dAGIe6d5e8J6iuVmmbi5obWWpZSmmXWqokupplWWZwlqpqqqn", "6" );
 
 """
 
@@ -317,8 +413,9 @@ debug();
 # 2 - AAdecode
 # 3 - Unpaccker
 # 4 - AAdecode in file
+# 5 - Alluc
 
-TEST = 0
+TEST = 5
 
 #Fonction en cas de probleme de raw string
 def loadRawstring(file):
@@ -339,6 +436,8 @@ if TEST == 3:
 if TEST == 4:
     JScode = loadRawstring('G:\\JSparser\\JS_AA_raw.txt')
     JScode = unicode(JScode, "utf-16")
+if TEST == 5:
+    JScode = JScode5
     
 JP = JsParser()
 Liste_var = []
@@ -362,3 +461,5 @@ if TEST == 2:
     print 'return : ' + JP.LastEval.decode('string-escape')
 if TEST == 4:
     print 'return : ' + JP.LastEval.decode('string-escape').decode('string-escape')
+if TEST == 5:
+    print 'return : ' + JP.LastEval
