@@ -1135,7 +1135,7 @@ class JsParser(object):
                 pass
             
             #3 - numeric chain
-            r = re.search('(^(?:0x)*[0-9]+)',JScode)
+            r = re.search('(^(?:0x)*[0-9a-f]+)',JScode)
             if r:
                 v = JScode[0:r.end()]
                 if v.startswith('0x'):
