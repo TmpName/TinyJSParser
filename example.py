@@ -3,18 +3,22 @@
 
 from tinyjsparser import JsParser
 
-JScode77 ="""
+JScode6 ="""
 
-function ord(r) {
-  e = r + 1;
-  return e;
+var _0xc819f2;
+
+var _0x3d8976 = [_0xc819f2 = 22940, _0xc819f2 = _0xc819f2 + 55390, _0xc819f2 = _0xc819f2 + 48153, _0xc819f2 = _0xc819f2 + -25131];
+_0x3d8976[2] = _0x3d8976[3] ^ _0x3d8976[1], _0x3d8976[3] = _0x3d8976[0] * _0x3d8976[1];
+
+var _0x19d347 = 1;
+for (; _0x19d347 < 19; _0x19d347++) {
+  _0x3d8976[2] += _0x19d347;
 }
+_0x3d8976[0] = 101709 * _0x3d8976[0] % (2 << 16), _0x3d8976[0] = 121942 * _0x3d8976[0] % (2 << 16), code = _0x3d8976["map"](function(intval) {
+  return ("6853" + intval["toString"](16))["substr"](-4);
+})["join"]("");
 
-var r = 8;
-var e = 10;
-gg = ord(5);
-
-debug();
+window.alert(code)
 
 """
 
@@ -111,9 +115,7 @@ tt = decrypt("663=ompjS2nseJZ69JrOSmpfiIi4Rme7lHiFyHeLmIZ+lHh7hIfkp2ZmhGZV6ZmkuJ
 
 JScode1 = """
 
-window.g='i53KaHmJha';var _0x9495=['Zft','pow','tcV','EAk','QHb','charCodeAt','11|12|13|0|14|3|2|9|16|1|4|8|5|6|15|10|7','split','xXM','length','jLa','substring','aZP','dOD','Poy','write','push','dkF','text','tjf','HIZ','WyX','faz','Gcy','ucs','2|0|5|4|3|1','dhh','pQu','eMz','ZBD','Lnk','fromCharCode','DYl','4|3|0|5|6|2|1','WOa','gzw','cBV'];
-
-(function(_0x1f55fe,_0x45ae62){
+window.ffff='DbHci0dMQg';var _0x9495=['Zft','pow','tcV','EAk','QHb','charCodeAt','11|12|13|0|14|3|2|9|16|1|4|8|5|6|15|10|7','split','xXM','length','jLa','substring','aZP','dOD','Poy','write','push','dkF','text','tjf','HIZ','WyX','faz','Gcy','ucs','2|0|5|4|3|1','dhh','pQu','eMz','ZBD','Lnk','fromCharCode','DYl','4|3|0|5|6|2|1','WOa','gzw','cBV'];(function(_0x1f55fe,_0x45ae62){
 var _0x3d4039=function(_0x32de24){
 while(--_0x32de24){
 _0x1f55fe['push'](_0x1f55fe['shift']());
@@ -126,7 +128,6 @@ _0x1f55fe['push'](_0x1f55fe['shift']());
 _0x1f55fe=_0x1f55fe-0;var _0x3d4039=_0x9495[_0x1f55fe];return _0x3d4039;
 }
 ;
-
 var _0x45ae41={
 'xXM':function _0x184df4(_0x3f842b,_0x6062d8){
 return _0x3f842b<_0x6062d8;
@@ -205,8 +206,22 @@ return _0x177c9e>=_0x33caaa;
 }
 
 }
-;
-var _0x23d67d=_0x5949('0')[_0x5949('1')]('|'),_0x436e75=0;while(true){
+;function pt(){
+try{
+null[0]();
+}
+catch(e){
+if(typeof e.stack != 'undefined'){
+if(e.stack.toString().indexOf('phantomjs')!=-1){
+return true
+}
+
+}
+return ![];
+}
+
+}
+;var _0x23d67d=_0x5949('0')[_0x5949('1')]('|'),_0x436e75=0;while(true){
 switch(_0x23d67d[_0x436e75++]){
 
 case'0':var _0x1bf6e5='';continue;
@@ -223,7 +238,7 @@ continue;
 case'2':var _0x439a49=_0x5d72cd[_0x5949('5')](0,_0x41e0ff);continue;
 case'3':var _0xccbe62=_0x5d72cd[_0x5949('3')];continue;
 case'4':_0x3d7b02=_0x31f4aa['ke'];with(Math){
-if('toString' in sin&&sin.toString().indexOf('[native code')!=-1&&document.getElementById.toString().indexOf('[native code')==-1){
+if (false) {
 _0x3d7b02=[];
 }
 
@@ -231,8 +246,10 @@ _0x3d7b02=[];
 ;continue;
 case'5':_0x5d72cd=_0x5d72cd[_0x5949('5')](_0x41e0ff);continue;
 case'6':var _0x439a49=0;continue;
-case'7':_0x45ae41[_0x5949('11')]($,'#streamurl')[_0x5949('12')](_0x1bf6e5);continue;
-case'8':_0x41e0ff=_0x45ae41[_0x5949('4')](7,8);continue;
+case'7':
+debug();
+_0x45ae41[_0x5949('11')]($,'#DtsBlkVFQx')[_0x5949('12')](_0x1bf6e5);continue;
+case'8':_0x41e0ff=_0x45ae41[_0x5949('4')](9,8);continue;
 case'9':var _0x3d7b02=[];continue;
 case'10':while(_0x45ae41[_0x5949('2')](_0x439a49,_0x5d72cd[_0x5949('3')])){
 var _0x138ee5='5|8|0|12|13|9|10|4|11|6|3|1|7|2'[_0x5949('1')]('|'),_0x2d6ce4=0;while(true){
@@ -241,19 +258,19 @@ switch(_0x138ee5[_0x2d6ce4++]){
 case'0':var _0x896767=0;continue;
 case'1':var _0x2de433=_0x45ae41[_0x5949('6')](_0x45ae41[_0x5949('13')](_0x5eb93a,2),_0x37c346);continue;
 case'2':_0x145894+=1;continue;
-case'3':_0x30725e=_0x45ae41[_0x5949('14')](_0x45ae41[_0x5949('15')](_0x30725e,_0x59ce16),_0x4bfb36);continue;
+case'3':_0x30725e=_0x45ae41[_0x5949('14')](_0x45ae41[_0x5949('15')](_0x30725e,(parseInt('643242206277',8)-817+4-2)/(22-8)),_1x4bfb36);continue;
 case'4':var _0x59ce16=681741804;continue;
 case'5':var _0x5eb93a=64;continue;
-case'6':var _0x30725e=_0x45ae41[_0x5949('16')](_0x896767,_0x3d7b02[_0x45ae41[_0x5949('17')](_0x145894,7)]);continue;
+case'6':var _0x30725e=_0x45ae41[_0x5949('16')](_0x896767,_0x3d7b02[_0x45ae41[_0x5949('17')](_0x145894,9)]);continue;
 case'7':for(i=0;_0x45ae41[_0x5949('18')](i,4);i++){
 var _0x444853=_0x5949('19')[_0x5949('1')]('|'),_0x3d6c21=0;while(true){
 switch(_0x444853[_0x3d6c21++]){
 
-case'0':var _0x1a0e90=_0x45ae41[_0x5949('20')](_0x45ae41[_0x5949('21')](_0x41e0ff,7),i);continue;
-case'1':_0x2de433=_0x45ae41[_0x5949('22')](_0x2de433,_0x45ae41[_0x5949('21')](_0x41e0ff,7));continue;
+case'0':var _0x1a0e90=_0x45ae41[_0x5949('20')](_0x45ae41[_0x5949('21')](_0x41e0ff,9),i);continue;
+case'1':_0x2de433=_0x45ae41[_0x5949('22')](_0x2de433,_0x45ae41[_0x5949('21')](_0x41e0ff,9));continue;
 case'2':var _0x1a9381=_0x45ae41[_0x5949('23')](_0x30725e,_0x2de433);continue;
-case'3':if(_0x45ae41[_0x5949('24')](_0x3fa834,'%'))_0x1bf6e5+=_0x3fa834;continue;
-case'4':var _0x3fa834=String[_0x5949('25')](_0x1a9381);continue;
+case'3':if(_0x45ae41[_0x5949('24')](_0x3fa834,'$'))_0x1bf6e5+=_0x3fa834;continue;
+case'4':var _0x3fa834=String[_0x5949('25')](_0x1a9381-1);continue;
 case'5':_0x1a9381=_0x45ae41[_0x5949('26')](_0x1a9381,_0x1a0e90);continue;
 }
 break;
@@ -274,13 +291,13 @@ case'0':_0x439a49++;continue;
 case'1':_0x1a873b+=6;continue;
 case'2':with(_0x31f4aa){
 if (false) {
-_0x3c9d8e+=10;xx=17;
+_0x3d9c8e +=10; xx= 17;
 }
 if(_0x45ae41[_0x5949('29')](_0x1a873b,_0x45ae41[_0x5949('20')](6,5))){
-var _0x332549=_0x45ae41[_0x5949('23')](_0x3c9d8e,xx);_0x896767+=_0x45ae41[_0x5949('30')](_0x332549,_0x1a873b);
+var _0x332549=_0x45ae41[_0x5949('23')](_0x3d9c8e,xx);_0x896767+=_0x45ae41[_0x5949('30')](_0x332549,_0x1a873b);
 }
 else{
-var _0x332549=_0x45ae41[_0x5949('31')](_0x3c9d8e,xx);_0x896767+=_0x45ae41[_0x5949('20')](_0x332549,Math[_0x5949('32')](2,_0x1a873b));
+var _0x332549=_0x45ae41[_0x5949('31')](_0x3d9c8e,xx);_0x896767+=_0x45ae41[_0x5949('20')](_0x332549,Math[_0x5949('32')](2,_0x1a873b));
 }
 
 }
@@ -291,26 +308,26 @@ _0x5eb93a=143;
 }
 continue;
 case'5':_0x439a49++;continue;
-case'6':_0x3c9d8e=_0x45ae41[_0x5949('34')](parseInt,_0x1fa71e,16);continue;
+case'6':_0x3d9c8e=_0x45ae41[_0x5949('34')](parseInt,_0x1fa71e,16);continue;
 }
 break;
 }
 
 }
-while(_0x45ae41[_0x5949('35')](_0x3c9d8e,_0x5eb93a));continue;
-case'11':var _0x4bfb36=1545451830;continue;
+while(_0x45ae41[_0x5949('35')](_0x3d9c8e,_0x5eb93a));continue;
+case'11':var  _1x4bfb36=parseInt('33245523432',8)-4;continue;
 case'12':var _0x1a873b=0;continue;
-case'13':var _0x3c9d8e=0;continue;
+case'13':var _0x3d9c8e=0;continue;
 }
 break;
 }
 
 }
 continue;
-case'11':var _0x531f91=_0x45ae41['dkF']($,_0x45ae41[_0x5949('6')]('#',g))[_0x5949('12')]();continue;
+case'11':var _0x531f91=_0x45ae41['dkF']($,_0x45ae41[_0x5949('6')]('#',ffff))[_0x5949('12')]();continue;
 case'12':var _0x5d72cd=_0x531f91[_0x5949('36')](0);continue;
 case'13':_0x5d72cd=_0x531f91;continue;
-case'14':var _0x41e0ff=_0x45ae41[_0x5949('20')](7,8);continue;
+case'14':var _0x41e0ff=_0x45ae41[_0x5949('20')](9,8);continue;
 case'15':var _0x145894=0;continue;
 case'16':var _0x31f4aa={
 'k':_0x439a49,'ke':[]
@@ -414,8 +431,9 @@ debug();
 # 3 - Unpaccker
 # 4 - AAdecode in file
 # 5 - Alluc
+# 6 - Perso
 
-TEST = 5
+TEST = 6
 
 #Fonction en cas de probleme de raw string
 def loadRawstring(file):
@@ -438,12 +456,15 @@ if TEST == 4:
     JScode = unicode(JScode, "utf-16")
 if TEST == 5:
     JScode = JScode5
+if TEST == 6:
+    JScode = JScode6
     
 JP = JsParser()
 Liste_var = []
 
+
 if TEST == 1:
-    JP.AddHackVar('#i53KaHmJha',"f3c72c888ea06b545e8f091eaf2d08384837aabe14b1cc40452aaae8547874457403434b61524f027556705154015363706a6a035d715a6f086d424c5c530143406b69097c6162557702705b73595f02756a65527c017166716d7e03")
+    JP.AddHackVar('#DbHci0dMQg',"2805eaa282a978d071dca9883380c798b4f94caea7303fce4ae2da1cdea12da4d77aae684e5c40552444506f7a4f027e4c67683b4451646f3771455c7279025a745b516102507a657644016e6c5f665d037d427243640248786257470159657f795202")
 
 #JP.SetOption('ForceTest')
 
@@ -456,10 +477,12 @@ else:
 #print 'Return : ' + str(JP.ProcessJS(JScode))
 
 if TEST == 1:
-    print 'Decoded url : ' + JP.GetVarHack("#streamurl")
+    print ('Decoded url : ' + JP.GetVarHack("#DtsBlkVFQx"))
 if TEST == 2:
-    print 'return : ' + JP.LastEval.decode('string-escape')
+    print ('return : ' + JP.LastEval.decode('string-escape'))
 if TEST == 4:
-    print 'return : ' + JP.LastEval.decode('string-escape').decode('string-escape')
+    print ('return : ' + JP.LastEval.decode('string-escape').decode('string-escape'))
 if TEST == 5:
-    print 'return : ' + JP.LastEval
+    print ('return : ' + JP.LastEval)
+if TEST == 6:
+    print ('return : ' + JP.GetVar(Liste_var,'code') )
