@@ -38,11 +38,15 @@
 
 import re
 import types
-from types import NoneType
 import time
 import math
-
 import sys
+
+try:
+    from types import NoneType
+except:
+    NoneType = type(None)
+
 
 REG_NAME = '[\w]+'
 REG_OP = '[\/\*\-\+<>\|\&=~^%!]+' #not space here, and no bracket
@@ -96,7 +100,7 @@ def out(string):
             string = str(string.encode('ascii','replace'))
         except:
             pass
-        print str(string.decode('latin-1').encode('ascii','replace'))
+        print (str(string.decode('latin-1').encode('ascii','replace')))
         #logwrite(string)
         
 def Ustr(string):
@@ -383,9 +387,9 @@ class JSBuffer(object):
             del self.buf[-1]
             
         elif len(self.buf) > 1:
-            print self.type
-            print self.buf
-            print self.opBuf
+            print (self.type)
+            print (self.buf)
+            print (self.opBuf)
             raise Exception("Can't compute")
     
     #on decale tout
@@ -617,10 +621,10 @@ class JsParser(object):
         return self.GetVar(self.HackVars,name)
         
     def PrintVar(self,vars):
-        print '-------------------------------'
+        print ('-------------------------------')
         for i,j in vars:
-            print Ustr(i) + ' : ' + Ustr(j)
-        print '-------------------------------'
+            print (Ustr(i) + ' : ' + Ustr(j))
+        print ('-------------------------------')
     
     #Need to take care at chain var with " and '
     def ExtractFirstchain(self,string):
@@ -1055,7 +1059,7 @@ class JsParser(object):
                 continue
                 
             #in operator            
-            if JScode[0:2] == 'in':
+            if JScode[0:2] == 'in' and not JScode[2].isalpha():
                 A = InterpretedCode.GetPrevious()
                 B = GetItemAlone(JScode[2:],',;&|')
                 B2 = self.evalJS(B,vars,allow_recursion)
@@ -1494,7 +1498,7 @@ class JsParser(object):
         #for lib in List_Lib:
         #    if variable == str(lib.__name__):
         #        return lib
-                
+        #self.PrintVar(var)     
         raise Exception('Variable not defined: ' + str(variable))
             
     def SetVar(self,var,variable,value,i = None):
@@ -1679,7 +1683,7 @@ class JsParser(object):
         elif value == None:
             self.SetVar(vars,name,None,index)
         else:
-            print type(value)
+            print (type(value))
             raise Exception('> ERROR : Var problem >' + str(value))
             
         
@@ -2123,7 +2127,7 @@ class JsParser(object):
             #hack, need to be reenabled
             #Non gere encore
             if not chain.endswith(';'):
-                print '> ' + JScode
+                print ('> ' + JScode)
                 raise Exception('> ERROR : can t parse >' + chain)
             
         return Parser_return
@@ -2297,6 +2301,7 @@ class String(object):
 
 class Array(object):
     def __init__(self,initV1,initV2=[]):
+        self._JSParser = initV1
         self._array = initV2
         
     def Get(self):
@@ -2341,6 +2346,27 @@ class Array(object):
         if len(self._array) == 0:
             return None
         return self._array.pop(0)
+        
+    def map(self,arg):
+    
+        tab = []
+        
+        self._JSParser.PrintVar(self._JSParser.FastEval_vars)
+    
+        fe = self._JSParser.IsFunc(self._JSParser.FastEval_vars,arg[0])
+        #print fe.name
+        #print fe.code
+        #print fe.param
+        #print fe.const
+        
+        for i in self._array:
+            v = []
+            v.append((fe.param[0], i))
+            vv = self._JSParser.Parse(fe.code,v,100)
+
+            tab.append(vv)
+
+        return tab
                         
 class Basic(object):
     def __init__(self,initV1,initV2):
@@ -2386,9 +2412,9 @@ class Basic(object):
     def alert(self,arg):
             #t1 = self.evalJS(arg,vars,allow_recursion)
             #logwrite(str(arg))
-            print '------------ALERT-------------------'
-            print arg
-            print '------------------------------------'
+            print ('------------ALERT-------------------')
+            print (arg)
+            print ('------------------------------------')
             return ''
 
     def RegExp(self,arg):
@@ -2399,11 +2425,15 @@ class Basic(object):
     #this fonction if for object normaly
     def toString(self,arg):
         t1 = arg[0]
+        v = self._name
+        
+        if t1 == 16:
+            v = hex(int(self._name))[2:]
         
         if isinstance(self._name, ( int, long ) ):
-            return str(self._name)
+            return str(v)
         elif isinstance(self._name, types.StringTypes ):
-            return str(self._name)
+            return str(v)
         
         try:
             f = self._name.im_func.__name__
