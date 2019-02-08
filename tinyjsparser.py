@@ -435,7 +435,14 @@ class JSBuffer(object):
             return self.buf[0]
 
         if self.type == 'Numeric':
-            return self.SafeEval(self.buf[0])
+            ret = self.SafeEval(self.buf[0])
+            #There is a bug sometime, long var are signed with L but are int in reality.
+            if isinstance(ret,long ):
+                try:
+                    ret = int (ret)
+                except:
+                    pass
+            return ret
 
         if self.type == 'Bool':
             if self.SafeEval(self.buf[0].replace('True','1').replace('False','0')):
@@ -2433,7 +2440,7 @@ class Basic(object):
         v = self._name
 
         if t1 == 16:
-            v = hex(int(self._name))[2:]
+            v = hex(int(self._name))[2:].replace('L','')
 
         if isinstance(self._name, ( int, long ) ):
             return str(v)
