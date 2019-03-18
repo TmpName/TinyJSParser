@@ -634,6 +634,9 @@ class JsParser(object):
         print ('-------------------------------')
         for i,j in vars:
             print (Ustr(i) + ' : ' + Ustr(j))
+        print ('\n')
+        for i,j in self.HackVars:
+            print (Ustr(i) + ' : ' + Ustr(j))
         print ('-------------------------------')
 
     #Need to take care at chain var with " and '
