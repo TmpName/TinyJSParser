@@ -2029,6 +2029,9 @@ class JsParser(object):
                 if name == 'switch':
                     v = self.evalJS(arg,vars,allow_recursion)
                     f = code[1:]
+                    
+                    if f[-1:] == '}':
+                        f = f[:-1]
 
                     if v == 'undefined':
                         continue
