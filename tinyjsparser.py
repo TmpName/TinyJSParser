@@ -1786,15 +1786,20 @@ class JsParser(object):
 
         #Make this part only if needed
         if 'function' in JScode:
+
             posG = 0
             Startoff = 0
             Endoff = 0
 
             while (True):
 
+                #out('before ' + JScode[posG:] + '\n')
+
                 chain,pos = self.ExtractFirstchain(JScode[posG:])
                 if not (chain):
                     break
+
+                #out('after ' + chain + '\n')
 
                 Startoff = posG
                 Endoff = posG + pos + 1
@@ -2032,7 +2037,7 @@ class JsParser(object):
                 if name == 'switch':
                     v = self.evalJS(arg,vars,allow_recursion)
                     f = code[1:]
-                    
+
                     if f[-1:] == '}':
                         f = f[:-1]
 
@@ -2041,6 +2046,8 @@ class JsParser(object):
 
                     #out('> Boucle switch : Case=' + v + ' code= ' + f[0:50] + '\n')
                     #logwrite(str(v) + '\n')
+
+                    out('Switch case ' + str(v) )
 
                     #Search the good case code
                     StrToSearch = "case'%s':"%(str(v))
@@ -2055,7 +2062,7 @@ class JsParser(object):
 
                     f = f[(len(StrToSearch)):]
 
-                    #out('\n> New block : ' + f[0:50])
+                    #out('\n> New block : ' + f)
 
                     self.Parse(f,vars,allow_recursion)
 
@@ -2088,7 +2095,6 @@ class JsParser(object):
                         except:
                             from random import choice
                             ttt = choice([True,False])
-                            #thx to come every day, to help me to find bug on this code
 
                         if (ttt):
                             self.Parse(f,vars,allow_recursion)
@@ -2132,6 +2138,29 @@ class JsParser(object):
 
                     self.Parse(f[1:-1],vars,allow_recursion)
                     #JScode = f[1:-1] + ';' + JScode
+                    continue
+
+                if name == 'try':
+
+                    f = code
+                    if GetNextUsefullchar(f)[0] =='{':
+                        f = GetItemAlone(f,'}')
+
+                    chain2,pos2 = self.ExtractFirstchain(JScode)
+
+                    chain2 = chain2.lstrip()
+                    JScode = JScode[(pos2 + 1):]
+                    m2 = re.search(r'catch\s*\(([^\)]+)\)\s*{(.+?)}', chain2,re.DOTALL)
+                    if m2:
+                        a = m2.group(1)
+                        b = m2.group(2)
+                    else:
+                        raise Exception('> ERROR : catch not found , try loop')
+
+                    out('> Try fonction : Block try=' + f + ' block catch=' + b )
+
+                    #For the moment just execute the catch part
+                    self.Parse(b,vars,allow_recursion)
                     continue
 
             #Pas trouve, une fonction ?
