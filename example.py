@@ -3,22 +3,12 @@
 
 from tinyjsparser import JsParser
 
+
 JScode6 ="""
 
-var _0xc819f2;
+"""
 
-var _0x3d8976 = [_0xc819f2 = 22940, _0xc819f2 = _0xc819f2 + 55390, _0xc819f2 = _0xc819f2 + 48153, _0xc819f2 = _0xc819f2 + -25131];
-_0x3d8976[2] = _0x3d8976[3] ^ _0x3d8976[1], _0x3d8976[3] = _0x3d8976[0] * _0x3d8976[1];
-
-var _0x19d347 = 1;
-for (; _0x19d347 < 19; _0x19d347++) {
-  _0x3d8976[2] += _0x19d347;
-}
-_0x3d8976[0] = 101709 * _0x3d8976[0] % (2 << 16), _0x3d8976[0] = 121942 * _0x3d8976[0] % (2 << 16), code = _0x3d8976["map"](function(intval) {
-  return ("6853" + intval["toString"](16))["substr"](-4);
-})["join"]("");
-
-window.alert(code)
+JScode7 ="""
 
 """
 
@@ -112,10 +102,22 @@ tt = decrypt("663=ompjS2nseJZ69JrOSmpfiIi4Rme7lHiFyHeLmIZ+lHh7hIfkp2ZmhGZV6ZmkuJ
 
 """
 
+JScode111 = """
+
+
+aa = 1;
+try {
+aa= 3;
+}
+catch (err) {
+  aa = 2;
+}
+debug();
+"""
 
 JScode1 = """
 
-window.ffff='DbHci0dMQg';var _0x9495=['Zft','pow','tcV','EAk','QHb','charCodeAt','11|12|13|0|14|3|2|9|16|1|4|8|5|6|15|10|7','split','xXM','length','jLa','substring','aZP','dOD','Poy','write','push','dkF','text','tjf','HIZ','WyX','faz','Gcy','ucs','2|0|5|4|3|1','dhh','pQu','eMz','ZBD','Lnk','fromCharCode','DYl','4|3|0|5|6|2|1','WOa','gzw','cBV'];(function(_0x1f55fe,_0x45ae62){
+window.cc_cc_cc=''+'gItZEkCYUy';var _0x9495=['Zft','pow','tcV','EAk','QHb','charCodeAt','11|12|13|0|14|3|2|9|16|1|4|8|5|6|15|10|7','split','xXM','length','jLa','substring','aZP','dOD','Poy','write','push','dkF','text','tjf','HIZ','WyX','faz','Gcy','ucs','2|0|5|4|3|1','dhh','pQu','eMz','ZBD','Lnk','fromCharCode','DYl','4|3|0|5|6|2|1','WOa','gzw','cBV'];(function(_0x1f55fe,_0x45ae62){
 var _0x3d4039=function(_0x32de24){
 while(--_0x32de24){
 _0x1f55fe['push'](_0x1f55fe['shift']());
@@ -227,7 +229,23 @@ switch(_0x23d67d[_0x436e75++]){
 case'0':var _0x1bf6e5='';continue;
 case'1':for(i=0;_0x45ae41[_0x5949('2')](i,_0x439a49[_0x5949('3')]);i+=8){
 _0x41e0ff=_0x45ae41[_0x5949('4')](i,8);var _0x40b427=_0x439a49[_0x5949('5')](i,_0x45ae41[_0x5949('6')](i,8));var _0x577716=_0x45ae41[_0x5949('7')](parseInt,_0x40b427,16);with(_0x31f4aa){
-if (false) {
+if(!_0x45ae41[_0x5949('8')](_0x5949('9'),document)||!(!(function(){
+//return false;
+try{
+if('_phantom'in window||'callPhantom'in window||'__phantomas'in window||'webdriver'in window&&1==window.a||'webdriver'in window.navigator&&1==window.navigator.a||'domAutomation'in window||'_Selenium_IDE_Recorder'in window||'__webdriver_script_fn'in document)return!0;try{
+if(window.document.documentElement.getAttribute('webdriver'))return!0;var b='__webdriver_evaluate;__selenium_evaluate;__webdriver_script_function;__webdriver_script_func;__webdriver_script_fn __fxdriver_evaluate __driver_unwrapped;__webdriver_unwrapped;__driver_evaluate;__selenium_unwrapped;__fxdriver_unwrapped'.split(';'),c='_phantom __nightmare;_selenium;callPhantom;callSelenium;_Selenium_IDE_Recorder;__stopAllTimers'.split(';'),d;for(d in c)if(window[c[d]])return!0;for(j in b)if(window.document[b[j]])return!0;for(var e in window.document)if(e.match(/$[a-z]dc_/)&&window.document[e].b)return!0
+}
+catch(f){
+
+}
+return window.external&&window.external.toString()&&-1!=window.external.toString().indexOf('Sequentum')?!0:window.document.documentElement.getAttribute('selenium')?!0:window.document.documentElement.getAttribute('driver')?!0:null!==document.documentElement.getAttribute('selenium')?!0:null!==document.documentElement.getAttribute('webdriver')?!0:null!==document.documentElement.getAttribute('driver')?!0:!1
+}
+catch(f){
+return!1
+}
+
+}
+)())){
 _0x577716=0;
 }
 ke[_0x5949('10')](_0x577716);
@@ -247,8 +265,9 @@ _0x3d7b02=[];
 case'5':_0x5d72cd=_0x5d72cd[_0x5949('5')](_0x41e0ff);continue;
 case'6':var _0x439a49=0;continue;
 case'7':
-debug();
-_0x45ae41[_0x5949('11')]($,'#DtsBlkVFQx')[_0x5949('12')](_0x1bf6e5);continue;
+_0x45ae41[_0x5949('11')]($,'#lqEH1')[_0x5949('12')](_0x1bf6e5);
+
+continue;
 case'8':_0x41e0ff=_0x45ae41[_0x5949('4')](9,8);continue;
 case'9':var _0x3d7b02=[];continue;
 case'10':while(_0x45ae41[_0x5949('2')](_0x439a49,_0x5d72cd[_0x5949('3')])){
@@ -258,7 +277,7 @@ switch(_0x138ee5[_0x2d6ce4++]){
 case'0':var _0x896767=0;continue;
 case'1':var _0x2de433=_0x45ae41[_0x5949('6')](_0x45ae41[_0x5949('13')](_0x5eb93a,2),_0x37c346);continue;
 case'2':_0x145894+=1;continue;
-case'3':_0x30725e=_0x45ae41[_0x5949('14')](_0x45ae41[_0x5949('15')](_0x30725e,(parseInt('643242206277',8)-817+4-2)/(22-8)),_1x4bfb36);continue;
+case'3':_0x30725e=_0x45ae41[_0x5949('14')](_0x45ae41[_0x5949('15')](_0x30725e,(parseInt('116527272660',8)-527+4-3)/(14-8)),_1x4bfb36);continue;
 case'4':var _0x59ce16=681741804;continue;
 case'5':var _0x5eb93a=64;continue;
 case'6':var _0x30725e=_0x45ae41[_0x5949('16')](_0x896767,_0x3d7b02[_0x45ae41[_0x5949('17')](_0x145894,9)]);continue;
@@ -315,7 +334,7 @@ break;
 
 }
 while(_0x45ae41[_0x5949('35')](_0x3d9c8e,_0x5eb93a));continue;
-case'11':var  _1x4bfb36=parseInt('33245523432',8)-4;continue;
+case'11':var  _1x4bfb36=parseInt('21007362032',8)-50;continue;
 case'12':var _0x1a873b=0;continue;
 case'13':var _0x3d9c8e=0;continue;
 }
@@ -324,7 +343,7 @@ break;
 
 }
 continue;
-case'11':var _0x531f91=_0x45ae41['dkF']($,_0x45ae41[_0x5949('6')]('#',ffff))[_0x5949('12')]();continue;
+case'11':var _0x531f91=_0x45ae41['dkF']($,_0x45ae41[_0x5949('6')]('#',cc_cc_cc))[_0x5949('12')]();continue;
 case'12':var _0x5d72cd=_0x531f91[_0x5949('36')](0);continue;
 case'13':_0x5d72cd=_0x531f91;continue;
 case'14':var _0x41e0ff=_0x45ae41[_0x5949('20')](9,8);continue;
@@ -431,7 +450,8 @@ debug();
 # 3 - Unpaccker
 # 4 - AAdecode in file
 # 5 - Alluc
-# 6 - Perso
+# 6 - Uptostream
+# 7 - perso
 
 TEST = 6
 
@@ -452,11 +472,13 @@ if TEST == 2:
 if TEST == 3:
     JScode = JScode3
 if TEST == 4:
-    JScode = loadRawstring('G:\\JSparser\\JS_AA_raw.txt')
+    JScode = loadRawstring('JS_AA_raw.txt')
     JScode = unicode(JScode, "utf-16")
 if TEST == 5:
     JScode = JScode5
 if TEST == 6:
+    JScode = loadRawstring('up2stream.js')
+if TEST == 7:
     JScode = JScode6
     
 JP = JsParser()
@@ -464,10 +486,11 @@ Liste_var = []
 
 
 if TEST == 1:
-    JP.AddHackVar('#DbHci0dMQg',"2805eaa282a978d071dca9883380c798b4f94caea7303fce4ae2da1cdea12da4d77aae684e5c40552444506f7a4f027e4c67683b4451646f3771455c7279025a745b516102507a657644016e6c5f665d037d427243640248786257470159657f795202")
+    JP.AddHackVar('#gItZEkCYUy',"7646b5310d329a21dec22b45be5b4bad6ce711857674f9b9d272e7896b81aee1b9c4e3837351587245037c585a6f7b024141755741016c5b47656a01476342497d0273476c7c6402426f4d29617279557a025f676d501c677c68795c0364614e6f4803")
 
 #JP.SetOption('ForceTest')
 
+# Set it tu true to display debug time process
 if (False):
     import cProfile
     cProfile.run('JP.ProcessJS(JScode,Liste_var)')
@@ -477,7 +500,7 @@ else:
 #print 'Return : ' + str(JP.ProcessJS(JScode))
 
 if TEST == 1:
-    print ('Decoded url : ' + JP.GetVarHack("#DtsBlkVFQx"))
+    print ('Decoded url : ' + JP.GetVarHack("#lqEH1"))
 if TEST == 2:
     print ('return : ' + JP.LastEval.decode('string-escape'))
 if TEST == 4:
