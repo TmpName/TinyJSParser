@@ -14,6 +14,7 @@
 # Object
 # Globla/Local variables/function/object
 # In JavaScript arrays/list are objects.
+# Use ast.literal_eval(node_or_string)
 
 
 #help
@@ -52,7 +53,7 @@ except:
 REG_NAME = '[\w]+'
 REG_OP = '[\/\*\-\+<>\|\&=~^%!]{1,2}' #not space here, and no bracket
 #REG_OP = '[\/\*\-\+<>\|\&=~^%!]+' #not space here, and no bracket
-DEBUG = True # Never enable it in kodi, too big size log
+DEBUG = False # Never enable it in kodi, too big size log
 MAX_RECURSION = 50
 ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 
@@ -215,6 +216,7 @@ def MySplit(string,char,NoEmpty = False):
     chain = 0
     p = 0
     e = ""
+    b = 0
 
     if not l:
         if (NoEmpty):
@@ -224,12 +226,18 @@ def MySplit(string,char,NoEmpty = False):
         c = string[i]
         if c == '"':
             chain = 1-chain
-        if c == '(':
-            p += 1
-        if c == ')':
-            p -= 1
+            
+        if not chain:
+            if c == '(':
+                p += 1
+            if c == ')':
+                p -= 1
+            if c == '{':
+                b += 1
+            if c == '}':
+                b -= 1
 
-        if (c == char) and not chain and not p:
+        if (c == char) and not chain and not p and not b:
             r.append(e.strip())
             e = ''
         else:
@@ -253,7 +261,7 @@ def GetConstructor(value):
     return ''
 
 class JSBuffer(object):
-    PRIORITY = {'+':3 , '-':3 , '*':4 , '/':4 , '>':1 , '<':1 , '&':2 , '|':2}
+    PRIORITY = {'+':5 , '-':5 , '*':5 , '/':5 , '>':5 , '<':5 , '&':5 , '|':5, '===' :0, '==':0}
 
     def __init__(self):
         self.Reset()
@@ -284,7 +292,7 @@ class JSBuffer(object):
     #Need 3 values for priority
     def AddValue(self,value):
         if DEBUG:
-            out('ADD (operator=' + self.__op + ')  ' + Ustr(value) + ' (' + Ustr(type(value)) + ') a ' + Ustr(self.buf))
+            out('ADD (operator: ' + self.__op + ')  ' + Ustr(value) + ' (' + Ustr(type(value)) + ') a ' + Ustr(self.buf))
 
         if not self.type:
             self.type = CheckType(value)
@@ -309,13 +317,18 @@ class JSBuffer(object):
 
         return ret
 
+    #OP0 BUF0 OP1 BUF1 OP2 BUF2
     def Compute(self):
+    
+        #check priority
+        #op1 = self.PRIORITY.get(self.opBuf[1],2)
+        #op2 = self.PRIORITY.get(self.opBuf[2],2)
 
         #check type
-        if len(self.buf) > 1:
+        if len(self.buf) > 1:   
             if not (self.type == CheckType(self.buf[len(self.buf) -1])):
                 #Type different mais juste operation logique
-                if self.opBuf[1] == '==':
+                if self.opBuf[1] == '==' or self.opBuf[1] == '===' or self.opBuf[1] == '!=' or self.opBuf[1] == '!==':
                     self.type = 'Logic'
                 #Type different mais JS convertis en string ou int
                 else:
@@ -323,25 +336,26 @@ class JSBuffer(object):
                         if DEBUG:
                             out('convertion to string')
 
-                            if not CheckType(self.buf[0]) == 'String':
-                                self.buf[0]=self.SpecialStr(self.buf[0])
-                            if len(self.buf) > 1:
-                                if not CheckType(self.buf[1]) == 'String':
-                                    self.buf[1]=self.SpecialStr(self.buf[1])
-                            self.type = 'String'
+                        if not CheckType(self.buf[0]) == 'String':
+                            self.buf[0]=self.SpecialStr(self.buf[0])
+                        if len(self.buf) > 1:
+                            if not CheckType(self.buf[1]) == 'String':
+                                self.buf[1]=self.SpecialStr(self.buf[1])
+                        self.type = 'String'
                     else:
                         if DEBUG:
                             out('convertion to int')
 
-                            if not CheckType(self.buf[0]) == 'Numeric':
-                                self.buf[0]=self.SafeEval(self.buf[0])
-                            if len(self.buf) > 1:
-                                if not CheckType(self.buf[1]) == 'Numeric':
-                                    self.buf[1]=self.SafeEval(self.buf[1])
-                            self.type = 'Numeric'
+                        if not CheckType(self.buf[0]) == 'Numeric':
+                            self.buf[0]=self.SafeEval(self.buf[0])
+                        if len(self.buf) > 1:
+                            if not CheckType(self.buf[1]) == 'Numeric':
+                                self.buf[1]=self.SafeEval(self.buf[1])
+                        self.type = 'Numeric'
 
         #Work for operateur + | !
         if self.type == 'String':
+
             if '!' in self.opBuf[0]:
                 self.buf[0] = not self.buf[0]
                 self.opBuf[0] = self.opBuf[0].replace('!','')
@@ -354,12 +368,13 @@ class JSBuffer(object):
                 if self.opBuf[1] == '|':
                     if not self.buf[0]:
                         self.buf[0] = self.buf[1]
-                if '==' in self.opBuf[1]:
-                    self.buf[0] = (self.buf[1] == self.buf[0])
-                    self.type == 'Logic'
                 if '!=' in self.opBuf[1]:
                     self.buf[0] = (self.buf[1] != self.buf[0])
                     self.type == 'Logic'
+                if '==' in self.opBuf[1]:
+                    self.buf[0] = (self.buf[1] == self.buf[0])
+                    self.type == 'Logic'
+
 
                 #decale
                 del self.opBuf[-1]
@@ -396,6 +411,9 @@ class JSBuffer(object):
                     self.buf[0] = False
                 else:
                     self.buf[0] = True
+
+                if '!' in self.opBuf[1]:
+                    self.buf[0] = not self.buf[0]
                 #decale
                 del self.opBuf[-1]
                 del self.buf[-1]
@@ -474,7 +492,7 @@ class JSBuffer(object):
     def SafeEval(self,str):
         if not str:
             raise Exception ('Nothing to eval')
-        f = re.search('[^0-9\+\-\.\(\)<>=x\|&%!*\^\/~]',str)
+        f = re.search('[^0-9\+\-\.\(\)<>=xabcdef\|&%!*\^\/~]',str)
         if f:
             raise Exception ('Wrong parameter to Eval : ' + str)
             return 0
@@ -490,6 +508,7 @@ class fonction(object):
         self.code = data
         self.param = param
         self.const = c
+        self.array = []
 
     def ToStr(self):
         return 'function ' + self.name + '(' + str(self.param)[1:-1] + ') {'+ self.code + '}'
@@ -817,6 +836,9 @@ class JsParser(object):
     def FonctionParser(self,vars,allow_recursion,name,function,arg2,JScode):
 
         arg=arg2.strip()
+        
+        if isinstance(name, ( int, long, float ) ):
+            name = str(name)
 
         if DEBUG:
             out( '*** fonction > Name: ' + Ustr(name) + ' arg: ' + Ustr(arg) + ' function: ' + Ustr(function) )
@@ -824,7 +846,6 @@ class JsParser(object):
         #hack ?
         if isinstance(name, Hack):
             a = MySplit(arg,',',True)
-
             #In this case function = text but useless ATM
 
             if a:
@@ -869,9 +890,9 @@ class JsParser(object):
 
                 n,p,c,ct = fe.name,fe.param,fe.code,fe.const
                 a = MySplit(arg,',',True)
+                
                 a2 = []
                 #out('code de la fonction : ' + c)
-
 
                 if ct:
                     out('constructor mode')
@@ -886,6 +907,9 @@ class JsParser(object):
                 for i in a:
                     vv = self.evalJS(i,vars,allow_recursion)
                     a2.append(RemoveGuil(vv))
+                    
+                while len(a2) < len(p):
+                    a2.append(None) #undefined
 
                 #We copy previous variables and function
                 #TODO list copy is rly bad for optimisation, need to make variable list by scope
@@ -907,7 +931,10 @@ class JsParser(object):
                     self.Return = None
 
                 #TODO: REALLY IMPORTANT : Check wich one is good
-                return jjj,JScode
+                #HACK : NEED TO CHECK
+                if self.ReturnValue == None:
+                    self.ReturnValue = jjj
+                #return jjj,JScode
                 return self.ReturnValue,JScode
 
             else:
@@ -928,6 +955,9 @@ class JsParser(object):
 
         for lib in List_Lib:
             if hasattr(lib, function):
+            
+                out('Fonction lib : ' + str(function))
+            
                 if not function == "eval":
                     arg = MySplit(arg,',')
                     for i in range(len(arg)):
@@ -1297,6 +1327,7 @@ class JsParser(object):
                         r = self.GetVar(vars,Var_string)
 
                 elif P1.t == 'fct':
+                
                     if P1.at1:
                         fonction = P1.at1
                         name = P1.name
@@ -1310,7 +1341,7 @@ class JsParser(object):
                     #hack, devrait etre acive tout le temps
                     if 'TEMPORARY_VARS' in name:
                         name = self.evalJS(name,vars,allow_recursion)
-
+                    
                     r,JScode = self.FonctionParser(vars,allow_recursion,name,fonction,P1.arg,JScode)
 
                 #to speed up
@@ -1509,10 +1540,11 @@ class JsParser(object):
                                 try:
                                     r = k[int(index)]
                                 except:
-                                    if self.IsFunc(var,j[1]):
+                                    #Need better check
+                                    #if self.IsFunc(var,j[1]):
                                         #return 'undefined'
-                                        return None
-                                    return False # To check
+                                        #return None
+                                    return None # To check
                     elif type(k) in [dict]:
                         index = RemoveGuil(index)
                         if CheckType(index) == 'Numeric':
@@ -1762,6 +1794,7 @@ class JsParser(object):
         pos2 = len(content) + 2
 
         fm = fonction(name,param,content.lstrip())
+        
         self.SetVar(vars,name,fm)
 
         data = data[(pos2):]
@@ -1914,15 +1947,17 @@ class JsParser(object):
                 if m:
                     chain = m.group(1)
                     r = self.evalJS(chain,vars,allow_recursion)
+                    
                     self.Return = True
                     self.ReturnValue = r
+                    
                     return self.ReturnValue
 
             #Variable creation/modification ?
             #m =  re.search(r'^\({0,1}([\w\.]+)\){0,1}(?:\[([^\]]+)\])*\){0,1}\s*(?:[\^\/\*\-\+])*=',chain,re.DOTALL | re.UNICODE)
             #m2 = re.search(r'^\({0,1}([\w\.]+)\){0,1}(?:\.([\w]+))*\){0,1}\s*(?:[\^\/\*\-\+])*=',chain,re.DOTALL | re.UNICODE)
-            if chain.startswith('var '):
-                out('var')
+            if chain.startswith('var ') or chain.startswith('let '):
+                out('var/let')
 
                 chain = chain[4:]
 
@@ -2405,7 +2440,7 @@ class Array(object):
             sr = self._array[int(p1):int(p2)]
         else:
             sr = self._array[int(p1):]
-        sr = '"' + sr + '"'
+        #sr = '"' + sr + '"'
         return sr
 
     def splice(self,arg):
@@ -2470,7 +2505,10 @@ class Basic(object):
 
     def debug(self,arg):
         self._JSParser.PrintVar(self._JSParser.FastEval_vars)
-        raise Exception("DEBUG")
+        r = ''
+        if len(arg) > 0:
+            r = arg[0]
+        raise Exception("DEBUG : " + r)
         return
 
     def eval(self,arg):
@@ -2521,6 +2559,19 @@ class Basic(object):
 
     def String(self,arg):
         return str(arg[0])
+        
+    def atob(self,arg):
+        import base64
+        return base64.b64decode(arg[0])
+        
+    def decodeURIComponent(self,arg):
+        #Phyton 3
+        #from urllib.parse import unquote
+        #return unquote(arg[0])
+        
+        #Python 2
+        import urllib
+        return urllib.unquote(arg[0]).decode('utf8')
     
 
 List_Lib = [Basic,Array,String,Math]
