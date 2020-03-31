@@ -324,8 +324,9 @@ class JSBuffer(object):
         #op1 = self.PRIORITY.get(self.opBuf[1],2)
         #op2 = self.PRIORITY.get(self.opBuf[2],2)
 
-        #check type
-        if len(self.buf) > 1:   
+        #Need convertion type ?
+        if len(self.buf) > 1:
+            #Need convertion ?        
             if not (self.type == CheckType(self.buf[len(self.buf) -1])):
                 #Type different mais juste operation logique
                 if self.opBuf[1] == '==' or self.opBuf[1] == '===' or self.opBuf[1] == '!=' or self.opBuf[1] == '!==':
@@ -619,6 +620,10 @@ class JsParserHelper1(object):
         if self.op:
             if DEBUG:
                 out('operation :' + Ustr(self.name) + ' []= ' + Ustr(self.at1) + ' op: ' + str(self.op) )
+                
+            #hack for priority
+            if '==' in self.op:
+                JScode = '(' + JScode + ')'
 
         self.rest_code = JScode
 
