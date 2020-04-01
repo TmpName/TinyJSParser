@@ -53,7 +53,7 @@ except:
 REG_NAME = '[\w]+'
 REG_OP = '[\/\*\-\+<>\|\&=~^%!]{1,2}' #not space here, and no bracket
 #REG_OP = '[\/\*\-\+<>\|\&=~^%!]+' #not space here, and no bracket
-DEBUG = False # Never enable it in kodi, too big size log
+DEBUG = True # Never enable it in kodi, too big size log
 MAX_RECURSION = 50
 ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 
@@ -509,7 +509,7 @@ class fonction(object):
         self.code = data
         self.param = param
         self.const = c
-        self.array = []
+        self.tuple = {}
 
     def ToStr(self):
         return 'function ' + self.name + '(' + str(self.param)[1:-1] + ') {'+ self.code + '}'
@@ -651,6 +651,7 @@ class JsParser(object):
         self.option_ForceTest = False
 
         self.SystemVars = []
+        self.GlobalVar = []
 
 
     def SetReturn(self,r,v):
@@ -671,7 +672,10 @@ class JsParser(object):
     def PrintVar(self,vars):
         print ('-------------------------------')
         for i,j in vars:
-            print (Ustr(i) + ' : ' + Ustr(j))
+            bon = ""
+            if isinstance(j, fonction):
+                bon = str(j.tuple)
+            print (Ustr(i) + ' : ' + Ustr(j) + " " + bon)
         print ('\n')
         for i,j in self.HackVars:
             print (Ustr(i) + ' : ' + Ustr(j))
@@ -873,7 +877,6 @@ class JsParser(object):
                 pass
 
         if fe:
-
             if fe == '$':
                 a = MySplit(arg,',',True)
                 vv = self.evalJS(a[0],vars,allow_recursion)
@@ -1519,6 +1522,7 @@ class JsParser(object):
             if j[0] == variable:
                 k = j[1]
                 r = k
+                
                 if not(index == None):
                     #Special method
                     if index == 'length':
@@ -1530,6 +1534,10 @@ class JsParser(object):
                                 return GetConstructor(k)
                         else:
                             return GetConstructor(k)
+                    # Object tuple, but using global var for the moment
+                    f = self.IsFunc(self.GlobalVar,j[1])
+                    if f:
+                        return f.tuple.get(index,None)
                     # normal one
                     if type(k) in [list,tuple,str,unicode]:
                         if CheckType(index) == 'Numeric':
@@ -1578,20 +1586,20 @@ class JsParser(object):
         #self.PrintVar(var)
         raise Exception('Variable not defined: ' + str(variable))
 
-    def SetVar(self,var,variable,value,i = None):
+    def SetVar(self,var,variable,value,index = None):
 
-        #print 'Setvar Variable =' + variable + ' value=' + str(value) + ' index=' + str(i)
+        #out( 'Setvar Variable : ' + variable + ' value=' + str(value) + ' index=' + str(index) )
 
         variable = variable.strip()
 
         #If not xisting var, create it first ?
         if not self.IsVar(var,variable):
             #Chain or numeric
-            if i == None:
+            if index == None:
                 var.append((variable,value))
                 return
             #dictionnary
-            elif (isinstance(i, types.StringTypes)):
+            elif (isinstance(index, types.StringTypes)):
                 var.append((variable,{}))
             #array
             else:
@@ -1600,7 +1608,7 @@ class JsParser(object):
         for j in var:
             if j[0] == variable:
 
-                if i == None:
+                if index == None:
                     #chain ?
                     if (isinstance(value, types.StringTypes)):
                         var[var.index(j)] = (variable,value)
@@ -1610,17 +1618,16 @@ class JsParser(object):
                 else:
                 #Array
                     #hack, Variable created as list but used as dictionnary, so need convertion
-                    if (isinstance(i, types.StringTypes)) and type(var[var.index(j)][1]) in [list,tuple]:
+                    if (isinstance(index, types.StringTypes)) and type(var[var.index(j)][1]) in [list,tuple]:
                         ind = var.index(j)
                         var[ind] = (variable,{})
                         j = (variable,{})
 
                     if type(var[var.index(j)][1]) in [list,tuple]:
-
                         Listvalue = var[var.index(j)][1]
 
                         #ok this place doesn't esist yet
-                        l = int(i) - len(Listvalue) + 1
+                        l = int(index) - len(Listvalue) + 1
                         while l > 0:
                             Listvalue.append('undefined')
                             l -= 1
@@ -1628,14 +1635,20 @@ class JsParser(object):
                         if type(value) in [list,tuple]:
                             Listvalue = value
                         else:
-                            Listvalue[int(i)] = value
+                            Listvalue[int(index)] = value
                         var[var.index(j)] = (variable,Listvalue)
                     #dictionnary
                     elif type(var[var.index(j)][1]) in [dict]:
                         ind = var.index(j)
                         Listvalue = var[ind][1]
-                        Listvalue[Ustr(i)] = value
+                        Listvalue[Ustr(index)] = value
                         var[ind] = (variable,Listvalue)
+                        
+                    else:
+                        #Variable is fonction so use Object tuple and using global var for the moment
+                        f = self.IsFunc(self.GlobalVar,j[1])
+                        if f:
+                            f.tuple[index] = value
 
                 return
 
@@ -1681,6 +1694,7 @@ class JsParser(object):
             return False
 
         f = self.GetVar(vars,name)
+        
         if f == '$':
             return '$'
         if isinstance(f, fonction):
@@ -1760,7 +1774,6 @@ class JsParser(object):
         elif value == None:
             self.SetVar(vars,name,None,index)
         else:
-            print (type(value))
             raise Exception('> ERROR : Var problem >' + str(value))
 
 
@@ -1801,6 +1814,9 @@ class JsParser(object):
         fm = fonction(name,param,content.lstrip())
         
         self.SetVar(vars,name,fm)
+        
+        #Hack, memorise it in global var too
+        self.SetVar(self.GlobalVar,name,fm)
 
         data = data[(pos2):]
 
@@ -2126,7 +2142,6 @@ class JsParser(object):
                         f = f[(len(tmp_str)+1):]
 
                     if len(f) < 1:
-                        self.PrintVar(vars)
                         raise Exception("Can't find switch value " + str(v))
 
                     f = f[(len(StrToSearch)):]
@@ -2268,6 +2283,9 @@ class JsParser(object):
 
         #Hack
         JScode = JScode.replace('$(document).ready','DOCUMENT_READY')
+        
+        #Make global var
+        self.GlobalVar = vars
 
         #Start the parsing
         ret = self.Parse(JScode,vars)
@@ -2471,10 +2489,6 @@ class Array(object):
         self._JSParser.PrintVar(self._JSParser.FastEval_vars)
 
         fe = self._JSParser.IsFunc(self._JSParser.FastEval_vars,arg[0])
-        #print fe.name
-        #print fe.code
-        #print fe.param
-        #print fe.const
 
         for i in self._array:
             v = []
