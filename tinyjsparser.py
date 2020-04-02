@@ -367,15 +367,15 @@ class JSBuffer(object):
                 if self.opBuf[1] == '!':
                     self.buf[1] = not self.buf[1]
                     self.opBuf[1] = self.opBuf[1].replace('!','')
-                if self.opBuf[1] == '+':
+                elif self.opBuf[1] == '+':
                     self.buf[0] = self.buf[0] + self.buf[1]
-                if self.opBuf[1] == '|':
+                elif self.opBuf[1] == '|':
                     if not self.buf[0]:
                         self.buf[0] = self.buf[1]
-                if '!=' in self.opBuf[1]:
+                elif '!=' in self.opBuf[1]:
                     self.buf[0] = (self.buf[1] != self.buf[0])
                     self.type == 'Logic'
-                if '==' in self.opBuf[1]:
+                elif '==' in self.opBuf[1]:
                     self.buf[0] = (self.buf[1] == self.buf[0])
                     self.type == 'Logic'
 
@@ -1612,11 +1612,6 @@ class JsParser(object):
         raise Exception('Variable not defined: ' + str(variable))
 
     def SetVar(self,var,variable,value,index = None):
-
-        try:
-            out( 'Setvar Variable : ' + variable + ' value=' + str(value) + ' index=' + str(index) )
-        except:
-            pass
 
         variable = variable.strip()
 
