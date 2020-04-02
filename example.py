@@ -514,6 +514,6 @@ if TEST == 4:
 if TEST == 5:
     print ('return : ' + JP.LastEval)
 if TEST == 6:
-    print ('return : ' + JP.GetVar(Liste_var,'code') )
+    print ('return : ' + str(JP.GetVar(Liste_var,'sources')) )
 if TEST == 7:
     pass
