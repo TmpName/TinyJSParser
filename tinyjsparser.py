@@ -213,7 +213,8 @@ def MySplit(string,char,NoEmpty = False):
     r = []
     l = len(string)
     i = 0
-    chain = 0
+    c1 = 0
+    c2 = 0
     p = 0
     e = ""
     b = 0
@@ -225,9 +226,11 @@ def MySplit(string,char,NoEmpty = False):
     while (l > i):
         c = string[i]
         if c == '"':
-            chain = 1-chain
+            c1 = 1-c1
+        if c == "'":
+            c2 = 1-c2
             
-        if not chain:
+        if not c1 and not c2:
             if c == '(':
                 p += 1
             if c == ')':
@@ -237,7 +240,7 @@ def MySplit(string,char,NoEmpty = False):
             if c == '}':
                 b -= 1
 
-        if (c == char) and not chain and not p and not b:
+        if (c == char) and not c1 and not p and not b and not c2:
             r.append(e.strip())
             e = ''
         else:
@@ -674,7 +677,7 @@ class JsParser(object):
         for i,j in vars:
             bon = ""
             if isinstance(j, fonction):
-                bon = str(j.tuple)
+                bon = str(j.tuple)# + " " + str(j.code)
             print (Ustr(i) + ' : ' + Ustr(j) + " " + bon)
         print ('\n')
         for i,j in self.HackVars:
@@ -999,7 +1002,7 @@ class JsParser(object):
             return NewEval,''
 
         self.PrintVar(vars)
-        raise Exception("Unknow fonction : " + function)
+        raise Exception("Unknow fonction : " + function + " Name " + name)
 
     def Fast_Eval(self,strg):
         r = self.evalJS(strg,self.FastEval_vars,self.FastEval_recur)
@@ -1111,6 +1114,7 @@ class JsParser(object):
                 #if not re.search('^=[^=]',JScode, re.UNICODE):
                     #usefull parenthses
                     v = self.evalJS(c2,vars,allow_recursion)
+                    
                     self.SetVar(vars,'TEMPORARY_VARS'+str(allow_recursion),v)
                     JScode = 'TEMPORARY_VARS'+str(allow_recursion) + JScode
                 else:
@@ -1191,7 +1195,9 @@ class JsParser(object):
 
                     replac,pos3,v = self.MemFonction(vars,name,m.group(2),openparenthesis,JScode)
                     JScode = replac
-                    InterpretedCode.AddValue(v)
+                    if not v in replac:
+                        InterpretedCode.AddValue(v)
+
                     continue
 
             # pointeur vers fonction ?
@@ -1238,9 +1244,10 @@ class JsParser(object):
                 pos2 = len(c2) + 2
 
                 valueT = MySplit(c2,',',True)
+
                 v = {}
                 for k in valueT:
-                    l = k.split(':')
+                    l = MySplit(k,':')
                     #WARNING : no eval here in JS
                     #v2g = self.evalJS(l[0],vars,func,allow_recursion)
                     v2g = RemoveGuil(l[0])
@@ -1517,61 +1524,79 @@ class JsParser(object):
         if DEBUG:
             out('*** Variable Get > var:' + Ustr(variable) + ' index :' + Ustr(index))
 
+        j = None
         #Realy bad for optimisation (array concatenation)
         for j in var + self.SystemVars:
             if j[0] == variable:
-                k = j[1]
-                r = k
+                break
                 
-                if not(index == None):
-                    #Special method
-                    if index == 'length':
-                        r = len(k)
-                        return r
-                    if index == 'constructor':
-                        if type(k) in [dict]:
-                            if not k.get('constructor'):
-                                return GetConstructor(k)
-                        else:
+        #hack Useless
+        #if j and index:
+        #    k = j[1]
+        #    try:
+        #        if str(k).startswith('AnonymousFunc'):
+        #            for l in var + self.SystemVars:
+        #                if l[0] == k:
+        #                    print ("Test : " + variable + "[" + index + ']')
+        #                    #j = l
+        #                    self.PrintVar(var)
+        #                    break
+        #    except:
+        #        pass
+                
+        if j:
+            k = j[1]
+            r = k
+            
+            if not(index == None):
+                #Special method
+                if index == 'length':
+                    r = len(k)
+                    return r
+                if index == 'constructor':
+                    if type(k) in [dict]:
+                        if not k.get('constructor'):
                             return GetConstructor(k)
-                    # Object tuple, but using global var for the moment
-                    f = self.IsFunc(self.GlobalVar,j[1])
-                    if f:
-                        return f.tuple.get(index,None)
-                    # normal one
-                    if type(k) in [list,tuple,str,unicode]:
-                        if CheckType(index) == 'Numeric':
-                            if int(index) < len(k):
-                                r = k[int(index)]
-                            else:
-                                r = 'undefined'
-                        elif CheckType(index) == 'String':
-                            index = RemoveGuil(index)
-                            try:
-                                r = k[index]
-                            except:
-                                try:
-                                    r = k[int(index)]
-                                except:
-                                    #Need better check
-                                    #if self.IsFunc(var,j[1]):
-                                        #return 'undefined'
-                                        #return None
-                                    return None # To check
-                    elif type(k) in [dict]:
+                    else:
+                        return GetConstructor(k)
+                # Object tuple, but using global var for the moment
+                f = self.IsFunc(self.GlobalVar,j[1])
+                if f:
+                    return f.tuple.get(index,None)
+                # normal one
+                if type(k) in [list,tuple,str,unicode]:
+                    if CheckType(index) == 'Numeric':
+                        if int(index) < len(k):
+                            r = k[int(index)]
+                        else:
+                            r = 'undefined'
+                    elif CheckType(index) == 'String':
                         index = RemoveGuil(index)
-                        if CheckType(index) == 'Numeric':
-                            index  = str(index)
+                        try:
+                            r = k[index]
+                        except:
+                            try:
+                                r = k[int(index)]
+                            except:
+                                #Need better check
+                                #if self.IsFunc(var,j[1]):
+                                    #return 'undefined'
+                                    #return None
+                                return None # To check
+                elif type(k) in [dict]:
+                    index = RemoveGuil(index)
+                    if CheckType(index) == 'Numeric':
+                        index  = str(index)
 
-                        #if type(index) in [unicode]:
-                        #    index = unicode(index, "utf-8")
+                    #if type(index) in [unicode]:
+                    #    index = unicode(index, "utf-8")
 
-                        r = k.get(index)
+                    r = k.get(index)
 
-                    elif type(k) in [type]:
-                        r = getattr(k(self,None), index)
+                elif type(k) in [type]:
+                    r = getattr(k(self,None), index)
 
-                return r
+            return r
 
         #search it in hackvar ?
         for j in self.HackVars:
@@ -1588,7 +1613,10 @@ class JsParser(object):
 
     def SetVar(self,var,variable,value,index = None):
 
-        #out( 'Setvar Variable : ' + variable + ' value=' + str(value) + ' index=' + str(index) )
+        try:
+            out( 'Setvar Variable : ' + variable + ' value=' + str(value) + ' index=' + str(index) )
+        except:
+            pass
 
         variable = variable.strip()
 
@@ -1702,7 +1730,10 @@ class JsParser(object):
         elif isinstance(f, types.MethodType):
             return f
         else:
-            return self.IsFunc(vars,f)
+            r = self.IsFunc(vars,f)
+            if not r:
+                r = self.IsFunc(self.GlobalVar,f)
+            return r
 
     def VarManage(self,allow_recursion,vars,name,value=None):
 
@@ -1788,7 +1819,8 @@ class JsParser(object):
 
         if not name:
             n0 = 0
-            while self.IsFunc(vars,'AnonymousFunc' + str(n0)):
+            #Hack : search in global var atm
+            while self.IsFunc(self.GlobalVar,'AnonymousFunc' + str(n0)):
                 n0+=1
             name = 'AnonymousFunc' + str(n0)
 
