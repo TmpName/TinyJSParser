@@ -52,7 +52,6 @@ except:
 
 REG_NAME = '[\w]+'
 REG_OP = '[\/\*\-\+<>\|\&=~^%!]{1,2}' #not space here, and no bracket
-#REG_OP = '[\/\*\-\+<>\|\&=~^%!]+' #not space here, and no bracket
 DEBUG = False # Never enable it in kodi, too big size log
 MAX_RECURSION = 50
 ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
@@ -68,6 +67,7 @@ def RemoveGuil(string):
     if not (isinstance(string, types.StringTypes)):
         return string
     #string = string.strip()
+    
     if string.startswith('"') and string.endswith('"'):
         return string[1:-1]
     if string.startswith("'") and string.endswith("'"):
@@ -110,11 +110,18 @@ def Ustr(string):
     if isinstance(string, unicode):
         return str(string.encode('ascii','replace'))
     return str(string)
-
+   
 def GetNextchar(string, pos):
-    if len(string) <= (pos + 1):
+    try:
+        return string[pos+1]
+    except:
         return ''
-    return string[pos+1]
+        
+def GetPrevchar(string, pos):
+    try:
+        return string[pos-1]
+    except:
+        return ''
 
 def GetNextUsefullchar(string):
     j = 0
@@ -124,12 +131,6 @@ def GetNextUsefullchar(string):
     except:
         return '',0
     return string[j],j
-
-
-def GetPrevchar(string, pos):
-    if (pos - 1) < 0:
-        return ''
-    return string[pos-1]
 
 def CheckType(value):
     if (isinstance(value, types.StringTypes)):
@@ -155,11 +156,13 @@ def GetItemAlone(string,separator = ' '):
     ret = ''
 
     i = -1
-    p = 0 #parenthese
-    a = 0 #accolade
-    b = 0 #bracket
-    c1 = 0 #chain with "
-    c2 = 0 #chain with '
+    #p = parenthese
+    #a = accolade
+    #b = bracket
+    #c1 = chain with "
+    #c2 = chain with '
+    
+    p=a=b=c1=c2=0
     n = False
     last_char = ''
 
@@ -172,7 +175,7 @@ def GetItemAlone(string,separator = ' '):
         n = False
         
         #Return if the is complete and before the char wanted but not if it's the first one
-        if (ch in separator)  and not p and not a and not b and  not c1 and not c2 and not n and (i>0):
+        if (ch in separator)  and not p and not a and not b and not c1 and not c2 and not n and (i>0):
             return ret[:-1]
 
         #Skip empty space
@@ -212,12 +215,8 @@ def GetItemAlone(string,separator = ' '):
 def MySplit(string,char,NoEmpty = False):
     r = []
     l = len(string)
-    i = 0
-    c1 = 0
-    c2 = 0
-    p = 0
     e = ""
-    b = 0
+    i = c1 = c2 =  p =  b = 0
 
     if not l:
         if (NoEmpty):
@@ -253,14 +252,11 @@ def MySplit(string,char,NoEmpty = False):
 
 def GetConstructor(value):
     if isinstance(value, ( int, long ) ):
-        r = fonction('Number','','\n    [native code]\n',True)
-        return r
+        return fonction('Number','','\n    [native code]\n',True)
     elif isinstance(value, fonction):
-        r = fonction('Function','','\n    [native code]\n',True)
-        return r
+        return fonction('Function','','\n    [native code]\n',True)
     elif (isinstance(value, types.StringTypes)):
-        r = fonction('String','','\n    [native code]\n',True)
-        return r
+        return fonction('String','','\n    [native code]\n',True)
     return ''
 
 class JSBuffer(object):
@@ -686,8 +682,6 @@ class JsParser(object):
 
     #Need to take care at chain var with " and '
     def ExtractFirstchain(self,string):
-
-        #print string.encode('ascii','replace')
 
         if not len(string.strip()):
             return '',0
@@ -1529,7 +1523,7 @@ class JsParser(object):
         for j in var + self.SystemVars:
             if j[0] == variable:
                 break
-                
+
         #hack Useless
         #if j and index:
         #    k = j[1]
@@ -1630,7 +1624,6 @@ class JsParser(object):
 
         for j in var:
             if j[0] == variable:
-
                 if index == None:
                     #chain ?
                     if (isinstance(value, types.StringTypes)):
@@ -1715,6 +1708,7 @@ class JsParser(object):
 
         if not bExist:
             return False
+        global gg
 
         f = self.GetVar(vars,name)
         
