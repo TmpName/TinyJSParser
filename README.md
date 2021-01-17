@@ -85,6 +85,7 @@ print 'Decoded url : ' + JP.GetVarHack("#streamurl")
 ```
    
 <br><br><br><br>
+The version 1 is only working on python 2, can use older version for python 3.   
    
 He is not totally secure, I don't use exec() but I use eval() in restricted mode (No letter).
 
