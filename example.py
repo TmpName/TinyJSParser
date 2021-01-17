@@ -3,17 +3,37 @@
 
 from tinyjsparser import JsParser
 
-#f = function(value,joiner){return value!==joiner;}
+
+def string_escape(s, encoding='utf-8'):
+    return (s.encode('latin1')         # To bytes, required by 'unicode-escape'
+             .decode('unicode-escape') # Perform the actual octal-escaping decode
+             .encode('latin1')         # 1:1 mapping back to bytes
+             .decode(encoding))        # Decode original encoding
+
+
+
+
 JScode6 ="""
 
-function t(r) {
- return "7";
-}
-
-t();
 """
 
 JScode7 ="""
+
+var sources = [];
+
+sources['a'] = (function (params) {
+
+    func = function() {
+      return 4;
+    };
+
+    var f = func();
+
+  return params;
+})(7);
+
+debug();
+
 
 """
 
@@ -367,19 +387,27 @@ JScode2 = """
 ﾟωﾟﾉ= /｀ｍ´）ﾉ ~┻━┻   //*´∇｀*/ ['_']; o=(ﾟｰﾟ)  =_=3; c=(ﾟΘﾟ) =(ﾟｰﾟ)-(ﾟｰﾟ);
 (ﾟДﾟ) =(ﾟΘﾟ)= (o^_^o)/ (o^_^o);
 
+
 (ﾟДﾟ)={
       ﾟΘﾟ: '_' ,
       ﾟωﾟﾉ : ((ﾟωﾟﾉ==3) +'_') [ﾟΘﾟ] ,
       ﾟｰﾟﾉ :(ﾟωﾟﾉ+ '_')[o^_^o -(ﾟΘﾟ)] ,
       ﾟДﾟﾉ:((ﾟｰﾟ==3) +'_')[ﾟｰﾟ] 
       };
+      
 
 (ﾟДﾟ) [ﾟΘﾟ] =((ﾟωﾟﾉ==3) +'_') [c^_^o];
 (ﾟДﾟ) ['c'] = ((ﾟДﾟ)+'_') [ (ﾟｰﾟ)+(ﾟｰﾟ)-(ﾟΘﾟ) ];
 (ﾟДﾟ) ['o'] = ((ﾟДﾟ)+'_') [ﾟΘﾟ];
 
+
+
 (ﾟoﾟ)=(ﾟДﾟ) ['c']+(ﾟДﾟ) ['o']+(ﾟωﾟﾉ +'_')[ﾟΘﾟ]+ ((ﾟωﾟﾉ==3) +'_') [ﾟｰﾟ] + ((ﾟДﾟ) +'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ ((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [(ﾟｰﾟ) - (ﾟΘﾟ)]+(ﾟДﾟ) ['c']+((ﾟДﾟ)+'_') [(ﾟｰﾟ)+(ﾟｰﾟ)]+ (ﾟДﾟ) ['o']+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ];
+
+
+
 (ﾟДﾟ) ['_'] =(o^_^o) [ﾟoﾟ] [ﾟoﾟ];
+
 
 (ﾟεﾟ)=((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟДﾟ) .ﾟДﾟﾉ+((ﾟДﾟ)+'_') [(ﾟｰﾟ) + (ﾟｰﾟ)]+((ﾟｰﾟ==3) +'_') [o^_^o -ﾟΘﾟ]+((ﾟｰﾟ==3) +'_') [ﾟΘﾟ]+ (ﾟωﾟﾉ +'_') [ﾟΘﾟ];
 
@@ -397,10 +425,6 @@ JScode2 = """
 
 JScode3 ="""
 a = (function(s, opt_attributes, key, pairs, func, params) {
-  /**
-   * @param {number} i
-   * @return {?}
-   */
   func = function(iii) {
     hh = (iii < opt_attributes ? "" : func(parseInt(iii / opt_attributes))) + ((iii = iii % opt_attributes) > 35 ? String.fromCharCode(iii + 29) : iii.toString(36));
     return parseInt(hh);
@@ -410,27 +434,24 @@ a = (function(s, opt_attributes, key, pairs, func, params) {
       params[func(key)] = pairs[key] || func(key);
     }
 
-    /** @type {Array} */
     pairs = [function(urlParam) {
       return params[urlParam];
     }];
-    /**
-     * @return {?}
-     */
+
     func = function() {
       return "\\w+";
     };
-    /** @type {number} */
+
     key = 1;
   }
   for (;key--;) {
     if (pairs[key]) {
-      /** @type {string} */
       s = s.replace(new RegExp("\\b" + func(key) + "\\b", "g"), pairs[key]);
     }
   }
   return s;
 })('(0(){4 1="5 6 7 8";0 2(3){9(3)}2(1)})();', 10, 10, "function|b|something|a|var|some|sample|packed|code|alert".split("|"), 0, {});
+
 debug();
 """
 
@@ -457,13 +478,17 @@ debug();
 # 4 - AAdecode in file
 # 5 - Alluc
 # 6 - Uptostream
-# 7 - perso
+# 7 - Netu
+# 8 - perso
 
-TEST = 6
+TEST = 7
 
 #Fonction en cas de probleme de raw string
-def loadRawstring(file):
-    fh = open(file, "r")
+def loadRawstring(file, encod = False):
+    if encod:
+        fh = open(file, "r" , encoding = encod)
+    else :
+        fh = open(file, "r")
     tmp = fh.read()
     fh.close()
     return tmp
@@ -474,18 +499,19 @@ if TEST == 1:
     JScode = JScode1
 if TEST == 2:
     JScode = JScode2
-    JScode = unicode(JScode, "utf-8")
+    #JScode = unicode(JScode, "utf-8")
 if TEST == 3:
     JScode = JScode3
 if TEST == 4:
-    JScode = loadRawstring('JS_AA_raw.txt')
-    JScode = unicode(JScode, "utf-16")
+    JScode = loadRawstring('JS_AA_raw.txt','utf-16')
 if TEST == 5:
     JScode = JScode5
 if TEST == 6:
     JScode = loadRawstring('up2stream.js')
 if TEST == 7:
-    JScode = JScode6
+    JScode = loadRawstring('NetuRawcode.txt','utf-16')
+if TEST == 8:
+    JScode = JScode7
     
 JP = JsParser()
 Liste_var = []
@@ -508,7 +534,8 @@ else:
 if TEST == 1:
     print ('Decoded url : ' + JP.GetVarHack("#lqEH1"))
 if TEST == 2:
-    print ('return : ' + JP.LastEval.decode('string-escape'))
+    #print ('return : ' + JP.LastEval.decode('string-escape'))
+    print ('return : ' + string_escape(str(JP.LastEval)))
 if TEST == 4:
     print ('return : ' + JP.LastEval.decode('string-escape').decode('string-escape'))
 if TEST == 5:
@@ -516,4 +543,6 @@ if TEST == 5:
 if TEST == 6:
     print ('return : ' + str(JP.GetVar(Liste_var,'sources')) )
 if TEST == 7:
+    print ('return : ' + string_escape(string_escape(str(JP.LastEval))))
+if TEST == 8:
     pass
