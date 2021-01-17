@@ -2,6 +2,7 @@
 Simple JavaScript parser/interpreter in python in only one file.
 
 This program can parse and interpret Javascript code (not convertion from Javascript to Python). For the moment it can work for AAdecode script (if you enable Unicode) and JSunpacker for exemple.
+I m using it ATM to solve some Javascript challenge to resolve url from web hoster like uptostream or netu only using python code.
 
 ```
 JScode ="""
