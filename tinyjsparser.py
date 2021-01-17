@@ -37,7 +37,6 @@
 
 #https://javascriptweblog.wordpress.com/2011/04/04/the-javascript-comma-operator/
 
-
 import re
 import types
 import time
@@ -58,13 +57,21 @@ ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
 
 #---------------------------------------------------------------------------------
 
+formatNumber = lambda n: n if n%1 else int(n)
+
+def _is_string_instance(obj):
+	try:
+		return isinstance(obj, basestring)
+	except NameError:
+		return isinstance(obj, str)
+
 def logwrite(stri):
     fh = open('G:\\JSparser\\debug.txt', "a")
     fh.write(stri.encode('utf8') + '\n')
     fh.close()
 
 def RemoveGuil(string):
-    if not (isinstance(string, types.StringTypes)):
+    if not (_is_string_instance(string)):
         return string
     #string = string.strip()
     
@@ -100,15 +107,24 @@ def IsUnicode(s):
 def out(string):
     if DEBUG:
         try:
-            string = str(string.encode('ascii','replace'))
+            print (string)
         except:
-            pass
-        print (str(string.decode('latin-1').encode('ascii','replace')))
+            print (Ustr(string))
+        #print (string)
         #logwrite(string)
+        
+def Myprint(string):
+        try:
+            print (string)
+        except:
+            print (Ustr(string))
 
 def Ustr(string):
-    if isinstance(string, unicode):
-        return str(string.encode('ascii','replace'))
+    if isinstance(string, str):
+        return str(string.encode('ascii',errors='replace'))
+    elif isinstance(string, dict):
+        string = str(string)
+        return str(string.encode('ascii',errors='replace'))
     return str(string)
    
 def GetNextchar(string, pos):
@@ -133,11 +149,11 @@ def GetNextUsefullchar(string):
     return string[j],j
 
 def CheckType(value):
-    if (isinstance(value, types.StringTypes)):
+    if (_is_string_instance(value)):
         return 'String'
     if isinstance(value, ( bool ) ):
         return 'Bool'
-    if isinstance(value, ( int, long, float ) ):
+    if isinstance(value, ( int, float ) ): #Remove long for python 3
         return 'Numeric'
     if type(value) in [list,tuple, dict]:
         return 'Array'
@@ -145,7 +161,7 @@ def CheckType(value):
         return 'undefined'
     if isinstance(value, fonction):
         return 'Fonction'
-    if (isinstance(value, types.UnicodeType)):
+    if (isinstance(value, str)): #chnage for python 3
         return 'String'
     return 'Unknow'
 
@@ -251,7 +267,7 @@ def MySplit(string,char,NoEmpty = False):
     return r
 
 def GetConstructor(value):
-    if isinstance(value, ( int, long ) ):
+    if isinstance(value, ( int ) ): #remove long for python 3
         return fonction('Number','','\n    [native code]\n',True)
     elif isinstance(value, fonction):
         return fonction('Function','','\n    [native code]\n',True)
@@ -291,7 +307,7 @@ class JSBuffer(object):
     #Need 3 values for priority
     def AddValue(self,value):
         if DEBUG:
-            out('ADD (operator: ' + self.__op + ')  ' + Ustr(value) + ' (' + Ustr(type(value)) + ') a ' + Ustr(self.buf))
+            out('ADD (operator: ' + self.__op + ')  ' + str(value) + ' (' + str(type(value)) + ') a ' + str(self.buf))
 
         if not self.type:
             self.type = CheckType(value)
@@ -326,7 +342,7 @@ class JSBuffer(object):
         #Need convertion type ?
         if len(self.buf) > 1:
             #Need convertion ?        
-            if not (self.type == CheckType(self.buf[len(self.buf) -1])):
+            if not (self.type == CheckType(self.buf[len(self.buf) - 1])):
                 #Type different mais juste operation logique
                 if self.opBuf[1] == '==' or self.opBuf[1] == '===' or self.opBuf[1] == '!=' or self.opBuf[1] == '!==':
                     self.type = 'Logic'
@@ -469,11 +485,12 @@ class JSBuffer(object):
         if self.type == 'Numeric':
             ret = self.SafeEval(self.buf[0])
             #There is a bug sometime, long var are signed with L but are int in reality.
-            if isinstance(ret,long ):
+            if isinstance(ret,int ) and not isinstance(ret, bool ): #Replace int by long for python 3
                 try:
                     ret = int (ret)
                 except:
                     pass
+
             return ret
 
         if self.type == 'Bool':
@@ -489,17 +506,22 @@ class JSBuffer(object):
 
     #WARNING : Take care if you edit this function, eval is realy unsafe.
     #better to use ast.literal_eval() but not implemented before python 3
-    def SafeEval(self,str):
-        if not str:
+    def SafeEval(self,_str):
+        if not _str:
             raise Exception ('Nothing to eval')
-        f = re.search('[^0-9\+\-\.\(\)<>=xabcdef\|&%!*\^\/~]',str)
+        f = re.search('[^0-9\+\-\.\(\)<>=xabcdef\|&%!*\^\/~]',_str)
         if f:
-            raise Exception ('Wrong parameter to Eval : ' + str)
+            raise Exception ('Wrong parameter to Eval : ' + _str)
             return 0
-        str = str.replace('!','not ')
+        _str = _str.replace('!','not ')
         #str = str.replace('=','==')
-        #print '>>' + str
-        return eval(str)
+        #print ('avant >>' + _str)
+        r = eval(_str)
+        #print ('apres >>' + str(r))
+        if isinstance(r, float):
+            r = formatNumber(r)
+        return r
+
 
 
 class fonction(object):
@@ -607,18 +629,18 @@ class JsParserHelper1(object):
 
         if self.t == 'fct':
             if DEBUG:
-                out('Fonction :' + self.name + ' method: ' + str(self.at1) + ' arg: ' + self.arg)
+                out('Fonction: ' + self.name + ' method: ' + str(self.at1) + ' arg: ' + self.arg)
         elif self.t == 'var':
             if self.property:
                 self.at1 = '"' + self.at1 + '"'
             if DEBUG:
-                out('Variable :' + Ustr(self.name) + ' []= ' + Ustr(self.at1) )
+                out('Variable :' + str(self.name) + ' []= ' + str(self.at1) )
             #Exit if nothing to process
             if (self.name == self.Tmp_var) and not self.at1 and not self.op:
                 return False
         if self.op:
             if DEBUG:
-                out('operation :' + Ustr(self.name) + ' []= ' + Ustr(self.at1) + ' op: ' + str(self.op) )
+                out('operation :' + str(self.name) + ' []= ' + str(self.at1) + ' op: ' + str(self.op) )
                 
             #hack for priority
             if '==' in self.op:
@@ -669,16 +691,18 @@ class JsParser(object):
         return self.GetVar(self.HackVars,name)
 
     def PrintVar(self,vars):
-        print ('-------------------------------')
+        print ('------------- VARS ---------------')
         for i,j in vars:
-            bon = ""
+            Myprint(str(i) + ' : ' + str(j) + " " )
+            
             if isinstance(j, fonction):
-                bon = str(j.tuple)# + " " + str(j.code)
-            print (Ustr(i) + ' : ' + Ustr(j) + " " + bon)
+                Myprint ( "fonction: " +  str(j.tuple) )# + " " + str(j.code)
+            
         print ('\n')
+        print ('-------------Hack VAR S-----------')
         for i,j in self.HackVars:
-            print (Ustr(i) + ' : ' + Ustr(j))
-        print ('-------------------------------')
+            print (str(i) + ' : ' + str(j))
+        print ('-----------------------------------')
 
     #Need to take care at chain var with " and '
     def ExtractFirstchain(self,string):
@@ -826,10 +850,10 @@ class JsParser(object):
         if isinstance(string, ( bool ) ):
             if string == True:
                 return True
-        elif (isinstance(string, types.StringTypes)):
+        elif (_is_string_instance(string)):
             if not string == '':
                 return True
-        if isinstance(string, ( int, long , float) ):
+        if isinstance(string, ( int, float) ): #Remove long for python 3
             if not (string == 0):
                 return True
         if isinstance(string, ( list, tuple) ):
@@ -843,7 +867,7 @@ class JsParser(object):
 
         arg=arg2.strip()
         
-        if isinstance(name, ( int, long, float ) ):
+        if isinstance(name, ( int, float ) ): #Remove long for python 3
             name = str(name)
 
         if DEBUG:
@@ -882,9 +906,9 @@ class JsParser(object):
                 return fff,JScode
 
             elif isinstance(fe, types.MethodType):
-                #print fe.im_func.__name__ #parseint
-                #print fe.im_class.__name__ #Basic
-                function = fe.im_func.__name__
+                #print fe.__func__.__name__ #parseint
+                #print fe.__class__.__name__ #Basic
+                function = fe.__func__.__name__
                 if DEBUG:
                     out( "> function (native): " + function + ' arg=' + arg)
                 #and continu with native fonction
@@ -976,7 +1000,7 @@ class JsParser(object):
 
                 r = getattr(cls, function)(arg)
 
-                #set new value if chnaged
+                #set new value if changed
                 if hasattr(lib, 'Get'):
                     NV = getattr(cls, 'Get')()
                     if not NV == s:
@@ -996,7 +1020,7 @@ class JsParser(object):
             return NewEval,''
 
         self.PrintVar(vars)
-        raise Exception("Unknow fonction : " + function + " Name " + name)
+        raise Exception("Unknow fonction : " + function + "  > Name: " + name)
 
     def Fast_Eval(self,strg):
         r = self.evalJS(strg,self.FastEval_vars,self.FastEval_recur)
@@ -1005,7 +1029,7 @@ class JsParser(object):
     def VarParser(self,vars,allow_recursion,variable,op,JScode):
 
         if DEBUG:
-            out('Variable : ' + Ustr(variable) + '  operator : ' + op )
+            out('Variable : ' + str(variable) + '  operator : ' + op )
 
         # if it's a creation/modification
         if op == '=':
@@ -1057,7 +1081,7 @@ class JsParser(object):
                 r = self.evalJS(variable + op[0] + n ,vars,allow_recursion)
                 #self.SetVar(vars,variable,r)
 
-                if isinstance(r, ( int, long , float) ):
+                if isinstance(r, ( int, float) ): #remove long for python 3
                     self.VarManage(allow_recursion,vars,variable,str(r))
                 if isinstance(r, ( str) ):
                     self.VarManage(allow_recursion,vars,variable,'"'+ r + '"')
@@ -1084,7 +1108,7 @@ class JsParser(object):
 
         if DEBUG:
             out( '-------------')
-            out( str(allow_recursion) + ' : A evaluer >'+ JScode + '<\n')
+            out( str(allow_recursion) + ' : A evaluer >'+ JScode + '< \n')
 
         #********************************************************
 
@@ -1095,7 +1119,7 @@ class JsParser(object):
 
             #print 'InterpretedCode > ' + InterpretedCode
             if DEBUG:
-                out( 'JScode > ' + JScode.encode('ascii','replace') + '\n')
+                out( 'JScode > ' + JScode + '\n')
 
             #parentheses
             if c == "(":
@@ -1131,7 +1155,7 @@ class JsParser(object):
                 B = GetItemAlone(JScode[2:],',;&|')
                 B2 = self.evalJS(B,vars,allow_recursion)
 
-                if type(B2) in [types.MethodType,types.InstanceType]:
+                if type(B2) in [types.MethodType,object]: #python 3
                     B2 = str(B2)
 
                 if A in B2:
@@ -1472,8 +1496,8 @@ class JsParser(object):
             # Not found part
             # We will make another turn
             self.PrintVar(vars)
-            out("Can't eval string :" + JScode)
-            out("Last eval : " + str(self.LastEval))
+            Myprint("Can't eval string :" + JScode)
+            Myprint("Last eval : " + str(self.LastEval))
 
             #print debug.encode('ascii','replace')
             raise Exception(str(allow_recursion) + " : Can't Eval chain : " + JScode)
@@ -1481,7 +1505,7 @@ class JsParser(object):
         InterpretedCode2 = InterpretedCode.GetBuffer()
 
         if DEBUG:
-            out( str(allow_recursion) + ' : Evalue > '+ Ustr(InterpretedCode2) + " type " + Ustr(type(InterpretedCode2)) )
+            out( str(allow_recursion) + ' : Evalue > '+ str(InterpretedCode2) + " type " + str(type(InterpretedCode2)) )
             out( '-------------')
 
         #if str(InterpretedCode2).endswith('51'):
@@ -1541,8 +1565,9 @@ class JsParser(object):
         if j:
             k = j[1]
             r = k
-            
+
             if not(index == None):
+
                 #Special method
                 if index == 'length':
                     r = len(k)
@@ -1558,7 +1583,7 @@ class JsParser(object):
                 if f:
                     return f.tuple.get(index,None)
                 # normal one
-                if type(k) in [list,tuple,str,unicode]:
+                if type(k) in [list,tuple,str]: #Remove Unicode for python 3
                     if CheckType(index) == 'Numeric':
                         if int(index) < len(k):
                             r = k[int(index)]
@@ -1616,7 +1641,7 @@ class JsParser(object):
                 var.append((variable,value))
                 return
             #dictionnary
-            elif (isinstance(index, types.StringTypes)):
+            elif (_is_string_instance(index)):
                 var.append((variable,{}))
             #array
             else:
@@ -1626,7 +1651,7 @@ class JsParser(object):
             if j[0] == variable:
                 if index == None:
                     #chain ?
-                    if (isinstance(value, types.StringTypes)):
+                    if (_is_string_instance(value)):
                         var[var.index(j)] = (variable,value)
                     #Numeric
                     else:
@@ -1634,7 +1659,7 @@ class JsParser(object):
                 else:
                 #Array
                     #hack, Variable created as list but used as dictionnary, so need convertion
-                    if (isinstance(index, types.StringTypes)) and type(var[var.index(j)][1]) in [list,tuple]:
+                    if (_is_string_instance(index)) and type(var[var.index(j)][1]) in [list,tuple]:
                         ind = var.index(j)
                         var[ind] = (variable,{})
                         j = (variable,{})
@@ -1657,7 +1682,7 @@ class JsParser(object):
                     elif type(var[var.index(j)][1]) in [dict]:
                         ind = var.index(j)
                         Listvalue = var[ind][1]
-                        Listvalue[Ustr(index)] = value
+                        Listvalue[str(index)] = value
                         var[ind] = (variable,Listvalue)
                         
                     else:
@@ -1730,7 +1755,7 @@ class JsParser(object):
         init = False
 
         if DEBUG:
-            out('*** Variable manager name: ' + Ustr(name) + ' value: ' + Ustr(value) + ' ' + str(type(value)))
+            out('*** Variable manager name: ' + str(name) + ' value: ' + str(value) + ' ' + str(type(value)))
 
         try:
             value = value.strip()
@@ -1754,7 +1779,7 @@ class JsParser(object):
         #    name = name[1:-1].strip()
 
         if value:
-            if isinstance(value, ( int, long , float) ):
+            if isinstance(value, ( int, float) ):  #Remove long for python 3
                 value = self.evalJS(value,vars,allow_recursion)
             else:
                 value = self.evalJS(value,vars,allow_recursion)
@@ -1772,15 +1797,17 @@ class JsParser(object):
         #Output for debug
         if DEBUG:
             if index == None:
-                out( '*** Variable in parser => ' + Ustr(name) + ' = ' + Ustr(value))
+                out( '*** Variable in parser => ' + str(name) + ' = ' + str(value))
             else:
-                out( '*** Variable in parser => ' + Ustr(name) + '[' + Ustr(index) + ']' + ' = ' + Ustr(value))
+                out( '*** Variable in parser => ' + str(name) + '[' + str(index) + ']' + ' = ' + str(value))
 
         #chain
-        if (isinstance(value, types.StringTypes)):
+        if (_is_string_instance(value)):
+            self.SetVar(vars,name,value,index)
+        elif isinstance(value, bytes):
             self.SetVar(vars,name,value,index)
         #number
-        elif isinstance(value, ( int, long , float) ):
+        elif isinstance(value, ( int, float) ): #Remove long for python 3
             self.SetVar(vars,name,value,index)
         #list
         elif type(value) in [list,tuple,dict]:
@@ -1794,12 +1821,11 @@ class JsParser(object):
         elif value == None:
             self.SetVar(vars,name,None,index)
         else:
+            print (type(value))
             raise Exception('> ERROR : Var problem >' + str(value))
-
 
         #and return value, to avoid double eval
         return value
-
 
     #(Function(arg){code})(arg2) Self invoked
     #(Function(arg){code}(arg2)) Self invoked
@@ -2279,7 +2305,7 @@ class JsParser(object):
             #hack, need to be reenabled
             #Non gere encore
             if not chain.endswith(';'):
-                print ('> ' + JScode)
+                Myprint ('> ' + JScode)
                 raise Exception('> ERROR : can t parse >' + chain)
 
         return Parser_return
@@ -2377,6 +2403,10 @@ class String(object):
 
     def charCodeAt(self,arg):
         v = arg[0]
+
+        if isinstance(self._string, bytes):
+            return self._string[int(v)]
+            
         return ord(self._string[int(v)])
 
     def length(self,arg):
@@ -2424,7 +2454,8 @@ class String(object):
     def fromCharCode(self,arg):
         #HACK
         #a =  chr(int(arg[0]))
-        b = ''.join(map(unichr, arg))
+
+        b = ''.join(map(chr, arg)) #unichr > chr
         try:
             return str(b)
         except:
@@ -2585,13 +2616,13 @@ class Basic(object):
         if t1 == 16:
             v = hex(int(self._name))[2:].replace('L','')
 
-        if isinstance(self._name, ( int, long ) ):
+        if isinstance(self._name, ( int ) ): #remove long for python 3
             return str(v)
-        elif isinstance(self._name, types.StringTypes ):
+        elif _is_string_instance(self._name ):
             return str(v)
 
         try:
-            f = self._name.im_func.__name__
+            f = self._name.__func__.__name__
         except:
             f = "HACK'"
         t = "function %s() {\n    [native code]\n}"%(f)
@@ -2606,12 +2637,12 @@ class Basic(object):
         
     def decodeURIComponent(self,arg):
         #Phyton 3
-        #from urllib.parse import unquote
-        #return unquote(arg[0])
+        from urllib.parse import unquote
+        return unquote(arg[0])
         
         #Python 2
-        import urllib
-        return urllib.unquote(arg[0]).decode('utf8')
+        #import urllib
+        #return urllib.unquote(arg[0]).decode('utf8')
     
 
 List_Lib = [Basic,Array,String,Math]
