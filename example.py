@@ -1,20 +1,12 @@
 # -*- coding: utf-8 -*- 
 #
+# Example file to test code.
+#
 
 from tinyjsparser import JsParser
 
-
-def string_escape(s, encoding='utf-8'):
-    return (s.encode('latin1')         # To bytes, required by 'unicode-escape'
-             .decode('unicode-escape') # Perform the actual octal-escaping decode
-             .encode('latin1')         # 1:1 mapping back to bytes
-             .decode(encoding))        # Decode original encoding
-
-
-
-
 JScode6 ="""
-
+debug();
 """
 
 JScode7 ="""
@@ -492,6 +484,14 @@ def loadRawstring(file, encod = False):
     tmp = fh.read()
     fh.close()
     return tmp
+
+# Fonction to escape string.
+def string_escape(s, encoding='utf-8'):
+    return (s.encode('latin1')         # To bytes, required by 'unicode-escape'
+             .decode('unicode-escape') # Perform the actual octal-escaping decode
+             .encode('latin1')         # 1:1 mapping back to bytes
+             .decode(encoding))        # Decode original encoding
+
     
 if TEST == 0:
     pass
@@ -499,7 +499,6 @@ if TEST == 1:
     JScode = JScode1
 if TEST == 2:
     JScode = JScode2
-    #JScode = unicode(JScode, "utf-8")
 if TEST == 3:
     JScode = JScode3
 if TEST == 4:
@@ -534,7 +533,6 @@ else:
 if TEST == 1:
     print ('Decoded url : ' + JP.GetVarHack("#lqEH1"))
 if TEST == 2:
-    #print ('return : ' + JP.LastEval.decode('string-escape'))
     print ('return : ' + string_escape(str(JP.LastEval)))
 if TEST == 4:
     print ('return : ' + JP.LastEval.decode('string-escape').decode('string-escape'))
