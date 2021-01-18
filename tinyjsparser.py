@@ -27,15 +27,8 @@
 #https://pro-domo.ddns.net/blog/optimiser-son-code-python.html
 #https://www.clips.uantwerpen.be/tutorials/python-performance-optimization
 
-#UNICODE ERROR
-#print a.decode('utf-8').encode('ascii','replace')
-#true = 1 instead of true
-
-#phrase=raw_input()
-#phrase.xxx
-
-
 #https://javascriptweblog.wordpress.com/2011/04/04/the-javascript-comma-operator/
+
 
 import re
 import types
@@ -66,7 +59,7 @@ def _is_string_instance(obj):
 		return isinstance(obj, str)
 
 def logwrite(stri):
-    fh = open('G:\\JSparser\\debug.txt', "a")
+    fh = open('debug.txt', "a")
     fh.write(stri.encode('utf8') + '\n')
     fh.close()
 
@@ -104,20 +97,13 @@ def IsUnicode(s):
         return True
     return False
 
-def out(string):
-    if DEBUG:
+def out(string, d = True):
+    if (d):
         try:
             print (string)
         except:
             print (Ustr(string))
-        #print (string)
         #logwrite(string)
-        
-def Myprint(string):
-        try:
-            print (string)
-        except:
-            print (Ustr(string))
 
 def Ustr(string):
     if isinstance(string, str):
@@ -161,7 +147,7 @@ def CheckType(value):
         return 'undefined'
     if isinstance(value, fonction):
         return 'Fonction'
-    if (isinstance(value, str)): #chnage for python 3
+    if (isinstance(value, str)): #change for python 3
         return 'String'
     return 'Unknow'
 
@@ -248,11 +234,11 @@ def MySplit(string,char,NoEmpty = False):
         if not c1 and not c2:
             if c == '(':
                 p += 1
-            if c == ')':
+            elif c == ')':
                 p -= 1
-            if c == '{':
+            elif c == '{':
                 b += 1
-            if c == '}':
+            elif c == '}':
                 b -= 1
 
         if (c == char) and not c1 and not p and not b and not c2:
@@ -435,9 +421,9 @@ class JSBuffer(object):
                 del self.buf[-1]
 
         elif len(self.buf) > 1:
-            print (self.type)
-            print (self.buf)
-            print (self.opBuf)
+            out(self.type)
+            out(self.buf)
+            out(self.opBuf)
             raise Exception("Can't compute")
 
     #on decale tout
@@ -691,18 +677,18 @@ class JsParser(object):
         return self.GetVar(self.HackVars,name)
 
     def PrintVar(self,vars):
-        print ('------------- VARS ---------------')
+        out('------------- VARS ---------------')
         for i,j in vars:
-            Myprint(str(i) + ' : ' + str(j) + " " )
+            out(str(i) + ' : ' + str(j) + " " )
             
             if isinstance(j, fonction):
-                Myprint ( "fonction: " +  str(j.tuple) )# + " " + str(j.code)
+                out( "fonction: " +  str(j.tuple) )# + " " + str(j.code)
             
-        print ('\n')
-        print ('-------------Hack VAR S-----------')
+        out('\n')
+        out('-------------Hack VAR S-----------')
         for i,j in self.HackVars:
-            print (str(i) + ' : ' + str(j))
-        print ('-----------------------------------')
+            out (str(i) + ' : ' + str(j))
+        out('-----------------------------------')
 
     #Need to take care at chain var with " and '
     def ExtractFirstchain(self,string):
@@ -886,7 +872,8 @@ class JsParser(object):
             else:
             #lecture
                 vv = self.GetVarHack(name.var)
-                out('Hack vars (set): ' + vv)
+                if DEBUG:
+                    out('Hack vars (set): ' + vv)
                 return vv,JScode
 
         #Definite function ?
@@ -924,7 +911,8 @@ class JsParser(object):
                 #out('code de la fonction : ' + c)
 
                 if ct:
-                    out('constructor mode')
+                    if DEBUG:
+                        out('constructor mode')
                     #hack
                     #Make replacement
                     JScode = "%s(%s)%s"%(n,arg,JScode) + ';'
@@ -984,8 +972,8 @@ class JsParser(object):
 
         for lib in List_Lib:
             if hasattr(lib, function):
-            
-                out('Fonction lib : ' + str(function))
+                if DEBUG:
+                    out('Fonction lib : ' + str(function))
             
                 if not function == "eval":
                     arg = MySplit(arg,',')
@@ -1174,11 +1162,11 @@ class JsParser(object):
 
                     if v == 'true':
                         InterpretedCode.AddValue(True)
-                    if v == 'false':
+                    elif v == 'false':
                         InterpretedCode.AddValue(False)
-                    if v == 'null':
+                    elif v == 'null':
                         InterpretedCode.AddValue(None)
-                    if v == 'String':
+                    elif v == 'String':
                         self.SetVar(vars,'TEMPORARY_VARS'+str(allow_recursion),'')
                         JScode = 'TEMPORARY_VARS'+str(allow_recursion) + JScode
                     #if v == 'Array':
@@ -1420,7 +1408,7 @@ class JsParser(object):
 
             #Special if (A)?(B):(C)
             if c == '?':
-                out( " ****** Special if 1 ********* ")
+                out( " ****** Special if 1 ********* ", DEBUG)
                 #need to find all part
                 #A = InterpretedCode.GetPrevious()  Not working if parenthesis absent
                 A = InterpretedCode.GetBuffer()
@@ -1445,7 +1433,7 @@ class JsParser(object):
 
             #Short-circuiting evaluations
             if JScode[0:2] == '&&' or JScode[0:2] == '||':
-                out( " ****** Short-circuiting  ********* ")
+                out( " ****** Short-circuiting  ********* ", DEBUG)
                 #A = InterpretedCode.GetPrevious()
                 A = InterpretedCode.GetBuffer()
                 InterpretedCode.Reset()
@@ -1496,8 +1484,8 @@ class JsParser(object):
             # Not found part
             # We will make another turn
             self.PrintVar(vars)
-            Myprint("Can't eval string :" + JScode)
-            Myprint("Last eval : " + str(self.LastEval))
+            out("Can't eval string :" + JScode)
+            out("Last eval : " + str(self.LastEval))
 
             #print debug.encode('ascii','replace')
             raise Exception(str(allow_recursion) + " : Can't Eval chain : " + JScode)
@@ -1821,7 +1809,7 @@ class JsParser(object):
         elif value == None:
             self.SetVar(vars,name,None,index)
         else:
-            print (type(value))
+            out(type(value))
             raise Exception('> ERROR : Var problem >' + str(value))
 
         #and return value, to avoid double eval
@@ -1881,7 +1869,8 @@ class JsParser(object):
         #self invoked ?
         if selfinvoked:
             paraminvoked = GetItemAlone(data,')')
-            out( "Self invoked " + str(paraminvoked) )
+            if DEBUG:
+                out( "Self invoked " + str(paraminvoked) )
             replac = name + paraminvoked
 
             data = data[(len(paraminvoked)):]
@@ -2025,7 +2014,8 @@ class JsParser(object):
             #m =  re.search(r'^\({0,1}([\w\.]+)\){0,1}(?:\[([^\]]+)\])*\){0,1}\s*(?:[\^\/\*\-\+])*=',chain,re.DOTALL | re.UNICODE)
             #m2 = re.search(r'^\({0,1}([\w\.]+)\){0,1}(?:\.([\w]+))*\){0,1}\s*(?:[\^\/\*\-\+])*=',chain,re.DOTALL | re.UNICODE)
             if chain.startswith('var ') or chain.startswith('let '):
-                out('var/let')
+                if DEBUG:
+                    out('var/let')
 
                 chain = chain[4:]
 
@@ -2142,7 +2132,8 @@ class JsParser(object):
                     if not e:
                         raise Exception('> While error')
 
-                    out('> Boucle do/while : test :' + e + ' code: ' + f)
+                    if DEBUG:
+                        out('> Boucle do/while : test :' + e + ' code: ' + f)
 
                     #loop
                     #1 forced execution because do/while
@@ -2179,7 +2170,7 @@ class JsParser(object):
                     #out('> Boucle switch : Case=' + v + ' code= ' + f[0:50] + '\n')
                     #logwrite(str(v) + '\n')
 
-                    out('Switch case ' + str(v) )
+                    out('Switch case ' + str(v) , DEBUG )
 
                     #Search the good case code
                     StrToSearch = "case'%s':"%(str(v))
@@ -2248,7 +2239,7 @@ class JsParser(object):
                     #list all arg membre.
                     member_list = self.GetVar(vars,arg)
 
-                    out('> With fonction : exp=' + arg + ' values=' + str(member_list))
+                    out('> With fonction : exp=' + arg + ' values=' + str(member_list) , DEBUG)
                     #print 'Before: ' + f
 
                     #print member_list
@@ -2288,7 +2279,7 @@ class JsParser(object):
                     else:
                         raise Exception('> ERROR : catch not found , try loop')
 
-                    out('> Try fonction : Block try=' + f + ' block catch=' + b )
+                    out('> Try fonction : Block try=' + f + ' block catch=' + b , DEBUG)
 
                     #For the moment just execute the catch part
                     self.Parse(b,vars,allow_recursion)
@@ -2305,7 +2296,7 @@ class JsParser(object):
             #hack, need to be reenabled
             #Non gere encore
             if not chain.endswith(';'):
-                Myprint ('> ' + JScode)
+                out('> ' + JScode)
                 raise Exception('> ERROR : can t parse >' + chain)
 
         return Parser_return
@@ -2598,9 +2589,9 @@ class Basic(object):
     def alert(self,arg):
             #t1 = self.evalJS(arg,vars,allow_recursion)
             #logwrite(str(arg))
-            print ('------------ALERT-------------------')
-            print (arg)
-            print ('------------------------------------')
+            out ('------------ALERT-------------------')
+            out (arg)
+            out ('------------------------------------')
             return ''
 
     def RegExp(self,arg):
