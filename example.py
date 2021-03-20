@@ -11,18 +11,7 @@ debug();
 
 JScode7 ="""
 
-var sources = [];
-
-sources['a'] = (function (params) {
-
-    func = function() {
-      return 4;
-    };
-
-    var f = func();
-
-  return params;
-})(7);
+if (77 === 77) { var bt = 1;}
 
 debug();
 
@@ -473,7 +462,7 @@ debug();
 # 7 - Netu
 # 8 - perso
 
-TEST = 7
+TEST = 4
 
 #Fonction en cas de probleme de raw string
 def loadRawstring(file, encod = False):
@@ -520,6 +509,7 @@ if TEST == 1:
     JP.AddHackVar('#gItZEkCYUy',"7646b5310d329a21dec22b45be5b4bad6ce711857674f9b9d272e7896b81aee1b9c4e3837351587245037c585a6f7b024141755741016c5b47656a01476342497d0273476c7c6402426f4d29617279557a025f676d501c677c68795c0364614e6f4803")
 
 #JP.SetOption('ForceTest')
+#JP.SetOption('ForceTry')
 
 # Set it tu true to display debug time process
 if (False):
@@ -535,7 +525,7 @@ if TEST == 1:
 if TEST == 2:
     print ('return : ' + string_escape(str(JP.LastEval)))
 if TEST == 4:
-    print ('return : ' + JP.LastEval.decode('string-escape').decode('string-escape'))
+    print ('return : ' + JP.LastEval.encode().decode('unicode_escape').encode().decode('unicode_escape'))
 if TEST == 5:
     print ('return : ' + JP.LastEval)
 if TEST == 6:
