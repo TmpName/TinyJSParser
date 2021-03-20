@@ -43,7 +43,7 @@ except:
 
 
 REG_NAME = '[\w]+'
-REG_OP = '[\/\*\-\+<>\|\&=~^%!]{1,2}' #not space here, and no bracket
+REG_OP = '[\/\*\-\+<>\|\&=~^%!]{1,3}' #not space here, and no bracket
 DEBUG = False # Never enable it in kodi, too big size log
 MAX_RECURSION = 50
 ALPHA = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
@@ -303,6 +303,10 @@ class JSBuffer(object):
         if not self.__op:
             out( 'op ' + str(self.opBuf) + ' - buff ' +str(self.buf))
             raise Exception("Missing operator")
+
+        if self.type == "Numeric":
+            if self.__op == '===':
+                self.__op = '=='
 
         self.Push(value)
 
@@ -608,9 +612,8 @@ class JsParserHelper1(object):
                     if len(self.op) > 1 and self.op[0] == '=' and not self.op[1] == '=':
                         self.op = self.op[0]
                     # a +=-2 situation
-                    if len(self.op) > 2 and self.op[1] == '=':
+                    if len(self.op) > 2 and self.op[1] == '=' and not self.op[2] == '=':
                         self.op = self.op[:2]
-
                     JScode = JScode[(len(self.op)):]
 
         if self.t == 'fct':
@@ -656,6 +659,7 @@ class JsParser(object):
         self.FastEval_recur = 0
 
         self.option_ForceTest = False
+        self.option_ForceTry = False
 
         self.SystemVars = []
         self.GlobalVar = []
@@ -669,6 +673,8 @@ class JsParser(object):
     def SetOption(self,option):
         if option == 'ForceTest':
             self.option_ForceTest = True
+        if option == 'ForceTry':
+            self.option_ForceTry = True
 
     def AddHackVar(self,name, value):
         self.HackVars.append((name,value))
@@ -2265,24 +2271,29 @@ class JsParser(object):
                 if name == 'try':
 
                     f = code
+
                     if GetNextUsefullchar(f)[0] =='{':
-                        f = GetItemAlone(f,'}')
+                        f = GetItemAlone(f[1:],'}')
 
                     chain2,pos2 = self.ExtractFirstchain(JScode)
-
                     chain2 = chain2.lstrip()
                     JScode = JScode[(pos2 + 1):]
+
                     m2 = re.search(r'catch\s*\(([^\)]+)\)\s*{(.+?)}', chain2,re.DOTALL)
                     if m2:
-                        a = m2.group(1)
-                        b = m2.group(2)
+                        a = m2.group(1) #Variable catched
+                        b = m2.group(2) #fonction
                     else:
                         raise Exception('> ERROR : catch not found , try loop')
 
                     out('> Try fonction : Block try=' + f + ' block catch=' + b , DEBUG)
 
-                    #For the moment just execute the catch part
-                    self.Parse(b,vars,allow_recursion)
+                    #For the moment just execute the catch part or try part only
+                    if (self.option_ForceTry):
+                        self.Parse(f,vars,allow_recursion)
+                    else:
+                        self.SetVar(vars,a,"catched error")
+                        self.Parse(b,vars,allow_recursion)
                     continue
 
             #Pas trouve, une fonction ?
@@ -2557,7 +2568,7 @@ class Basic(object):
             t2 = arg[1]
         else:
             t2 = 10
-        if t1 == '':
+        if (t1 == '') or (t1 == True):
             return None
         r = int(str(t1),int(t2))
         return r
